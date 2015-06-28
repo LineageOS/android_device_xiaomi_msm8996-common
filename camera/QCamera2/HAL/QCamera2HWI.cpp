@@ -2336,7 +2336,7 @@ int QCamera2HardwareInterface::initCapabilities(uint32_t cameraId,
             CAM_MAPPING_BUF_TYPE_CAPABILITY,
             0 /*stream id*/, 0 /*buffer index*/, -1 /*plane index*/,
             0 /*cookie*/, capabilityHeap->getFd(0), sizeof(cam_capability_t),
-            bufMapList);
+            bufMapList, capabilityHeap->getPtr(0));
 
     if (rc == NO_ERROR) {
         rc = cameraHandle->ops->map_bufs(cameraHandle->camera_handle,
@@ -5850,7 +5850,8 @@ int QCamera2HardwareInterface::registerFaceImage(void *img_ptr,
 
     ssize_t bufSize = imgBuf->getSize(0);
     if (BAD_INDEX != bufSize) {
-        rc = pChannel->doReprocess(imgBuf->getFd(0), (size_t)bufSize, faceID);
+        rc = pChannel->doReprocess(imgBuf->getFd(0), imgBuf->getPtr(0),
+                (size_t)bufSize, faceID);
     } else {
         LOGE("Failed to retrieve buffer size (bad index)");
         return UNKNOWN_ERROR;
