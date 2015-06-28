@@ -155,13 +155,14 @@ typedef enum {
     CAM_HAL_V3 = 3
 } cam_hal_version_t;
 
-typedef enum {
-    CAM_STATUS_SUCCESS,       /* Operation Succeded */
-    CAM_STATUS_FAILED,        /* Failure in doing operation */
-    CAM_STATUS_INVALID_PARM,  /* Inavlid parameter provided */
-    CAM_STATUS_NOT_SUPPORTED, /* Parameter/operation not supported */
-    CAM_STATUS_ACCEPTED,      /* Parameter accepted */
-    CAM_STATUS_MAX,
+ typedef enum {
+    CAM_STATUS_INVALID_PARM  = -4, /* Inavlid parameter provided */
+    CAM_STATUS_NOT_SUPPORTED = -3, /* Parameter/operation not supported */
+    CAM_STATUS_BUSY          = -2, /* operation busy */
+    CAM_STATUS_FAILED        = -1, /* Failure in doing operation */
+    CAM_STATUS_SUCCESS       =  0, /* Operation Succeded */
+    CAM_STATUS_ACCEPTED      =  1, /* Parameter accepted */
+    CAM_STATUS_MAX           =  2,
 } cam_status_t;
 
 typedef enum {
@@ -442,6 +443,7 @@ typedef struct {
     uint32_t cookie;      /* could be job_id(uint32_t) to identify mapping job */
     int32_t fd;           /* origin fd */
     size_t size;          /* size of the buffer */
+    void *buffer;         /* Buffer pointer */
 } cam_buf_map_type;
 
 typedef struct {
@@ -481,6 +483,7 @@ typedef struct {
         cam_buf_unmap_type_list buf_unmap_list;
     } payload;
 } cam_sock_packet_t;
+typedef cam_sock_packet_t cam_reg_buf_t;
 
 typedef enum {
     CAM_MODE_2D = (1<<0),
