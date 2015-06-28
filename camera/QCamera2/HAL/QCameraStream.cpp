@@ -599,7 +599,7 @@ int32_t QCameraStream::mapBufs(QCameraMemory *Buf,
         }
 
         rc = bufferMaps.enqueue(bufType, mHandle, i /*buf index*/, -1 /*plane index*/,
-                0 /*cookie*/, Buf->getFd(i), bufSize);
+                0 /*cookie*/, Buf->getFd(i), bufSize, Buf->getPtr(i));
 
         if (rc < 0) {
             LOGE("Failed to map buffers");
@@ -1322,7 +1322,8 @@ int32_t QCameraStream::getBufs(cam_frame_len_offset_t *offset,
 
         rc = bufferMaps.enqueue(CAM_MAPPING_BUF_TYPE_STREAM_BUF,
                 0 /*stream id*/, i /*buf index*/, -1 /*plane index*/,
-                0 /*cookie*/, mStreamBufs->getFd(i), bufSize);
+                0 /*cookie*/, mStreamBufs->getFd(i), bufSize,
+                mStreamBufs->getPtr(i));
 
         if (rc < 0) {
             LOGE("Failed to map buffers");
@@ -1491,7 +1492,7 @@ int32_t QCameraStream::mapNewBuffer(uint32_t index)
     rc = QCameraBufferMaps::makeSingletonBufMapList(
             CAM_MAPPING_BUF_TYPE_STREAM_BUF, 0 /*stream id*/, index,
             -1 /*plane index*/, 0 /*cookie*/, mStreamBufs->getFd(index),
-            bufSize, bufMapList);
+            bufSize, bufMapList, mStreamBufs->getPtr(index));
 
     if (rc == NO_ERROR) {
         rc = m_MemOpsTbl.bundled_map_ops(&bufMapList, m_MemOpsTbl.userdata);
@@ -1660,7 +1661,8 @@ int32_t QCameraStream::mapBuffers()
         if (BAD_INDEX != bufSize) {
             rc = bufferMaps.enqueue(CAM_MAPPING_BUF_TYPE_STREAM_BUF, mHandle,
                     i /*buf index*/, -1 /*plane index*/, 0 /*cookie*/,
-                    mStreamBufs->getFd(i), bufSize);
+                    mStreamBufs->getFd(i), bufSize,
+                    mStreamBufs->getPtr(i));
 
             if (rc < 0) {
                 LOGE("Failed to map buffers");
@@ -1728,7 +1730,8 @@ int32_t QCameraStream::allocateBatchBufs(cam_frame_len_offset_t *offset,
     for (uint32_t i = 0; i < numBufsToMap; i++) {
         rc = bufferMaps.enqueue(CAM_MAPPING_BUF_TYPE_STREAM_USER_BUF,
                 0 /*stream id*/, i /*buf index*/, -1 /*plane index*/,
-                0 /*cookie*/, mStreamBatchBufs->getFd(i), mNumBufs);
+                0 /*cookie*/, mStreamBatchBufs->getFd(i),
+                mNumBufs, mStreamBatchBufs->getPtr(i));
 
         if (rc < 0) {
             LOGE("Failed to map buffers");
@@ -1777,7 +1780,8 @@ int32_t QCameraStream::allocateBatchBufs(cam_frame_len_offset_t *offset,
         if (BAD_INDEX != bufSize) {
             rc = planeBufferMaps.enqueue(CAM_MAPPING_BUF_TYPE_STREAM_BUF,
                     0 /*stream id*/, i /*buf index*/, -1 /*plane index*/,
-                    0 /*cookie*/, mStreamBufs->getFd(i), bufSize);
+                    0 /*cookie*/, mStreamBufs->getFd(i), bufSize,
+                    mStreamBufs->getPtr(i));
 
             if (rc < 0) {
                 LOGE("Failed to map buffers");
@@ -2032,7 +2036,8 @@ void *QCameraStream::BufAllocRoutine(void *data)
 
             rc = bufferMaps.enqueue(CAM_MAPPING_BUF_TYPE_STREAM_BUF,
                     pme->mHandle, i /*buf index*/, -1 /*plane index*/,
-                    0 /*cookie*/, pme->mStreamBufs->getFd(i), bufSize);
+                    0 /*cookie*/, pme->mStreamBufs->getFd(i), bufSize,
+                    pme->mStreamBufs->getPtr(i));
 
             if (rc < 0) {
                 LOGE("Failed to map buffers");
@@ -2460,20 +2465,22 @@ int32_t QCameraStream::acquireStreamBufs()
  *   @buf_idx  : index of buffer
  *   @plane_idx: plane index
  *   @fd       : fd of the buffer
+ *   @buffer   : buffer address
  *   @size     : lenght of the buffer
- *   @ops_tbl    : ptr to buf mapping/unmapping ops
+ *   @ops_tbl  : ptr to buf mapping/unmapping ops
  *
  * RETURN     : int32_t type of status
  *              NO_ERROR  -- success
  *              none-zero failure code
  *==========================================================================*/
 int32_t QCameraStream::mapBuf(uint8_t buf_type, uint32_t buf_idx,
-        int32_t plane_idx, int fd, size_t size, mm_camera_map_unmap_ops_tbl_t *ops_tbl)
+        int32_t plane_idx, int fd, void *buffer, size_t size,
+        mm_camera_map_unmap_ops_tbl_t *ops_tbl)
 {
     cam_buf_map_type_list bufMapList;
     int32_t rc = QCameraBufferMaps::makeSingletonBufMapList(
            (cam_mapping_buf_type)buf_type, mHandle, buf_idx, plane_idx,
-           0 /*cookie*/, fd, size, bufMapList);
+           0 /*cookie*/, fd, size, bufMapList, buffer);
 
     if (rc != NO_ERROR) {
         return rc;
