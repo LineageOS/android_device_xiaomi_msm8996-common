@@ -108,17 +108,6 @@ media.aac_51_output_enabled=true
 ro.nfc.port=I2C
 persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 
-# NITZ
-persist.rild.nitz_plmn=""
-persist.rild.nitz_long_ons_0=""
-persist.rild.nitz_long_ons_1=""
-persist.rild.nitz_long_ons_2=""
-persist.rild.nitz_long_ons_3=""
-persist.rild.nitz_short_ons_0=""
-persist.rild.nitz_short_ons_1=""
-persist.rild.nitz_short_ons_2=""
-persist.rild.nitz_short_ons_3=""
-
 # Perf
 ro.am.reschedule_service=true
 ro.min_freq_0=307200
