@@ -203,6 +203,9 @@ BOARD_RIL_CLASS := ../../../$(VENDOR_PATH)/ril
 PROTOBUF_SUPPORTED := true
 TARGET_RIL_VARIANT := caf
 
+# Seccomp policy
+BOARD_SECCOMP_POLICY := $(VENDOR_PATH)/seccomp
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
