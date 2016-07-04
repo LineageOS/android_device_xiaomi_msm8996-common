@@ -5849,6 +5849,55 @@ QCamera3HardwareInterface::translateFromHalMetadata(
     IF_META_AVAILABLE(uint32_t, histogramMode, CAM_INTF_META_STATS_HISTOGRAM_MODE, metadata) {
         uint8_t fwk_histogramMode = (uint8_t) *histogramMode;
         camMetadata.update(ANDROID_STATISTICS_HISTOGRAM_MODE, &fwk_histogramMode, 1);
+
+        if (fwk_histogramMode == ANDROID_STATISTICS_HISTOGRAM_MODE_ON) {
+            IF_META_AVAILABLE(cam_hist_stats_t, stats_data, CAM_INTF_META_HISTOGRAM, metadata) {
+                // process histogram statistics info
+                uint32_t hist_buf[3][CAM_HISTOGRAM_STATS_SIZE];
+                uint32_t hist_size = sizeof(cam_histogram_data_t::hist_buf);
+                cam_histogram_data_t rHistData, gHistData, bHistData;
+                memset(&rHistData, 0, sizeof(rHistData));
+                memset(&gHistData, 0, sizeof(gHistData));
+                memset(&bHistData, 0, sizeof(bHistData));
+
+                switch (stats_data->type) {
+                case CAM_HISTOGRAM_TYPE_BAYER:
+                    switch (stats_data->bayer_stats.data_type) {
+                        case CAM_STATS_CHANNEL_GR:
+                            rHistData = gHistData = bHistData = stats_data->bayer_stats.gr_stats;
+                            break;
+                        case CAM_STATS_CHANNEL_GB:
+                            rHistData = gHistData = bHistData = stats_data->bayer_stats.gb_stats;
+                            break;
+                        case CAM_STATS_CHANNEL_B:
+                            rHistData = gHistData = bHistData = stats_data->bayer_stats.b_stats;
+                            break;
+                        case CAM_STATS_CHANNEL_ALL:
+                            rHistData = stats_data->bayer_stats.r_stats;
+                            //Framework expects only 3 channels. So, for now,
+                            //use gb stats for G channel.
+                            gHistData = stats_data->bayer_stats.gb_stats;
+                            bHistData = stats_data->bayer_stats.b_stats;
+                            break;
+                        case CAM_STATS_CHANNEL_Y:
+                        case CAM_STATS_CHANNEL_R:
+                        default:
+                            rHistData = gHistData = bHistData = stats_data->bayer_stats.r_stats;
+                            break;
+                    }
+                    break;
+                case CAM_HISTOGRAM_TYPE_YUV:
+                    rHistData = gHistData = bHistData = stats_data->yuv_stats;
+                    break;
+                }
+
+                memcpy(hist_buf, rHistData.hist_buf, hist_size);
+                memcpy(hist_buf[1], gHistData.hist_buf, hist_size);
+                memcpy(hist_buf[2], bHistData.hist_buf, hist_size);
+
+                camMetadata.update(ANDROID_STATISTICS_HISTOGRAM, (int32_t*)hist_buf, hist_size*3);
+            }
+        }
     }
 
     IF_META_AVAILABLE(uint32_t, sharpnessMapMode,
