@@ -646,6 +646,9 @@ public:
                                cam_dimension_t &dim);
     int32_t getStreamFormat(cam_stream_type_t streamType,
                              cam_format_t &format);
+  int32_t getStreamSubFormat(cam_stream_type_t streamType,
+             cam_sub_format_type_t &sub_format);
+
     int32_t getStreamDimension(cam_stream_type_t streamType,
             cam_dimension_t &dim);
     void getThumbnailSize(int *width, int *height) const;
@@ -869,6 +872,11 @@ public:
         bool hal3,
         cam_feature_mask_t featureMask,
         cam_analysis_info_t *pAnalysisInfo);
+
+    int32_t getMetaRawInfo();
+    bool sendStreamConfigForPickRes(cam_stream_size_info_t &stream_config_info);
+    int32_t updateDtVc(int32_t *dt, int32_t *vc);
+
 private:
     int32_t setPreviewSize(const QCameraParameters& );
     int32_t setVideoSize(const QCameraParameters& );
@@ -1153,7 +1161,7 @@ private:
     bool m_bFixedFrameRateSet;      // Indicates that a fixed frame rate is set
     qcamera_thermal_mode m_ThermalMode; // adjust fps vs adjust frameskip
     cam_dimension_t m_LiveSnapshotSize; // live snapshot size
-    cam_dimension_t m_rawSize; // live snapshot size
+    cam_dimension_t m_rawSize; // Raw size
     cam_dimension_t m_maxPicSize;
     bool m_bHDREnabled;             // if HDR is enabled
     bool m_bLocalHDREnabled;   // This flag tells whether HDR enabled or not regarless of APP mode
@@ -1161,6 +1169,7 @@ private:
     bool m_bDISEnabled;
     bool m_bOISEnabled;
     cam_still_more_t m_stillmore_config;
+    bool m_bMetaRawEnabled;
 
     uint8_t m_MobiMask;
     QCameraAdjustFPS *m_AdjustFPS;

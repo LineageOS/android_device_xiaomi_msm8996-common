@@ -288,6 +288,9 @@ typedef enum {
     CAM_FORMAT_JPEG_RAW_8BIT,
     CAM_FORMAT_META_RAW_8BIT,
 
+    /* generic 10-bit raw */
+    CAM_FORMAT_META_RAW_10BIT,
+
     /* QCOM RAW formats where data is packed into 64bit word.
      * 14BPP: 1 64-bit word contains 4 pixels p0 - p3, where most
      *       significant 4 bits are set to 0. P0 is stored at LSB.
@@ -365,6 +368,12 @@ typedef enum {
 
     CAM_FORMAT_MAX
 } cam_format_t;
+
+typedef enum {
+    CAM_FORMAT_SUBTYPE_HDR_STATS,
+    CAM_FORMAT_SUBTYPE_PDAF_STATS,
+    CAM_FORMAT_SUBTYPE_MAX
+} cam_sub_format_type_t;
 
 typedef enum {
     CAM_STREAM_TYPE_DEFAULT,       /* default stream type */
@@ -1633,8 +1642,10 @@ typedef struct {
     uint32_t min_scanline;
     uint8_t batch_size;
     cam_sync_type_t sync_type;
+    uint32_t dt[MAX_NUM_STREAMS];
+    uint32_t vc[MAX_NUM_STREAMS];
+    cam_sub_format_type_t sub_format_type[MAX_NUM_STREAMS];
 } cam_stream_size_info_t;
-
 
 typedef enum {
     CAM_INTF_OVERWRITE_MINI_CHROMATIX_OFFLINE,
@@ -2190,6 +2201,11 @@ typedef enum {
     CAM_INTF_PARM_JPEG_SCALE_DIMENSION,
     /*Param for updating Quadra CFA mode */
     CAM_INTF_PARM_QUADRA_CFA,
+    /* Meta Raw Dim */
+    CAM_INTF_META_RAW,
+    /* Number of streams and size of streams in
+       current configuration for pic res*/
+    CAM_INTF_META_STREAM_INFO_FOR_PIC_RES,
     /* HAL based HDR*/
     CAM_INTF_PARM_HAL_BRACKETING_HDR,
     /* Hack 3 to make proper enum */

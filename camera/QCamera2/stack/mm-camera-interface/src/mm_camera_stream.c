@@ -3484,6 +3484,7 @@ int32_t mm_stream_calc_offset_raw(cam_format_t fmt,
     case CAM_FORMAT_BAYER_IDEAL_RAW_MIPI_10BPP_GRBG:
     case CAM_FORMAT_BAYER_IDEAL_RAW_MIPI_10BPP_RGGB:
     case CAM_FORMAT_BAYER_IDEAL_RAW_MIPI_10BPP_BGGR:
+    case CAM_FORMAT_META_RAW_10BIT:
     case CAM_FORMAT_BAYER_IDEAL_RAW_MIPI_10BPP_GREY:
         /* Every 64 pixels occupy 80 bytes */
         stride = PAD_TO_SIZE(dim->width, CAM_PAD_TO_4);
