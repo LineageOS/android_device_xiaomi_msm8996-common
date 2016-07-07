@@ -935,6 +935,7 @@ QCameraParameters::QCameraParameters()
       m_bLocalHDREnabled(false),
       m_bAVTimerEnabled(false),
       m_bDISEnabled(false),
+      m_bMetaRawEnabled(false),
       m_MobiMask(0),
       m_AdjustFPS(NULL),
       m_bHDR1xFrameEnabled(false),
@@ -9959,6 +9960,29 @@ int32_t QCameraParameters::getStreamRotation(cam_stream_type_t streamType,
     return ret;
 }
 
+int32_t QCameraParameters::getStreamSubFormat(cam_stream_type_t streamType,
+                            cam_sub_format_type_t &sub_format)
+{
+    int32_t ret = NO_ERROR;
+    sub_format = CAM_FORMAT_SUBTYPE_MAX;
+
+    switch (streamType) {
+        case CAM_STREAM_TYPE_RAW: {
+          char raw_sub_format[PROPERTY_VALUE_MAX];
+          int rawSubFormat;
+          memset(raw_sub_format, 0, sizeof(raw_sub_format));
+          /*Default value is CAM_FORMAT_SUBTYPE_PDAF_STATS*/
+          property_get("persist.camera.raw.subformat", raw_sub_format, "1");
+          rawSubFormat = atoi(raw_sub_format);
+          sub_format = (cam_sub_format_type_t)rawSubFormat;
+          LOGH("Subformat for raw stream = %d", sub_format);
+        }
+            break;
+        default:
+            break;
+    }
+    return ret;
+}
 /*===========================================================================
  * FUNCTION   : getStreamFormat
  *
@@ -11502,6 +11526,10 @@ int32_t QCameraParameters::updateRAW(cam_dimension_t max_dim)
     int32_t rc = NO_ERROR;
     cam_dimension_t raw_dim, pic_dim;
 
+    //No need to update RAW dimensions if meta raw is enabled.
+    if (m_bMetaRawEnabled) {
+        return rc;
+    }
     // If offline raw is enabled, check the dimensions from Picture size since snapshot
     // stream is not added but final JPEG is required of snapshot size
     if (getofflineRAW()) {
@@ -12794,6 +12822,12 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
     stream_config_info.min_scanline   = m_pCapability->min_scanline;
     stream_config_info.batch_size = getBufBatchCount();
 
+    LOGH("buf_alignment=%d stride X scan=%dx%d batch size = %d\n",
+            m_pCapability->buf_alignment,
+            m_pCapability->min_stride,
+            m_pCapability->min_scanline,
+            stream_config_info.batch_size);
+
     property_get("persist.camera.raw_yuv", value, "0");
     raw_yuv = atoi(value) > 0 ? true : false;
 
@@ -13002,25 +13036,52 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
             }
         }
         LOGH("Max Dimension = %d X %d", max_dim.width, max_dim.height);
-        updateRAW(max_dim);
         stream_config_info.type[stream_config_info.num_streams] =
-                CAM_STREAM_TYPE_RAW;
-        getStreamDimension(CAM_STREAM_TYPE_RAW,
-                stream_config_info.stream_sizes[stream_config_info.num_streams]);
+            CAM_STREAM_TYPE_RAW;
+        getStreamFormat(CAM_STREAM_TYPE_RAW,
+                stream_config_info.format[stream_config_info.num_streams]);
+        if (CAM_FORMAT_META_RAW_10BIT ==
+            stream_config_info.format[stream_config_info.num_streams]) {
+            int32_t dt = 0;
+            int32_t vc = 0;
+            cam_stream_size_info_t temp_stream_config_info;
+            getStreamSubFormat(CAM_STREAM_TYPE_RAW,
+                stream_config_info.sub_format_type[
+                stream_config_info.num_streams]);
+            /* Sending separate meta_stream_info so that other modules do
+             * not confuse with original sendStreamConfigInfo(). This is only
+             * for sensor where sensor can run pick resolusion for meta raw.
+             */
+            updateDtVc(&dt, &vc);
+            stream_config_info.dt[stream_config_info.num_streams] = dt;
+            stream_config_info.vc[stream_config_info.num_streams] = vc;
+            memcpy(&temp_stream_config_info, &stream_config_info,
+                sizeof(temp_stream_config_info));
+            temp_stream_config_info.num_streams++;
+            sendStreamConfigForPickRes(temp_stream_config_info);
+            getMetaRawInfo();
+        } else {
+            updateRAW(max_dim);
+        }
+        getStreamDimension(CAM_STREAM_TYPE_RAW, stream_config_info.stream_sizes[
+                stream_config_info.num_streams]);
         updatePpFeatureMask(CAM_STREAM_TYPE_RAW);
         stream_config_info.postprocess_mask[stream_config_info.num_streams] =
                 mStreamPpMask[CAM_STREAM_TYPE_RAW];
-        getStreamFormat(CAM_STREAM_TYPE_RAW,
-                stream_config_info.format[stream_config_info.num_streams]);
         stream_config_info.num_streams++;
     }
+
     for (uint32_t k = 0; k < stream_config_info.num_streams; k++) {
-        LOGI("STREAM INFO : type %d, wxh: %d x %d, pp_mask: 0x%llx Format = %d",
+        LOGI("STREAM INFO : type %d, wxh: %d x %d, pp_mask: 0x%llx \
+            Format = %d, dt =%d cid =%d subformat =%d",
                 stream_config_info.type[k],
                 stream_config_info.stream_sizes[k].width,
                 stream_config_info.stream_sizes[k].height,
                 stream_config_info.postprocess_mask[k],
-                stream_config_info.format[k]);
+                stream_config_info.format[k],
+                stream_config_info.dt[k],
+                stream_config_info.vc[k],
+                stream_config_info.sub_format_type[k]);
     }
 
     rc = sendStreamConfigInfo(stream_config_info);
@@ -14300,8 +14361,6 @@ int32_t QCameraParameters::getPicSizeFromAPK(int &width, int &height)
     return m_reprocScaleParam.getPicSizeFromAPK(width, height);
 }
 
-
-
 /*===========================================================================
  * FUNCTION   : setDualLedCalibration
  *
@@ -14427,6 +14486,123 @@ int32_t QCameraParameters::getAnalysisInfo(
         cam_analysis_info_t *pAnalysisInfo)
 {
     return mCommon.getAnalysisInfo(fdVideoEnabled, hal3, featureMask, pAnalysisInfo);
+}
+
+/*===========================================================================
+ * FUNCTION   : getMetaRawInfo
+ *
+ * DESCRIPTION: fetch meta raw dimension
+ *
+ * PARAMETERS :
+ *   @dim  : get dimension for meta raw stream
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+int32_t QCameraParameters::getMetaRawInfo()
+{
+    int32_t rc = NO_ERROR;
+    cam_dimension_t meta_stream_size;
+
+    if(initBatchUpdate(m_pParamBuf) < 0 ) {
+        LOGE("Failed to initialize group update table");
+        return BAD_TYPE;
+    }
+
+    ADD_GET_PARAM_ENTRY_TO_BATCH(m_pParamBuf,
+            CAM_INTF_META_RAW);
+
+    rc = commitGetBatch();
+    if (rc != NO_ERROR) {
+        LOGE("Failed to get extened RAW info");
+        return rc;
+    }
+
+    READ_PARAM_ENTRY(m_pParamBuf,
+            CAM_INTF_META_RAW, meta_stream_size);
+
+    if (meta_stream_size.width == 0 || meta_stream_size.height == 0) {
+        LOGE("Error getting RAW size. Setting to Capability value");
+        meta_stream_size = m_pCapability->raw_meta_dim[0];
+    }
+    LOGH("RAW meta size. width =%d height =%d",
+      meta_stream_size.width, meta_stream_size.height);
+
+    setRawSize(meta_stream_size);
+    m_bMetaRawEnabled = true;
+    return rc;
+}
+/*===========================================================================
+ * FUNCTION   : sendStreamConfigForPickRes
+ *
+ * DESCRIPTION: send Stream config info.
+ *
+ * PARAMETERS :
+ *   @stream_config_info: Stream config information
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+bool QCameraParameters::sendStreamConfigForPickRes
+    (cam_stream_size_info_t &stream_config_info) {
+    int32_t rc = NO_ERROR;
+    if(initBatchUpdate(m_pParamBuf) < 0 ) {
+        LOGE("Failed to initialize group update table");
+        return BAD_TYPE;
+    }
+
+    if (ADD_SET_PARAM_ENTRY_TO_BATCH(m_pParamBuf,
+            CAM_INTF_META_STREAM_INFO_FOR_PIC_RES, stream_config_info)) {
+        LOGE("%s:Failed to update table");
+        return BAD_VALUE;
+    }
+
+    rc = commitSetBatch();
+    if (rc != NO_ERROR) {
+        LOGE("Failed to set stream info parm");
+        return rc;
+    }
+    return rc;
+}
+
+/*===========================================================================
+ * FUNCTION   : updateDtVc
+ *
+ * DESCRIPTION: Update DT and Vc from capabilities
+ *
+ * PARAMETERS :
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+int32_t QCameraParameters::updateDtVc(int32_t *dt, int32_t *vc)
+{
+    int32_t rc = NO_ERROR;
+    char prop[PROPERTY_VALUE_MAX];
+
+    int dt_val = 0;
+    int vc_val = 0;
+
+    /* Setting Dt from setprop or capability */
+    property_get("persist.camera.dt", prop, "0");
+    dt_val = atoi(prop);
+    if (dt_val == 0) {
+        dt_val = m_pCapability->dt[0];
+    }
+    *dt = dt_val;
+
+    /*Setting vc from setprop or capability */
+    property_get("persist.camera.vc", prop, "-1");
+    vc_val = atoi(prop);
+    if (vc_val== -1) {
+        vc_val = m_pCapability->vc[0];
+    }
+    *vc = vc_val;
+
+    LOGH("dt=%d vc=%d",*dt, *vc);
+    return rc;
 }
 
 }; // namespace qcamera

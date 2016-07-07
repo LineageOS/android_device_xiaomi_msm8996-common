@@ -3018,6 +3018,9 @@ QCameraHeapMemory *QCamera2HardwareInterface::allocateStreamInfoBuf(
     int rc = NO_ERROR;
     char value[PROPERTY_VALUE_MAX];
     bool raw_yuv = false;
+    int32_t dt = 0;
+    int32_t vc = 0;
+
 
     QCameraHeapMemory *streamInfoBuf = new QCameraHeapMemory(QCAMERA_ION_USE_CACHE);
     if (!streamInfoBuf) {
@@ -3070,6 +3073,13 @@ QCameraHeapMemory *QCamera2HardwareInterface::allocateStreamInfoBuf(
         } else {
             streamInfo->is_secure = NON_SECURE;
         }
+        if (CAM_FORMAT_META_RAW_10BIT == streamInfo->fmt) {
+            mParameters.updateDtVc(&dt, &vc);
+            if (dt)
+                streamInfo->dt = dt;
+            streamInfo->vc = vc;
+        }
+
         break;
     case CAM_STREAM_TYPE_POSTVIEW:
         if (mLongshotEnabled) {
@@ -7314,7 +7324,7 @@ int32_t QCamera2HardwareInterface::addZSLChannel()
     if (raw_yuv) {
         rc = addStreamToChannel(pChannel,
                                 CAM_STREAM_TYPE_RAW,
-                                NULL,
+                                preview_raw_stream_cb_routine,
                                 this);
         if (rc != NO_ERROR) {
             LOGE("add raw stream failed, ret = %d", rc);
