@@ -1522,9 +1522,7 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
     cam_padding_info_t padding_info = gCamCapability[mCameraId]->padding_info;
 
     /*EIS configuration*/
-    bool eisSupported = false;
     bool oisSupported = false;
-    int32_t margin_index = -1;
     uint8_t eis_prop_set;
     uint32_t maxEisWidth = 0;
     uint32_t maxEisHeight = 0;
@@ -1535,14 +1533,11 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
     count = MIN(gCamCapability[mCameraId]->supported_is_types_cnt, count);
     for (size_t i = 0; i < count; i++) {
         if ((gCamCapability[mCameraId]->supported_is_types[i] == IS_TYPE_EIS_2_0) ||
-            (gCamCapability[mCameraId]->supported_is_types[i] == IS_TYPE_EIS_3_0))
-        {
-            eisSupported = true;
-            margin_index = (int32_t)i;
+            (gCamCapability[mCameraId]->supported_is_types[i] == IS_TYPE_EIS_3_0)) {
+            m_bEisSupported = true;
             break;
         }
     }
-
     count = CAM_OPT_STAB_MAX;
     count = MIN(gCamCapability[mCameraId]->optical_stab_modes_count, count);
     for (size_t i = 0; i < count; i++) {
@@ -1552,7 +1547,7 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
         }
     }
 
-    if (eisSupported) {
+    if (m_bEisSupported) {
         maxEisWidth = MAX_EIS_WIDTH;
         maxEisHeight = MAX_EIS_HEIGHT;
     }
@@ -1560,11 +1555,14 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
     /* EIS setprop control */
     char eis_prop[PROPERTY_VALUE_MAX];
     memset(eis_prop, 0, sizeof(eis_prop));
-    property_get("persist.camera.eis.enable", eis_prop, "0");
+    property_get("persist.camera.eis.enable", eis_prop, "1");
     eis_prop_set = (uint8_t)atoi(eis_prop);
 
-    m_bEisEnable = eis_prop_set && (!oisSupported && eisSupported) &&
+    m_bEisEnable = eis_prop_set && (!oisSupported && m_bEisSupported) &&
             (mOpMode != CAMERA3_STREAM_CONFIGURATION_CONSTRAINED_HIGH_SPEED_MODE);
+
+    LOGD("m_bEisEnable: %d, eis_prop_set: %d, m_bEisSupported: %d, oisSupported:%d ",
+            m_bEisEnable, eis_prop_set, m_bEisSupported, oisSupported);
 
     /* stream configurations */
     for (size_t i = 0; i < streamList->num_streams; i++) {
@@ -4045,10 +4043,14 @@ int QCamera3HardwareInterface::processCaptureRequest(
         }
         m_perfLock.lock_acq();
         /* get eis information for stream configuration */
-        cam_is_type_t is_type;
+        cam_is_type_t isTypeVideo, isTypePreview, is_type=IS_TYPE_NONE;
         char is_type_value[PROPERTY_VALUE_MAX];
-        property_get("persist.camera.is_type", is_type_value, "0");
-        is_type = static_cast<cam_is_type_t>(atoi(is_type_value));
+        property_get("persist.camera.is_type", is_type_value, "4");
+        isTypeVideo = static_cast<cam_is_type_t>(atoi(is_type_value));
+        // Make default value for preview IS_TYPE as IS_TYPE_EIS_2_0
+        property_get("persist.camera.is_type_preview", is_type_value, "4");
+        isTypePreview = static_cast<cam_is_type_t>(atoi(is_type_value));
+        LOGD("isTypeVideo: %d isTypePreview: %d", isTypeVideo, isTypePreview);
 
         if (meta.exists(ANDROID_CONTROL_CAPTURE_INTENT)) {
             int32_t hal_version = CAM_HAL_V3;
@@ -4060,32 +4062,49 @@ int QCamera3HardwareInterface::processCaptureRequest(
             ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters, CAM_INTF_META_CAPTURE_INTENT, captureIntent);
         }
 
-        //If EIS is enabled, turn it on for video
-        bool setEis = m_bEisEnable && m_bEisSupportedSize;
+        uint8_t fwkVideoStabMode=0;
+        if (meta.exists(ANDROID_CONTROL_VIDEO_STABILIZATION_MODE)) {
+            fwkVideoStabMode = meta.find(ANDROID_CONTROL_VIDEO_STABILIZATION_MODE).data.u8[0];
+        }
+
+        // If EIS setprop is enabled & if first capture setting has EIS enabled then only
+        // turn it on for video/preview
+        bool setEis = m_bEisEnable && fwkVideoStabMode && m_bEisSupportedSize &&
+                (isTypeVideo >= IS_TYPE_EIS_2_0);
         int32_t vsMode;
         vsMode = (setEis)? DIS_ENABLE: DIS_DISABLE;
         if (ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters, CAM_INTF_PARM_DIS_ENABLE, vsMode)) {
             rc = BAD_VALUE;
         }
+        LOGD("setEis %d", setEis);
+        bool eis3Supported = false;
+        size_t count = IS_TYPE_MAX;
+        count = MIN(gCamCapability[mCameraId]->supported_is_types_cnt, count);
+        for (size_t i = 0; i < count; i++) {
+            if (gCamCapability[mCameraId]->supported_is_types[i] == IS_TYPE_EIS_3_0) {
+                eis3Supported = true;
+                break;
+            }
+        }
 
         //IS type will be 0 unless EIS is supported. If EIS is supported
-        //it could either be 1 or 4 depending on the stream and video size
+        //it could either be 4 or 5 depending on the stream and video size
         for (uint32_t i = 0; i < mStreamConfigInfo.num_streams; i++) {
             if (setEis) {
-                if (!m_bEisSupportedSize) {
-                    is_type = IS_TYPE_DIS;
-                    } else {
-                    if (mStreamConfigInfo.type[i] == CAM_STREAM_TYPE_PREVIEW) {
+                if (mStreamConfigInfo.type[i] == CAM_STREAM_TYPE_PREVIEW) {
+                    is_type = isTypePreview;
+                } else if (mStreamConfigInfo.type[i] == CAM_STREAM_TYPE_VIDEO ) {
+                    if ( (isTypeVideo == IS_TYPE_EIS_3_0) && (eis3Supported == FALSE) ) {
+                        LOGW(" EIS_3.0 is not supported and so setting EIS_2.0");
                         is_type = IS_TYPE_EIS_2_0;
-                    }else if (mStreamConfigInfo.type[i] == CAM_STREAM_TYPE_VIDEO) {
-                        is_type = IS_TYPE_EIS_3_0;
-                    }else {
-                        is_type = IS_TYPE_NONE;
+                    } else {
+                        is_type = isTypeVideo;
                     }
-                 }
+                } else {
+                    is_type = IS_TYPE_NONE;
+                }
                  mStreamConfigInfo.is_type[i] = is_type;
-            }
-            else {
+            } else {
                  mStreamConfigInfo.is_type[i] = IS_TYPE_NONE;
             }
         }
@@ -4169,12 +4188,13 @@ int QCamera3HardwareInterface::processCaptureRequest(
         LOGD("set_parms META_STREAM_INFO " );
         for (uint32_t i = 0; i < mStreamConfigInfo.num_streams; i++) {
             LOGI("STREAM INFO : type %d, wxh: %d x %d, pp_mask: 0x%x "
-                    "Format:%d",
+                    "Format:%d is_type: %d",
                     mStreamConfigInfo.type[i],
                     mStreamConfigInfo.stream_sizes[i].width,
                     mStreamConfigInfo.stream_sizes[i].height,
                     mStreamConfigInfo.postprocess_mask[i],
-                    mStreamConfigInfo.format[i]);
+                    mStreamConfigInfo.format[i],
+                    mStreamConfigInfo.is_type[i]);
         }
 
         rc = mCameraHandle->ops->set_parms(mCameraHandle->camera_handle,
@@ -4221,9 +4241,15 @@ int QCamera3HardwareInterface::processCaptureRequest(
             QCamera3Channel *channel = (QCamera3Channel *)(*it)->stream->priv;
             if ((((1U << CAM_STREAM_TYPE_VIDEO) == channel->getStreamTypeMask()) ||
                ((1U << CAM_STREAM_TYPE_PREVIEW) == channel->getStreamTypeMask())) &&
-               setEis)
+               setEis) {
+                for (size_t i = 0; i < mStreamConfigInfo.num_streams; i++) {
+                    if ( (1U << mStreamConfigInfo.type[i]) == channel->getStreamTypeMask() ) {
+                        is_type = mStreamConfigInfo.is_type[i];
+                        break;
+                    }
+                }
                 rc = channel->initialize(is_type);
-            else {
+            } else {
                 rc = channel->initialize(IS_TYPE_NONE);
             }
             if (NO_ERROR != rc) {
@@ -4264,7 +4290,7 @@ int QCamera3HardwareInterface::processCaptureRequest(
                 pthread_mutex_unlock(&mMutex);
                 goto error_exit;
             }
-            rc = mDummyBatchChannel->initialize(is_type);
+            rc = mDummyBatchChannel->initialize(IS_TYPE_NONE);
             if (rc < 0) {
                 LOGE("mDummyBatchChannel initialization failed");
                 pthread_mutex_unlock(&mMutex);
@@ -5652,7 +5678,7 @@ QCamera3HardwareInterface::translateFromHalMetadata(
         // and so hardcoding the Video Stab result to OFF mode.
         uint8_t fwkVideoStabMode = ANDROID_CONTROL_VIDEO_STABILIZATION_MODE_OFF;
         camMetadata.update(ANDROID_CONTROL_VIDEO_STABILIZATION_MODE, &fwkVideoStabMode, 1);
-        LOGD("%s: EIS result default to OFF mode", __func__);
+        LOGD("EIS result default to OFF mode");
     }
 
     IF_META_AVAILABLE(uint32_t, noiseRedMode, CAM_INTF_META_NOISE_REDUCTION_MODE, metadata) {
@@ -7561,10 +7587,20 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
     Vector<uint8_t> availableVstabModes;
     availableVstabModes.add(ANDROID_CONTROL_VIDEO_STABILIZATION_MODE_OFF);
     char eis_prop[PROPERTY_VALUE_MAX];
+    bool eisSupported = false;
     memset(eis_prop, 0, sizeof(eis_prop));
-    property_get("persist.camera.eis.enable", eis_prop, "0");
+    property_get("persist.camera.eis.enable", eis_prop, "1");
     uint8_t eis_prop_set = (uint8_t)atoi(eis_prop);
-    if (facingBack && eis_prop_set) {
+    count = IS_TYPE_MAX;
+    count = MIN(gCamCapability[cameraId]->supported_is_types_cnt, count);
+    for (size_t i = 0; i < count; i++) {
+        if ((gCamCapability[cameraId]->supported_is_types[i] == IS_TYPE_EIS_2_0) ||
+            (gCamCapability[cameraId]->supported_is_types[i] == IS_TYPE_EIS_3_0)) {
+            eisSupported = true;
+            break;
+        }
+    }
+    if (facingBack && eis_prop_set && eisSupported) {
         availableVstabModes.add(ANDROID_CONTROL_VIDEO_STABILIZATION_MODE_ON);
     }
     staticInfo.update(ANDROID_CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES,
@@ -8812,23 +8848,6 @@ camera_metadata_t* QCamera3HardwareInterface::translateCapabilityToMetadata(int 
     memset(videoOisProp, 0, sizeof(videoOisProp));
     property_get("persist.camera.ois.video", videoOisProp, "1");
     uint8_t forceVideoOis = (uint8_t)atoi(videoOisProp);
-
-    // EIS enable/disable
-    char eis_prop[PROPERTY_VALUE_MAX];
-    memset(eis_prop, 0, sizeof(eis_prop));
-    property_get("persist.camera.eis.enable", eis_prop, "0");
-    const uint8_t eis_prop_set = (uint8_t)atoi(eis_prop);
-
-    const bool facingBack = ((gCamCapability[mCameraId]->position == CAM_POSITION_BACK) ||
-            (gCamCapability[mCameraId]->position == CAM_POSITION_BACK_AUX));
-    // This is a bit hacky. EIS is enabled only when the above setprop
-    // is set to non-zero value and on back camera (for 2015 Nexus).
-    // Ideally, we should rely on m_bEisEnable, but we cannot guarantee
-    // configureStream is called before this function. In other words,
-    // we cannot guarantee the app will call configureStream before
-    // calling createDefaultRequest.
-    const bool eisEnabled = facingBack && eis_prop_set;
-
     uint8_t controlIntent = 0;
     uint8_t focusMode;
     uint8_t vsMode;
@@ -8879,9 +8898,6 @@ camera_metadata_t* QCamera3HardwareInterface::translateCapabilityToMetadata(int 
         controlIntent = ANDROID_CONTROL_CAPTURE_INTENT_VIDEO_RECORD;
         focusMode = ANDROID_CONTROL_AF_MODE_CONTINUOUS_VIDEO;
         optStabMode = ANDROID_LENS_OPTICAL_STABILIZATION_MODE_OFF;
-        if (eisEnabled) {
-            vsMode = ANDROID_CONTROL_VIDEO_STABILIZATION_MODE_ON;
-        }
         cacMode = ANDROID_COLOR_CORRECTION_ABERRATION_MODE_FAST;
         edge_mode = ANDROID_EDGE_MODE_FAST;
         noise_red_mode = ANDROID_NOISE_REDUCTION_MODE_FAST;
@@ -8893,9 +8909,6 @@ camera_metadata_t* QCamera3HardwareInterface::translateCapabilityToMetadata(int 
         controlIntent = ANDROID_CONTROL_CAPTURE_INTENT_VIDEO_SNAPSHOT;
         focusMode = ANDROID_CONTROL_AF_MODE_CONTINUOUS_VIDEO;
         optStabMode = ANDROID_LENS_OPTICAL_STABILIZATION_MODE_OFF;
-        if (eisEnabled) {
-            vsMode = ANDROID_CONTROL_VIDEO_STABILIZATION_MODE_ON;
-        }
         cacMode = ANDROID_COLOR_CORRECTION_ABERRATION_MODE_FAST;
         edge_mode = ANDROID_EDGE_MODE_FAST;
         noise_red_mode = ANDROID_NOISE_REDUCTION_MODE_FAST;

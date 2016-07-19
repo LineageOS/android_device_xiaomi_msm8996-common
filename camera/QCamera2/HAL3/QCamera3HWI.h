@@ -430,6 +430,7 @@ private:
     bool m_bIs4KVideo;
     bool m_bEisSupportedSize;
     bool m_bEisEnable;
+    bool m_bEisSupported;
     typedef struct {
         cam_dimension_t dim;
         int format;
