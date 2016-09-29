@@ -803,8 +803,9 @@ int32_t QCameraStream::calcOffset(cam_stream_info_t *streamInfo)
                 &streamInfo->buf_planes);
         break;
     case CAM_STREAM_TYPE_POSTVIEW:
-        rc = mm_stream_calc_offset_post_view(streamInfo->fmt,
+        rc = mm_stream_calc_offset_post_view(streamInfo,
                 &dim,
+                &mPaddingInfo,
                 &streamInfo->buf_planes);
         break;
     case CAM_STREAM_TYPE_SNAPSHOT:
