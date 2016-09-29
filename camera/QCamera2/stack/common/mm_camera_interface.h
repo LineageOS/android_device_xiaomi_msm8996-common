@@ -901,8 +901,9 @@ int32_t mm_stream_calc_offset_preview(cam_stream_info_t *stream_info,
         cam_padding_info_t *padding,
         cam_stream_buf_plane_info_t *buf_planes);
 
-int32_t mm_stream_calc_offset_post_view(cam_format_t fmt,
+int32_t mm_stream_calc_offset_post_view(cam_stream_info_t *stream_info,
         cam_dimension_t *dim,
+        cam_padding_info_t *padding,
         cam_stream_buf_plane_info_t *buf_planes);
 
 int32_t mm_stream_calc_offset_snapshot(cam_format_t fmt,
