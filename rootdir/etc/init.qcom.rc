@@ -636,7 +636,7 @@ service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
 service imsrcsservice /system/vendor/bin/imsrcsd
     class main
     user system
-    group radio diag log
+    group radio diag inet log
     writepid /dev/cpuset/system-background/tasks
     disabled
 
