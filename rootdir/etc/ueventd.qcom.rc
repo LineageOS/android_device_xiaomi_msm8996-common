@@ -52,6 +52,9 @@
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
 
+#permsissions for BT/FM
+/dev/btpower              0660   bluetooth  system
+
 #permissions for pta
 /dev/pta                  0660   system     system
 
