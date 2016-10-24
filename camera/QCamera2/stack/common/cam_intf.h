@@ -990,6 +990,7 @@ typedef struct {
     INCLUDE(XIAOMI_DUMMY2,                              uint8_t,                     4);
     INCLUDE(CAM_INTF_PARM_JPEG_ENCODE_CROP,             cam_stream_crop_info_t,      1); // BAD + 4 ?
     INCLUDE(CAM_INTF_PARM_JPEG_SCALE_DIMENSION,         cam_dimension_t,             1); //BAD stock +44
+    INCLUDE(CAM_INTF_PARM_HAL_BRACKETING_HDR,           cam_hdr_param_t,             1);
     volatile char         xiaomi_reserved4[4];
     INCLUDE(XIAOMI_DUMMY3,                              uint8_t,                     12);
 } metadata_data_t;

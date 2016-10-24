@@ -4,14 +4,14 @@
 * modification, are permitted provided that the following conditions are
 * met:
 *     * Redistributions of source code must retain the above copyright
-*	notice, this list of conditions and the following disclaimer.
+*       notice, this list of conditions and the following disclaimer.
 *     * Redistributions in binary form must reproduce the above
-*	copyright notice, this list of conditions and the following
-*	disclaimer in the documentation and/or other materials provided
-*	with the distribution.
+*       copyright notice, this list of conditions and the following
+*       disclaimer in the documentation and/or other materials provided
+*       with the distribution.
 *     * Neither the name of The Linux Foundation nor the names of its
-*	contributors may be used to endorse or promote products derived
-*	from this software without specific prior written permission.
+*       contributors may be used to endorse or promote products derived
+*       from this software without specific prior written permission.
 *
 * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -73,6 +73,7 @@ class QCamera3ProcessingChannel;
         char gps_processing_method[GPS_PROCESSING_METHOD_SIZE];
         uint8_t image_desc_valid;
         char image_desc[EXIF_IMAGE_DESCRIPTION_SIZE];
+        bool hdr_snapshot;
     } jpeg_settings_t;
 
     typedef struct {
@@ -88,6 +89,7 @@ class QCamera3ProcessingChannel;
         cam_dimension_t output_stream_dim;
         cam_padding_info_t *padding;
         reprocess_type_t reprocess_type;
+        cam_hdr_param_t hdr_param;
         QCamera3ProcessingChannel *src_channel;
     } reprocess_config_t;
 

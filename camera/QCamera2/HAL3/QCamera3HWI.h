@@ -34,6 +34,7 @@
 #include <pthread.h>
 #include <utils/KeyedVector.h>
 #include <utils/List.h>
+#include <map>
 #include "CameraMetadata.h"
 
 // Camera dependencies
@@ -69,6 +70,15 @@ using ::android::hardware::camera::common::V1_0::helper::CameraMetadata;
 #define NSEC_PER_SEC 1000000000LLU
 #define NSEC_PER_USEC 1000LLU
 #define NSEC_PER_33MSEC 33000000LLU
+
+/*Orchestrate Macros */
+#define EV_COMP_SETTLE_DELAY   2
+#define GB_HDR_HALF_STEP_EV -6
+#define GB_HDR_2X_STEP_EV 6
+
+#define FRAME_REGISTER_LRU_SIZE 256
+#define INTERNAL_FRAME_STARTING_NUMBER 800
+#define EMPTY_FRAMEWORK_FRAME_NUMBER 0xFFFFFFFF
 
 typedef enum {
     SET_ENABLE,
@@ -122,6 +132,23 @@ public:
     int32_t getBufErrStatus(buffer_handle_t *buffer);
 };
 
+class FrameNumberRegistry {
+public:
+
+    FrameNumberRegistry();
+    ~FrameNumberRegistry();
+    int32_t allocStoreInternalFrameNumber(uint32_t frameworkFrameNumber,
+            uint32_t &internalFrameNumber);
+    int32_t generateStoreInternalFrameNumber(uint32_t &internalFrameNumber);
+    int32_t freeInternalFrameNumber(uint32_t internalFrameNumber);
+    int32_t getFrameworkFrameNumber(uint32_t internalFrameNumber, uint32_t &frameworkFrameNumber);
+    void purgeOldEntriesLocked();
+
+private:
+    std::map<uint32_t, uint32_t> _register;
+    uint32_t _nextFreeInternalNumber;
+    Mutex mRegistryLock;
+};
 
 class QCamera3HardwareInterface {
 public:
@@ -150,6 +177,12 @@ public:
                                           void *user_data);
     int openCamera(struct hw_device_t **hw_device);
     camera_metadata_t* translateCapabilityToMetadata(int type);
+
+    typedef struct {
+        camera3_stream_t *stream;
+        bool need_metadata;
+        bool meteringOnly;
+    } InternalRequest;
 
     static int getCamInfo(uint32_t cameraId, struct camera_info *info);
     static int initCapabilities(uint32_t cameraId);
@@ -181,7 +214,12 @@ public:
     int initialize(const camera3_callback_ops_t *callback_ops);
     int configureStreams(camera3_stream_configuration_t *stream_list);
     int configureStreamsPerfLocked(camera3_stream_configuration_t *stream_list);
-    int processCaptureRequest(camera3_capture_request_t *request);
+    int processCaptureRequest(camera3_capture_request_t *request,
+                              List<InternalRequest> &internalReqs);
+    int orchestrateRequest(camera3_capture_request_t *request);
+    void orchestrateResult(camera3_capture_result_t *result);
+    void orchestrateNotify(camera3_notify_msg_t *notify_msg);
+
     void dump(int fd);
     int flushPerf();
 
@@ -290,7 +328,8 @@ private:
             int32_t scalar_format, const cam_dimension_t &dim,
             int32_t config_type);
 
-    int validateCaptureRequest(camera3_capture_request_t *request);
+    int validateCaptureRequest(camera3_capture_request_t *request,
+                               List<InternalRequest> &internallyRequestedStreams);
     int validateStreamDimensions(camera3_stream_configuration_t *streamList);
     int validateStreamRotations(camera3_stream_configuration_t *streamList);
     void deriveMinFrameDuration();
@@ -316,6 +355,7 @@ private:
 
     bool isSupportChannelNeeded(camera3_stream_configuration_t *streamList,
             cam_stream_size_info_t stream_config_info);
+    bool isHdrSnapshotRequest(camera3_capture_request *request);
     int32_t setMobicat();
 
     int32_t getSensorOutputSize(cam_dimension_t &sensor_dim);
@@ -380,6 +420,7 @@ private:
     bool mFlush;
     bool mFlushPerf;
     bool mEnableRawDump;
+    bool mForceHdrSnapshot;
     QCamera3HeapMemory *mParamHeap;
     metadata_buffer_t* mParameters;
     metadata_buffer_t* mPrevParameters;
@@ -410,11 +451,13 @@ private:
         // in order to generate the buffer.
         bool need_metadata;
     } RequestedBufferInfo;
+
     typedef struct {
         uint32_t frame_number;
         uint32_t num_buffers;
         int32_t request_id;
         List<RequestedBufferInfo> buffers;
+        List<InternalRequest> internalRequestList;
         int blob_request;
         uint8_t bUrgentReceived;
         nsecs_t timestamp;
@@ -438,6 +481,7 @@ private:
         uint32_t frame_number;
     } PendingReprocessResult;
 
+    class FrameNumberRegistry _orchestrationDb;
     typedef KeyedVector<uint32_t, Vector<PendingBufferInfo> > FlushMap;
     typedef List<QCamera3HardwareInterface::PendingRequestInfo>::iterator
             pendingRequestIterator;

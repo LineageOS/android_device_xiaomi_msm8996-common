@@ -44,6 +44,7 @@
 #include "sys/ioctl.h"
 #include <sync/sync.h>
 #include "gralloc_priv.h"
+#include <map>
 
 // Display dependencies
 #include "qdMetaData.h"
@@ -422,6 +423,9 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
     memset(prop, 0, sizeof(prop));
     property_get("persist.camera.raw.dump", prop, "0");
     mEnableRawDump = atoi(prop);
+    property_get("persist.camera.hal3.force.hdr", prop, "0");
+    mForceHdrSnapshot = atoi(prop);
+
     if (mEnableRawDump)
         LOGD("Raw dump from Camera HAL enabled");
 
@@ -2434,7 +2438,8 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
  *
  *==========================================================================*/
 int QCamera3HardwareInterface::validateCaptureRequest(
-                    camera3_capture_request_t *request)
+                    camera3_capture_request_t *request,
+                    List<InternalRequest> &internallyRequestedStreams)
 {
     ssize_t idx = 0;
     const camera3_stream_buffer_t *b;
@@ -2452,7 +2457,8 @@ int QCamera3HardwareInterface::validateCaptureRequest(
     }
 
     uint32_t frameNumber = request->frame_number;
-    if (request->num_output_buffers < 1 || request->output_buffers == NULL) {
+    if ((request->num_output_buffers < 1 || request->output_buffers == NULL)
+            && (internallyRequestedStreams.size() == 0)) {
         LOGE("Request %d: No output buffers provided!",
                 __FUNCTION__, frameNumber);
         return BAD_VALUE;
@@ -2483,7 +2489,7 @@ int QCamera3HardwareInterface::validateCaptureRequest(
 
     // Validate all buffers
     b = request->output_buffers;
-    do {
+    while (idx < (ssize_t)request->num_output_buffers) {
         QCamera3ProcessingChannel *channel =
                 static_cast<QCamera3ProcessingChannel*>(b->stream->priv);
         if (channel == NULL) {
@@ -2513,8 +2519,7 @@ int QCamera3HardwareInterface::validateCaptureRequest(
         }
         idx++;
         b = request->output_buffers + idx;
-    } while (idx < (ssize_t)request->num_output_buffers);
-
+    }
     return NO_ERROR;
 }
 
@@ -2687,7 +2692,7 @@ int32_t QCamera3HardwareInterface::handlePendingReprocResults(uint32_t frame_num
     for (List<PendingReprocessResult>::iterator j = mPendingReprocessResultList.begin();
             j != mPendingReprocessResultList.end(); j++) {
         if (j->frame_number == frame_number) {
-            mCallbackOps->notify(mCallbackOps, &j->notify_msg);
+            orchestrateNotify(&j->notify_msg);
 
             LOGD("Delayed reprocess notify %d",
                     frame_number);
@@ -2708,7 +2713,7 @@ int32_t QCamera3HardwareInterface::handlePendingReprocResults(uint32_t frame_num
                     result.input_buffer = k->input_buffer;
                     result.result = k->settings;
                     result.partial_result = PARTIAL_RESULT_COUNT;
-                    mCallbackOps->process_capture_result(mCallbackOps, &result);
+                    orchestrateResult(&result);
 
                     erasePendingRequest(k);
                     break;
@@ -2892,7 +2897,7 @@ void QCamera3HardwareInterface::notifyError(uint32_t frameNumber,
     notify_msg.message.error.error_code = errorCode;
     notify_msg.message.error.error_stream = NULL;
     notify_msg.message.error.frame_number = frameNumber;
-    mCallbackOps->notify(mCallbackOps, &notify_msg);
+    orchestrateNotify(&notify_msg);
 
     return;
 }
@@ -3023,7 +3028,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                 result.output_buffers = NULL;
                 result.partial_result = i->partial_result_cnt;
 
-                mCallbackOps->process_capture_result(mCallbackOps, &result);
+                orchestrateResult(&result);
                 LOGD("urgent frame_number = %u, capture_time = %lld",
                       result.frame_number, capture_time);
                 free_camera_metadata((camera_metadata_t *)result.result);
@@ -3069,11 +3074,17 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                         // Send Error notify to frameworks with CAMERA3_MSG_ERROR_BUFFER
                         LOGE("Start of reporting error frame#=%u, streamID=%u",
                                  i->frame_number, streamID);
-                        notify_msg.type = CAMERA3_MSG_ERROR;
-                        notify_msg.message.error.frame_number = i->frame_number;
-                        notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_BUFFER ;
-                        notify_msg.message.error.error_stream = j->stream;
-                        mCallbackOps->notify(mCallbackOps, &notify_msg);
+                    } else {
+                        // For instant AEC, inform frame drop and frame number
+                        LOGH("Start of reporting error frame#=%u" ,i->frame_number);
+                    }
+                    notify_msg.type = CAMERA3_MSG_ERROR;
+                    notify_msg.message.error.frame_number = i->frame_number;
+                    notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_BUFFER ;
+                    notify_msg.message.error.error_stream = j->stream;
+                    orchestrateNotify(&notify_msg);
+                    if (p_cam_frame_drop) {
+                        // Treat msg as error for system buffer drops
                         LOGE("End of reporting error frame#=%u, streamID=%u",
                                 i->frame_number, streamID);
                         PendingFrameDropInfo PendingFrameDrop;
@@ -3116,7 +3127,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
             notify_msg.type = CAMERA3_MSG_SHUTTER;
             notify_msg.message.shutter.frame_number = i->frame_number;
             notify_msg.message.shutter.timestamp = (uint64_t)capture_time;
-            mCallbackOps->notify(mCallbackOps, &notify_msg);
+            orchestrateNotify(&notify_msg);
 
             i->timestamp = capture_time;
 
@@ -3142,6 +3153,18 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                     break;
                 }
             }
+
+            for (auto itr = i->internalRequestList.begin();
+                  itr != i->internalRequestList.end(); itr++) {
+                if (itr->need_metadata) {
+                    internalPproc = true;
+                    QCamera3ProcessingChannel *channel =
+                            (QCamera3ProcessingChannel *)itr->stream->priv;
+                    channel->queueReprocMetadata(metadata_buf);
+                    break;
+                }
+            }
+
 
             result.result = translateFromHalMetadata(metadata,
                     i->timestamp, i->request_id, i->jpegMetadata, i->pipeline_depth,
@@ -3220,7 +3243,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                     }
                 }
                 result.output_buffers = result_buffers;
-                mCallbackOps->process_capture_result(mCallbackOps, &result);
+                orchestrateResult(&result);
                 LOGD("meta frame_number = %u, capture_time = %lld",
                         result.frame_number, i->timestamp);
                 free_camera_metadata((camera_metadata_t *)result.result);
@@ -3229,7 +3252,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                 LOGE("Fatal error: out of memory");
             }
         } else {
-            mCallbackOps->process_capture_result(mCallbackOps, &result);
+            orchestrateResult(&result);
             LOGD("meta frame_number = %u, capture_time = %lld",
                     result.frame_number, i->timestamp);
             free_camera_metadata((camera_metadata_t *)result.result);
@@ -3334,7 +3357,7 @@ void QCamera3HardwareInterface::handleInputBufferWithLock(uint32_t frame_number)
             notify_msg.type = CAMERA3_MSG_SHUTTER;
             notify_msg.message.shutter.frame_number = frame_number;
             notify_msg.message.shutter.timestamp = (uint64_t)capture_time;
-            mCallbackOps->notify(mCallbackOps, &notify_msg);
+            orchestrateNotify(&notify_msg);
             i->shutter_notified = true;
             LOGD("Input request metadata notify frame_number = %u, capture_time = %llu",
                         i->frame_number, notify_msg.message.shutter.timestamp);
@@ -3355,7 +3378,7 @@ void QCamera3HardwareInterface::handleInputBufferWithLock(uint32_t frame_number)
         result.input_buffer = i->input_buffer;
         result.partial_result = PARTIAL_RESULT_COUNT;
 
-        mCallbackOps->process_capture_result(mCallbackOps, &result);
+        orchestrateResult(&result);
         LOGD("Input request metadata and input buffer frame_number = %u",
                         i->frame_number);
         i = erasePendingRequest(i);
@@ -3429,7 +3452,7 @@ void QCamera3HardwareInterface::handleBufferWithLock(
 
         mPendingBuffersMap.removeBuf(buffer->buffer);
 
-        mCallbackOps->process_capture_result(mCallbackOps, &result);
+        orchestrateResult(&result);
     } else {
         if (i->input_buffer) {
             CameraMetadata settings;
@@ -3470,8 +3493,8 @@ void QCamera3HardwareInterface::handleBufferWithLock(
             result.output_buffers = buffer;
             result.partial_result = PARTIAL_RESULT_COUNT;
 
-            mCallbackOps->notify(mCallbackOps, &notify_msg);
-            mCallbackOps->process_capture_result(mCallbackOps, &result);
+            orchestrateNotify(&notify_msg);
+            orchestrateResult(&result);
             LOGD("Notify reprocess now %d!", frame_number);
             i = erasePendingRequest(i);
         } else {
@@ -3510,6 +3533,388 @@ void QCamera3HardwareInterface::unblockRequestIfNecessary()
    pthread_cond_signal(&mRequestCond);
 }
 
+/*===========================================================================
+ * FUNCTION   : isHdrSnapshotRequest
+ *
+ * DESCRIPTION: Function to determine if the request is for a HDR snapshot
+ *
+ * PARAMETERS : camera3 request structure
+ *
+ * RETURN     : boolean decision variable
+ *
+ *==========================================================================*/
+bool QCamera3HardwareInterface::isHdrSnapshotRequest(camera3_capture_request *request)
+{
+    if (request == NULL) {
+        LOGE("Invalid request handle");
+        assert(0);
+        return false;
+    }
+
+    if (!mForceHdrSnapshot) {
+        CameraMetadata frame_settings;
+        frame_settings = request->settings;
+
+        if (frame_settings.exists(ANDROID_CONTROL_MODE)) {
+            uint8_t metaMode = frame_settings.find(ANDROID_CONTROL_MODE).data.u8[0];
+            if (metaMode != ANDROID_CONTROL_MODE_USE_SCENE_MODE) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        if (frame_settings.exists(ANDROID_CONTROL_SCENE_MODE)) {
+            uint8_t fwk_sceneMode = frame_settings.find(ANDROID_CONTROL_SCENE_MODE).data.u8[0];
+            if (fwk_sceneMode != ANDROID_CONTROL_SCENE_MODE_HDR) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    for (uint32_t i = 0; i < request->num_output_buffers; i++) {
+        if (request->output_buffers[i].stream->format
+                == HAL_PIXEL_FORMAT_BLOB) {
+            return true;
+        }
+    }
+
+    return false;
+}
+/*===========================================================================
+ * FUNCTION   : orchestrateRequest
+ *
+ * DESCRIPTION: Orchestrates a capture request from camera service
+ *
+ * PARAMETERS :
+ *   @request : request from framework to process
+ *
+ * RETURN     : Error status codes
+ *
+ *==========================================================================*/
+int32_t QCamera3HardwareInterface::orchestrateRequest(
+        camera3_capture_request_t *request)
+{
+
+    uint32_t originalFrameNumber = request->frame_number;
+    uint32_t originalOutputCount = request->num_output_buffers;
+    const camera_metadata_t *original_settings = request->settings;
+    List<InternalRequest> internallyRequestedStreams;
+    List<InternalRequest> emptyInternalList;
+
+    if (isHdrSnapshotRequest(request) && request->input_buffer == NULL) {
+        LOGD("Framework requested:%d buffers in HDR snapshot", request->num_output_buffers);
+        uint32_t internalFrameNumber;
+        CameraMetadata modified_meta;
+
+
+        /* Add Blob channel to list of internally requested streams */
+        for (uint32_t i = 0; i < request->num_output_buffers; i++) {
+            if (request->output_buffers[i].stream->format
+                    == HAL_PIXEL_FORMAT_BLOB) {
+                InternalRequest streamRequested;
+                streamRequested.meteringOnly = 1;
+                streamRequested.need_metadata = 0;
+                streamRequested.stream = request->output_buffers[i].stream;
+                internallyRequestedStreams.push_back(streamRequested);
+            }
+        }
+        request->num_output_buffers = 0;
+        auto itr =  internallyRequestedStreams.begin();
+
+        /* Modify setting to set compensation */
+        modified_meta = request->settings;
+        int32_t expCompensation = GB_HDR_HALF_STEP_EV;
+        uint8_t aeLock = 1;
+        modified_meta.update(ANDROID_CONTROL_AE_EXPOSURE_COMPENSATION, &expCompensation, 1);
+        modified_meta.update(ANDROID_CONTROL_AE_LOCK, &aeLock, 1);
+        camera_metadata_t *modified_settings = modified_meta.release();
+        request->settings = modified_settings;
+
+        /* Capture Settling & -2x frame */
+        _orchestrationDb.generateStoreInternalFrameNumber(internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        processCaptureRequest(request, internallyRequestedStreams);
+
+        request->num_output_buffers = originalOutputCount;
+        _orchestrationDb.allocStoreInternalFrameNumber(originalFrameNumber, internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        processCaptureRequest(request, emptyInternalList);
+        request->num_output_buffers = 0;
+
+        modified_meta = modified_settings;
+        expCompensation = 0;
+        aeLock = 1;
+        modified_meta.update(ANDROID_CONTROL_AE_EXPOSURE_COMPENSATION, &expCompensation, 1);
+        modified_meta.update(ANDROID_CONTROL_AE_LOCK, &aeLock, 1);
+        modified_settings = modified_meta.release();
+        request->settings = modified_settings;
+
+        /* Capture Settling & 0X frame */
+
+        itr =  internallyRequestedStreams.begin();
+        if (itr == internallyRequestedStreams.end()) {
+            LOGE("Error Internally Requested Stream list is empty");
+            assert(0);
+        } else {
+            itr->need_metadata = 0;
+            itr->meteringOnly = 1;
+        }
+
+        _orchestrationDb.generateStoreInternalFrameNumber(internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        processCaptureRequest(request, internallyRequestedStreams);
+
+        itr =  internallyRequestedStreams.begin();
+        if (itr == internallyRequestedStreams.end()) {
+            ALOGE("Error Internally Requested Stream list is empty");
+            assert(0);
+        } else {
+            itr->need_metadata = 1;
+            itr->meteringOnly = 0;
+        }
+
+        _orchestrationDb.generateStoreInternalFrameNumber(internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        processCaptureRequest(request, internallyRequestedStreams);
+
+        /* Capture 2X frame*/
+        modified_meta = modified_settings;
+        expCompensation = GB_HDR_2X_STEP_EV;
+        aeLock = 1;
+        modified_meta.update(ANDROID_CONTROL_AE_EXPOSURE_COMPENSATION, &expCompensation, 1);
+        modified_meta.update(ANDROID_CONTROL_AE_LOCK, &aeLock, 1);
+        modified_settings = modified_meta.release();
+        request->settings = modified_settings;
+
+        itr =  internallyRequestedStreams.begin();
+        if (itr == internallyRequestedStreams.end()) {
+            ALOGE("Error Internally Requested Stream list is empty");
+            assert(0);
+        } else {
+            itr->need_metadata = 0;
+            itr->meteringOnly = 1;
+        }
+        _orchestrationDb.generateStoreInternalFrameNumber(internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        processCaptureRequest(request, internallyRequestedStreams);
+
+        itr =  internallyRequestedStreams.begin();
+        if (itr == internallyRequestedStreams.end()) {
+            ALOGE("Error Internally Requested Stream list is empty");
+            assert(0);
+        } else {
+            itr->need_metadata = 1;
+            itr->meteringOnly = 0;
+        }
+
+        _orchestrationDb.generateStoreInternalFrameNumber(internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        processCaptureRequest(request, internallyRequestedStreams);
+
+
+        /* Capture 2X on original streaming config*/
+        internallyRequestedStreams.clear();
+
+        /* Restore original settings pointer */
+        request->settings = original_settings;
+    } else {
+        uint32_t internalFrameNumber;
+        _orchestrationDb.allocStoreInternalFrameNumber(request->frame_number, internalFrameNumber);
+        request->frame_number = internalFrameNumber;
+        return processCaptureRequest(request, internallyRequestedStreams);
+    }
+
+    return NO_ERROR;
+}
+
+/*===========================================================================
+ * FUNCTION   : orchestrateResult
+ *
+ * DESCRIPTION: Orchestrates a capture result to camera service
+ *
+ * PARAMETERS :
+ *   @request : request from framework to process
+ *
+ * RETURN     :
+ *
+ *==========================================================================*/
+void QCamera3HardwareInterface::orchestrateResult(
+                    camera3_capture_result_t *result)
+{
+    uint32_t frameworkFrameNumber;
+    int32_t rc = _orchestrationDb.getFrameworkFrameNumber(result->frame_number,
+            frameworkFrameNumber);
+    if (rc != NO_ERROR) {
+        LOGE("Cannot find translated frameworkFrameNumber");
+        assert(0);
+    } else {
+        if (frameworkFrameNumber == EMPTY_FRAMEWORK_FRAME_NUMBER) {
+            LOGD("CAM_DEBUG Internal Request drop the result");
+        } else {
+            result->frame_number = frameworkFrameNumber;
+            mCallbackOps->process_capture_result(mCallbackOps, result);
+        }
+    }
+}
+
+/*===========================================================================
+ * FUNCTION   : orchestrateNotify
+ *
+ * DESCRIPTION: Orchestrates a notify to camera service
+ *
+ * PARAMETERS :
+ *   @request : request from framework to process
+ *
+ * RETURN     :
+ *
+ *==========================================================================*/
+void QCamera3HardwareInterface::orchestrateNotify(camera3_notify_msg_t *notify_msg)
+{
+    uint32_t frameworkFrameNumber;
+    uint32_t internalFrameNumber = notify_msg->message.shutter.frame_number;
+    int32_t rc = _orchestrationDb.getFrameworkFrameNumber(internalFrameNumber,
+                                                          frameworkFrameNumber);
+    if (rc != NO_ERROR) {
+        LOGE("Cannot find translated frameworkFrameNumber");
+        assert(0);
+    } else {
+        if (frameworkFrameNumber == EMPTY_FRAMEWORK_FRAME_NUMBER) {
+            LOGE("CAM_DEBUG Internal Request drop the notifyCb");
+        } else {
+            notify_msg->message.shutter.frame_number = frameworkFrameNumber;
+            mCallbackOps->notify(mCallbackOps, notify_msg);
+        }
+    }
+}
+
+/*===========================================================================
+ * FUNCTION   : FrameNumberRegistry
+ *
+ * DESCRIPTION: Constructor
+ *
+ * PARAMETERS :
+ *
+ * RETURN     :
+ *
+ *==========================================================================*/
+FrameNumberRegistry::FrameNumberRegistry()
+{
+    _nextFreeInternalNumber = INTERNAL_FRAME_STARTING_NUMBER;
+}
+
+/*===========================================================================
+ * FUNCTION   : ~FrameNumberRegistry
+ *
+ * DESCRIPTION: Destructor
+ *
+ * PARAMETERS :
+ *
+ * RETURN     :
+ *
+ *==========================================================================*/
+FrameNumberRegistry::~FrameNumberRegistry()
+{
+}
+
+/*===========================================================================
+ * FUNCTION   : PurgeOldEntriesLocked
+ *
+ * DESCRIPTION: Maintainance function to trigger LRU cleanup mechanism
+ *
+ * PARAMETERS :
+ *
+ * RETURN     : NONE
+ *
+ *==========================================================================*/
+void FrameNumberRegistry::purgeOldEntriesLocked()
+{
+    while (_register.begin() != _register.end()) {
+        auto itr = _register.begin();
+        if (itr->first < (_nextFreeInternalNumber - FRAME_REGISTER_LRU_SIZE)) {
+            _register.erase(itr);
+        } else {
+            return;
+        }
+    }
+}
+
+/*===========================================================================
+ * FUNCTION   : allocStoreInternalFrameNumber
+ *
+ * DESCRIPTION: Method to note down a framework request and associate a new
+ *              internal request number against it
+ *
+ * PARAMETERS :
+ *   @fFrameNumber: Identifier given by framework
+ *   @internalFN  : Output parameter which will have the newly generated internal
+ *                  entry
+ *
+ * RETURN     : Error code
+ *
+ *==========================================================================*/
+int32_t FrameNumberRegistry::allocStoreInternalFrameNumber(uint32_t frameworkFrameNumber,
+                                                            uint32_t &internalFrameNumber)
+{
+    Mutex::Autolock lock(mRegistryLock);
+    internalFrameNumber = _nextFreeInternalNumber++;
+    LOGD("Storing ff#:%d, with internal:%d", frameworkFrameNumber, internalFrameNumber);
+    _register.insert(std::pair<uint32_t,uint32_t>(internalFrameNumber, frameworkFrameNumber));
+    purgeOldEntriesLocked();
+    return NO_ERROR;
+}
+
+/*===========================================================================
+ * FUNCTION   : generateStoreInternalFrameNumber
+ *
+ * DESCRIPTION: Method to associate a new internal request number independent
+ *              of any associate with framework requests
+ *
+ * PARAMETERS :
+ *   @internalFrame#: Output parameter which will have the newly generated internal
+ *
+ *
+ * RETURN     : Error code
+ *
+ *==========================================================================*/
+int32_t FrameNumberRegistry::generateStoreInternalFrameNumber(uint32_t &internalFrameNumber)
+{
+    Mutex::Autolock lock(mRegistryLock);
+    internalFrameNumber = _nextFreeInternalNumber++;
+    LOGD("Generated internal framenumber:%d", internalFrameNumber);
+    _register.insert(std::pair<uint32_t,uint32_t>(internalFrameNumber, EMPTY_FRAMEWORK_FRAME_NUMBER));
+    purgeOldEntriesLocked();
+    return NO_ERROR;
+}
+
+/*===========================================================================
+ * FUNCTION   : getFrameworkFrameNumber
+ *
+ * DESCRIPTION: Method to query the framework framenumber given an internal #
+ *
+ * PARAMETERS :
+ *   @internalFrame#: Internal reference
+ *   @frameworkframenumber: Output parameter holding framework frame entry
+ *
+ * RETURN     : Error code
+ *
+ *==========================================================================*/
+int32_t FrameNumberRegistry::getFrameworkFrameNumber(uint32_t internalFrameNumber,
+                                                     uint32_t &frameworkFrameNumber)
+{
+    Mutex::Autolock lock(mRegistryLock);
+    auto itr = _register.find(internalFrameNumber);
+    if (itr == _register.end()) {
+        LOGE("CAM_DEBUG: Cannot find internal#: %d", internalFrameNumber);
+        return -ENOENT;
+    }
+
+    frameworkFrameNumber = itr->second;
+    purgeOldEntriesLocked();
+    return NO_ERROR;
+}
 
 /*===========================================================================
  * FUNCTION   : processCaptureRequest
@@ -3523,7 +3928,8 @@ void QCamera3HardwareInterface::unblockRequestIfNecessary()
  *
  *==========================================================================*/
 int QCamera3HardwareInterface::processCaptureRequest(
-                    camera3_capture_request_t *request)
+                    camera3_capture_request_t *request,
+                    List<InternalRequest> &internallyRequestedStreams)
 {
     ATRACE_CALL();
     int rc = NO_ERROR;
@@ -3552,7 +3958,7 @@ int QCamera3HardwareInterface::processCaptureRequest(
             return -ENODEV;
     }
 
-    rc = validateCaptureRequest(request);
+    rc = validateCaptureRequest(request, internallyRequestedStreams);
     if (rc != NO_ERROR) {
         LOGE("incoming request is not valid");
         pthread_mutex_unlock(&mMutex);
@@ -4020,7 +4426,7 @@ no_error:
         }
 
         if (output.stream->format == HAL_PIXEL_FORMAT_BLOB) {
-            //Call function to store local copy of jpeg data for encode params.
+            //FIXME??:Call function to store local copy of jpeg data for encode params.
             blob_request = 1;
             snapshotStreamId = channel->getStreamID(channel->getStreamTypeMask());
         }
@@ -4035,6 +4441,18 @@ no_error:
            }
         }
 
+        streamsArray.stream_request[streamsArray.num_streams++].streamID =
+            channel->getStreamID(channel->getStreamTypeMask());
+
+        if ((1U << CAM_STREAM_TYPE_VIDEO) == channel->getStreamTypeMask()) {
+            isVidBufRequested = true;
+        }
+    }
+
+    //FIXME: Add checks to ensure to dups in validateCaptureRequest
+    for (auto itr = internallyRequestedStreams.begin(); itr != internallyRequestedStreams.end();
+          itr++) {
+        QCamera3Channel *channel = (QCamera3Channel *)(*itr).stream->priv;
         streamsArray.stream_request[streamsArray.num_streams++].streamID =
             channel->getStreamID(channel->getStreamTypeMask());
 
@@ -4223,7 +4641,7 @@ no_error:
                       output.buffer, request->input_buffer, frameNumber);
             if(request->input_buffer != NULL){
                 rc = channel->request(output.buffer, frameNumber,
-                        pInputBuffer, &mReprocMeta, indexUsed);
+                        pInputBuffer, &mReprocMeta, indexUsed, false, false);
                 if (rc < 0) {
                     LOGE("Fail to request on picture channel");
                     pthread_mutex_unlock(&mMutex);
@@ -4268,8 +4686,8 @@ no_error:
             bool needMetadata = false;
             QCamera3YUVChannel *yuvChannel = (QCamera3YUVChannel *)channel;
             rc = yuvChannel->request(output.buffer, frameNumber,
-                    pInputBuffer,
-                    (pInputBuffer ? &mReprocMeta : mParameters), needMetadata, indexUsed);
+                    pInputBuffer, (pInputBuffer ? &mReprocMeta : mParameters),
+                    needMetadata, indexUsed, false, false);
             if (rc < 0) {
                 LOGE("Fail to request on YUV channel");
                 pthread_mutex_unlock(&mMutex);
@@ -4333,6 +4751,76 @@ no_error:
             }
         }
         pendingBufferIter++;
+    }
+
+    for (auto itr = internallyRequestedStreams.begin(); itr != internallyRequestedStreams.end();
+          itr++) {
+        QCamera3Channel *channel = (QCamera3Channel *)(*itr).stream->priv;
+
+        if (channel == NULL) {
+            LOGE("invalid channel pointer for stream");
+            assert(0);
+            return BAD_VALUE;
+        }
+
+        InternalRequest requestedStream;
+        requestedStream = (*itr);
+
+
+        if ((*itr).stream->format == HAL_PIXEL_FORMAT_BLOB) {
+            LOGD("snapshot request internally input buffer %p, frame_number %d",
+                      request->input_buffer, frameNumber);
+            if(request->input_buffer != NULL){
+                rc = channel->request(NULL, frameNumber,
+                        pInputBuffer, &mReprocMeta, indexUsed, true, requestedStream.meteringOnly);
+                if (rc < 0) {
+                    LOGE("Fail to request on picture channel");
+                    pthread_mutex_unlock(&mMutex);
+                    return rc;
+                }
+            } else {
+                LOGD("snapshot request with frame_number %d", frameNumber);
+                if (!request->settings) {
+                    rc = channel->request(NULL, frameNumber,
+                            NULL, mPrevParameters, indexUsed, true, requestedStream.meteringOnly);
+                } else {
+                    rc = channel->request(NULL, frameNumber,
+                            NULL, mParameters, indexUsed, true, requestedStream.meteringOnly);
+                }
+                if (rc < 0) {
+                    LOGE("Fail to request on picture channel");
+                    pthread_mutex_unlock(&mMutex);
+                    return rc;
+                }
+
+                if ((*itr).meteringOnly != 1) {
+                    requestedStream.need_metadata = 1;
+                    streams_need_metadata++;
+                }
+            }
+
+            uint32_t streamId = channel->getStreamID(channel->getStreamTypeMask());
+            uint32_t j = 0;
+            for (j = 0; j < streamsArray.num_streams; j++) {
+                if (streamsArray.stream_request[j].streamID == streamId) {
+                  if (mOpMode == CAMERA3_STREAM_CONFIGURATION_CONSTRAINED_HIGH_SPEED_MODE)
+                      streamsArray.stream_request[j].buf_index = CAM_FREERUN_IDX;
+                  else
+                      streamsArray.stream_request[j].buf_index = indexUsed;
+                    break;
+                }
+            }
+            if (j == streamsArray.num_streams) {
+                LOGE("Did not find matching stream to update index");
+                assert(0);
+            }
+
+        } else {
+            LOGE("Internal requests not supported on this stream type");
+            assert(0);
+            return INVALID_OPERATION;
+        }
+        latestRequest->internalRequestList.push_back(requestedStream);
     }
 
     //If 2 streams have need_metadata set to true, fail the request, unless
@@ -4773,7 +5261,7 @@ int32_t QCamera3HardwareInterface::handleCameraDeviceError()
     notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_DEVICE;
     notify_msg.message.error.error_stream = NULL;
     notify_msg.message.error.frame_number = 0;
-    mCallbackOps->notify(mCallbackOps, &notify_msg);
+    orchestrateNotify(&notify_msg);
 
     return rc;
 }
@@ -9257,6 +9745,7 @@ int QCamera3HardwareInterface::translateToHalMetadata
             expCompensation = gCamCapability[mCameraId]->exposure_compensation_min;
         if (expCompensation > gCamCapability[mCameraId]->exposure_compensation_max)
             expCompensation = gCamCapability[mCameraId]->exposure_compensation_max;
+        ALOGE("CAM_DEBUG: Setting compensation:%d", expCompensation);
         if (ADD_SET_PARAM_ENTRY_TO_BATCH(hal_metadata, CAM_INTF_PARM_EXPOSURE_COMPENSATION,
                 expCompensation)) {
             rc = BAD_VALUE;
@@ -10159,7 +10648,7 @@ int QCamera3HardwareInterface::process_capture_request(
         return -EINVAL;
     }
 
-    int rc = hw->processCaptureRequest(request);
+    int rc = hw->orchestrateRequest(request);
     LOGD("X");
     return rc;
 }
@@ -10367,6 +10856,17 @@ int32_t QCamera3HardwareInterface::extractSceneMode(
                 rc = BAD_VALUE;
             }
         }
+
+        if (fwk_sceneMode == ANDROID_CONTROL_SCENE_MODE_HDR) {
+            cam_hdr_param_t hdr_params;
+            hdr_params.hdr_enable = 1;
+            hdr_params.hdr_mode = CAM_HDR_MODE_MULTIFRAME;
+            hdr_params.hdr_need_1x = false;
+            if (ADD_SET_PARAM_ENTRY_TO_BATCH(hal_metadata,
+                    CAM_INTF_PARM_HAL_BRACKETING_HDR, hdr_params)) {
+                rc = BAD_VALUE;
+            }
+        }
     } else if ((ANDROID_CONTROL_MODE_OFF == metaMode) ||
             (ANDROID_CONTROL_MODE_AUTO == metaMode)) {
         uint8_t sceneMode = CAM_SCENE_MODE_OFF;
@@ -10376,6 +10876,18 @@ int32_t QCamera3HardwareInterface::extractSceneMode(
             rc = BAD_VALUE;
         }
     }
+
+    if (mForceHdrSnapshot) {
+        cam_hdr_param_t hdr_params;
+        hdr_params.hdr_enable = 1;
+        hdr_params.hdr_mode = CAM_HDR_MODE_MULTIFRAME;
+        hdr_params.hdr_need_1x = false;
+        if (ADD_SET_PARAM_ENTRY_TO_BATCH(hal_metadata,
+                CAM_INTF_PARM_HAL_BRACKETING_HDR, hdr_params)) {
+            rc = BAD_VALUE;
+        }
+    }
+
     return rc;
 }
 
@@ -10438,7 +10950,7 @@ bool QCamera3HardwareInterface::needReprocess(cam_feature_mask_t postprocess_mas
  *==========================================================================*/
 bool QCamera3HardwareInterface::needJpegExifRotation()
 {
-   /*If the pp does not have the ability to do rotation, enable jpeg rotation*/
+    /*If the pp does not have the ability to do rotation, enable jpeg rotation*/
     if (!(gCamCapability[mCameraId]->qcom_supported_feature_mask & CAM_QCOM_FEATURE_ROTATION)) {
        LOGD("Need use Jpeg EXIF Rotation");
        return true;
@@ -10493,6 +11005,18 @@ QCamera3ReprocessChannel *QCamera3HardwareInterface::addOfflineReprocChannel(
     }
     if (!(gCamCapability[mCameraId]->qcom_supported_feature_mask & CAM_QCOM_FEATURE_ROTATION)) {
         pp_config.feature_mask &= ~CAM_QCOM_FEATURE_ROTATION;
+    }
+
+    if (config.hdr_param.hdr_enable) {
+        pp_config.feature_mask |= CAM_QCOM_FEATURE_HDR;
+        pp_config.hdr_param = config.hdr_param;
+    }
+
+    if (mForceHdrSnapshot) {
+        pp_config.feature_mask |= CAM_QCOM_FEATURE_HDR;
+        pp_config.hdr_param.hdr_enable = 1;
+        pp_config.hdr_param.hdr_need_1x = 0;
+        pp_config.hdr_param.hdr_mode = CAM_HDR_MODE_MULTIFRAME;
     }
 
     rc = pChannel->addReprocStreamsFromSource(pp_config,
@@ -10948,7 +11472,7 @@ int32_t QCamera3HardwareInterface::notifyErrorForPendingRequests()
                 pStream_Buf[index].buffer = info->buffer;
                 pStream_Buf[index].status = CAMERA3_BUFFER_STATUS_ERROR;
                 pStream_Buf[index].stream = info->stream;
-                mCallbackOps->notify(mCallbackOps, &notify_msg);
+                orchestrateNotify(&notify_msg);
                 index++;
                 // Remove buffer from list
                 info = req->mPendingBufferList.erase(info);
@@ -10959,7 +11483,7 @@ int32_t QCamera3HardwareInterface::notifyErrorForPendingRequests()
                 req->frame_number, mPendingBuffersMap.mPendingBuffersInRequest.size());
             req = mPendingBuffersMap.mPendingBuffersInRequest.erase(req);
 
-            mCallbackOps->process_capture_result(mCallbackOps, &result);
+            orchestrateResult(&result);
 
             delete [] pStream_Buf;
         } else {
@@ -10976,7 +11500,7 @@ int32_t QCamera3HardwareInterface::notifyErrorForPendingRequests()
             notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_REQUEST;
             notify_msg.message.error.error_stream = NULL;
             notify_msg.message.error.frame_number = req->frame_number;
-            mCallbackOps->notify(mCallbackOps, &notify_msg);
+            orchestrateNotify(&notify_msg);
 
             pStream_Buf = new camera3_stream_buffer_t[req->mPendingBufferList.size()];
             if (NULL == pStream_Buf) {
@@ -11009,7 +11533,7 @@ int32_t QCamera3HardwareInterface::notifyErrorForPendingRequests()
                 req->frame_number, mPendingBuffersMap.mPendingBuffersInRequest.size());
             req = mPendingBuffersMap.mPendingBuffersInRequest.erase(req);
 
-            mCallbackOps->process_capture_result(mCallbackOps, &result);
+            orchestrateResult(&result);
             delete [] pStream_Buf;
             i = erasePendingRequest(i);
         }
