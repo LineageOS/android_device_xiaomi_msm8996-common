@@ -60,6 +60,7 @@ static void init_alarm_boot_properties()
 {
     char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
     char boot_reason[1];
+    std::string tmp = property_get("ro.boot.alarmboot");
 
     if (read_file2(boot_reason_file, boot_reason)) {
         /*
@@ -77,7 +78,7 @@ static void init_alarm_boot_properties()
          * 7 -> CBLPWR_N pin toggled (for external power supply)
          * 8 -> KPDPWR_N pin toggled (power key pressed)
          */
-         if (boot_reason[0] == '3')
+         if (boot_reason[0] == '3' || tmp == "true")
              property_set("ro.alarm_boot", "true");
          else
              property_set("ro.alarm_boot", "false");
