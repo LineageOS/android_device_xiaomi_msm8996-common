@@ -31,7 +31,6 @@
 
 // To remove
 #include <cutils/properties.h>
-#include <utils/Errors.h>
 
 // System dependencies
 #include <stdlib.h>
@@ -47,484 +46,414 @@ extern "C" {
 
 namespace qcamera {
 
-typedef enum {
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_0     = 0x40800000,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_1     = 0x40800010,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_2     = 0x40800020,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_3     = 0x40800030,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_0  = 0x40800100,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_1  = 0x40800110,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_2  = 0x40800120,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_3  = 0x40800130,
-
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_0     = 0x40804000,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_1     = 0x40804010,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_2     = 0x40804020,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_3     = 0x40804030,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_0  = 0x40804100,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_1  = 0x40804110,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_2  = 0x40804120,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_3  = 0x40804130,
-
-    MPCTLV3_MIN_ONLINE_CPU_CLUSTER_BIG      = 0x41000000,
-    MPCTLV3_MIN_ONLINE_CPU_CLUSTER_LITTLE   = 0x41000100,
-    MPCTLV3_MAX_ONLINE_CPU_CLUSTER_BIG      = 0x41004000,
-    MPCTLV3_MAX_ONLINE_CPU_CLUSTER_LITTLE   = 0x41004100,
-
-    MPCTLV3_ALL_CPUS_PWR_CLPS_DIS           = 0x40400000
-} perf_lock_params;
-
-
-static int32_t perfLockParamsOpenCamera[] = {
-    #ifndef TARGET_MSM8996
-    // Make sure big cluster is online
-    MPCTLV3_MIN_ONLINE_CPU_CLUSTER_BIG,     0x4,
-    MPCTLV3_MAX_ONLINE_CPU_CLUSTER_BIG,     0x4,
-    #endif
-    // Disable power collapse and set CPU cloks to turbo
-    MPCTLV3_ALL_CPUS_PWR_CLPS_DIS,          0x1,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_0,    0xFFF,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_0,    0xFFF,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_0, 0xFFF,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_0, 0xFFF
-};
-
-static int32_t perfLockParamsCloseCamera[] = {
-    #ifndef TARGET_MSM8996
-    // Make sure big cluster is online
-    MPCTLV3_MIN_ONLINE_CPU_CLUSTER_BIG,     0x4,
-    MPCTLV3_MAX_ONLINE_CPU_CLUSTER_BIG,     0x4,
-    #endif
-    // Disable power collapse and set CPU cloks to turbo
-    MPCTLV3_ALL_CPUS_PWR_CLPS_DIS,          0x1,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_0,    0xFFF,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_0,    0xFFF,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_0, 0xFFF,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_0, 0xFFF
-};
-
-static int32_t perfLockParamsStartPreview[] = {
-    #ifndef TARGET_MSM8996
-    // Make sure big cluster is online
-    MPCTLV3_MIN_ONLINE_CPU_CLUSTER_BIG,     0x4,
-    MPCTLV3_MAX_ONLINE_CPU_CLUSTER_BIG,     0x4,
-    #endif
-    // Disable power collapse and set CPU cloks to turbo
-    MPCTLV3_ALL_CPUS_PWR_CLPS_DIS,          0x1,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_0,    0xFFF,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_0,    0xFFF,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_0, 0xFFF,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_0, 0xFFF
-};
-
-static int32_t perfLockParamsTakeSnapshot[] = {
-    #ifdef TARGET_MSM8996
-    // Set little cluster and big cluster cores to 1.555 GHz
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_0, 0x613,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_1, 0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_0, 0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_1, 0x613,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_0,    0x613,
-    MPCTLV3_MIN_FREQ_CLUSTER_BIG_CORE_1,    0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_0,    0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_BIG_CORE_1,    0x613
-    #else
-    // Set little cluster cores to 1.555 GHz
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_0, 0x613,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_1, 0x613,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_2, 0x613,
-    MPCTLV3_MIN_FREQ_CLUSTER_LITTLE_CORE_3, 0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_0, 0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_1, 0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_2, 0x613,
-    MPCTLV3_MAX_FREQ_CLUSTER_LITTLE_CORE_3, 0x613,
-    // Set big cluster offline
-    MPCTLV3_MAX_ONLINE_CPU_CLUSTER_BIG,     0x0
-    #endif
-};
-
-PerfLockInfo QCameraPerfLock::mPerfLockInfo[] = {
-    { //PERF_LOCK_OPEN_CAMERA
-      perfLockParamsOpenCamera,
-      sizeof(perfLockParamsOpenCamera)/sizeof(int32_t) },
-    { //PERF_LOCK_CLOSE_CAMERA
-      perfLockParamsCloseCamera,
-      sizeof(perfLockParamsCloseCamera)/sizeof(int32_t) },
-    { //PERF_LOCK_START_PREVIEW
-      perfLockParamsStartPreview,
-      sizeof(perfLockParamsStartPreview)/sizeof(int32_t) },
-    { //PERF_LOCK_TAKE_SNAPSHOT
-      perfLockParamsTakeSnapshot,
-      sizeof(perfLockParamsTakeSnapshot)/sizeof(int32_t) },
-    { //PERF_LOCK_POWERHINT_PREVIEW
-      NULL, 0},
-    { //PERF_LOCK_POWERHINT_ENCODE
-      NULL, 0}
-    };
-
-Mutex                QCameraPerfLockIntf::mMutex;
-QCameraPerfLockIntf* QCameraPerfLockIntf::mInstance = NULL;
-
-
-/*===========================================================================
- * FUNCTION   : QCameraPerfLockMgr constructor
- *
- * DESCRIPTION: Initialize the perf locks
- *
- * PARAMETERS : None
- *
- * RETURN     : void
- *
- *==========================================================================*/
-QCameraPerfLockMgr::QCameraPerfLockMgr() :
-    mState(LOCK_MGR_STATE_UNINITIALIZED)
-{
-    for (int i = 0; i < PERF_LOCK_COUNT; ++i) {
-        mPerfLock[i] = QCameraPerfLock::create((PerfLockEnum)i);
-
-        if (mPerfLock[i] == NULL) {
-            mState = LOCK_MGR_STATE_ERROR;
-            LOGE("Could not allocate perf locks");
-
-            // Set the remaining perf locks to NULL
-            for (int j = i+1; j < PERF_LOCK_COUNT; ++j) {
-                mPerfLock[j] = NULL;
-            }
-            return;
-        }
-    }
-    mState = LOCK_MGR_STATE_READY;
-}
-
-
-/*===========================================================================
- * FUNCTION   : QCameraPerfLockMgr destructor
- *
- * DESCRIPTION: class destructor
- *
- * PARAMETERS : None
- *
- * RETURN     : void
- *
- *==========================================================================*/
-QCameraPerfLockMgr::~QCameraPerfLockMgr()
-{
-    for (int i = 0; i < PERF_LOCK_COUNT; ++i) {
-        if (mPerfLock[i]) {
-            delete mPerfLock[i];
-        }
-    }
-}
-
-
-/*===========================================================================
- * FUNCTION   : acquirePerfLock
- *
- * DESCRIPTION: Call acquirePerfLock function for the requested perf lock
- *
- * PARAMETERS :
- * @perfLockType: Perf lock enum
- * @timer:        Timer value in ms
- *
- * RETURN     : true  on success
- *              false on failure
- *==========================================================================*/
-bool QCameraPerfLockMgr::acquirePerfLock(
-        PerfLockEnum perfLockType,
-        uint32_t     timer)
-{
-    bool ret = false;
-    if ((mState == LOCK_MGR_STATE_READY) &&
-        isValidPerfLockEnum(perfLockType)) {
-        ret = mPerfLock[perfLockType]->acquirePerfLock(true, timer);
-    }
-    return ret;
-}
-
-
-/*===========================================================================
- * FUNCTION   : acquirePerfLockIfExpired
- *
- * DESCRIPTION: Call acquirePerfLock function for the requested perf lock
- *
- * PARAMETERS :
- * @perfLockType: Type of perf lock
- * @timer:        Timer value in ms
- *
- * RETURN     : true  on success
- *              false on failure
- *==========================================================================*/
-bool QCameraPerfLockMgr::acquirePerfLockIfExpired(
-        PerfLockEnum perfLockType,
-        uint32_t     timer)
-{
-    bool ret = false;
-    if ((mState == LOCK_MGR_STATE_READY) &&
-        isValidPerfLockEnum(perfLockType)) {
-        ret = mPerfLock[perfLockType]->acquirePerfLock(false, timer);
-    }
-    return ret;
-
-}
-
-
-/*===========================================================================
- * FUNCTION   : releasePerfLock
- *
- * DESCRIPTION: Call releasePerfLock function for the requested perf lock
- *
- * PARAMETERS :
- * @perfLockType: Enum of perf lock
- *
- * RETURN     : true  on success
- *              false on failure
- *==========================================================================*/
-bool QCameraPerfLockMgr::releasePerfLock(
-        PerfLockEnum perfLockType)
-{
-    bool ret = false;
-    if ((mState == LOCK_MGR_STATE_READY) &&
-        isValidPerfLockEnum(perfLockType)) {
-        ret = mPerfLock[perfLockType]->releasePerfLock();
-    }
-    return ret;
-}
-
-
-/*===========================================================================
- * FUNCTION   : powerHintInternal
- *
- * DESCRIPTION: Calls the appropriate perf lock's powerHintInternal function
- *
- * PARAMETERS :
- * @perfLockType: Type of perf lock
- * @hint        : Power hint
- * @enable      : Enable power hint if set to 1. Disable if set to 0.
- *
- * RETURN     : void
- *
- *==========================================================================*/
-void QCameraPerfLockMgr::powerHintInternal(
-        PerfLockEnum perfLockType,
-        power_hint_t powerHint,
-        bool         enable)
-{
-    if ((mState == LOCK_MGR_STATE_READY) &&
-        isValidPerfLockEnum(perfLockType)) {
-        mPerfLock[perfLockType]->powerHintInternal(powerHint, enable);
-    }
-}
-
-
-/*===========================================================================
- * FUNCTION   : create
- *
- * DESCRIPTION: This is a static method to create perf lock object. It calls
- *              protected constructor of the class and only returns a valid object
- *              if it can successfully initialize the perf lock.
- *
- * PARAMETERS : None
- *
- * RETURN     : QCameraPerfLock object pointer on success
- *              NULL on failure
- *
- *==========================================================================*/
-QCameraPerfLock* QCameraPerfLock::create(
-        PerfLockEnum perfLockType)
-{
-    QCameraPerfLock *perfLock = NULL;
-
-    if (perfLockType < PERF_LOCK_COUNT) {
-        QCameraPerfLockIntf *perfLockIntf = QCameraPerfLockIntf::createSingleton();
-        if (perfLockIntf) {
-            perfLock = new QCameraPerfLock(perfLockType, perfLockIntf);
-        }
-    }
-    return perfLock;
-}
-
-
 /*===========================================================================
  * FUNCTION   : QCameraPerfLock constructor
  *
- * DESCRIPTION: Initialize member variables
+ * DESCRIPTION: initialize member variables
  *
- * PARAMETERS : None
+ * PARAMETERS :
+ *   None
  *
  * RETURN     : void
  *
  *==========================================================================*/
-QCameraPerfLock::QCameraPerfLock(
-        PerfLockEnum         perfLockType,
-        QCameraPerfLockIntf *perfLockIntf) :
-        mHandle(0),
-        mRefCount(0),
-        mTimeOut(0),
-        mPerfLockType(perfLockType),
-        mPerfLockIntf(perfLockIntf)
+QCameraPerfLock::QCameraPerfLock() :
+        perf_lock_acq(NULL),
+        perf_lock_rel(NULL),
+        mDlHandle(NULL),
+        mPerfLockEnable(0),
+        mPerfLockHandle(-1),
+        mPerfLockHandleTimed(-1),
+        mTimerSet(0),
+        mPerfLockTimeout(0),
+        mStartTimeofLock(0)
 {
 }
-
 
 /*===========================================================================
  * FUNCTION   : QCameraPerfLock destructor
  *
- * DESCRIPTION: class destructor
+ * DESCRIPTION: class desctructor
  *
- * PARAMETERS : None
+ * PARAMETERS :
+ *   None
  *
  * RETURN     : void
  *
  *==========================================================================*/
 QCameraPerfLock::~QCameraPerfLock()
 {
-    if (mHandle > 0) {
-        (*mPerfLockIntf->perfLockRel())(mHandle);
-    }
-    QCameraPerfLockIntf::deleteInstance();
+    lock_deinit();
 }
 
 
 /*===========================================================================
- * FUNCTION   : isTimedOut
+ * FUNCTION   : lock_init
  *
- * DESCRIPTION: Check if the perf lock is timed out
- *
- * PARAMETERS : None
- *
- * RETURN     : boolean indicating if the perf lock is timed out
- *
- *==========================================================================*/
-bool QCameraPerfLock::isTimedOut()
-{
-    if (mTimeOut && (systemTime() > mTimeOut)) {
-        return true;
-    }
-    return false;
-}
-
-
-/*===========================================================================
- * FUNCTION   : restartTimer
- *
- * DESCRIPTION: Restart the timer for the duration specified
+ * DESCRIPTION: opens the performance lib and initilizes the perf lock functions
  *
  * PARAMETERS :
- *  @timer    : timer duration in milliseconds
+ *   None
  *
  * RETURN     : void
  *
  *==========================================================================*/
-void inline QCameraPerfLock::restartTimer(
-        uint32_t timer)
+void QCameraPerfLock::lock_init()
 {
-    if (timer > 0) {
-        mTimeOut = systemTime() + ms2ns(timer);
+    const char *rc;
+    char value[PROPERTY_VALUE_MAX];
+
+    LOGD("E");
+    Mutex::Autolock lock(mLock);
+
+    // Clear the list of active power hints
+    mActivePowerHints.clear();
+    mCurrentPowerHint       = static_cast<power_hint_t>(0);
+    mCurrentPowerHintEnable = false;
+
+    property_get("persist.camera.perflock.enable", value, "1");
+    mPerfLockEnable = atoi(value);
+#ifdef HAS_MULTIMEDIA_HINTS
+    if (hw_get_module(POWER_HARDWARE_MODULE_ID, (const hw_module_t **)&m_pPowerModule)) {
+        LOGE("%s module not found", POWER_HARDWARE_MODULE_ID);
     }
+#endif
+
+    if (mPerfLockEnable) {
+        perf_lock_acq = NULL;
+        perf_lock_rel = NULL;
+        mPerfLockHandle = -1;
+        /* Retrieve name of vendor extension library */
+        if (property_get("ro.vendor.extension_library", value, NULL) <= 0) {
+            goto cleanup;
+        }
+
+        mDlHandle = dlopen(value, RTLD_NOW | RTLD_LOCAL);
+        if (mDlHandle == NULL) {
+            goto cleanup;
+        }
+
+        dlerror();
+
+        perf_lock_acq = (int (*) (int, int, int[], int))dlsym(mDlHandle, "perf_lock_acq");
+        if ((rc = dlerror()) != NULL) {
+            LOGE("failed to perf_lock_acq function handle");
+            goto cleanup;
+        }
+
+        perf_lock_rel = (int (*) (int))dlsym(mDlHandle, "perf_lock_rel");
+        if ((rc = dlerror()) != NULL) {
+            LOGE("failed to perf_lock_rel function handle");
+            goto cleanup;
+        }
+        LOGD("X");
+        return;
+
+cleanup:
+        perf_lock_acq  = NULL;
+        perf_lock_rel  = NULL;
+        mPerfLockEnable = 0;
+        if (mDlHandle) {
+            dlclose(mDlHandle);
+            mDlHandle = NULL;
+        }
+    }
+    LOGD("X");
 }
 
-
 /*===========================================================================
- * FUNCTION   : acquirePerfLock
+ * FUNCTION   : lock_deinit
  *
- * DESCRIPTION: Acquires the perf lock for the duration specified. Do not acquire
- *              the perf lock is reacquire flag is set to false provided the perf
- *              lock is already acquired.
+ * DESCRIPTION: deinitialize the perf lock parameters
  *
  * PARAMETERS :
- * @forceReaquirePerfLock: Reacquire
- * @timer     : Duration of the perf lock
+ *   None
  *
- * RETURN     : true  on success
- *              false on failure
+ * RETURN     : void
  *
  *==========================================================================*/
-bool QCameraPerfLock::acquirePerfLock(
-        bool     forceReaquirePerfLock,
-        uint32_t timer)
+void QCameraPerfLock::lock_deinit()
 {
-    bool ret = true;
-    Mutex::Autolock lock(mMutex);
+    Mutex::Autolock lock(mLock);
+    if (mPerfLockEnable) {
+        LOGD("E");
 
-    if ((mPerfLockType == PERF_LOCK_POWERHINT_PREVIEW) ||
-        (mPerfLockType == PERF_LOCK_POWERHINT_ENCODE)) {
-        powerHintInternal(POWER_HINT_VIDEO_ENCODE, true);
-        return true;
-    }
-
-    if (isTimedOut()) {
-        mHandle   = 0;
-        mRefCount = 0;
-    }
-
-    if ((mRefCount == 0) || forceReaquirePerfLock) {
-        mHandle = (*mPerfLockIntf->perfLockAcq())(
-            mHandle, timer,
-            mPerfLockInfo[mPerfLockType].perfLockParams,
-            mPerfLockInfo[mPerfLockType].perfLockParamsCount);
-
-        if (mHandle > 0) {
-            ++mRefCount;
-            restartTimer(timer);
-            LOGD("perfLockHandle %d, updated refCount: %d, perfLockType: %d",
-                mHandle, mRefCount, mPerfLockType);
-        } else {
-            LOGE("Failed to acquire the perf lock");
-            ret = false;
+        if (mActivePowerHints.empty() == false) {
+            // Disable the active power hint
+            mCurrentPowerHint = *mActivePowerHints.begin();
+            powerHintInternal(mCurrentPowerHint, false);
+            mActivePowerHints.clear();
         }
-    } else {
-        LOGD("Perf lock already acquired, not re-aquiring");
-    }
 
-    return ret;
+        if ((NULL != perf_lock_rel) && (mPerfLockHandleTimed >= 0)) {
+            (*perf_lock_rel)(mPerfLockHandleTimed);
+        }
+
+        if ((NULL != perf_lock_rel) && (mPerfLockHandle >= 0)) {
+            (*perf_lock_rel)(mPerfLockHandle);
+        }
+
+        if (mDlHandle) {
+            perf_lock_acq  = NULL;
+            perf_lock_rel  = NULL;
+
+            dlclose(mDlHandle);
+            mDlHandle       = NULL;
+        }
+        mPerfLockEnable = 0;
+        LOGD("X");
+    }
 }
 
-
 /*===========================================================================
- * FUNCTION   : releasePerfLock
+ * FUNCTION   : isTimerReset
  *
- * DESCRIPTION: Releases the perf lock
+ * DESCRIPTION: Check if timout duration is reached
  *
  * PARAMETERS : None
  *
- * RETURN     : true  on success
- *              false on failure
+ * RETURN     : true if timeout reached
+ *              false if timeout not reached
  *
  *==========================================================================*/
-bool QCameraPerfLock::releasePerfLock()
+bool QCameraPerfLock::isTimerReset()
 {
-    bool ret = true;
-    Mutex::Autolock lock(mMutex);
-
-    if ((mPerfLockType == PERF_LOCK_POWERHINT_PREVIEW) ||
-        (mPerfLockType == PERF_LOCK_POWERHINT_ENCODE)) {
-        powerHintInternal(POWER_HINT_VIDEO_ENCODE, false);
-        return true;
+    Mutex::Autolock lock(mLock);
+    if (mPerfLockEnable && mTimerSet) {
+        nsecs_t timeDiff = systemTime() - mStartTimeofLock;
+        if (ns2ms(timeDiff) > (uint32_t)mPerfLockTimeout) {
+            resetTimer();
+            return true;
+        }
     }
+    return false;
+}
 
-    if (mHandle > 0) {
-        LOGD("perfLockHandle %d, refCount: %d, perfLockType: %d",
-                    mHandle, mRefCount, mPerfLockType);
+/*===========================================================================
+ * FUNCTION   : resetTimer
+ *
+ * DESCRIPTION: Reset the timer used in timed perf lock
+ *
+ * PARAMETERS : None
+ *
+ * RETURN     : void
+ *
+ *==========================================================================*/
+void QCameraPerfLock::resetTimer()
+{
+    mPerfLockTimeout = 0;
+    mTimerSet = 0;
+}
 
-        if (isTimedOut()) {
-            mHandle   = 0;
-            mRefCount = 0;
-        } else if (--mRefCount == 0) {
-            int32_t rc = (*mPerfLockIntf->perfLockRel())(mHandle);
-            mHandle = 0;
-            mTimeOut = 0;
-            if (rc < 0) {
-                LOGE("Failed to release the perf lock");
-                ret = false;
+/*===========================================================================
+ * FUNCTION   : start_timer
+ *
+ * DESCRIPTION: get the start of the timer
+ *
+ * PARAMETERS :
+ *  @timer_val: timer duration in milliseconds
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *
+ *==========================================================================*/
+void QCameraPerfLock::startTimer(uint32_t timer_val)
+{
+    mStartTimeofLock = systemTime();
+    mTimerSet = 1;
+    mPerfLockTimeout = timer_val;
+}
+
+/*===========================================================================
+ * FUNCTION   : lock_acq_timed
+ *
+ * DESCRIPTION: Acquire the performance lock for the specified duration.
+ *              If an existing lock timeout has not elapsed, extend the
+ *              lock further for the specified duration
+ *
+ * PARAMETERS :
+ *  @timer_val: lock duration
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *
+ *==========================================================================*/
+int32_t QCameraPerfLock::lock_acq_timed(int32_t timer_val)
+{
+    int32_t ret = -1;
+
+    LOGD("E");
+    Mutex::Autolock lock(mLock);
+
+    if (mPerfLockEnable) {
+        int32_t perf_lock_params[] = {
+                ALL_CPUS_PWR_CLPS_DIS,
+                CPU0_MIN_FREQ_TURBO_MAX,
+                CPU4_MIN_FREQ_TURBO_MAX
+        };
+        if (mTimerSet) {
+            nsecs_t curElapsedTime = systemTime() - mStartTimeofLock;
+            int32_t pendingTimeout = mPerfLockTimeout - ns2ms(curElapsedTime);
+            timer_val += pendingTimeout;
+        }
+        startTimer(timer_val);
+
+        // Disable power hint when acquiring the perf lock
+        if (mCurrentPowerHintEnable) {
+            LOGD("mCurrentPowerHintEnable %d" ,mCurrentPowerHintEnable);
+            powerHintInternal(mCurrentPowerHint, false);
+        }
+
+        if ((NULL != perf_lock_acq) && (mPerfLockHandleTimed < 0)) {
+            ret = (*perf_lock_acq)(mPerfLockHandleTimed, timer_val, perf_lock_params,
+                    sizeof(perf_lock_params) / sizeof(int32_t));
+            LOGD("ret %d", ret);
+            if (ret < 0) {
+                LOGE("failed to acquire lock");
+            } else {
+                mPerfLockHandleTimed = ret;
             }
         }
-    } else {
-        LOGW("Perf lock %d either not acquired or already released", mPerfLockType);
+        LOGD("perf_handle_acq %d ", mPerfLockHandleTimed);
     }
 
+    LOGD("X");
     return ret;
 }
 
+/*===========================================================================
+ * FUNCTION   : lock_acq
+ *
+ * DESCRIPTION: acquire the performance lock
+ *
+ * PARAMETERS :
+ *   None
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *
+ *==========================================================================*/
+int32_t QCameraPerfLock::lock_acq()
+{
+    int32_t ret = -1;
+
+    LOGD("E");
+    Mutex::Autolock lock(mLock);
+
+    if (mPerfLockEnable) {
+        int32_t perf_lock_params[] = {
+                ALL_CPUS_PWR_CLPS_DIS,
+                CPU0_MIN_FREQ_TURBO_MAX,
+                CPU4_MIN_FREQ_TURBO_MAX
+        };
+
+        // Disable power hint when acquiring the perf lock
+        if (mCurrentPowerHintEnable) {
+            powerHintInternal(mCurrentPowerHint, false);
+        }
+
+        if ((NULL != perf_lock_acq) && (mPerfLockHandle < 0)) {
+            ret = (*perf_lock_acq)(mPerfLockHandle, ONE_SEC, perf_lock_params,
+                    sizeof(perf_lock_params) / sizeof(int32_t));
+            LOGD("ret %d", ret);
+            if (ret < 0) {
+                LOGE("failed to acquire lock");
+            } else {
+                mPerfLockHandle = ret;
+            }
+        }
+        LOGD("perf_handle_acq %d ", mPerfLockHandle);
+    }
+
+    LOGD("X");
+    return ret;
+}
+
+/*===========================================================================
+ * FUNCTION   : lock_rel_timed
+ *
+ * DESCRIPTION: release the performance lock
+ *
+ * PARAMETERS :
+ *   None
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *
+ *==========================================================================*/
+int32_t QCameraPerfLock::lock_rel_timed()
+{
+    int ret = -1;
+    Mutex::Autolock lock(mLock);
+    if (mPerfLockEnable) {
+        LOGD("E");
+        if (mPerfLockHandleTimed < 0) {
+            LOGW("mPerfLockHandle < 0,check if lock is acquired");
+            return ret;
+        }
+        LOGD("perf_handle_rel %d ", mPerfLockHandleTimed);
+
+        if ((NULL != perf_lock_rel) && (0 <= mPerfLockHandleTimed)) {
+            ret = (*perf_lock_rel)(mPerfLockHandleTimed);
+            if (ret < 0) {
+                LOGE("failed to release lock");
+            }
+            mPerfLockHandleTimed = -1;
+            resetTimer();
+        }
+
+        if ((mCurrentPowerHintEnable == 1) && (mTimerSet == 0)) {
+            powerHintInternal(mCurrentPowerHint, mCurrentPowerHintEnable);
+        }
+        LOGD("X");
+    }
+    return ret;
+}
+
+/*===========================================================================
+ * FUNCTION   : lock_rel
+ *
+ * DESCRIPTION: release the performance lock
+ *
+ * PARAMETERS :
+ *   None
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *
+ *==========================================================================*/
+int32_t QCameraPerfLock::lock_rel()
+{
+    int ret = -1;
+    Mutex::Autolock lock(mLock);
+    if (mPerfLockEnable) {
+        LOGD("E");
+        if (mPerfLockHandle < 0) {
+            LOGW("mPerfLockHandle < 0,check if lock is acquired");
+            return ret;
+        }
+        LOGD("perf_handle_rel %d ", mPerfLockHandle);
+
+        if ((NULL != perf_lock_rel) && (0 <= mPerfLockHandle)) {
+            ret = (*perf_lock_rel)(mPerfLockHandle);
+            if (ret < 0) {
+                LOGE("failed to release lock");
+            }
+            mPerfLockHandle = -1;
+        }
+
+        if (mCurrentPowerHintEnable == 1) {
+            powerHintInternal(mCurrentPowerHint, mCurrentPowerHintEnable);
+        }
+        LOGD("X");
+    }
+    return ret;
+}
 
 /*===========================================================================
  * FUNCTION   : powerHintInternal
@@ -532,137 +461,85 @@ bool QCameraPerfLock::releasePerfLock()
  * DESCRIPTION: Sets the requested power hint and state to power HAL.
  *
  * PARAMETERS :
- * @hint      : Power hint
- * @enable    : Enable power hint if set to 1. Disable if set to 0.
- *
+ * hint       : Power hint
+ * enable     : Enable power hint if set to 1. Disable if set to 0.
  * RETURN     : void
  *
  *==========================================================================*/
-void QCameraPerfLock::powerHintInternal(
-        power_hint_t powerHint,
-        bool         enable)
+void QCameraPerfLock::powerHintInternal(power_hint_t hint, bool enable)
 {
 #ifdef HAS_MULTIMEDIA_HINTS
+    if (m_pPowerModule != NULL) {
         if (enable == true) {
-            mPerfLockIntf->powerHintIntf()->powerHint(mPerfLockIntf->powerHintIntf(),
-                                                    powerHint, (void *)"state=1");
+            m_pPowerModule->powerHint(m_pPowerModule, hint, (void *)"state=1");
         } else {
-            mPerfLockIntf->powerHintIntf()->powerHint(mPerfLockIntf->powerHintIntf(),
-                                                    powerHint, (void *)"state=0");
+            m_pPowerModule->powerHint(m_pPowerModule, hint, (void *)"state=0");
         }
+    }
 #endif
 }
 
-
-
 /*===========================================================================
- * FUNCTION   : createSingleton
+ * FUNCTION   : powerHint
  *
- * DESCRIPTION: Open the perf lock library, query the function pointers and
- *              create a singleton object upon success
- *
- * PARAMETERS : None
- *
- * RETURN     : QCameraPerfLockIntf object pointer on success
- *              NULL on failure
+ * DESCRIPTION: Updates the list containing active/enabled power hints.
+ *              If needed, calls the internal powerHint function with
+ *              requested power hint and state.
+ * PARAMETERS :
+ * hint       : Power hint
+ * enable     : Enable power hint if set to 1. Disable if set to 0.
+ * RETURN     : void
  *
  *==========================================================================*/
-QCameraPerfLockIntf* QCameraPerfLockIntf::createSingleton()
+void QCameraPerfLock::powerHint(power_hint_t hint, bool enable)
 {
-    bool error = true;
-    Mutex::Autolock lock(mMutex);
+#ifdef HAS_MULTIMEDIA_HINTS
+    if (enable == true) {
+        if ((hint != mCurrentPowerHint) || (enable != mCurrentPowerHintEnable)) {
+            // Disable the current active power hint
+            if (mCurrentPowerHintEnable == true) {
+                powerHintInternal(mCurrentPowerHint, false);
+            }
+            // Push the new power hint at the head of the active power hint list
+            mActivePowerHints.push_front(hint);
 
-    if (mInstance == NULL) {
-        // Open perflock library and query for the function pointers
-        uint32_t perfLockEnable = 0;
-        char value[PROPERTY_VALUE_MAX];
-
-        property_get("persist.camera.perflock.enable", value, "1");
-        perfLockEnable = atoi(value);
-
-        if (perfLockEnable) {
-            mInstance = new QCameraPerfLockIntf();
-            if (mInstance) {
-                #ifdef HAS_MULTIMEDIA_HINTS
-                if (hw_get_module(POWER_HARDWARE_MODULE_ID,
-                        (const hw_module_t **)(&(mInstance->mPowerModule)))) {
-                    LOGE("%s module for powerHAL not found", POWER_HARDWARE_MODULE_ID);
+            // Set the new power hint
+            mCurrentPowerHint       = hint;
+            mCurrentPowerHintEnable = enable;
+            powerHintInternal(hint, enable);
+        }
+    } else {
+        // Remove the power hint from the list
+        for (List<power_hint_t>::iterator it = mActivePowerHints.begin();
+                it != mActivePowerHints.end(); ++it) {
+            if (*it == hint) {
+                if (it != mActivePowerHints.begin()) {
+                    LOGW("Request to remove the previous power hint: %d instead of "
+                            "currently active power hint: %d", static_cast<int>(hint),
+                                                            static_cast<int>(mCurrentPowerHint));
                 }
-                else
-                #endif
-                {
-                    /* Retrieve the name of the vendor extension library */
-                    void *dlHandle = NULL;
-                    if ((property_get("ro.vendor.extension_library", value, NULL) > 0) &&
-                        (dlHandle = dlopen(value, RTLD_NOW | RTLD_LOCAL))) {
+                mActivePowerHints.erase(it);
+                break;
+            }
+        }
 
-                        perfLockAcquire pLockAcq = (perfLockAcquire)dlsym(dlHandle, "perf_lock_acq");
-                        perfLockRelease pLockRel = (perfLockRelease)dlsym(dlHandle, "perf_lock_rel");
+        if (hint == mCurrentPowerHint) {
+            // Disable the power hint
+            powerHintInternal(hint, false);
 
-                        if (pLockAcq && pLockRel) {
-                            mInstance->mDlHandle    = dlHandle;
-                            mInstance->mPerfLockAcq = pLockAcq;
-                            mInstance->mPerfLockRel = pLockRel;
-                            error = false;
-                        } else {
-                            LOGE("Failed to link the symbols- perf_lock_acq, perf_lock_rel");
-                        }
-                    } else {
-                        LOGE("Unable to load lib: %s", value);
-                    }
-                }
-                if (error && mInstance) {
-                    delete mInstance;
-                    mInstance = NULL;
-                }
+            // If the active power hint list is not empty,
+            // restore the previous power hint from the head of the list
+            if (mActivePowerHints.empty() == false) {
+                mCurrentPowerHint       = *mActivePowerHints.begin();
+                mCurrentPowerHintEnable = true;
+                powerHintInternal(mCurrentPowerHint, true);
+            } else {
+                mCurrentPowerHint       = static_cast<power_hint_t>(0);
+                mCurrentPowerHintEnable = false;
             }
         }
     }
-
-    if (mInstance) {
-        ++(mInstance->mRefCount);
-    }
-
-    return mInstance;
-}
-
-
-/*===========================================================================
- * FUNCTION   : deleteInstance
- *
- * DESCRIPTION: Delete the object if refCount is 0
- *
- * PARAMETERS : None
- *
- * RETURN     : void
- *
- *==========================================================================*/
-void QCameraPerfLockIntf::deleteInstance()
-{
-    Mutex::Autolock lock(mMutex);
-
-    if (mInstance && (--(mInstance->mRefCount) == 0)) {
-        delete mInstance;
-        mInstance = NULL;
-    }
-}
-
-
-/*===========================================================================
- * FUNCTION   : QCameraPerfLockIntf destructor
- *
- * DESCRIPTION: class destructor
- *
- * PARAMETERS : None
- *
- * RETURN     : void
- *
- *==========================================================================*/
-QCameraPerfLockIntf::~QCameraPerfLockIntf()
-{
-    if (mDlHandle) {
-        dlclose(mDlHandle);
-    }
+#endif
 }
 
 }; // namespace qcamera
