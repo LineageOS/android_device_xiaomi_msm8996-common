@@ -365,7 +365,7 @@ private:
     QCamera3SupportChannel *mAnalysisChannel;
     QCamera3RawDumpChannel *mRawDumpChannel;
     QCamera3RegularChannel *mDummyBatchChannel;
-    QCameraPerfLockMgr mPerfLockMgr;
+    QCameraPerfLock m_perfLock;
     QCameraCommon   mCommon;
 
     uint32_t mChannelHandle;
@@ -488,7 +488,6 @@ private:
     uint32_t mFirstFrameNumberInBatch;
     camera3_stream_t mDummyBatchStream;
     bool mNeedSensorRestart;
-    bool mPreviewStarted;
     uint32_t mMinInFlightRequests;
     uint32_t mMaxInFlightRequests;
 
@@ -498,6 +497,7 @@ private:
     /* Ldaf calibration data */
     bool mLdafCalibExist;
     uint32_t mLdafCalib[2];
+    bool mPowerHintEnabled;
     int32_t mLastCustIntentFrmNum;
     CameraMetadata  mCachedMetadata;
 
