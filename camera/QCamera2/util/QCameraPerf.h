@@ -31,120 +31,60 @@
 #define __QCAMERAPERF_H__
 
 // System dependencies
+#include <utils/List.h>
 #include <utils/Mutex.h>
 
 // Camera dependencies
 #include "hardware/power.h"
 
+typedef enum {
+    ALL_CORES_ONLINE = 0x7FE,
+    ALL_CPUS_PWR_CLPS_DIS = 0x101,
+    CPU0_MIN_FREQ_TURBO_MAX = 0x2FE,
+    CPU4_MIN_FREQ_TURBO_MAX = 0x1FFE,
+}perf_lock_params_t;
+
+/* Time related macros */
+#define ONE_SEC 1000
+typedef int64_t nsecs_t;
+#define NSEC_PER_SEC 1000000000LLU
+
 using namespace android;
 
 namespace qcamera {
 
-#define DEFAULT_PERF_LOCK_TIMEOUT_MS 1000
-
-typedef int32_t (*perfLockAcquire)(int, int, int[], int);
-typedef int32_t (*perfLockRelease)(int);
-
-typedef enum {
-    PERF_LOCK_OPEN_CAMERA,
-    PERF_LOCK_CLOSE_CAMERA,
-    PERF_LOCK_START_PREVIEW,
-    PERF_LOCK_STOP_PREVIEW    = PERF_LOCK_START_PREVIEW,
-    PERF_LOCK_START_RECORDING = PERF_LOCK_START_PREVIEW,
-    PERF_LOCK_STOP_RECORDING  = PERF_LOCK_STOP_PREVIEW,
-    PERF_LOCK_TAKE_SNAPSHOT,
-    PERF_LOCK_POWERHINT_PREVIEW,
-    PERF_LOCK_POWERHINT_ENCODE,
-    PERF_LOCK_COUNT
-} PerfLockEnum;
-
-typedef enum {
-    LOCK_MGR_STATE_UNINITIALIZED,
-    LOCK_MGR_STATE_READY,
-    LOCK_MGR_STATE_ERROR
-} PerfLockMgrStateEnum;
-
-
-typedef struct {
-    int32_t      *perfLockParams;
-    uint32_t      perfLockParamsCount;
-} PerfLockInfo;
-
-
-class QCameraPerfLockIntf;
-
 class QCameraPerfLock {
 public:
-    static QCameraPerfLock* create(PerfLockEnum perfLockType);
-    virtual ~QCameraPerfLock();
+    QCameraPerfLock();
+    ~QCameraPerfLock();
 
-    bool releasePerfLock();
-    bool acquirePerfLock(bool     forceReacquirePerfLock,
-                         uint32_t timer = DEFAULT_PERF_LOCK_TIMEOUT_MS);
-    void powerHintInternal(power_hint_t powerHint, bool enable);
-
-protected:
-    QCameraPerfLock(PerfLockEnum perfLockType, QCameraPerfLockIntf *perfLockIntf);
-
-private:
-    Mutex                mMutex;
-    int32_t              mHandle;
-    uint32_t             mRefCount;
-    nsecs_t              mTimeOut;
-    PerfLockEnum         mPerfLockType;
-    QCameraPerfLockIntf *mPerfLockIntf;
-
-    static PerfLockInfo  mPerfLockInfo[PERF_LOCK_COUNT];
-
-    void restartTimer(uint32_t timer);
-    bool isTimedOut();
-};
-
-
-class QCameraPerfLockIntf {
-private:
-    static QCameraPerfLockIntf *mInstance;
-    static Mutex                mMutex;
-
-    uint32_t         mRefCount;
-    perfLockAcquire  mPerfLockAcq;
-    perfLockRelease  mPerfLockRel;
-    power_module_t  *mPowerModule;
-    void            *mDlHandle;
-
-protected:
-    QCameraPerfLockIntf() { mRefCount = 0; mDlHandle = NULL; }
-    virtual ~QCameraPerfLockIntf();
-
-public:
-    static QCameraPerfLockIntf* createSingleton();
-    static void deleteInstance();
-
-    inline perfLockAcquire perfLockAcq() { return mPerfLockAcq; }
-    inline perfLockRelease perfLockRel() { return mPerfLockRel; }
-    inline power_module_t* powerHintIntf() { return mPowerModule; }
-};
-
-
-class QCameraPerfLockMgr {
-public:
-    QCameraPerfLockMgr();
-    virtual ~QCameraPerfLockMgr();
-
-    bool releasePerfLock(PerfLockEnum perfLockType);
-    bool acquirePerfLock(PerfLockEnum perfLockType, uint32_t timer = DEFAULT_PERF_LOCK_TIMEOUT_MS);
-
-    bool acquirePerfLockIfExpired(PerfLockEnum perfLockRnum,
-                                  uint32_t     timer = DEFAULT_PERF_LOCK_TIMEOUT_MS);
-    void powerHintInternal(PerfLockEnum perfLockType, power_hint_t powerHint, bool enable);
+    void    lock_init();
+    void    lock_deinit();
+    int32_t lock_rel();
+    int32_t lock_acq();
+    int32_t lock_acq_timed(int32_t timer_val);
+    int32_t lock_rel_timed();
+    bool    isTimerReset();
+    void    powerHintInternal(power_hint_t hint, bool enable);
+    void    powerHint(power_hint_t hint, bool enable);
 
 private:
-    PerfLockMgrStateEnum mState;
-    Mutex                mMutex;
-    QCameraPerfLock*     mPerfLock[PERF_LOCK_COUNT];
-
-    inline bool isValidPerfLockEnum(PerfLockEnum perfLockType)
-                    { return (perfLockType < PERF_LOCK_COUNT); }
+    int32_t        (*perf_lock_acq)(int, int, int[], int);
+    int32_t        (*perf_lock_rel)(int);
+    void            startTimer(uint32_t timer_val);
+    void            resetTimer();
+    void           *mDlHandle;
+    uint32_t        mPerfLockEnable;
+    Mutex           mLock;
+    int32_t         mPerfLockHandle;        // Performance lock library handle
+    int32_t         mPerfLockHandleTimed;   // Performance lock library handle
+    power_module_t *m_pPowerModule;         // power module Handle
+    power_hint_t    mCurrentPowerHint;
+    bool            mCurrentPowerHintEnable;
+    uint32_t        mTimerSet;
+    uint32_t        mPerfLockTimeout;
+    nsecs_t         mStartTimeofLock;
+    List<power_hint_t> mActivePowerHints;   // Active/enabled power hints list
 };
 
 }; // namespace qcamera
