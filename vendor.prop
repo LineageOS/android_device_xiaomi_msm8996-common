@@ -127,6 +127,9 @@ persist.timed.enable=true
 
 # USB
 sys.usb.controller=6a00000.dwc3
+sys.usb.ffs.max_write=524288
+sys.usb.ffs.max_read=524288
+sys.usb.mtp.device_type=3
 
 # Wifi
 wifi.interface=wlan0
