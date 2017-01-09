@@ -6031,6 +6031,20 @@ QCamera3HardwareInterface::translateFromHalMetadata(
                 meteringMode, 1);
     }
 
+    IF_META_AVAILABLE(cam_asd_hdr_scene_data_t, hdr_scene_data,
+            CAM_INTF_META_ASD_HDR_SCENE_DATA, metadata) {
+        LOGD("hdr_scene_data: %d %f\n",
+                hdr_scene_data->is_hdr_scene, hdr_scene_data->hdr_confidence);
+        uint8_t isHdr = hdr_scene_data->is_hdr_scene;
+        float isHdrConfidence = hdr_scene_data->hdr_confidence;
+        camMetadata.update(QCAMERA3_STATS_IS_HDR_SCENE,
+                           &isHdr, 1);
+        camMetadata.update(QCAMERA3_STATS_IS_HDR_SCENE_CONFIDENCE,
+                           &isHdrConfidence, 1);
+    }
+
+
+
     if (metadata->is_tuning_params_valid) {
         uint8_t tuning_meta_data_blob[sizeof(tuning_params_t)];
         uint8_t *data = (uint8_t *)&tuning_meta_data_blob[0];
