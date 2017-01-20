@@ -84,11 +84,9 @@ static int hw_buttons;
 #define GREEN_BLINK_FILE "/sys/class/leds/green/blink"
 #define BLUE_BLINK_FILE "/sys/class/leds/blue/blink"
 
-#define RGB_BLINK_FILE "/sys/class/leds/rgb/rgb_blink"
-
 #define RAMP_SIZE 8
 static int BRIGHTNESS_RAMP[RAMP_SIZE] = { 0, 12, 25, 37, 50, 72, 85, 100 };
-#define RAMP_STEP_DURATION 50
+#define RAMP_STEP_DURATION 255
 
 #define DEFAULT_MAX_BRIGHTNESS 255
 int max_brightness;
@@ -297,7 +295,9 @@ static int set_speaker_light_locked(struct light_device_t* dev,
     blink = onMS > 0 && offMS > 0;
 
     // Disable all blinking to start
-    write_int(RGB_BLINK_FILE, 0);
+    write_int(RED_BLINK_FILE, 0);
+    write_int(GREEN_BLINK_FILE, 0);
+    write_int(BLUE_BLINK_FILE, 0);
 
     if (blink) {
         stepDuration = RAMP_STEP_DURATION;
@@ -341,13 +341,10 @@ static int set_speaker_light_locked(struct light_device_t* dev,
         free(duty);
 
         // Start the party
-        write_int(RGB_BLINK_FILE, 1);
+        write_int(RED_BLINK_FILE, 1);
+        write_int(GREEN_BLINK_FILE, 1);
+        write_int(BLUE_BLINK_FILE, 1);
     } else {
-        if (red == 0 && green == 0 && blue == 0) {
-            write_int(RED_BLINK_FILE, 0);
-            write_int(GREEN_BLINK_FILE, 0);
-            write_int(BLUE_BLINK_FILE, 0);
-        }
         write_int(RED_LED_BRIGHTNESS_FILE, red);
         write_int(GREEN_LED_BRIGHTNESS_FILE, green);
         write_int(BLUE_LED_BRIGHTNESS_FILE, blue);
