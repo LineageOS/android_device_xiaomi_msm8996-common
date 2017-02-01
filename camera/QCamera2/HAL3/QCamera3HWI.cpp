@@ -152,6 +152,7 @@ const QCamera3HardwareInterface::QCameraMap<
 const QCamera3HardwareInterface::QCameraMap<
         camera_metadata_enum_android_control_scene_mode_t,
         cam_scene_mode_type> QCamera3HardwareInterface::SCENE_MODES_MAP[] = {
+    { ANDROID_CONTROL_SCENE_MODE_DISABLED,       CAM_SCENE_MODE_OFF },
     { ANDROID_CONTROL_SCENE_MODE_FACE_PRIORITY,  CAM_SCENE_MODE_FACE_PRIORITY },
     { ANDROID_CONTROL_SCENE_MODE_ACTION,         CAM_SCENE_MODE_ACTION },
     { ANDROID_CONTROL_SCENE_MODE_PORTRAIT,       CAM_SCENE_MODE_PORTRAIT },
@@ -382,7 +383,8 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
       m_pRelCamSyncHeap(NULL),
       m_pRelCamSyncBuf(NULL),
       mBootToMonoTimestampOffset(0),
-      mUseAVTimer(false)
+      mUseAVTimer(false),
+      mCurrentSceneMode(0)
 {
     getLogLevel();
     m_perfLock.lock_init();
@@ -1437,6 +1439,8 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
 
     mOpMode = streamList->operation_mode;
     LOGD("mOpMode: %d", mOpMode);
+
+    mCurrentSceneMode = 0;
 
     /* first invalidate all the steams in the mStreamList
      * if they appear again, they will be validated */
@@ -3170,6 +3174,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                     i->timestamp, i->request_id, i->jpegMetadata, i->pipeline_depth,
                     i->capture_intent, internalPproc, i->fwkCacMode,
                     firstMetadataInBatch);
+            restoreHdrScene(i->scene_mode, result.result);
 
             saveExifParams(metadata);
 
@@ -3272,6 +3277,33 @@ done_metadata:
     }
     LOGD("mPendingLiveRequest = %d", mPendingLiveRequest);
     unblockRequestIfNecessary();
+}
+
+/*===========================================================================
+ * FUNCTION   : restoreHdrScene
+ *
+ * DESCRIPTION: HAL internally removes HDR scene mode, need to restore when
+ *              reporting metadata
+ *
+ * PARAMETERS : @result: Metadata to be reported in capture result
+ *
+ * RETURN     : None
+ *
+ *==========================================================================*/
+void QCamera3HardwareInterface::restoreHdrScene(
+        uint8_t sceneMode, const camera_metadata_t *result)
+{
+    CameraMetadata resultWrapper;
+
+    resultWrapper.acquire((camera_metadata_t *)result);
+
+    // If original scene mode was HDR, set it in result metadata
+    if (sceneMode == ANDROID_CONTROL_SCENE_MODE_HDR) {
+        LOGD("Restore HDR scene mode in result metadata");
+        resultWrapper.update(ANDROID_CONTROL_SCENE_MODE, &sceneMode, 1);
+    }
+
+    resultWrapper.release();
 }
 
 /*===========================================================================
@@ -4560,6 +4592,7 @@ no_error:
     pendingRequest.jpegMetadata = mCurJpegMeta;
     pendingRequest.settings = saveRequestSettings(mCurJpegMeta, request);
     pendingRequest.shutter_notified = false;
+    pendingRequest.scene_mode = mCurrentSceneMode;
 
     //extract capture intent
     if (meta.exists(ANDROID_CONTROL_CAPTURE_INTENT)) {
@@ -5508,7 +5541,7 @@ QCamera3HardwareInterface::translateFromHalMetadata(
     }
 
     IF_META_AVAILABLE(uint32_t, sceneMode, CAM_INTF_PARM_BESTSHOT_MODE, metadata) {
-        int val = (uint8_t)lookupFwkName(SCENE_MODES_MAP,
+        int val = lookupFwkName(SCENE_MODES_MAP,
                 METADATA_MAP_SIZE(SCENE_MODES_MAP),
                 *sceneMode);
         if (NAME_NOT_FOUND != val) {
@@ -10850,18 +10883,18 @@ int32_t QCamera3HardwareInterface::extractSceneMode(
         metadata_buffer_t *hal_metadata)
 {
     int32_t rc = NO_ERROR;
-
+    uint8_t sceneMode = CAM_SCENE_MODE_OFF;
     if (metaMode == ANDROID_CONTROL_MODE_USE_SCENE_MODE) {
         camera_metadata_ro_entry entry =
                 frame_settings.find(ANDROID_CONTROL_SCENE_MODE);
         if (0 == entry.count)
             return rc;
 
-        uint8_t fwk_sceneMode = entry.data.u8[0];
+        mCurrentSceneMode = entry.data.u8[0];
 
         int val = lookupHalName(SCENE_MODES_MAP,
                 sizeof(SCENE_MODES_MAP)/sizeof(SCENE_MODES_MAP[0]),
-                fwk_sceneMode);
+                mCurrentSceneMode);
         if (NAME_NOT_FOUND != val) {
             uint8_t sceneMode = (uint8_t)val;
             LOGD("sceneMode: %d", sceneMode);
@@ -10871,7 +10904,8 @@ int32_t QCamera3HardwareInterface::extractSceneMode(
             }
         }
 
-        if (fwk_sceneMode == ANDROID_CONTROL_SCENE_MODE_HDR) {
+        uint8_t bestshot = sceneMode;
+        if (sceneMode == CAM_SCENE_MODE_HDR) {
             cam_hdr_param_t hdr_params;
             hdr_params.hdr_enable = 1;
             hdr_params.hdr_mode = CAM_HDR_MODE_MULTIFRAME;
@@ -10880,6 +10914,7 @@ int32_t QCamera3HardwareInterface::extractSceneMode(
                     CAM_INTF_PARM_HAL_BRACKETING_HDR, hdr_params)) {
                 rc = BAD_VALUE;
             }
+            bestshot = 0;
         }
     } else if ((ANDROID_CONTROL_MODE_OFF == metaMode) ||
             (ANDROID_CONTROL_MODE_AUTO == metaMode)) {

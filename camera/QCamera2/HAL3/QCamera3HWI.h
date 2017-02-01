@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2016, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -384,6 +384,7 @@ private:
 
     bool isOnEncoder(const cam_dimension_t max_viewfinder_size,
             uint32_t width, uint32_t height);
+    void restoreHdrScene(uint8_t sceneMode, const camera_metadata_t *result);
     void hdrPlusPerfLock(mm_camera_super_buf_t *metadata_buf);
 
     static bool supportBurstCapture(uint32_t cameraId);
@@ -469,6 +470,7 @@ private:
         uint8_t capture_intent;
         uint8_t fwkCacMode;
         bool shutter_notified;
+        uint8_t scene_mode;
     } PendingRequestInfo;
     typedef struct {
         uint32_t frame_number;
@@ -596,6 +598,10 @@ private:
     //The offset between BOOTTIME and MONOTONIC timestamps
     nsecs_t mBootToMonoTimestampOffset;
     bool mUseAVTimer;
+
+
+    uint8_t mCurrentSceneMode;
+
 };
 
 }; // namespace qcamera
