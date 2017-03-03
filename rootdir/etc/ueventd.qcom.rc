@@ -145,6 +145,7 @@
 /dev/sdsprpc-smd          0660   system     system
 
 #permissions for audio
+/dev/wcd_dsp0_control     0660   system     audio
 /dev/wcd-dsp-glink        0660   system     audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
