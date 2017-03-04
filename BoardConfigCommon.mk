@@ -38,9 +38,6 @@ ENABLE_CPUSETS := true
 
 TARGET_USES_64_BIT_BINDER := true
 
-# Assertions
-TARGET_BOARD_INFO_FILE ?= $(VENDOR_PATH)/board-info.txt
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := msm8996
 TARGET_NO_BOOTLOADER := true
