@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa5d592f_c872f97b",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-03-04T21:54:45Z",
+      "side": 1,
+      "message": "Remove in another commit",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 32
+      },
+      "revId": "c4b44b3d96c116f029a2da20d11add2b3437f08a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
