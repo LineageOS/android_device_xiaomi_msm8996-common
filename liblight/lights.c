@@ -2,6 +2,7 @@
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2014 The Linux Foundation. All rights reserved.
  * Copyright (C) 2016 The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -460,7 +461,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "Mi5 Lights Module",
+    .name = "MSM8996 Lights Module",
     .author = "The CyanogenMod Project",
     .methods = &lights_module_methods,
 };
