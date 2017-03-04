@@ -18,7 +18,7 @@
 
 set -e
 
-DEVICE=gemini
+DEVICE=msm8996-common
 VENDOR=xiaomi
 
 INITIAL_COPYRIGHT_YEAR=2016
