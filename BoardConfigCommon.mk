@@ -137,6 +137,9 @@ SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
 
+# Filesystem
+TARGET_ANDROID_FILESYSTEM_CONFIG_H := $(VENDOR_PATH)/android_filesystem_config.h
+
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
