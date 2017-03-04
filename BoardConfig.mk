@@ -17,9 +17,9 @@
 
 BOARD_VENDOR := xiaomi
 
-DEVICE_PATH := device/xiaomi/gemini
+DEVICE_PATH := device/xiaomi/msm8996-common
 
-TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/gemini/include
+TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/msm8996-common/include
 
 # Architecture
 TARGET_ARCH := arm64
@@ -40,7 +40,7 @@ TARGET_USES_64_BIT_BINDER := true
 
 # Assertions
 TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt
-TARGET_OTA_ASSERT_DEVICE := gemini
+TARGET_OTA_ASSERT_DEVICE := msm8996-common
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := msm8996
@@ -55,7 +55,7 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CONFIG := lineageos_gemini_defconfig
+TARGET_KERNEL_CONFIG := lineageos_msm8996-common_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8996
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
@@ -177,7 +177,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Releasetools
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_gemini
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_msm8996-common
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # RIL
@@ -194,8 +194,8 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 USE_SENSOR_MULTI_HAL := true
 
 # Vendor init
-TARGET_INIT_VENDOR_LIB := libinit_gemini
-TARGET_RECOVERY_DEVICE_MODULES := libinit_gemini
+TARGET_INIT_VENDOR_LIB := libinit_msm8996-common
+TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8996-common
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
@@ -212,4 +212,4 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
--include vendor/xiaomi/gemini/BoardConfigVendor.mk
+-include vendor/xiaomi/msm8996-common/BoardConfigVendor.mk
