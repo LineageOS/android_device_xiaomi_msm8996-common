@@ -16,6 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),gemini)
+ifeq ($(TARGET_DEVICE),gemini natrium)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
