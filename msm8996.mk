@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +18,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/msm8996-common/msm8996-common-vendor.mk)
 
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
@@ -129,21 +130,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
-# Device config scripts
-PRODUCT_PACKAGES += \
-    init.leds.sh \
-    init.qcom.bt.sh
-
-# Device init scripts
-PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.rc \
-    init.qcom.power.rc \
-    init.qcom.usb.rc \
-    init.target.rc \
-    ueventd.qcom.rc \
-    init.qcom.sh
-
 # CNE
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
@@ -151,6 +137,21 @@ PRODUCT_PACKAGES += \
 # ConfigPanel
 PRODUCT_PACKAGES += \
     ConfigPanel \
+
+# Common config scripts
+PRODUCT_PACKAGES += \
+    init.leds.sh \
+    init.qcom.bt.sh
+
+# Common init scripts
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    init.qcom.rc \
+    init.qcom.sh \
+    init.qcom.power.rc \
+    init.qcom.usb.rc \
+    init.xiaomi.rc \
+    ueventd.qcom.rc
 
 # Display
 PRODUCT_PACKAGES += \
@@ -283,7 +284,7 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_gemini
+    librecovery_updater_xiaomi
 
 # RIL
 PRODUCT_PACKAGES += \

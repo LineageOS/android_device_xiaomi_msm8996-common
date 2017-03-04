@@ -18,7 +18,7 @@
 
 set -e
 
-DEVICE=gemini
+DEVICE=msm8996-common
 VENDOR=xiaomi
 
 # Load extract_utils and do some sanity checks
