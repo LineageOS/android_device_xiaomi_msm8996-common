@@ -23,17 +23,17 @@ import android.os.Parcel;
 import static com.android.internal.telephony.RILConstants.*;
 
 /**
- * Custom Qualcomm RIL for Xiaomi Mi 5
+ * Custom Qualcomm RIL for Xiaomi msm8996 based devices
  *
  * {@hide}
  */
-public class GeminiRIL extends RIL implements CommandsInterface {
+public class XiaomiMSM8996RIL extends RIL implements CommandsInterface {
 
-    public GeminiRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+    public XiaomiMSM8996RIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         this(context, preferredNetworkType, cdmaSubscription, null);
     }
 
-    public GeminiRIL(Context context, int preferredNetworkType,
+    public XiaomiMSM8996RIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
     }
