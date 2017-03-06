@@ -16,6 +16,24 @@
       "revId": "2788334c33f693ea6e48c735a4b42e31d5e225db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa5d592f_e9d6dfc4",
+        "filename": "rootdir/init.xiaomi.rc",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-06T12:36:39Z",
+      "side": 0,
+      "message": "init.target.rc is being imported in init.qcom.rc, after init.xiaomi.rc (in the decommonization change).",
+      "parentUuid": "fa5d592f_29cd1732",
+      "revId": "2788334c33f693ea6e48c735a4b42e31d5e225db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
