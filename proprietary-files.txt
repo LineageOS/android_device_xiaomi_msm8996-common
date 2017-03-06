@@ -34,20 +34,6 @@ vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
-# Audio ACDB
-etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb
-etc/acdbdata/Forte/Forte_General_cal.acdb
-etc/acdbdata/Forte/Forte_Global_cal.acdb
-etc/acdbdata/Forte/Forte_Handset_cal.acdb
-etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
-etc/acdbdata/Forte/Forte_Headset_cal.acdb
-etc/acdbdata/Forte/Forte_Speaker_cal.acdb
-etc/acdbdata/adsp_avs_config.acdb
-
-# Audio amplifier
-etc/firmware/tfa98xx.cnt
-etc/firmware/tfa9891.cnt
-
 # Audio libraries
 lib/soundfx/libdirac.so
 vendor/lib64/soundfx/libqcbassboost.so
@@ -144,20 +130,13 @@ vendor/lib/libmmcamera_hvx_grid_sum.so
 vendor/lib/libmmcamera_hvx_zzHDR.so
 vendor/lib/libmmcamera_imglib_faceproc_adspstub.so
 vendor/lib/libmmcamera_imglib.so
-vendor/lib/libmmcamera_imx298_liteon.so
-vendor/lib/libmmcamera_imx298_semco.so
-vendor/lib/libmmcamera_imx298.so
 vendor/lib/libmmcamera_llvd.so
 vendor/lib/libmmcamera_optizoom_lib.so
-vendor/lib/libmmcamera_ov4688_eeprom.so
-vendor/lib/libmmcamera_ov4688_primax.so
-vendor/lib/libmmcamera_ov4688.so
 vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
 vendor/lib/libmmcamera_ppeiscore.so
-vendor/lib/libmmcamera_sony_imx298_eeprom.so
 vendor/lib/libmmcamera_stillmore_lib.so
 vendor/lib/libmmcamera_sw2d_lib.so
 vendor/lib/libmmcamera_thread_services.so
@@ -182,125 +161,9 @@ vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libRecoFace.so
 vendor/lib/libseemore.so
-vendor/lib/libSonyIMX298PdafLibrary.so
 vendor/lib/libtm_interface.so
 vendor/lib/libtrueportrait.so
 vendor/lib/libubifocus.so
-
-# Camera actuators
-vendor/lib/libactuator_ak7348.so
-vendor/lib/libactuator_ak7371.so
-
-# Camera chromatix
-vendor/lib/libchromatix_imx298_liteon_4K_preview.so
-vendor/lib/libchromatix_imx298_liteon_4K_video.so
-vendor/lib/libchromatix_imx298_liteon_common.so
-vendor/lib/libchromatix_imx298_liteon_cpp_hfr_60.so
-vendor/lib/libchromatix_imx298_liteon_cpp_hfr_90.so
-vendor/lib/libchromatix_imx298_liteon_cpp_hfr_120.so
-vendor/lib/libchromatix_imx298_liteon_cpp_liveshot.so
-vendor/lib/libchromatix_imx298_liteon_cpp_preview.so
-vendor/lib/libchromatix_imx298_liteon_cpp_snapshot.so
-vendor/lib/libchromatix_imx298_liteon_cpp_snapshot_hdr.so
-vendor/lib/libchromatix_imx298_liteon_cpp_video.so
-vendor/lib/libchromatix_imx298_liteon_cpp_video_hdr.so
-vendor/lib/libchromatix_imx298_liteon_default_preview.so
-vendor/lib/libchromatix_imx298_liteon_default_video.so
-vendor/lib/libchromatix_imx298_liteon_hdr_snapshot_3a.so
-vendor/lib/libchromatix_imx298_liteon_hdr_video_3a.so
-vendor/lib/libchromatix_imx298_liteon_hfr_60.so
-vendor/lib/libchromatix_imx298_liteon_hfr_60_3a.so
-vendor/lib/libchromatix_imx298_liteon_hfr_90.so
-vendor/lib/libchromatix_imx298_liteon_hfr_90_3a.so
-vendor/lib/libchromatix_imx298_liteon_hfr_120.so
-vendor/lib/libchromatix_imx298_liteon_hfr_120_3a.so
-vendor/lib/libchromatix_imx298_liteon_liveshot.so
-vendor/lib/libchromatix_imx298_liteon_postproc.so
-vendor/lib/libchromatix_imx298_liteon_preview.so
-vendor/lib/libchromatix_imx298_liteon_snapshot.so
-vendor/lib/libchromatix_imx298_liteon_snapshot_hdr.so
-vendor/lib/libchromatix_imx298_liteon_video_hdr.so
-vendor/lib/libchromatix_imx298_liteon_zsl_preview.so
-vendor/lib/libchromatix_imx298_liteon_zsl_video.so
-vendor/lib/libchromatix_imx298_semco_4K_preview.so
-vendor/lib/libchromatix_imx298_semco_4K_video.so
-vendor/lib/libchromatix_imx298_semco_common.so
-vendor/lib/libchromatix_imx298_semco_cpp_hfr_60.so
-vendor/lib/libchromatix_imx298_semco_cpp_hfr_90.so
-vendor/lib/libchromatix_imx298_semco_cpp_hfr_120.so
-vendor/lib/libchromatix_imx298_semco_cpp_liveshot.so
-vendor/lib/libchromatix_imx298_semco_cpp_preview.so
-vendor/lib/libchromatix_imx298_semco_cpp_snapshot.so
-vendor/lib/libchromatix_imx298_semco_cpp_snapshot_hdr.so
-vendor/lib/libchromatix_imx298_semco_cpp_video.so
-vendor/lib/libchromatix_imx298_semco_cpp_video_hdr.so
-vendor/lib/libchromatix_imx298_semco_default_preview.so
-vendor/lib/libchromatix_imx298_semco_default_video.so
-vendor/lib/libchromatix_imx298_semco_hdr_snapshot_3a.so
-vendor/lib/libchromatix_imx298_semco_hdr_video_3a.so
-vendor/lib/libchromatix_imx298_semco_hfr_60.so
-vendor/lib/libchromatix_imx298_semco_hfr_60_3a.so
-vendor/lib/libchromatix_imx298_semco_hfr_90.so
-vendor/lib/libchromatix_imx298_semco_hfr_90_3a.so
-vendor/lib/libchromatix_imx298_semco_hfr_120.so
-vendor/lib/libchromatix_imx298_semco_hfr_120_3a.so
-vendor/lib/libchromatix_imx298_semco_liveshot.so
-vendor/lib/libchromatix_imx298_semco_postproc.so
-vendor/lib/libchromatix_imx298_semco_preview.so
-vendor/lib/libchromatix_imx298_semco_snapshot.so
-vendor/lib/libchromatix_imx298_semco_snapshot_hdr.so
-vendor/lib/libchromatix_imx298_semco_video_hdr.so
-vendor/lib/libchromatix_imx298_semco_zsl_preview.so
-vendor/lib/libchromatix_imx298_semco_zsl_video.so
-vendor/lib/libchromatix_ov4688_common.so
-vendor/lib/libchromatix_ov4688_cpp_hfr_60.so
-vendor/lib/libchromatix_ov4688_cpp_hfr_90.so
-vendor/lib/libchromatix_ov4688_cpp_hfr_120.so
-vendor/lib/libchromatix_ov4688_cpp_liveshot.so
-vendor/lib/libchromatix_ov4688_cpp_preview.so
-vendor/lib/libchromatix_ov4688_cpp_snapshot.so
-vendor/lib/libchromatix_ov4688_cpp_video.so
-vendor/lib/libchromatix_ov4688_default_video.so
-vendor/lib/libchromatix_ov4688_hfr_60.so
-vendor/lib/libchromatix_ov4688_hfr_60_ad5823.so
-vendor/lib/libchromatix_ov4688_hfr_90.so
-vendor/lib/libchromatix_ov4688_hfr_90_ad5823.so
-vendor/lib/libchromatix_ov4688_hfr_120.so
-vendor/lib/libchromatix_ov4688_hfr_120_ad5823.so
-vendor/lib/libchromatix_ov4688_liveshot.so
-vendor/lib/libchromatix_ov4688_postproc.so
-vendor/lib/libchromatix_ov4688_preview.so
-vendor/lib/libchromatix_ov4688_primax_common.so
-vendor/lib/libchromatix_ov4688_primax_cpp_hfr_60.so
-vendor/lib/libchromatix_ov4688_primax_cpp_hfr_90.so
-vendor/lib/libchromatix_ov4688_primax_cpp_hfr_120.so
-vendor/lib/libchromatix_ov4688_primax_cpp_liveshot.so
-vendor/lib/libchromatix_ov4688_primax_cpp_preview.so
-vendor/lib/libchromatix_ov4688_primax_cpp_snapshot.so
-vendor/lib/libchromatix_ov4688_primax_cpp_video.so
-vendor/lib/libchromatix_ov4688_primax_default_video.so
-vendor/lib/libchromatix_ov4688_primax_hfr_60.so
-vendor/lib/libchromatix_ov4688_primax_hfr_60_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_hfr_90.so
-vendor/lib/libchromatix_ov4688_primax_hfr_90_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_hfr_120.so
-vendor/lib/libchromatix_ov4688_primax_hfr_120_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_liveshot.so
-vendor/lib/libchromatix_ov4688_primax_postproc.so
-vendor/lib/libchromatix_ov4688_primax_preview.so
-vendor/lib/libchromatix_ov4688_primax_snapshot.so
-vendor/lib/libchromatix_ov4688_primax_zsl_preview_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_zsl_video_ad5823.so
-vendor/lib/libchromatix_ov4688_snapshot.so
-vendor/lib/libchromatix_ov4688_zsl_preview_ad5823.so
-vendor/lib/libchromatix_ov4688_zsl_video_ad5823.so
-
-# Camera configs
-etc/camera/imx298_liteon_chromatix.xml
-etc/camera/imx298_semco_chromatix.xml
-etc/camera/msm8996_camera.xml
-etc/camera/ov4688_chromatix.xml
-etc/camera/ov4688_primax_chromatix.xml
 
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
@@ -445,13 +308,6 @@ vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
 vendor/lib64/libssd.so
 vendor/lib/libQSEEComAPI.so
-
-# Fingerprint
-bin/qvop-daemon
-lib64/hw/fingerprint.fpc.so
-lib/hw/fingerprint.fpc.so
-vendor/lib64/libqvop-service.so
-vendor/lib/libqvop-service.so
 
 # Gatekeeper
 vendor/lib64/hw/gatekeeper.msm8996.so
@@ -608,10 +464,6 @@ vendor/lib64/libvoice-svc.so
 # IPA
 bin/ipacm-diag
 
-# IRDA
-lib64/hw/consumerir.msm8996.so
-lib/hw/consumerir.msm8996.so
-
 # Keystore
 vendor/lib64/hw/keystore.msm8996.so
 vendor/lib/hw/keystore.msm8996.so
@@ -648,9 +500,6 @@ vendor/lib64/libQtiTether.so
 vendor/lib64/libconnctrl.so
 vendor/lib/libQtiTether.so
 vendor/lib/libconnctrl.so
-
-# NFC firmware
-vendor/firmware/libpn548ad_fw.so
 
 # Perf
 bin/energy-awareness
@@ -804,6 +653,11 @@ vendor/lib64/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
+
+# Voice fingerprint
+bin/qvop-daemon
+vendor/lib64/libqvop-service.so
+vendor/lib/libqvop-service.so
 
 # Widevine
 vendor/lib/libWVStreamControlAPI_L3.so|61673304827483d44b735a3dd08f0783d10ce92d
