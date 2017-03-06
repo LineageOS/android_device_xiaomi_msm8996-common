@@ -60,8 +60,6 @@ on post-fs-data
     mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/audio_pp 0771 media audio
     mkdir /data/audio_cal 0771 system system
-    chown system system /dev/sysmatdrv
-    chmod 0660 /dev/sysmatdrv
 
 on boot
     start rmt_storage
