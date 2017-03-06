@@ -28,6 +28,7 @@
 import init.qcom.power.rc
 import init.qcom.usb.rc
 import init.xiaomi.rc
+import init.target.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
