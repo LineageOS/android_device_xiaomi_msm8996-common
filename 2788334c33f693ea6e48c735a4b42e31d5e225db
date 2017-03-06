@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa5d592f_29cd1732",
+        "filename": "rootdir/init.xiaomi.rc",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-03-06T12:33:28Z",
+      "side": 0,
+      "message": "maybe import init.xiaomi.target.rc?\nso we can configure \"xiaomi\" targets",
+      "revId": "2788334c33f693ea6e48c735a4b42e31d5e225db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
