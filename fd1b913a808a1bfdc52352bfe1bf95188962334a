@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa5d592f_a9d8e7ef",
+        "filename": "bluetooth/bdroid_buildcfg.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-03-06T12:40:18Z",
+      "side": 0,
+      "message": "Maybe we can dynamically set the name\nhttps://review.lineageos.org/#/c/25304/",
+      "revId": "fd1b913a808a1bfdc52352bfe1bf95188962334a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
