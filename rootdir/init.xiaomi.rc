@@ -54,14 +54,10 @@ on post-fs-data
     mkdir /tombstones/dsps 0771 system system
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
-    mkdir /persist/qc_senseid 0700 system system
     mkdir /data/misc/dts 0770 media audio
     mkdir /data/misc/seemp 0700 system system
-    mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/audio_pp 0771 media audio
     mkdir /data/audio_cal 0771 system system
-    chown system system /dev/sysmatdrv
-    chmod 0660 /dev/sysmatdrv
 
 on boot
     start rmt_storage
@@ -94,11 +90,6 @@ service fingerprintd /system/bin/fingerprintd
     user system
     group system drmrpc diag input
     writepid /dev/cpuset/system-background/tasks
-
-service qvop-daemon /system/bin/qvop-daemon
-    class late_start
-    user system
-    group system drmrpc
 
 # Start up peripheral manager
 service per_mgr /system/bin/pm-service
