@@ -22,6 +22,24 @@
       "revId": "048098aa95086410a2f7368c5937801f4e869051",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da6255ed_c9ca316e",
+        "filename": "setup-makefiles.sh",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-03-07T09:08:46Z",
+      "side": 0,
+      "message": "I think this was only necessary in \u003c\u003d cm-12.1",
+      "parentUuid": "da6255ed_29b42df1",
+      "revId": "048098aa95086410a2f7368c5937801f4e869051",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
