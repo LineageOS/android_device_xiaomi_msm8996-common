@@ -35,7 +35,7 @@
 #include <utils/Mutex.h>
 #include <utils/Vector.h>
 #include "gralloc_priv.h"
-
+#include <sys/stat.h>
 // Camera dependencies
 #include "cam_intf.h"
 #include "cam_types.h"
