@@ -41,8 +41,9 @@ static struct light_state_t g_attention;
 static struct light_state_t g_notification;
 static struct light_state_t g_battery;
 
-#define BACK_BUTTON_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
-#define MENU_BUTTON_BRIGHTNESS_FILE "/sys/class/leds/button-backlight1/brightness"
+#define BUTTON_1_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
+#define BUTTON_2_BRIGHTNESS_FILE "/sys/class/leds/button-backlight1/brightness"
+#define BUTTON_3_BRIGHTNESS_FILE "/sys/class/leds/button-backlight2/brightness"
 
 #define LCD_BRIGHTNESS_FILE "/sys/class/leds/lcd-backlight/brightness"
 #define LCD_MAX_BRIGHTNESS_FILE "/sys/class/leds/lcd-backlight/max_brightness"
@@ -214,7 +215,9 @@ static int set_light_buttons(struct light_device_t *dev,
         return -1;
 
     pthread_mutex_lock(&g_lock);
-    err = write_int(BACK_BUTTON_BRIGHTNESS_FILE, brightness) + write_int(MENU_BUTTON_BRIGHTNESS_FILE, brightness);
+    err = write_int(BUTTON_1_BRIGHTNESS_FILE, brightness) +
+            write_int(BUTTON_2_BRIGHTNESS_FILE, brightness) +
+            write_int(BUTTON_3_BRIGHTNESS_FILE, brightness);
     pthread_mutex_unlock(&g_lock);
     return err;
 }
