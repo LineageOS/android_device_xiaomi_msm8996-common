@@ -278,7 +278,7 @@ static int set_speaker_light_locked(struct light_device_t* dev,
 
         // Red
         write_int(RED_START_IDX_FILE, 0);
-        duty = get_scaled_duty_pcts(red);    
+        duty = get_scaled_duty_pcts(red);
         write_str(RED_DUTY_PCTS_FILE, duty);
         write_int(RED_PAUSE_LO_FILE, offMS);
         // The led driver is configured to ramp up then ramp
