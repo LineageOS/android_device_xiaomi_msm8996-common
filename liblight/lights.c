@@ -56,11 +56,14 @@ static const char LCD_FILE[]
 static const char LCD_MAX_BRIGHTNESS_FILE[]
         = "/sys/class/leds/lcd-backlight/max_brightness";
 
-static const char BACK_BUTTON_FILE[]
+static const char BUTTON_1_FILE[]
         = "/sys/class/leds/button-backlight/brightness";
 
-static const char MENU_BUTTON_FILE[]
+static const char BUTTON_2_FILE[]
         = "/sys/class/leds/button-backlight1/brightness";
+
+static const char BUTTON_3_FILE[]
+        = "/sys/class/leds/button-backlight2/brightness";
 
 static const char RED_DUTY_PCTS_FILE[]
         = "/sys/class/leds/red/duty_pcts";
@@ -256,7 +259,9 @@ static int set_light_buttons(struct light_device_t *dev,
         return -1;
     }
     pthread_mutex_lock(&g_lock);
-    err = write_int(BACK_BUTTON_FILE, brightness) + write_int(MENU_BUTTON_FILE, brightness);
+    err = write_int(BUTTON_1_FILE, brightness) +
+            write_int(BUTTON_2_FILE, brightness) +
+            write_int(BUTTON_3_FILE, brightness);
     pthread_mutex_unlock(&g_lock);
     return err;
 }
