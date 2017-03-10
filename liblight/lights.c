@@ -41,8 +41,17 @@ static struct light_state_t g_attention;
 static struct light_state_t g_notification;
 static struct light_state_t g_battery;
 
-#define BACK_BUTTON_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
-#define MENU_BUTTON_BRIGHTNESS_FILE "/sys/class/leds/button-backlight1/brightness"
+#define BUTTON_1_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
+#define BUTTON_2_BRIGHTNESS_FILE "/sys/class/leds/button-backlight1/brightness"
+#define BUTTON_3_BRIGHTNESS_FILE "/sys/class/leds/button-backlight2/brightness"
+
+enum buttons_mask_t {
+    BUTTON_1 = 0x1,
+    BUTTON_2 = 0x2,
+    BUTTON_3 = 0x4,
+};
+
+static int hw_buttons;
 
 #define LCD_BRIGHTNESS_FILE "/sys/class/leds/lcd-backlight/brightness"
 #define LCD_MAX_BRIGHTNESS_FILE "/sys/class/leds/lcd-backlight/max_brightness"
@@ -87,6 +96,16 @@ int max_brightness;
 /**
  * Device methods
  */
+
+void check_buttons_support()
+{
+    // Assume that the device has at least two buttons
+    hw_buttons = BUTTON_1 | BUTTON_2;
+
+    // Check if a third button is present
+    if (access(BUTTON_3_BRIGHTNESS_FILE, W_OK) == 0)
+        hw_buttons |= BUTTON_3;
+}
 
 static void init_globals(void)
 {
@@ -214,8 +233,14 @@ static int set_light_buttons(struct light_device_t *dev,
         return -1;
 
     pthread_mutex_lock(&g_lock);
-    err = write_int(BACK_BUTTON_BRIGHTNESS_FILE, brightness) +
-            write_int(MENU_BUTTON_BRIGHTNESS_FILE, brightness);
+
+    if (hw_buttons & BUTTON_1)
+        err += write_int(BUTTON_1_BRIGHTNESS_FILE, brightness);
+    if (hw_buttons & BUTTON_2)
+        err += write_int(BUTTON_2_BRIGHTNESS_FILE, brightness);
+    if (hw_buttons & BUTTON_3)
+        err += write_int(BUTTON_3_BRIGHTNESS_FILE, brightness);
+
     pthread_mutex_unlock(&g_lock);
     return err;
 }
@@ -419,6 +444,8 @@ static int open_lights(const struct hw_module_t* module, char const* name,
 {
     int (*set_light)(struct light_device_t* dev,
             struct light_state_t const* state);
+
+    check_buttons_support();
 
     if (0 == strcmp(LIGHT_ID_BACKLIGHT, name))
         set_light = set_light_backlight;
