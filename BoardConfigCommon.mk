@@ -113,7 +113,7 @@ BOARD_HARDWARE_CLASS += \
     hardware/cyanogen/cmhw \
     $(VENDOR_PATH)/cmhw
 BOARD_USES_CYANOGEN_HARDWARE := true
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
+TARGET_TAP_TO_WAKE_NODE := "/sys/class/input/input2/wake_gesture"
 
 # CNE and DPM
 BOARD_USES_QCNE := true
