@@ -69,11 +69,6 @@ ro.sys.display.support=63
 # DRM
 drm.service.enabled=true
 
-# Fingerprint
-persist.qfp=false
-ro.hardware.fingerprint=fpc
-sys.fpc.tu.disabled=0
-
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
