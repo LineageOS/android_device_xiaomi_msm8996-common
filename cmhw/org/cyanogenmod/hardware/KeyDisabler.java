@@ -29,7 +29,7 @@ import org.cyanogenmod.internal.util.FileUtils;
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/proc/touchpanel/capacitive_keys_enable";
+    private static String CONTROL_PATH = "/sys/class/input/input2/0dbutton";
 
     public static boolean isSupported() {
         return FileUtils.isFileWritable(CONTROL_PATH);
