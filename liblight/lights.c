@@ -84,6 +84,10 @@ static int hw_buttons;
 #define GREEN_BLINK_FILE "/sys/class/leds/green/blink"
 #define BLUE_BLINK_FILE "/sys/class/leds/blue/blink"
 
+#define RED_PWM_US_FILE "/sys/class/leds/red/pwm_us"
+#define GREEN_PWM_US_FILE "/sys/class/leds/green/pwm_us"
+#define BLUE_PWM_US_FILE "/sys/class/leds/blue/pwm_us"
+
 #define RGB_BLINK_FILE "/sys/class/leds/rgb/rgb_blink"
 
 #define RAMP_SIZE 8
@@ -267,7 +271,7 @@ static int set_speaker_light_locked(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int red, green, blue, blink;
-    int onMS, offMS, stepDuration, pauseHi;
+    int onMS, offMS, stepDuration, pauseHi, pwm;
     unsigned int colorRGB;
     char *duty;
 
@@ -297,7 +301,14 @@ static int set_speaker_light_locked(struct light_device_t* dev,
     blink = onMS > 0 && offMS > 0;
 
     // Disable all blinking to start
-    write_int(RGB_BLINK_FILE, 0);
+    write_int(RED_PWM_US_FILE, 0);
+    write_int(GREEN_PWM_US_FILE, 0);
+    write_int(BLUE_PWM_US_FILE, 0);
+
+    // Set proper colors
+    write_int(RED_LED_BRIGHTNESS_FILE, red);
+    write_int(GREEN_LED_BRIGHTNESS_FILE, green);
+    write_int(BLUE_LED_BRIGHTNESS_FILE, blue);
 
     if (blink) {
         stepDuration = RAMP_STEP_DURATION;
@@ -341,18 +352,15 @@ static int set_speaker_light_locked(struct light_device_t* dev,
         free(duty);
 
         // Start the party
-        write_int(RGB_BLINK_FILE, 1);
-    } else {
-        if (red == 0 && green == 0 && blue == 0) {
-            write_int(RED_BLINK_FILE, 0);
-            write_int(GREEN_BLINK_FILE, 0);
-            write_int(BLUE_BLINK_FILE, 0);
-        }
-        write_int(RED_LED_BRIGHTNESS_FILE, red);
-        write_int(GREEN_LED_BRIGHTNESS_FILE, green);
-        write_int(BLUE_LED_BRIGHTNESS_FILE, blue);
+        pwm = offMS * 1000;
+        write_int(RED_PWM_US_FILE, pwm);
+        write_int(GREEN_PWM_US_FILE, pwm);
+        write_int(BLUE_PWM_US_FILE, pwm);
+    } else if (red == 0 && green == 0 && blue == 0) {
+        write_int(RED_BLINK_FILE, 0);
+        write_int(GREEN_BLINK_FILE, 0);
+        write_int(BLUE_BLINK_FILE, 0);
     }
-
 
     return 0;
 }
