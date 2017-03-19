@@ -47,6 +47,7 @@ ro.qualcomm.bluetooth.pbap=true
 
 # Camera
 persist.camera.gyro.disable=0
+persist.camera.HAL3.enabled=1
 persist.camera.imglib.fddsp=1
 
 # CNE
