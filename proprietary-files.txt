@@ -58,7 +58,6 @@ vendor/lib/libaudiodevarb.so
 
 # Bluetooth
 # aptX - from marlin - OPM1.171019.011
-bin/btnvtool:vendor/bin/btnvtool
 bin/wcnss_filter:vendor/bin/wcnss_filter
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
