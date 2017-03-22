@@ -382,9 +382,6 @@ on property:sys.boot_completed=1
     # CPE fw_name used by sound trigger HAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
 
-on property:vold.decrypt=trigger_restart_framework
-    start config_bt_addr
-
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
@@ -439,12 +436,6 @@ service hci_filter_root /system/vendor/bin/wcnss_filter
     user bluetooth
     group bluetooth oem_2950 system
     disabled
-
-service config_bt_addr /system/vendor/bin/btnvtool -O
-    class core
-    user bluetooth
-    group bluetooth radio
-    oneshot
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
