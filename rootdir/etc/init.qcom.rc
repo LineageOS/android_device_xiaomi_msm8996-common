@@ -624,7 +624,7 @@ service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
 
-service leds-sh /system/bin/sh /system/etc/init.leds.sh
+service panel-sh /system/bin/sh /system/etc/init.panel.sh
     class core
     user root
     oneshot
