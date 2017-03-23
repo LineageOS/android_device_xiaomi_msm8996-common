@@ -655,4 +655,3 @@ vendor/lib/mediadrm/libwvdrmengine.so|c2199998c12f0f298be0b3f82eaac7e299a0feaa
 
 # WiFi
 bin/cnss-daemon
-bin/cnss_diag
