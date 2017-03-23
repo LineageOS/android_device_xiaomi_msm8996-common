@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba57610f_705c2b26",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-23T17:14:31Z",
+      "side": 0,
+      "message": "Derp?",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 11
+      },
+      "revId": "4f998c74c642a76990c34aacbbe4fecafbc2f1ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
