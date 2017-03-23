@@ -195,9 +195,6 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # FST Manager uses bond0
-    chown wifi wifi /sys/class/net/bond0/bonding/queue_id
-
 # MSM specific files that need to be created on /data
 on post-fs-data
     # Create directories for fingerprint
@@ -564,35 +561,6 @@ service wigig_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-# FST Manager with hostapd (softap) - all settings inside ini file
-service fstman /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini
-    user wifi
-    group wifi net_admin net_raw
-    class main
-    disabled
-    oneshot
-
-# FST Manager with supplicant - connect to supplicant socket
-service fstman_wlan0 /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini @android:wpa_wlan0
-    user wifi
-    group wifi net_admin net_raw
-    class main
-    disabled
-    oneshot
-
-on property:netd.fstman.start=true
-    start fstman
-
-on property:netd.fstman.start=false
-    stop fstman
-
-service cnss_diag /system/bin/cnss_diag -q -f
-    class main
-    user system
-    group system wifi inet net_admin sdcard_rw media_rw diag
-    disabled
-    oneshot
-
 service cnss-daemon /system/bin/cnss-daemon -n -l
     class late_start
     user system
@@ -660,13 +628,6 @@ service ssr_diag /system/bin/ssr_diag
     user system
     group system
     disabled
-
-service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-    class core
-    user root
-    group root
-    disabled
-    writepid /dev/cpuset/system-background/tasks
 
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start
