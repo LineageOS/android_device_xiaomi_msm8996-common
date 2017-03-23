@@ -352,29 +352,6 @@ on property:sys.boot_completed=1
     # CPE fw_name used by sound trigger HAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
 
-# Corefile limit
-on property:persist.debug.trace=1
-    mkdir /data/core 0777 root root
-    write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
-
-on property:bluetooth.dun.status=running
-    start bt-dun
-
-on property:bluetooth.dun.status=stopped
-    stop bt-dun
-
-on property:bluetooth.sap.status=running
-    start bt-sap
-
-on property:bluetooth.sap.status=stopped
-    stop bt-sap
-
-on property:bluetooth.startbtsnoop=true
-    start btsnoop
-
-on property:bluetooth.startbtsnoop=false
-    stop btsnoop
-
 on property:vold.decrypt=trigger_restart_framework
     start config_bt_addr
 
@@ -426,25 +403,6 @@ service config_bt_addr /system/bin/btnvtool -O
     user bluetooth
     group bluetooth radio
     oneshot
-
-service btsnoop /system/bin/btsnoop
-    user bluetooth
-    group bluetooth net_bt_admin sdcard_rw sdcard_r media_rw
-    class late_start
-    disabled
-    oneshot
-
-service port-bridge /system/bin/port-bridge
-    class main
-    user radio system
-    group radio system inet
-
-# QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
-    class main
-    user root
-    group radio audio bluetooth gps nfc qcom_diag wakelock
-    writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -561,14 +519,6 @@ service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     group root
     oneshot
     disabled
-
-service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
-    class late_start
-    group net_bt_admin inet radio wifi
-    disabled
-
-on property:persist.ims.regmanager.mode=1
-    start ims_regmanager
 
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
