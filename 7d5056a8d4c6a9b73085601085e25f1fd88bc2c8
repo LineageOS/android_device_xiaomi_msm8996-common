@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba57610f_b0cce336",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-23T20:01:13Z",
+      "side": 1,
+      "message": "Can be removed as well.",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 71
+      },
+      "revId": "7d5056a8d4c6a9b73085601085e25f1fd88bc2c8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
