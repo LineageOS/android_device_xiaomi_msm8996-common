@@ -130,7 +130,7 @@ PRODUCT_PACKAGES += \
 
 # Common config scripts
 PRODUCT_PACKAGES += \
-    init.leds.sh \
+    init.panel.sh \
     init.qcom.bt.sh
 
 # Common init scripts
