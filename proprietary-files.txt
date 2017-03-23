@@ -493,7 +493,6 @@ vendor/lib/libconnctrl.so
 # Perf
 bin/energy-awareness
 bin/iop
-bin/msm_irqbalance
 vendor/bin/perfd
 vendor/etc/perf-profile0.conf
 vendor/etc/perf-profile1.conf
