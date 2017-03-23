@@ -493,7 +493,6 @@ vendor/lib/libconnctrl.so
 # Perf
 bin/energy-awareness
 bin/iop
-bin/msm_irqbalance
 vendor/bin/perfd
 vendor/etc/perf-profile0.conf
 vendor/etc/perf-profile1.conf
@@ -655,4 +654,3 @@ vendor/lib/mediadrm/libwvdrmengine.so|c2199998c12f0f298be0b3f82eaac7e299a0feaa
 
 # WiFi
 bin/cnss-daemon
-bin/cnss_diag
