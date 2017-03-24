@@ -27,12 +27,16 @@
 
 import init.qcom.power.rc
 import init.qcom.usb.rc
-import init.xiaomi.rc
 import init.target.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+
+    mkdir /firmware 0771 system system
+    mkdir /bt_firmware 0771 system system
+    mkdir /dsp 0771 media media
+    symlink /data/tombstones /tombstones
 
 on init
     export LD_SHIM_LIBS /system/vendor/lib64/lib-imsvt.so|libshims_ims.so
@@ -48,6 +52,8 @@ on init
     write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
+
+    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
@@ -82,10 +88,21 @@ on boot
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /dev/ttyHS0
 
+    # Access permission for fingerprint
     chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
     chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_key_events
     chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
     chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
+
+    # Access permission for secure touch
+    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
+    chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
+    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
+    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
+
+    # Access permission for smartPA
+    chmod 0666 /dev/i2c-3
+    chmod 0666 /dev/i2c-9
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -102,6 +119,14 @@ on boot
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
     mkdir /persist/time 0770 system system
+    mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+    mkdir /persist/qc_senseid 0700 system system
+    mkdir /persist/bms 0700 root system
+    mkdir /persist/wlan_bt 0700 system system
+    mkdir /persist/audio 0777 media audio
+    restorecon_recursive /persist
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -141,6 +166,11 @@ on boot
     chmod 660 /sys/class/leds/green/start_idx
     chmod 660 /sys/class/leds/blue/start_idx
     chmod 660 /sys/class/leds/rgb/rgb_blink
+
+    # LED torch permissions
+    chmod 0666 /sys/class/leds/led:torch_0/brightness
+    chmod 0666 /sys/class/leds/led:torch_1/brightness
+    chmod 0666 /sys/class/leds/led:switch/brightness
 
     # Button backlight permissions
     chown system system /sys/class/leds/button-backlight1/brightness
@@ -187,7 +217,11 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-# MSM specific files that need to be created on /data
+on fs
+    wait /dev/block/bootdevice
+    mount_all fstab.qcom
+    swapon_all fstab.qcom
+
 on post-fs-data
     # Create directories for fingerprint
     mkdir /data/misc/stargate 0770 system system
@@ -198,6 +232,13 @@ on post-fs-data
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
 
+    # Create directories for tombstones
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+
     # Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
 
@@ -207,6 +248,12 @@ on post-fs-data
     mkdir /data/misc/ipa 0700 net_admin net_admin
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+
+    mkdir /data/misc/dts 0770 media audio
+    mkdir /data/misc/seemp 0700 system system
+    mkdir /data/misc/qvop 0660 system system
+    mkdir /data/misc/audio_pp 0771 media audio
+    mkdir /data/audio_cal 0771 system system
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -505,11 +552,162 @@ service ril-daemon2 /system/bin/rild -c 2
     user root
     group radio cache inet misc audio log readproc wakelock qcom_diag
 
+service qseecomd /system/bin/qseecomd
+    class core
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
 
+service time_daemon /system/bin/time_daemon
+    class late_start
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
 on property:vold.decrypt=trigger_restart_min_framework
     start time_daemon
+
+# Start camera server as daemon
+service qcamerasvr /system/bin/mm-qcamera-daemon
+    class late_start
+    user camera
+    group camera system inet input graphics
+    writepid /dev/cpuset/system-background/tasks
+
+# Fingerprint service
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system drmrpc diag input
+    writepid /dev/cpuset/system-background/tasks
+
+service qvop-daemon /system/bin/qvop-daemon
+    class late_start
+    user system
+    group system drmrpc
+
+# Start up peripheral manager
+service per_mgr /system/bin/pm-service
+    class core
+    user system
+    group system
+    writepid /dev/cpuset/system-background/tasks
+
+service per_proxy /system/bin/pm-proxy
+    class core
+    user system
+    group system
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+on property:init.svc.per_mgr=running
+    start per_proxy
+
+on property:sys.shutdown.requested=*
+    stop per_proxy
+
+service readmac /system/bin/readmac
+    class main
+    user root
+    group root
+    oneshot
+
+service thermal-engine /system/vendor/bin/thermal-engine
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
+service adsprpcd /system/bin/adsprpcd
+    class main
+    user media
+    group media
+
+service audiod /system/bin/audiod
+    class late_start
+    user system
+    group system
+
+service imsqmidaemon /system/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio log diag
+    writepid /dev/cpuset/system-background/tasks
+
+service imsdatadaemon /system/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet log diag
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+service pd_mapper /system/vendor/bin/pd-mapper
+    class core
+    disabled
+
+on property:persist.sys.pd_enable=1
+    start pd_mapper
+    write /sys/class/service_locator/service_locator_status 1
+
+on property:persist.sys.pd_enable=0
+    write /sys/class/service_locator/service_locator_status 0
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+service ims_rtp_daemon /system/bin/ims_rtp_daemon
+    class main
+    user system
+    socket ims_rtpd stream 0660 system radio
+    group radio diag inet log
+    disabled
+
+service imscmservice /system/bin/imscmservice
+    class main
+    user system
+    group radio diag log
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start imscmservice
+
+service ppd /system/vendor/bin/mm-pp-dpps
+    class late_start
+    user system
+    group system graphics
+    socket pps stream 0660 system system
+    disabled
+
+on property:init.svc.surfaceflinger=stopped
+    stop ppd
+
+on property:init.svc.surfaceflinger=running
+    start ppd
+
+on property:init.svc.surfaceflinger=restarting
+    stop ppd
+
+on property:init.svc.zygote=stopped
+    stop ppd
+
+on property:init.svc.zygote=running
+    start ppd
+
+on property:init.svc.zygote=restarting
+    stop ppd
+
+on property:slpi.restart=1
+    write /sys/kernel/debug/msm_subsys/slpi restart
