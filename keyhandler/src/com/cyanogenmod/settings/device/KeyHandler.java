@@ -41,7 +41,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
     private final Context mContext;
 
-    private final BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
@@ -55,16 +55,17 @@ public class KeyHandler implements DeviceKeyHandler {
     public KeyHandler(Context context) {
         mContext = context;
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        mContext.registerReceiver(mUpdateReceiver, filter);
+        IntentFilter screenStateFilter = new IntentFilter();
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
+        mContext.registerReceiver(mScreenStateReceiver, screenStateFilter);
     }
 
     public boolean handleKeyEvent(KeyEvent event) {
         CMHardwareManager hardware = CMHardwareManager.getInstance(mContext);
         boolean virtualKeysEnabled = hardware.get(CMHardwareManager.FEATURE_KEY_DISABLE);
-        boolean fingerprintHomeButtonEnabled = FileUtils.readOneLine(FP_HOME_NODE).equals("1");
+        boolean fingerprintHomeButtonEnabled = FileUtils.isFileReadable(FP_HOME_NODE) &&
+                FileUtils.readOneLine(FP_HOME_NODE).equals("1");
 
         if (!hasSetupCompleted()) {
             return false;
