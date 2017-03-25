@@ -59,6 +59,8 @@
                 android:value="com.android.settings.category.device" />
         </activity>
 
+        <activity android:name=".KeyHandler" />
+
         <receiver android:name=".Startup" >
             <intent-filter>
                 <action android:name="cyanogenmod.intent.action.INITIALIZE_CM_HARDWARE" />
