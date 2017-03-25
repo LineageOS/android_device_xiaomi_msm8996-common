@@ -264,6 +264,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
+    com.xiaomi.sensor \
     sensors.msm8996
 
 # Shims
