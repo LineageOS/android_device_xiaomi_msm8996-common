@@ -36,6 +36,11 @@
             android:title="@string/fingerprint_wakeup_title"
             android:summary="@string/fingerprint_wakeup_summary" />
 
+        <SwitchPreference
+            android:key="fp_proximity"
+            android:title="Prevent accidental wake-up"
+            android:summary="Check the proximity sensor prior to wake-ups triggered by the fingerprint sensor" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

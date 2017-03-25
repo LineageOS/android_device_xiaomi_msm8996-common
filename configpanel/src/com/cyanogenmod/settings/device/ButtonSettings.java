@@ -18,7 +18,12 @@
 package com.cyanogenmod.settings.device;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
 
+import com.cyanogenmod.settings.device.utils.Constants;
 import com.cyanogenmod.settings.device.utils.NodePreferenceActivity;
 
 public class ButtonSettings extends NodePreferenceActivity {
@@ -26,5 +31,25 @@ public class ButtonSettings extends NodePreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.button_panel);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (Constants.FP_PROXIMITY_KEY.equals(preference.getKey())) {
+            final Intent intent = new Intent(Constants.FP_PROX_INTENT);
+            intent.putExtra(Constants.FP_PROX_INTENT_EXTRA, (Boolean) newValue);
+            sendBroadcast(intent);
+            return true;
+        }
+        return super.onPreferenceChange(preference, newValue);
+    }
+
+    @Override
+    public void addPreferencesFromResource(int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+
+        // Initialize other preferences whose keys are not associated with nodes
+        SwitchPreference b = (SwitchPreference) findPreference(Constants.FP_PROXIMITY_KEY);
+        b.setOnPreferenceChangeListener(this);
     }
 }
