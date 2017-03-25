@@ -32,6 +32,8 @@ public class PocketModeService extends Service {
     private static final boolean DEBUG = false;
 
     private static final String FP_WAKEUP_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_wakeup";
+    private static final String FP_PROX_INTENT = "com.cyanogenmod.settings.device.FP_PROX_TOGGLE";
+    private static final String FP_PROX_INTENT_EXTRA = "fingerprint_proximity";
 
     private ProximitySensor mProximitySensor;
 
@@ -40,9 +42,9 @@ public class PocketModeService extends Service {
         if (DEBUG) Log.d(TAG, "Creating service");
         mProximitySensor = new ProximitySensor(this);
 
-        IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        registerReceiver(mScreenStateReceiver, screenStateFilter);
+        IntentFilter custFilter = new IntentFilter();
+        custFilter.addAction(FP_PROX_INTENT);
+        registerReceiver(mUpdateReceiver, custFilter);
     }
 
     @Override
@@ -56,6 +58,7 @@ public class PocketModeService extends Service {
         if (DEBUG) Log.d(TAG, "Destroying service");
         super.onDestroy();
         this.unregisterReceiver(mScreenStateReceiver);
+        this.unregisterReceiver(mUpdateReceiver);
         mProximitySensor.disable();
     }
 
@@ -84,6 +87,23 @@ public class PocketModeService extends Service {
                 onDisplayOn();
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 onDisplayOff();
+            }
+        }
+    };
+
+    private BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getBooleanExtra(FP_PROX_INTENT_EXTRA, false)) {
+                IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+                screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                registerReceiver(mScreenStateReceiver, screenStateFilter);
+            } else {
+                try {
+                    unregisterReceiver(mScreenStateReceiver);
+                } catch (IllegalArgumentException e) {
+                    // Do nothing
+                }
             }
         }
     };
