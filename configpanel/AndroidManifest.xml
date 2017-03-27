@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2016 The CyanogenMod Project
+     Copyright (C) 2017 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License"
      you may not use this file except in compliance with the License.
@@ -19,6 +20,8 @@
           package="com.cyanogenmod.settings.device"
           android:versionCode="6"
           android:versionName="2.4" >
+
+    <protected-broadcast android:name="com.cyanogenmod.settings.device.CUST_UPDATE" />
 
     <uses-permission android:name="android.permission.INJECT_EVENTS"/>
     <uses-permission android:name="cyanogenmod.permission.HARDWARE_ABSTRACTION_ACCESS" />
