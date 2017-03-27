@@ -21,7 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.UserHandle;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 
@@ -30,6 +32,7 @@ public class Constants {
     // Preference keys
     public static final String BUTTON_SWAP_KEY = "button_swap";
     public static final String FP_HOME_KEY = "fp_home";
+    public static final String FP_PROXIMITY_KEY = "fp_proximity";
     public static final String FP_WAKEUP_KEY = "fp_wakeup";
 
     // Nodes
@@ -37,6 +40,10 @@ public class Constants {
     public static final String FP_HOME_KEY_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_key_events";
     public static final String FP_WAKEUP_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_wakeup";
     public static final String VIRTUAL_KEYS_NODE = "/proc/touchpanel/capacitive_keys_enable";
+
+    // Intents
+    private static final String CUST_INTENT = "com.cyanogenmod.settings.device.CUST_UPDATE";
+    private static final String CUST_INTENT_EXTRA = "pocketmode_service";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
@@ -97,5 +104,11 @@ public class Constants {
             b.setEnabled(false);
             b.setChecked(false);
         }
+    }
+
+    public static void broadcastCustIntent(Context context, boolean value) {
+        final Intent intent = new Intent(CUST_INTENT);
+        intent.putExtra(CUST_INTENT_EXTRA, value);
+        context.sendBroadcastAsUser(intent, UserHandle.CURRENT);
     }
 }
