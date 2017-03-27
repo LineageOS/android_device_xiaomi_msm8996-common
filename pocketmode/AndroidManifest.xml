@@ -5,7 +5,7 @@
     android:versionName="1.0"
     android:sharedUserId="android.uid.system">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="cyanogenmod.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -15,15 +15,18 @@
         android:label="XiaomiPocketMode"
         android:persistent="true">
 
-        <receiver android:name="com.cyanogenmod.pocketmode.BootCompletedReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
+        <receiver android:name=".Startup" android:enabled="true" >
+            <intent-filter android:priority="2147483647" >
+                <action android:name="cyanogenmod.intent.action.INITIALIZE_CM_HARDWARE" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.cyanogenmod.pocketmode.PocketModeService"
-                 android:permission="XiaomiPocketModeService">
+        <service android:name=".ReceiverService"
+                 android:permission="ReceiverService">
+        </service>
+
+        <service android:name=".PocketModeService"
+                 android:permission="PocketModeService">
         </service>
 
         <activity android:name="PocketMode"
