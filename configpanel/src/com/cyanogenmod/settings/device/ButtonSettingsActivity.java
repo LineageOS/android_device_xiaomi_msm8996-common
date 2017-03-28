@@ -17,14 +17,18 @@
 
 package com.cyanogenmod.settings.device;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.cyanogenmod.settings.device.utils.NodePreferenceActivity;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 
-public class ButtonSettings extends NodePreferenceActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+public class ButtonSettingsActivity extends SettingsDrawerActivity {
+
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.button_panel);
+
+        getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                new ButtonSettingsFragment()).commit();
     }
 }
