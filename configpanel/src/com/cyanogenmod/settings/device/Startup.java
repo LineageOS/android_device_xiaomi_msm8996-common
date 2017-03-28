@@ -24,8 +24,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import java.io.File;
-
 import com.cyanogenmod.settings.device.utils.Constants;
 
 import org.cyanogenmod.internal.util.FileUtils;
@@ -47,15 +45,13 @@ public class Startup extends BroadcastReceiver {
 
                 // Restore nodes to saved preference values
                 for (String pref : Constants.sButtonPrefKeys) {
-                    String value;
-                    String node;
+                    String node, value;
                     if (Constants.sStringNodePreferenceMap.containsKey(pref)) {
-                        value = Constants.getPreferenceString(context, pref);
                         node = Constants.sStringNodePreferenceMap.get(pref);
+                        value = Constants.getPreferenceString(context, pref);
                     } else {
-                        value = Constants.isPreferenceEnabled(context, pref) ?
-                                "1" : "0";
                         node = Constants.sBooleanNodePreferenceMap.get(pref);
+                        value = Constants.isPreferenceEnabled(context, pref) ? "1" : "0";
                     }
                     if (!FileUtils.writeLine(node, value)) {
                         Log.w(TAG, "Write to node " + node +
@@ -67,9 +63,9 @@ public class Startup extends BroadcastReceiver {
     }
 
     static boolean hasButtonProcs() {
-        return new File(Constants.BUTTON_SWAP_NODE).exists() ||
-                new File(Constants.FP_HOME_KEY_NODE).exists() ||
-                new File(Constants.FP_WAKEUP_NODE).exists();
+        return (FileUtils.fileExists(Constants.BUTTON_SWAP_NODE) ||
+                FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) ||
+                FileUtils.fileExists(Constants.FP_WAKEUP_NODE));
     }
 
     private void disableComponent(Context context, String component) {

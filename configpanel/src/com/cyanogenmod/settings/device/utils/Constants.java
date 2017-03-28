@@ -54,7 +54,7 @@ public class Constants {
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
         FP_HOME_KEY,
-        FP_WAKEUP_KEY,
+        FP_WAKEUP_KEY
     };
 
     static {
