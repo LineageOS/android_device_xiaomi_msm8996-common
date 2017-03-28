@@ -25,20 +25,19 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 
-public class PocketModeService extends Service {
-    private static final String TAG = "PocketModeService";
+public class PocketModeReceiverService extends Service {
+    private static final String TAG = "PocketModeReceiverService";
     private static final boolean DEBUG = false;
 
-    private ProximitySensor mProximitySensor;
+    private static final String CUST_INTENT = "com.cyanogenmod.settings.device.CUST_UPDATE";
+    private static final String CUST_INTENT_EXTRA = "pocketmode_service";
 
     @Override
     public void onCreate() {
         if (DEBUG) Log.d(TAG, "Creating service");
-        mProximitySensor = new ProximitySensor(this);
 
-        IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        registerReceiver(mScreenStateReceiver, screenStateFilter);
+        IntentFilter custFilter = new IntentFilter(CUST_INTENT);
+        registerReceiver(mUpdateReceiver, custFilter);
     }
 
     @Override
@@ -51,8 +50,7 @@ public class PocketModeService extends Service {
     public void onDestroy() {
         if (DEBUG) Log.d(TAG, "Destroying service");
         super.onDestroy();
-        this.unregisterReceiver(mScreenStateReceiver);
-        mProximitySensor.disable();
+        this.unregisterReceiver(mUpdateReceiver);
     }
 
     @Override
@@ -60,23 +58,15 @@ public class PocketModeService extends Service {
         return null;
     }
 
-    private void onDisplayOn() {
-        if (DEBUG) Log.d(TAG, "Display on");
-        mProximitySensor.disable();
-    }
-
-    private void onDisplayOff() {
-        if (DEBUG) Log.d(TAG, "Display off");
-        mProximitySensor.enable();
-    }
-
-    private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                onDisplayOn();
-            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-                onDisplayOff();
+            if (intent.getBooleanExtra(CUST_INTENT_EXTRA, false)) {
+                Log.d(TAG, "Starting main service");
+                context.startService(new Intent(context, PocketModeService.class));
+            } else {
+                Log.d(TAG, "Stopping main service");
+                context.stopService(new Intent(context, PocketModeService.class));
             }
         }
     };

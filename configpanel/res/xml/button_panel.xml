@@ -36,6 +36,12 @@
             android:title="@string/fingerprint_wakeup_title"
             android:summary="@string/fingerprint_wakeup_summary" />
 
+        <SwitchPreference
+            android:key="fp_proximity"
+            android:title="@string/fingerprint_proximity_title"
+            android:summary="@string/fingerprint_proximity_summary"
+            android:dependency="fp_wakeup" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
