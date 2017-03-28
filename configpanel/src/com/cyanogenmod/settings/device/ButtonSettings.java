@@ -18,13 +18,100 @@
 package com.cyanogenmod.settings.device;
 
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceActivity;
+import android.preference.ListPreference;
+import android.preference.SwitchPreference;
+import android.text.TextUtils;
+import android.view.MenuItem;
 
-import com.cyanogenmod.settings.device.utils.NodePreferenceActivity;
+import org.cyanogenmod.internal.util.FileUtils;
 
-public class ButtonSettings extends NodePreferenceActivity {
+import com.cyanogenmod.settings.device.utils.Constants;
+
+public class ButtonSettings extends PreferenceActivity implements OnPreferenceChangeListener {
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.button_panel);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePreferencesBasedOnDependencies();
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String node = Constants.sBooleanNodePreferenceMap.get(preference.getKey());
+        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
+            Boolean value = (Boolean) newValue;
+            FileUtils.writeLine(node, value ? "1" : "0");
+            return true;
+        }
+        node = Constants.sStringNodePreferenceMap.get(preference.getKey());
+        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
+            FileUtils.writeLine(node, (String) newValue);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addPreferencesFromResource(int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+        // Initialize node preferences
+        for (String pref : Constants.sBooleanNodePreferenceMap.keySet()) {
+            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            if (b == null) continue;
+            b.setOnPreferenceChangeListener(this);
+            String node = Constants.sBooleanNodePreferenceMap.get(pref);
+            if (FileUtils.isFileReadable(node)) {
+                String curNodeValue = FileUtils.readOneLine(node);
+                b.setChecked(curNodeValue.equals("1"));
+            } else {
+                b.setEnabled(false);
+            }
+        }
+        for (String pref : Constants.sStringNodePreferenceMap.keySet()) {
+            ListPreference l = (ListPreference) findPreference(pref);
+            if (l == null) continue;
+            l.setOnPreferenceChangeListener(this);
+            String node = Constants.sStringNodePreferenceMap.get(pref);
+            if (FileUtils.isFileReadable(node)) {
+                l.setValue(FileUtils.readOneLine(node));
+            } else {
+                l.setEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        // Respond to the action bar's Up/Home button
+        case android.R.id.home:
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void updatePreferencesBasedOnDependencies() {
+        for (String pref : Constants.sNodeDependencyMap.keySet()) {
+            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            if (b == null) continue;
+            String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
+            if (FileUtils.isFileReadable(dependencyNode)) {
+                String dependencyNodeValue = FileUtils.readOneLine(dependencyNode);
+                boolean shouldSetEnabled = dependencyNodeValue.equals(
+                        Constants.sNodeDependencyMap.get(pref)[1]);
+                Constants.updateDependentPreference(this, b, pref, shouldSetEnabled);
+            }
+        }
     }
 }
