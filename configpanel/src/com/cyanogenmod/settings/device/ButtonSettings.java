@@ -51,6 +51,9 @@ public class ButtonSettings extends PreferenceActivity implements OnPreferenceCh
         if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
             Boolean value = (Boolean) newValue;
             FileUtils.writeLine(node, value ? "1" : "0");
+            if (Constants.FP_WAKEUP_KEY.equals(preference.getKey())) {
+                Constants.broadcastCustIntent(this, value);
+            }
             return true;
         }
         node = Constants.sStringNodePreferenceMap.get(preference.getKey());
@@ -58,6 +61,12 @@ public class ButtonSettings extends PreferenceActivity implements OnPreferenceCh
             FileUtils.writeLine(node, (String) newValue);
             return true;
         }
+
+        if (Constants.FP_PROXIMITY_KEY.equals(preference.getKey())) {
+            Constants.broadcastCustIntent(this, (Boolean) newValue);
+            return true;
+        }
+
         return false;
     }
 
@@ -88,6 +97,10 @@ public class ButtonSettings extends PreferenceActivity implements OnPreferenceCh
                 l.setEnabled(false);
             }
         }
+
+        // Initialize other preferences whose keys are not associated with nodes
+        SwitchPreference b = (SwitchPreference) findPreference(Constants.FP_PROXIMITY_KEY);
+        b.setOnPreferenceChangeListener(this);
     }
 
     @Override
