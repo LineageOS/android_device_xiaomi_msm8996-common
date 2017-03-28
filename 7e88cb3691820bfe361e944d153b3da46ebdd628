@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba57610f_73c78e46",
+        "filename": "configpanel/AndroidManifest.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-28T12:10:19Z",
+      "side": 1,
+      "message": "This permission can be removed.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 70
+      },
+      "revId": "7e88cb3691820bfe361e944d153b3da46ebdd628",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba57610f_b3b506cf",
+        "filename": "configpanel/src/com/cyanogenmod/settings/device/ButtonSettings.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-28T12:10:19Z",
+      "side": 1,
+      "message": "Can we get rid of this?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "7e88cb3691820bfe361e944d153b3da46ebdd628",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba57610f_93ca024e",
+        "filename": "configpanel/src/com/cyanogenmod/settings/device/ButtonSettings.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-28T12:10:19Z",
+      "side": 1,
+      "message": "And this?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 5
+      },
+      "revId": "7e88cb3691820bfe361e944d153b3da46ebdd628",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
