@@ -15,15 +15,10 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device.utils;
+package com.cyanogenmod.settings.device;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
 
 public class Constants {
 
@@ -54,7 +49,7 @@ public class Constants {
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
         FP_HOME_KEY,
-        FP_WAKEUP_KEY,
+        FP_WAKEUP_KEY
     };
 
     static {
@@ -67,35 +62,5 @@ public class Constants {
         sNodeDefaultMap.put(FP_WAKEUP_KEY, true);
 
         sNodeDependencyMap.put(FP_HOME_KEY, new String[]{ VIRTUAL_KEYS_NODE, "1" });
-    }
-
-    public static boolean isPreferenceEnabled(Context context, String key) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getBoolean(key, (Boolean) sNodeDefaultMap.get(key));
-    }
-
-    public static String getPreferenceString(Context context, String key) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(key, (String) sNodeDefaultMap.get(key));
-    }
-
-    public static void updateDependentPreference(Context context, SwitchPreference b,
-            String key, Boolean shouldSetEnabled) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean prefActualValue = preferences.getBoolean(key, false);
-
-        if (shouldSetEnabled) {
-            if (sNodeUserSetValuesMap.get(key) != null &&
-                    (Boolean) sNodeUserSetValuesMap.get(key)[1] &&
-                    (Boolean) sNodeUserSetValuesMap.get(key)[1] != prefActualValue) {
-                b.setChecked(true);
-                sNodeUserSetValuesMap.put(key, new Boolean[]{ prefActualValue, false });
-            }
-        } else {
-            if (b.isEnabled() && prefActualValue)
-                sNodeUserSetValuesMap.put(key, new Boolean[]{ prefActualValue, true });
-            b.setEnabled(false);
-            b.setChecked(false);
-        }
     }
 }
