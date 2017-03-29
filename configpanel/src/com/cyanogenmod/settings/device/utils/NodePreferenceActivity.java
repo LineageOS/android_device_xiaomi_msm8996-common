@@ -26,8 +26,6 @@ import android.preference.SwitchPreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-import java.io.File;
-
 import org.cyanogenmod.internal.util.FileUtils;
 import org.cyanogenmod.internal.util.ScreenType;
 
@@ -54,13 +52,13 @@ public class NodePreferenceActivity extends PreferenceActivity
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String node = Constants.sBooleanNodePreferenceMap.get(preference.getKey());
-        if (!TextUtils.isEmpty(node)) {
+        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
             Boolean value = (Boolean) newValue;
             FileUtils.writeLine(node, value ? "1" : "0");
             return true;
         }
         node = Constants.sStringNodePreferenceMap.get(preference.getKey());
-        if (!TextUtils.isEmpty(node)) {
+        if (!TextUtils.isEmpty(node) && FileUtils.isFileWritable(node)) {
             FileUtils.writeLine(node, (String) newValue);
             return true;
         }
@@ -76,7 +74,7 @@ public class NodePreferenceActivity extends PreferenceActivity
             if (b == null) continue;
             b.setOnPreferenceChangeListener(this);
             String node = Constants.sBooleanNodePreferenceMap.get(pref);
-            if (new File(node).exists()) {
+            if (FileUtils.isFileReadable(node)) {
                 String curNodeValue = FileUtils.readOneLine(node);
                 b.setChecked(curNodeValue.equals("1"));
             } else {
@@ -88,7 +86,7 @@ public class NodePreferenceActivity extends PreferenceActivity
             if (l == null) continue;
             l.setOnPreferenceChangeListener(this);
             String node = Constants.sStringNodePreferenceMap.get(pref);
-            if (new File(node).exists()) {
+            if (FileUtils.isFileReadable(node)) {
                 l.setValue(FileUtils.readOneLine(node));
             } else {
                 l.setEnabled(false);
@@ -112,7 +110,7 @@ public class NodePreferenceActivity extends PreferenceActivity
             SwitchPreference b = (SwitchPreference) findPreference(pref);
             if (b == null) continue;
             String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
-            if (new File(dependencyNode).exists()) {
+            if (FileUtils.isFileReadable(dependencyNode)) {
                 String dependencyNodeValue = FileUtils.readOneLine(dependencyNode);
                 boolean shouldSetEnabled = dependencyNodeValue.equals(
                         Constants.sNodeDependencyMap.get(pref)[1]);
