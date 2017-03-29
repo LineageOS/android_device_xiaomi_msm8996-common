@@ -21,6 +21,8 @@
           android:versionCode="6"
           android:versionName="2.4" >
 
+    <protected-broadcast android:name="com.cyanogenmod.settings.device.CUST_UPDATE" />
+
     <uses-permission android:name="cyanogenmod.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <uses-sdk

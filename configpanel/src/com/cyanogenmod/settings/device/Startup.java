@@ -22,6 +22,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
 import com.cyanogenmod.settings.device.utils.Constants;
@@ -36,6 +38,7 @@ public class Startup extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
         if (cyanogenmod.content.Intent.ACTION_INITIALIZE_CM_HARDWARE.equals(action)) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
             // Disable button settings if needed
             if (!hasButtonProcs()) {
@@ -58,6 +61,12 @@ public class Startup extends BroadcastReceiver {
                             " failed while restoring saved preference values");
                     }
                 }
+
+                // Send initial broadcasts
+                final boolean shouldEnablePocketMode =
+                        prefs.getBoolean(Constants.FP_WAKEUP_KEY, false) &&
+                        prefs.getBoolean(Constants.FP_POCKETMODE_KEY, false);
+                Constants.broadcastCustIntent(context, shouldEnablePocketMode);
             }
         }
     }
