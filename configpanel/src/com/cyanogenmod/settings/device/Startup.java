@@ -24,8 +24,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import java.io.File;
-
 import com.cyanogenmod.settings.device.utils.Constants;
 
 import org.cyanogenmod.internal.util.FileUtils;
@@ -67,9 +65,9 @@ public class Startup extends BroadcastReceiver {
     }
 
     static boolean hasButtonProcs() {
-        return new File(Constants.BUTTON_SWAP_NODE).exists() ||
-                new File(Constants.FP_HOME_KEY_NODE).exists() ||
-                new File(Constants.FP_WAKEUP_NODE).exists();
+        return (FileUtils.fileExists(Constants.BUTTON_SWAP_NODE) ||
+                FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) ||
+                FileUtils.fileExists(Constants.FP_WAKEUP_NODE));
     }
 
     private void disableComponent(Context context, String component) {
