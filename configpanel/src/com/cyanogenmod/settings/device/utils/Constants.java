@@ -22,8 +22,8 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.PreferenceManager;
 
 public class Constants {
 
@@ -54,7 +54,7 @@ public class Constants {
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
         FP_HOME_KEY,
-        FP_WAKEUP_KEY,
+        FP_WAKEUP_KEY
     };
 
     static {
@@ -80,7 +80,7 @@ public class Constants {
     }
 
     public static void updateDependentPreference(Context context, SwitchPreference b,
-            String key, Boolean shouldSetEnabled) {
+            String key, boolean shouldSetEnabled) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean prefActualValue = preferences.getBoolean(key, false);
 

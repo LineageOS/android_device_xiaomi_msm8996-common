@@ -39,21 +39,19 @@ public class Startup extends BroadcastReceiver {
 
             // Disable button settings if needed
             if (!hasButtonProcs()) {
-                disableComponent(context, ButtonSettings.class.getName());
+                disableComponent(context, ButtonSettingsActivity.class.getName());
             } else {
-                enableComponent(context, ButtonSettings.class.getName());
+                enableComponent(context, ButtonSettingsActivity.class.getName());
 
                 // Restore nodes to saved preference values
                 for (String pref : Constants.sButtonPrefKeys) {
-                    String value;
-                    String node;
+                    String node, value;
                     if (Constants.sStringNodePreferenceMap.containsKey(pref)) {
-                        value = Constants.getPreferenceString(context, pref);
                         node = Constants.sStringNodePreferenceMap.get(pref);
+                        value = Constants.getPreferenceString(context, pref);
                     } else {
-                        value = Constants.isPreferenceEnabled(context, pref) ?
-                                "1" : "0";
                         node = Constants.sBooleanNodePreferenceMap.get(pref);
+                        value = Constants.isPreferenceEnabled(context, pref) ? "1" : "0";
                     }
                     if (!FileUtils.writeLine(node, value)) {
                         Log.w(TAG, "Write to node " + node +
