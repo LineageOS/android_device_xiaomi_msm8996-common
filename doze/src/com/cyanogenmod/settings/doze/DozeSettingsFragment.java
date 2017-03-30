@@ -17,7 +17,6 @@
 
 package com.cyanogenmod.settings.doze;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -56,27 +55,6 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
             DozeReceiver.notifyChanged(getActivity());
         }
     };
-
-    static String getDozeSummary(Context context) {
-        if (Utils.isDozeEnabled(context)) {
-            return context.getString(R.string.ambient_display_summary_on);
-        }
-        return context.getString(R.string.ambient_display_summary_off);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getContext()).inflate(R.layout.doze, container, false);
-        ((ViewGroup) view).addView(super.onCreateView(inflater, container, savedInstanceState));
-        return view;
-    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -160,7 +138,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         Utils.enableDoze(b, getActivity());
     }
 
-    public static class HelpDialogFragment extends DialogFragment {
+    private static class HelpDialogFragment extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
