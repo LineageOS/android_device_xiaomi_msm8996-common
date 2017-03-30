@@ -41,14 +41,6 @@ public class DozeReceiver extends RemotePreferenceUpdater {
         }
     }
 
-    @Override
-    public String getSummary(Context context, String key) {
-        if (DOZE_CATEGORY_KEY.equals(key)) {
-            return DozeSettingsFragment.getDozeSummary(context);
-        }
-        return null;
-    }
-
     static void notifyChanged(Context context) {
         notifyChanged(context, DOZE_CATEGORY_KEY);
     }
