@@ -95,6 +95,9 @@ persist.dbg.vt_avail_ovr=1
 persist.radio.NO_STAPA=1
 persist.radio.VT_HYBRID_ENABLE=1
 
+# Media
+persist.media.treble_omx=false
+
 # NFC
 ro.nfc.port=I2C
 persist.nfc.smartcard.config=SIM1,SIM2,eSE1
