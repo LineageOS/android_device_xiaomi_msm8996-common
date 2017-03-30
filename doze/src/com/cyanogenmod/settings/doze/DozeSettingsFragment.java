@@ -57,13 +57,6 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         }
     };
 
-    static String getDozeSummary(Context context) {
-        if (Utils.isDozeEnabled(context)) {
-            return context.getString(R.string.ambient_display_summary_on);
-        }
-        return context.getString(R.string.ambient_display_summary_off);
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
