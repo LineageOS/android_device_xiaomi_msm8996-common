@@ -653,3 +653,8 @@ vendor/lib/mediadrm/libwvdrmengine.so|c2199998c12f0f298be0b3f82eaac7e299a0feaa
 
 # WiFi
 bin/cnss-daemon
+
+# Open Mobile API
+etc/permissions/org.simalliance.openmobileapi.xml
+framework/org.simalliance.openmobileapi.jar
+-priv-app/SmartcardService/SmartcardService.apk|6491efadb43d428a5a4a9ed3bb82df09
