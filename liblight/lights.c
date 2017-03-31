@@ -292,7 +292,7 @@ static int set_speaker_light_locked(struct light_device_t* dev,
     red = (colorRGB >> 16) & 0xFF;
     green = (colorRGB >> 8) & 0xFF;
     blue = colorRGB & 0xFF;
-    blink = onMS > 0 && offMS > 0;
+    blink = 0;
 
     // Disable all blinking to start
     write_int(RED_BLINK_FILE, 0);
