@@ -24,6 +24,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -31,13 +32,24 @@ import android.view.MenuItem;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import org.cyanogenmod.internal.util.FileUtils;
+import org.cyanogenmod.internal.util.PackageManagerUtils;
 
 public class ButtonSettingsFragment extends PreferenceFragment
         implements OnPreferenceChangeListener {
 
+    private SwitchPreference mPocketMode;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.button_panel);
+
+        final PreferenceCategory fingerprintCategory =
+                (PreferenceCategory) getPreferenceScreen().findPreference(Constants.CATEGORY_FP);
+        mPocketMode = (SwitchPreference) findPreference(Constants.FP_POCKETMODE_KEY);
+        if (!PackageManagerUtils.isAppInstalled(getContext(), "com.cyanogenmod.pocketmode")) {
+            fingerprintCategory.removePreference(mPocketMode);
+            mPocketMode = null;
+        }
     }
 
     @Override
@@ -66,7 +78,7 @@ public class ButtonSettingsFragment extends PreferenceFragment
             return true;
         }
 
-        if (Constants.FP_POCKETMODE_KEY.equals(preference.getKey())) {
+        if (mPocketMode != null && Constants.FP_POCKETMODE_KEY.equals(preference.getKey())) {
             Utils.broadcastCustIntent(getContext(), (Boolean) newValue);
             return true;
         }
