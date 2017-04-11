@@ -73,6 +73,9 @@ on late-fs
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
 on post-fs-data
+    mkdir /data/vendor 0770 system system
+    mkdir /data/vendor/misc 0770 system system
+
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
@@ -80,10 +83,10 @@ on post-fs-data
     mkdir /data/vendor/media 0770 mediacodec media
 
     # Create directories for fingerprint
-    mkdir /data/misc/stargate 0770 system system
-    mkdir /data/misc/stargate/bg_estimation 0770 system system
-    mkdir /data/misc/stargate/calib_test 0770 system system
-    mkdir /data/misc/stargate/database 0770 system system
+    mkdir /data/vendor/misc/qti_fp 0770 system system
+    mkdir /data/vendor/misc/qti_fp/bg_estimation 0770 system system
+    mkdir /data/vendor/misc/qti_fp/calib_test 0770 system system
+    mkdir /data/vendor/misc/qti_fp/database 0770 system system
 
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
