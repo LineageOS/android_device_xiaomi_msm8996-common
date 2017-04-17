@@ -165,13 +165,13 @@ Value * VerifyModemFn(const char *name, State *state, int argc, Expr *argv[]) {
 
     ret = get_modem_version(current_modem_version, MODEM_VER_BUF_LEN);
     if (ret) {
-        return ErrorAbort(state, "%s() failed to read current MODEM build time-stamp: %d",
-                name, ret);
+        return ErrorAbort(state, kVendorFailure,
+                "%s() failed to read current MODEM build time-stamp: %d", name, ret);
     }
 
     char** modem_version = ReadVarArgs(state, argc, argv);
     if (modem_version == NULL) {
-        return ErrorAbort(state, "%s() error parsing arguments", name);
+        return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
     }
 
     memset(&tm1, 0, sizeof(tm));
