@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a4e6583_ae025609",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-04-20T08:09:15Z",
+      "side": 1,
+      "message": "Are you sure you wanna use cfq instead of bfq?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 44
+      },
+      "revId": "8abe0479c26f182e1d56c79142ce85093d327ca9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
