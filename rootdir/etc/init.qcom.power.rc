@@ -60,6 +60,9 @@ on charger
     start hvdcp_opti
 
 on enable-low-power
+    # Set RT bandwidth
+    copy /dev/cpuctl/cpu.rt_runtime_us /dev/cpuctl/bg_non_interactive/cpu.rt_runtime_us
+
     # Disable thermal hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
 
