@@ -14,6 +14,7 @@
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
 /data/misc/netmgr/log\.txt            u:object_r:netmgrd_data_file:s0
+/persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
 
 # Binaries
 /system/bin/readmac                   u:object_r:readmac_exec:s0
