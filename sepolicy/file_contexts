@@ -1,4 +1,5 @@
 # Devices
+/dev/captouch                         u:object_r:captouch_device:s0
 /dev/lirc[0-9]*                       u:object_r:lirc_device:s0
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
