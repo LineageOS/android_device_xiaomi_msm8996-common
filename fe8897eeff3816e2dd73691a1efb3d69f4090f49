@@ -34,6 +34,24 @@
       "revId": "fe8897eeff3816e2dd73691a1efb3d69f4090f49",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_643e9fba",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-05-09T18:16:51Z",
+      "side": 1,
+      "message": "It\u0027s a battery management service found in msm8916 and msm8909 at least. Check CAF\u0027s init.qcom.sh for more info.",
+      "parentUuid": "1a486d77_044ecb6f",
+      "revId": "fe8897eeff3816e2dd73691a1efb3d69f4090f49",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
