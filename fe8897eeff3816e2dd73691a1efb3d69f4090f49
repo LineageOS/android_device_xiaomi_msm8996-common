@@ -16,6 +16,24 @@
       "revId": "fe8897eeff3816e2dd73691a1efb3d69f4090f49",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_044ecb6f",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 17655
+      },
+      "writtenOn": "2017-05-09T18:06:23Z",
+      "side": 1,
+      "message": "Sorry guys to hijack, but what is vm_bms? i couldn\u0027t find any info",
+      "parentUuid": "1a486d77_29e520a8",
+      "revId": "fe8897eeff3816e2dd73691a1efb3d69f4090f49",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
