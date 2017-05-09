@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_04612b39",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-05-09T23:28:59Z",
+      "side": 1,
+      "message": "*We* don\u0027t, but who knows? This comes from lithium\u0027s ueventd.",
+      "parentUuid": "1a486d77_44760340",
+      "revId": "a7dc5bf5eb7e2fee697921f59f8d7566f11255c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_2473074f",
         "filename": "rootdir/etc/ueventd.qcom.rc",
         "patchSetId": 5
