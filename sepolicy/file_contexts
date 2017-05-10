@@ -1,5 +1,6 @@
 # Devices
 /dev/captouch                         u:object_r:captouch_device:s0
+/dev/elliptic(.*)?                    u:object_r:sound_device:s0
 /dev/lirc[0-9]*                       u:object_r:lirc_device:s0
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
@@ -15,6 +16,9 @@
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
 /data/misc/netmgr/log\.txt            u:object_r:netmgrd_data_file:s0
+
+# Persist files
+/persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
 /persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
 
 # Binaries
