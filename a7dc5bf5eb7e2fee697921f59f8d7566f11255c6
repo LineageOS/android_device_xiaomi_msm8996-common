@@ -51,6 +51,24 @@
       "revId": "a7dc5bf5eb7e2fee697921f59f8d7566f11255c6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_bf0c9e95",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-05-10T16:03:40Z",
+      "side": 1,
+      "message": "I thought the idea was bringing this closer to the stock ueventd and I am not sure whether this is required for devices other than gemini or natrium.",
+      "parentUuid": "1a486d77_2473074f",
+      "revId": "a7dc5bf5eb7e2fee697921f59f8d7566f11255c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
