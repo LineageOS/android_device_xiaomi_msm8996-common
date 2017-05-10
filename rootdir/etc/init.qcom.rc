@@ -134,6 +134,7 @@ on boot
     mkdir /persist/bms 0700 root system
     mkdir /persist/wlan_bt 0700 system system
     mkdir /persist/audio 0777 media audio
+    mkdir /persist/display 0770 system graphics
     restorecon_recursive /persist
 
     # Create NETMGR daemon socket area
@@ -235,6 +236,9 @@ on fs
     mount_all fstab.qcom
 
 on post-fs-data
+    # Create directory used by display clients
+    mkdir /data/vendor/display 0770 system graphics
+
     # Create directories for fingerprint
     mkdir /data/misc/stargate 0770 system system
     mkdir /data/misc/stargate/bg_estimation 0770 system system
@@ -300,9 +304,6 @@ on post-fs-data
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
-
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
