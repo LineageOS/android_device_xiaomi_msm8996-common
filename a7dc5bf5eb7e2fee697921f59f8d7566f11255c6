@@ -37,6 +37,29 @@
     },
     {
       "key": {
+        "uuid": "1a486d77_9ab570cf",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-05-11T00:42:54Z",
+      "side": 1,
+      "message": "Doesn\u0027t exists on lithium. Confirmed by Balasz.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 50
+      },
+      "revId": "a7dc5bf5eb7e2fee697921f59f8d7566f11255c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a486d77_2473074f",
         "filename": "rootdir/etc/ueventd.qcom.rc",
         "patchSetId": 5
