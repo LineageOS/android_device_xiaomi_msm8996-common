@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_95b9c3eb",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-05-11T11:15:30Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "c0655adce7fb278a3c21715377e05df980bca889",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
