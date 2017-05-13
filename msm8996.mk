@@ -126,6 +126,7 @@ PRODUCT_PACKAGES += \
 
 # Common config scripts
 PRODUCT_PACKAGES += \
+    init.cnss.sh \
     init.panel.sh
 
 # Common init scripts
