@@ -1,0 +1,18 @@
+type init_wlan, domain, domain_deprecated;
+type init_wlan_exec, exec_type, file_type;
+
+init_daemon_domain(init_wlan)
+
+# shell scripts need to execute /system/bin/sh
+allow init_wlan shell_exec:file rx_file_perms;
+allow init_wlan toolbox_exec:file rx_file_perms;
+
+# Allow writing to /sys/module/cnss_common/parameters/bdwlan_file
+allow init_wlan sysfs_cnss_common:dir search;
+allow init_wlan sysfs_cnss_common:file w_file_perms;
+
+# Allow reading files in /persist, mainly /persist/wlan_bt/ff_flag
+allow init_wlan persist_file:dir search;
+allow init_wlan persist_file:file r_file_perms;
+
+allow init_wlan self:capability { dac_override dac_read_search };
