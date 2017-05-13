@@ -538,6 +538,11 @@ service panel-sh /system/bin/sh /system/etc/init.panel.sh
     user root
     oneshot
 
+service wlan-sh /system/etc/init.xiaomi.wlan.sh
+    class core
+    user root
+    oneshot
+
 service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     class late_start
     user root
