@@ -9,6 +9,13 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := etc/init.panel.sh
 include $(BUILD_PREBUILT)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.xiaomi.wlan.sh
+LOCAL_MODULE_TAGS  := optional eng
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := etc/init.xiaomi.wlan.sh
+include $(BUILD_PREBUILT)
+
 # Common init scripts
 
 include $(CLEAR_VARS)
