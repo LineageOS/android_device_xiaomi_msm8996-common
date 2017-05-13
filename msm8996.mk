@@ -126,7 +126,8 @@ PRODUCT_PACKAGES += \
 
 # Common config scripts
 PRODUCT_PACKAGES += \
-    init.panel.sh
+    init.panel.sh \
+    init.xiaomi.wlan.sh
 
 # Common init scripts
 PRODUCT_PACKAGES += \
