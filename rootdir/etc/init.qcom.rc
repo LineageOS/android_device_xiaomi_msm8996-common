@@ -519,6 +519,12 @@ service cnss-daemon /system/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
 
+service cnss-sh /system/bin/sh /system/etc/init.cnss.sh
+    class core
+    user root
+    seclabel u:r:init_cnss:s0
+    oneshot
+
 on property:sys.shutdown.requested=*
     stop cnss-daemon
 
