@@ -715,3 +715,9 @@ on property:init.svc.zygote=restarting
 
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
+
+service xiaomi_wlan /system/etc/init.xiaomi.wlan.sh
+    class main
+    user root
+    group root
+    oneshot
