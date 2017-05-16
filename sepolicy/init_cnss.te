@@ -1,9 +1,11 @@
 type init_cnss, domain, domain_deprecated;
+type init_cnss_exec, exec_type, file_type;
 
+# Allow for transition from init domain to init_cnss
 init_daemon_domain(init_cnss)
 
 # Shell script needs to execute /system/bin/sh
-allow init_cnss shell_exec:file { entrypoint r_file_perms };
+allow init_cnss shell_exec:file rx_file_perms;
 allow init_cnss toolbox_exec:file rx_file_perms;
 
 # Allow writing to /sys/module/cnss_common/parameters/bdwlan_file
@@ -14,4 +16,5 @@ allow init_cnss sysfs_cnss_common:file w_file_perms;
 allow init_cnss persist_file:dir search;
 allow init_cnss persist_file:file r_file_perms;
 
+# Run grep
 allow init_cnss self:capability { dac_override dac_read_search };
