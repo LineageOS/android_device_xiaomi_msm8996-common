@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_db03e071",
+        "filename": "sepolicy/init_cnss.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-05-16T19:32:38Z",
+      "side": 1,
+      "message": "init_cnss",
+      "range": {
+        "startLine": 4,
+        "startChar": 43,
+        "endLine": 4,
+        "endChar": 50
+      },
+      "revId": "8b7ce2ff987648654a65a2607aa3b9061962f151",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a486d77_fbfe9c6a",
+        "filename": "sepolicy/init_panel.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-05-16T19:32:38Z",
+      "side": 1,
+      "message": "init_panel",
+      "range": {
+        "startLine": 4,
+        "startChar": 43,
+        "endLine": 4,
+        "endChar": 50
+      },
+      "revId": "8b7ce2ff987648654a65a2607aa3b9061962f151",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
