@@ -519,10 +519,9 @@ service cnss-daemon /system/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
 
-service cnss-sh /system/bin/sh /system/etc/init.cnss.sh
+service cnss-sh /system/bin/init.cnss.sh
     class core
     user root
-    seclabel u:r:init_cnss:s0
     oneshot
 
 on property:sys.shutdown.requested=*
@@ -539,7 +538,7 @@ service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
 
-service panel-sh /system/bin/sh /system/etc/init.panel.sh
+service panel-sh /system/bin/init.panel.sh
     class core
     user root
     oneshot
