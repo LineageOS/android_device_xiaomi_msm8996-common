@@ -1,0 +1,12 @@
+type init_panel, domain, domain_deprecated;
+type init_panel_exec, exec_type, file_type;
+
+# Allow for transition from init domain to init_panel
+init_daemon_domain(init_panel)
+
+# Shell script needs to execute /system/bin/sh
+allow init_panel shell_exec:file rx_file_perms;
+allow init_panel toolbox_exec:file rx_file_perms;
+
+# Set panel property
+set_prop(init_panel, system_panel_prop)
