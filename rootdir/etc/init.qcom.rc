@@ -242,6 +242,9 @@ on post-fs-data
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
+    # Create directory used by media clients
+    mkdir /data/vendor/media 0770 mediacodec media
+
     # Create directories for fingerprint
     mkdir /data/misc/stargate 0770 system system
     mkdir /data/misc/stargate/bg_estimation 0770 system system
