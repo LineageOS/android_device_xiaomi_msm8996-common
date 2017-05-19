@@ -33,6 +33,9 @@ if [ -f /sys/bus/i2c/devices/12-004a/panel_color ]; then
 elif [ -f /sys/bus/i2c/devices/12-0020/panel_color ]; then
     # Synaptics
     color=`cat /sys/bus/i2c/devices/12-0020/panel_color`
+elif [ -f /sys/bus/i2c/devices/12-0038/panel_color ]; then
+    # Focaltech
+    color=`cat /sys/bus/i2c/devices/12-0038/panel_color`
 else
     color="0"
 fi
