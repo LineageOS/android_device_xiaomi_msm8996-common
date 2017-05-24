@@ -598,8 +598,6 @@ vendor/qcril.db
 
 # Sensors
 bin/sensors.qcom
-etc/sensors/hals.conf|c678b10fb77b0ff89c707e719f6bbda623c6f7e4
-etc/sensors/sensor_def_qcomdev.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
