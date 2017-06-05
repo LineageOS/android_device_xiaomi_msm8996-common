@@ -1,4 +1,4 @@
-# Copyright (c) 2009-2012, 2014-2016, The Linux Foundation. All rights reserved.
+# Copyright (c) 2009-2012, 2014-2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -73,6 +73,9 @@ on late-fs
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
 on post-fs-data
+    mkdir /data/vendor 0770 system system
+    mkdir /data/vendor/misc 0770 system system
+
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
@@ -133,11 +136,11 @@ on post-fs-data
     chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
-    mkdir /data/misc/audio 0770 audio audio
+    mkdir /data/vendor/misc/audio 0770 audio audio
 
     # Create directory for audio delta files
-    mkdir /data/misc/audio/acdbdata 0770 media audio
-    mkdir /data/misc/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
