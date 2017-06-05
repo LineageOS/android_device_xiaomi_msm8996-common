@@ -73,7 +73,6 @@ on late-fs
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
 on post-fs-data
-    mkdir /data/vendor 0770 system system
     mkdir /data/vendor/misc 0770 system system
 
     # Create directory used by display clients
