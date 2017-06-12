@@ -1,6 +1,8 @@
 type readmac, domain;
 type readmac_exec, exec_type, file_type;
 
+type_transition readmac persist_file:file persist_wlan_mac_file "wlan_mac.bin";
+
 # Allow for transition from init domain to readmac
 init_daemon_domain(readmac)
 
@@ -8,11 +10,7 @@ init_daemon_domain(readmac)
 qmux_socket(readmac)
 
 # Allow readmac to fully access wlan_mac.bin persist file
-allow readmac persist_file:dir rw_dir_perms;
-allow readmac persist_file:file create_file_perms;
+allow readmac persist_file:dir { add_name search write };
+allow readmac persist_wlan_mac_file:file create_file_perms;
 
-allow readmac self:capability dac_override;
 allow readmac self:socket create_socket_perms;
-
-allow readmac diag_device:chr_file rw_file_perms;
-allow readmac sysfs:file r_file_perms;
