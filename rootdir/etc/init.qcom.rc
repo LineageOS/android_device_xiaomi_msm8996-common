@@ -628,7 +628,7 @@ on property:sys.shutdown.requested=*
 service readmac /system/bin/readmac
     class main
     user root
-    group root
+    group root qcom_diag
     oneshot
 
 service thermal-engine /system/vendor/bin/thermal-engine
