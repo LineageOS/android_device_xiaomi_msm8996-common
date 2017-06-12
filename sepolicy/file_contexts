@@ -24,6 +24,7 @@
 # Persist files
 /persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
 /persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
+/persist/wlan_mac.bin                 u:object_r:persist_wlan_mac_file:s0
 
 # Binaries
 /system/bin/readmac                   u:object_r:readmac_exec:s0
