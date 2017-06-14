@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_7d689bba",
+        "filename": "sepolicy/readmac.te",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-06-14T09:06:12Z",
+      "side": 1,
+      "message": "is this needed?",
+      "revId": "a13c3c4f1ad051d22f9ec70a0da765bbf3be9912",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da87b5cf_9d655fe3",
+        "filename": "sepolicy/readmac.te",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-06-14T09:06:12Z",
+      "side": 1,
+      "message": "label plz",
+      "revId": "a13c3c4f1ad051d22f9ec70a0da765bbf3be9912",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
