@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_60c5505a",
+        "filename": "readmac/xiaomi_readmac.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-14T21:37:16Z",
+      "side": 1,
+      "message": "Move this to the end so that one can see this message also in case dlopen fails and WLAN_MAC_BIN is then generated with a random MAC address.",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 57
+      },
+      "revId": "d28cb5de9e58f83768844e29d2b340bc02fed7d5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
