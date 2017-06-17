@@ -157,6 +157,9 @@ TARGET_PROVIDES_KEYMASTER := true
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
+# Malloc
+MALLOC_SVELTE := true
+
 # NFC
 TARGET_USES_NQ_NFC := true
 
