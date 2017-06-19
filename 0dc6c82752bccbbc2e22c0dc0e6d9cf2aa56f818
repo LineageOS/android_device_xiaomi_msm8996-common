@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_3fe43e3a",
+        "filename": "system.prop",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-19T15:17:21Z",
+      "side": 0,
+      "message": "Still in use?\nhttps://github.com/LineageOS/android_frameworks_base/blob/cm-14.1/packages/SettingsLib/src/com/android/settingslib/bluetooth/LocalBluetoothProfileManager.java#L138\n\nand\n\nhttps://github.com/LineageOS/android_vendor_qcom_opensource_bluetooth/blob/cm-14.1/src/org/codeaurora/bluetooth/dun/BluetoothDunReceiver.java#L47",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 21
+      },
+      "revId": "0dc6c82752bccbbc2e22c0dc0e6d9cf2aa56f818",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da87b5cf_5fc4a291",
+        "filename": "system.prop",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-19T15:17:21Z",
+      "side": 0,
+      "message": "https://github.com/LineageOS/android_vendor_qcom_opensource_bluetooth/blob/cm-14.1/src/org/codeaurora/bluetooth/sap/BluetoothSapReceiver.java#L47",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "0dc6c82752bccbbc2e22c0dc0e6d9cf2aa56f818",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da87b5cf_7fc1667f",
+        "filename": "system.prop",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-19T15:17:21Z",
+      "side": 0,
+      "message": "For those I don\u0027t find any references either.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "0dc6c82752bccbbc2e22c0dc0e6d9cf2aa56f818",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
