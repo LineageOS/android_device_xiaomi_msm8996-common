@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_5ff902c7",
+        "filename": "sepolicy/location.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-19T15:52:05Z",
+      "side": 0,
+      "message": "https://github.com/LineageOS/android_device_qcom_sepolicy/commit/76db2359008aedc7cc9f2ecd12802d0a4991957b#diff-856d10800ce76dc06c3a2c6f5d802855R36",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 55
+      },
+      "revId": "0dc6c82752bccbbc2e22c0dc0e6d9cf2aa56f818",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da87b5cf_3f699e8b",
+        "filename": "sepolicy/wcnss_service.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-19T15:52:05Z",
+      "side": 0,
+      "message": "https://github.com/LineageOS/android_device_qcom_sepolicy/commit/e912d0b6801f0a08d09e21fd2223ee23e82180f2",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 54
+      },
+      "revId": "0dc6c82752bccbbc2e22c0dc0e6d9cf2aa56f818",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
