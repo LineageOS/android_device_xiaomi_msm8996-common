@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_11836a05",
+        "filename": "readfem/xiaomi_readfem.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-06-23T13:46:15Z",
+      "side": 1,
+      "message": "It can be 1 (64 and 128 GB variants) or 2 (32 GB variant).",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 17
+      },
+      "revId": "7816698f8e0f3340aca94028474a59bff5357106",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
