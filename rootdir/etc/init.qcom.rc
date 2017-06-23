@@ -233,7 +233,6 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
     mount_all fstab.qcom
-    swapon_all fstab.qcom
 
 on post-fs-data
     # Create directories for fingerprint
@@ -373,6 +372,9 @@ on post-fs-data
     chmod 2770 /data/system/swap
 
 on property:sys.boot_completed=1
+    # Enable ZRAM on boot_complete
+    swapon_all fstab.qcom
+
     # end boot time fs tune
     write /sys/block/sda/queue/read_ahead_kb 128
     write /sys/block/sda/queue/nr_requests 128
