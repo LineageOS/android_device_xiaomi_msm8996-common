@@ -109,7 +109,7 @@ static int write_bdwlan_file(int need_fem_fix) {
 int main() {
     void* handle = NULL;
     unsigned int* ff_flag;
-    int need_fem_fix = 0; // Disabled by default
+    int need_fem_fix = 0;  // Disabled by default
     char product_device[PROPERTY_VALUE_MAX];
 
     property_get("ro.product.device", product_device, "");
