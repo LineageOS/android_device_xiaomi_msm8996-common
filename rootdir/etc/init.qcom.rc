@@ -666,17 +666,6 @@ service imsdatadaemon /system/bin/imsdatadaemon
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-service pd_mapper /system/vendor/bin/pd-mapper
-    class core
-    disabled
-
-on property:persist.sys.pd_enable=1
-    start pd_mapper
-    write /sys/class/service_locator/service_locator_status 1
-
-on property:persist.sys.pd_enable=0
-    write /sys/class/service_locator/service_locator_status 0
-
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
