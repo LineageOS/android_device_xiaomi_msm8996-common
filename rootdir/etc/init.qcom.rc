@@ -224,9 +224,6 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Allow access for WLAN firmware
-    chown system system /sys/module/cnss_common/parameters/bdwlan_file
-
 on fs
     wait /dev/block/bootdevice
     mount_all fstab.qcom
@@ -526,11 +523,6 @@ service cnss-daemon /system/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
 
-service cnss-sh /system/bin/init.cnss.sh
-    class core
-    user system
-    oneshot
-
 on property:sys.shutdown.requested=*
     stop cnss-daemon
 
@@ -627,6 +619,12 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+
+service readfem /system/bin/readfem
+    class main
+    user root
+    group root qcom_diag
+    oneshot
 
 service readmac /system/bin/readmac
     class main
