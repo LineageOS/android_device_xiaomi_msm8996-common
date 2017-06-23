@@ -524,7 +524,6 @@ bin/irsc_util
 etc/permissions/qti_permissions.xml
 lib64/libqminvapi.so
 lib/libqminvapi.so
-vendor/bin/pd-mapper
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
