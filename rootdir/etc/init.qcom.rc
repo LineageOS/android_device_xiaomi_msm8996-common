@@ -239,7 +239,6 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
     mount_all fstab.qcom
-    swapon_all fstab.qcom
 
 on post-fs-data
     # Create directories for fingerprint
@@ -384,6 +383,9 @@ on property:sys.boot_completed=1
     write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled N
+
+    # Enable ZRAM on boot_complete
+    swapon_all fstab.qcom
 
     # end boot time fs tune
     write /sys/block/sda/queue/read_ahead_kb 128
