@@ -1,0 +1,21 @@
+type readfem, domain;
+type readfem_exec, exec_type, file_type;
+
+# Allow for transition from init domain to readfem
+init_daemon_domain(readfem)
+
+# Allow readfem to communicate with qmuxd via qmux_radio socket
+qmux_socket(readfem)
+
+# Allow reading files in /persist, mainly /persist/ff_flag
+allow readfem persist_file:dir rw_dir_perms;
+allow readfem persist_file:file create_file_perms;
+
+# Allow writing to /sys/module/cnss_common/parameters/bdwlan_file
+allow readfem sysfs_cnss_common:dir search;
+allow readfem sysfs_cnss_common:file rw_file_perms;
+
+allow readfem self:socket create_socket_perms;
+
+allow readfem diag_device:chr_file rw_file_perms;
+allow readfem sysfs:file r_file_perms;
