@@ -224,8 +224,8 @@
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
 # laser sensor access
-/sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   system
-/sys/devices/virtual/input/input*                   set_delay_ms     0660  system   system
+/sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   input
+/sys/devices/virtual/input/input*                   set_delay_ms     0660  system   input
 
 # wlan
 /dev/wcnss_wlan           0660   system     system
