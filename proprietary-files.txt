@@ -559,9 +559,7 @@ vendor/lib/libqmi.so
 vendor/lib/libsmemlog.so
 
 # RIL
--app/datastatusnotification/datastatusnotification.apk
 -app/embms/embms.apk
--app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
