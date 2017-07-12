@@ -1,0 +1,2 @@
+dontaudit priv_app device:dir read;
+dontaudit priv_app proc_interrupts:file read;
