@@ -162,14 +162,21 @@ on boot
 
     # SSC/SLPI sensors
     mkdir /persist/sensors
+    chown root system /persist/sensors
     chmod 0775 /persist/sensors
-    chown sensors sensors /persist/sensors
+    chown root system /persist/sensors/sensors_settings
     chmod 0664 /persist/sensors/sensors_settings
-    chown system root /persist/sensors/sensors_settings
-    chmod 0600 /persist/PRSensorData.txt
-    chown system system /persist/PRSensorData.txt
-    chmod 0600 /persist/PSensor3cm_ct.txt
-    chown system system /persist/PSensor3cm_ct.txt
+    chown root system /persist/sensors/sns.reg
+    chmod 0664 /persist/sensors/sns.reg
+    chown root system /persist/PRSensorData.txt
+    chmod 0660 /persist/PRSensorData.txt
+    chown root system /persist/PSensor3cm_ct.txt
+    chmod 0660 /persist/PSensor3cm_ct.txt
+
+    # /dev/sensors only supports an ioctl to get the current SLPI timestamp;
+    # allow the sensors daemon to perform this as non-root
+    chown root system /dev/sensors
+    chmod 0660 /dev/sensors
 
     # Assign TCP buffer thresholds to be ceiling value of technology maximums
     # Increased technology maximums should be reflected here.
@@ -428,8 +435,11 @@ service qti /system/vendor/bin/qti
 
 service sensors /system/vendor/bin/sensors.qcom
     class core
-    user root
-    group root
+    user system
+    group system
+    # Grants the ability for this daemon to bind IPC router ports so it can
+    # register QMI services
+    capabilities NET_BIND_SERVICE
     writepid /dev/cpuset/system-background/tasks
 
 on property:ro.use_data_netmgrd=false
