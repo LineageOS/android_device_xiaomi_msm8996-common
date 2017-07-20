@@ -622,7 +622,7 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
+on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
 service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
@@ -632,16 +632,16 @@ service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
     group radio diag inet log
     disabled
 
-service imscmservice /system/vendor/bin/imscmservice
+service imsrcsservice /system/vendor/bin/imsrcsd
     class main
     user system
     group radio diag log
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-on property:sys.ims.DATA_DAEMON_STATUS=1
+on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
-    start imscmservice
+    start imsrcsservice
 
 service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
