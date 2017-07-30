@@ -31,48 +31,32 @@ if [ ! -f "$HELPER" ]; then
 fi
 . "$HELPER"
 
-while getopts ":nhsd:" options
-do
-  case $options in
-    n ) CLEANUP="false" ;;
-    d ) SRC=$OPTARG ;;
-    s ) SETUP=1 ;;
-    h ) echo "Usage: `basename $0` [OPTIONS] "
-        echo "  -n  No cleanup"
-        echo "  -d  Fetch blob from filesystem"
-        echo "  -s  Setup only, no extraction"
-        echo "  -h  Show this help"
-        exit ;;
-    * ) ;;
-  esac
-done
-
-if [ -z $SRC ]; then
-  SRC=adb
-fi
-
-if [ -n "$SETUP" ]; then
-    # Initialize the helper for common
-    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true false
-    "$MY_DIR"/setup-makefiles.sh false
-
-    if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
-        # Initalize the helper for device
-        setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false false
-        "$MY_DIR"/setup-makefiles.sh false
-    fi
+if [ $# -eq 0 ]; then
+    SRC=adb
 else
-    # Initialize the helper for common
-    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEANUP"
-
-    extract "$MY_DIR"/proprietary-files.txt "$SRC"
-
-    if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
-        # Reinitialize the helper for device
-        setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEANUP"
-
-        extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
+    if [ $# -eq 1 ]; then
+        SRC=$1
+    else
+        echo "$0: bad number of arguments"
+        echo ""
+        echo "usage: $0 [PATH_TO_EXPANDED_ROM]"
+        echo ""
+        echo "If PATH_TO_EXPANDED_ROM is not specified, blobs will be extracted from"
+        echo "the device using adb pull."
+        exit 1
     fi
-
-    "$MY_DIR"/setup-makefiles.sh "$CLEANUP"
 fi
+
+# Initialize the helper for common
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEANUP"
+
+extract "$MY_DIR"/proprietary-files.txt "$SRC"
+
+if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
+    # Reinitialize the helper for device
+    setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEANUP"
+
+    extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
+fi
+
+"$MY_DIR"/setup-makefiles.sh
