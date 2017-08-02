@@ -417,6 +417,7 @@ service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
+    shutdown critical
     writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /system/vendor/bin/tftp_server
