@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f494bdf_ba4d9c49",
+        "filename": "extract-files.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-08-16T20:35:42Z",
+      "side": 0,
+      "message": "There\u0027s no reason to pass this argument to this script.",
+      "range": {
+        "startLine": 77,
+        "startChar": 33,
+        "endLine": 77,
+        "endChar": 43
+      },
+      "revId": "3583424ba3b9f8cd9721dad9e6e45e95d0706ef8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37005dc7_065224e3",
+        "filename": "setup-makefiles.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-08-16T20:35:42Z",
+      "side": 0,
+      "message": "This has no use.",
+      "range": {
+        "startLine": 37,
+        "startChar": 58,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "3583424ba3b9f8cd9721dad9e6e45e95d0706ef8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b90c7fa_9f3c5a6e",
+        "filename": "setup-makefiles.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-08-16T20:35:42Z",
+      "side": 0,
+      "message": "Same.",
+      "range": {
+        "startLine": 51,
+        "startChar": 56,
+        "endLine": 51,
+        "endChar": 60
+      },
+      "revId": "3583424ba3b9f8cd9721dad9e6e45e95d0706ef8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
