@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,7 +18,7 @@
 
 set -e
 
-# Load extractutils and do some sanity checks
+# Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
@@ -31,48 +31,38 @@ if [ ! -f "$HELPER" ]; then
 fi
 . "$HELPER"
 
-while getopts ":nhsd:" options
-do
-  case $options in
-    n ) CLEANUP="false" ;;
-    d ) SRC=$OPTARG ;;
-    s ) SETUP=1 ;;
-    h ) echo "Usage: `basename $0` [OPTIONS] "
-        echo "  -n  No cleanup"
-        echo "  -d  Fetch blob from filesystem"
-        echo "  -s  Setup only, no extraction"
-        echo "  -h  Show this help"
-        exit ;;
-    * ) ;;
-  esac
+# Default to sanitizing the vendor folder before extraction
+CLEAN_VENDOR=true
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -p | --path )           shift
+                                SRC=$1
+                                ;;
+        -s | --section )        shift
+                                SECTION=$1
+                                CLEAN_VENDOR=false
+                                ;;
+        -n | --no-cleanup )     CLEAN_VENDOR=false
+                                ;;
+    esac
+    shift
 done
 
-if [ -z $SRC ]; then
-  SRC=adb
+if [ -z "$SRC" ]; then
+    SRC=adb
 fi
 
-if [ -n "$SETUP" ]; then
-    # Initialize the helper for common
-    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true false
-    "$MY_DIR"/setup-makefiles.sh false
+# Initialize the helper for common device
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEAN_VENDOR"
 
-    if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
-        # Initalize the helper for device
-        setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false false
-        "$MY_DIR"/setup-makefiles.sh false
-    fi
-else
-    # Initialize the helper for common
-    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEANUP"
+extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 
-    extract "$MY_DIR"/proprietary-files.txt "$SRC"
+if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
+    # Reinitialize the helper for device
+    setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEAN_VENDOR"
 
-    if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
-        # Reinitialize the helper for device
-        setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEANUP"
-
-        extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
-    fi
-
-    "$MY_DIR"/setup-makefiles.sh "$CLEANUP"
+    extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC" "$SECTION"
 fi
+
+"$MY_DIR"/setup-makefiles.sh
