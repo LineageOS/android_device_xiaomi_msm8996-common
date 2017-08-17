@@ -1,7 +1,6 @@
 # Audio
 af.fast_track_multiplier=1
 audio_hal.period_size=192
-audio.deep_buffer.media=true
 audio.heap.size.multiplier=7
 audio.offload.buffer.size.kb=64
 audio.offload.gapless.enabled=true
