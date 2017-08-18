@@ -32,12 +32,13 @@
 #include <stdlib.h>
 #include <sys/sysinfo.h>
 
+#include <android-base/properties.h>
 #include <android-base/strings.h>
 
-#include "vendor_init.h"
 #include "property_service.h"
-#include "log.h"
-#include "util.h"
+#include "vendor_init.h"
+
+using android::base::GetProperty;
 
 using android::base::Trim;
 
@@ -99,7 +100,7 @@ void vendor_load_properties()
 {
     std::string platform;
 
-    platform = property_get("ro.board.platform");
+    platform = GetProperty("ro.board.platform", "");
     if (platform != ANDROID_TARGET)
         return;
 
