@@ -149,6 +149,9 @@ TARGET_HW_DISK_ENCRYPTION := true
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(VENDOR_PATH)/config.fs
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
+
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
