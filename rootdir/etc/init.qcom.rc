@@ -602,13 +602,6 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     group camera system inet input graphics
     writepid /dev/cpuset/system-background/tasks
 
-# Fingerprint service
-service fingerprintd /system/bin/fingerprintd
-    class late_start
-    user system
-    group system drmrpc diag input
-    writepid /dev/cpuset/system-background/tasks
-
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
     user system
