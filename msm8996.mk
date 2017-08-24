@@ -194,6 +194,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl
 
+# IMS
+PRODUCT_PACKAGES += \
+    libshims_ims
+
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
@@ -281,7 +285,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librmnetctl \
-    libxml2
+    libxml2 \
+    libshims_rild_socket
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -290,10 +295,6 @@ PRODUCT_PACKAGES += \
 # Seccomp policy
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
-
-# Shims
-PRODUCT_PACKAGES += \
-    libshims_ims
 
 # USB
 PRODUCT_PACKAGES += \
