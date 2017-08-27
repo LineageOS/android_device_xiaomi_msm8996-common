@@ -329,9 +329,6 @@ on post-fs-data
     # Create directory for SSC/SLPI sensors
     mkdir /data/misc/sensors 0775 system system
 
-    # Create directory for hostapd
-    mkdir /data/hostapd 0770 system wifi
-
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
@@ -530,13 +527,6 @@ service panel-sh /system/bin/init.panel.sh
     class core
     user root
     oneshot
-
-service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
-    class late_start
-    user root
-    group root
-    oneshot
-    disabled
 
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
