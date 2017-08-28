@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4b2f62b_53dffea2",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:00:14Z",
+      "side": 1,
+      "message": "Doesn\u0027t exist, just change the commit message to \"Remove non existing packages\"",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 275,
+        "endChar": 12
+      },
+      "revId": "cc721c67ab7246362edb8c9fd270457bd1b32394",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
