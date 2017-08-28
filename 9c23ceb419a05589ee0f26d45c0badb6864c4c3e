@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d319dc90_a04412c9",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:09:09Z",
+      "side": 1,
+      "message": "hmm, these are working perfectly",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "9c23ceb419a05589ee0f26d45c0badb6864c4c3e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0110a23_27aa5870",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:09:09Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 40,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 133
+      },
+      "revId": "9c23ceb419a05589ee0f26d45c0badb6864c4c3e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
