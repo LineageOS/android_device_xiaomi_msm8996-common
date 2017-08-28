@@ -230,7 +230,7 @@ PRODUCT_PACKAGES += \
     lights.msm8996
 
 # LiveDisplay native
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     libjni_livedisplay
 
 # Media
