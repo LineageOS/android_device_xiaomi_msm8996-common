@@ -45,6 +45,7 @@ TARGET_NO_BOOTLOADER := true
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff
+BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -164,8 +165,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Releasetools
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_xiaomi
-TARGET_RELEASETOOLS_EXTENSIONS := $(VENDOR_PATH)
+#TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_xiaomi
+#TARGET_RELEASETOOLS_EXTENSIONS := $(VENDOR_PATH)
 
 # Render
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
@@ -177,9 +178,9 @@ PROTOBUF_SUPPORTED := true
 TARGET_RIL_VARIANT := caf
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
+#include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
 
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm8996
