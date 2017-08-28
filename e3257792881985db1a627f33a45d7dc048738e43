@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d89910d1_67c5f510",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:04:46Z",
+      "side": 1,
+      "message": "dead",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 19
+      },
+      "revId": "e3257792881985db1a627f33a45d7dc048738e43",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de52b2dc_f32eda98",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:04:46Z",
+      "side": 1,
+      "message": "dead",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 23
+      },
+      "revId": "e3257792881985db1a627f33a45d7dc048738e43",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98f049d1_e1f9e897",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:04:46Z",
+      "side": 1,
+      "message": "dead",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 19
+      },
+      "revId": "e3257792881985db1a627f33a45d7dc048738e43",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d1cf1f8_f7e50003",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-08-28T19:04:46Z",
+      "side": 1,
+      "message": "doesn\u0027t exist",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 14
+      },
+      "revId": "e3257792881985db1a627f33a45d7dc048738e43",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
