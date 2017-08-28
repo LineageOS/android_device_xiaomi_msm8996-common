@@ -27,9 +27,9 @@
          This needs to match the constants in
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
-    <integer name="config_longPressOnAppSwitchBehavior">1</integer>
+    <!--integer name="config_longPressOnAppSwitchBehavior">1</integer-->
 
     <!-- Support in Surfaceflinger for blur layers.
          NOTE: This requires additional hardware-specific code. -->
-    <bool name="config_uiBlurEnabled">true</bool>
+    <!--bool name="config_uiBlurEnabled">true</bool-->
 </resources>
