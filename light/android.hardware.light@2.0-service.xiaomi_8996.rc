@@ -38,7 +38,7 @@ on init
     # Button backlight permissions
     chown system system /sys/class/leds/button-backlight1/brightness
 
-service light-hal-2-0 /vendor/bin/hw/android.hardware.light@2.0-service.xiaomi_8996
+service vendor.light-hal-2-0 /vendor/bin/hw/android.hardware.light@2.0-service.xiaomi_8996
     interface android.hardware.light@2.0::ILight default
     class hal
     user system
