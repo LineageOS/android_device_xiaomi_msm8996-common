@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29fe6b04_c2e27e3d",
+        "filename": "init/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-09-01T06:57:11Z",
+      "side": 1,
+      "message": "We could just include the headers dir ( no need to the static lib, it\u0027s already included in init )",
+      "revId": "305316e99f1f22c0c63c522829ed33f557a483a3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
