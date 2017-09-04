@@ -222,7 +222,7 @@ vendor/lib/libmmcamera_isp_sub_module.so
 bin/hvdcp_opti
 
 # CNE
-bin/cnd
+bin/cnd|832b9bb467eebc858ea030356e1d664909bc9c97
 etc/cne/SwimConfig.xml
 etc/cne/andsfCne.xml
 etc/cne/wqeclient/ATT/ATT_profile1.xml
@@ -247,9 +247,9 @@ framework/cneapiclient.jar
 framework/com.quicinc.cne.jar
 framework/ConnectivityExt.jar
 -priv-app/CNEService/CNEService.apk
-vendor/lib64/libcneapiclient.so
+vendor/lib64/libcneapiclient.so|a350cf3a344ab5b03156bf1adc1acc79691f6684
 vendor/lib64/libcneqmiutils.so
-vendor/lib64/libcne.so
+vendor/lib64/libcne.so|85489412fd3f53ef6d2fa418da7b4626e42bad43
 vendor/lib64/libvendorconn.so
 vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
