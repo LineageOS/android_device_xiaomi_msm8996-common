@@ -339,6 +339,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service.xiaomi_8996
+
 # VNDK
 PRODUCT_PACKAGES += \
     vndk-sp
