@@ -197,7 +197,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
 service hvdcp_opti /system/vendor/bin/hvdcp_opti
     class main
     user root
-    group root
+    group system wakelock
 
 service iop /system/vendor/bin/iop
     class main
