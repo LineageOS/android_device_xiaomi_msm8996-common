@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75f8c6df_851fcbde",
+        "filename": "init/init_msm8996.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 15284
+      },
+      "writtenOn": "2017-09-25T07:18:47Z",
+      "side": 1,
+      "message": "GetProperty?",
+      "range": {
+        "startLine": 54,
+        "startChar": 32,
+        "endLine": 54,
+        "endChar": 44
+      },
+      "revId": "77f060543ca787b2a783d06cb822a7f405bf71fb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
