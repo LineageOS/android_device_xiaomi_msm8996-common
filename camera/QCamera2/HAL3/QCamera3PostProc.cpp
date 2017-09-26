@@ -88,6 +88,7 @@ QCamera3PostProcessor::QCamera3PostProcessor(QCamera3ProcessingChannel* ch_ctrl)
 {
     memset(&mJpegHandle, 0, sizeof(mJpegHandle));
     memset(&mJpegMetadata, 0, sizeof(mJpegMetadata));
+    mReprocessNode.clear();
     pthread_mutex_init(&mReprocJobLock, NULL);
 }
 
@@ -581,16 +582,103 @@ int32_t QCamera3PostProcessor::processData(mm_camera_super_buf_t *input,
     pp_buffer->input = input;
     pp_buffer->output = output;
     pp_buffer->frameNumber = frameNumber;
-    m_inputPPQ.enqueue((void *)pp_buffer);
     if (!(m_inputMetaQ.isEmpty())) {
-        LOGD("meta queue is not empty, do next job");
-        m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_DO_NEXT_JOB, FALSE, FALSE);
-    } else
+        qcamera_hal3_meta_pp_buffer_t *meta_job = isMetaMatched(frameNumber);
+        if(meta_job != NULL) {
+            ReprocessBuffer reproc;
+            reproc.metaBuffer = meta_job;
+            reproc.reprocBuf = pp_buffer;
+            mReprocessNode.push_back(reproc);
+            LOGD("meta queue is not empty, do next job");
+            m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_DO_NEXT_JOB, FALSE, FALSE);
+        } else {
+            m_inputPPQ.enqueue((void *)pp_buffer);
+        }
+    } else {
         LOGD("metadata queue is empty");
+        m_inputPPQ.enqueue((void *)pp_buffer);
+    }
     pthread_mutex_unlock(&mReprocJobLock);
 
     return NO_ERROR;
 }
+
+
+/*===========================================================================
+ * FUNCTION   : isMetaMatched
+ *
+ * DESCRIPTION: corresponding meta detection
+ *
+ * PARAMETERS :
+ *   @frame   : frame number
+ *
+ * RETURN     :
+ *  TRUE if Frame is present
+ *  FALSE if Frame is not released.
+ *
+ *==========================================================================*/
+qcamera_hal3_meta_pp_buffer_t* QCamera3PostProcessor::isMetaMatched(uint32_t resultFrameNumber)
+{
+    qcamera_hal3_meta_pp_buffer_t *meta_job =
+            (qcamera_hal3_meta_pp_buffer_t *)
+            m_inputMetaQ.dequeue(matchMetaFrameNum, (void*)&resultFrameNumber);
+    if(meta_job != NULL) {
+        return meta_job;
+    }
+    return NULL;
+}
+
+
+/*===========================================================================
+ * FUNCTION   : releaseReprocMetaBuffer
+ *
+ * DESCRIPTION: Release reprocessed Meta.
+ *
+ * PARAMETERS :
+*   @frame   : meta frame number
+ *
+ * RETURN     :
+ *  TRUE if Meta is released.
+ *  FALSE if Meta is not released.
+ *
+ *==========================================================================*/
+bool QCamera3PostProcessor::releaseReprocMetaBuffer(uint32_t resultFrameNumber)
+{
+    pthread_mutex_lock(&mReprocJobLock);
+    if (!(m_inputMetaQ.isEmpty())) {
+        mm_camera_super_buf_t *meta_buffer = NULL;
+        qcamera_hal3_meta_pp_buffer_t *meta_job =
+                (qcamera_hal3_meta_pp_buffer_t *)
+                m_inputMetaQ.dequeue(matchMetaFrameNum, (void*)&resultFrameNumber);
+        if(meta_job != NULL) {
+            meta_buffer = meta_job->metabuf;
+            m_parent->metadataBufDone(meta_buffer);
+            free(meta_job);
+            pthread_mutex_unlock(&mReprocJobLock);
+            return true;
+        }
+    }
+    pthread_mutex_unlock(&mReprocJobLock);
+    return false;
+}
+
+
+bool QCamera3PostProcessor::matchMetaFrameNum(void *data, void *, void *match_data)
+{
+    qcamera_hal3_meta_pp_buffer_t *job = (qcamera_hal3_meta_pp_buffer_t *) data;
+    uint32_t frame_num = *((uint32_t *) match_data);
+    return job->metaFrameNumber == frame_num;
+}
+
+
+bool QCamera3PostProcessor::matchReprocessFrameNum(void *data, void *, void *match_data)
+{
+    qcamera_hal3_pp_buffer_t *job = (qcamera_hal3_pp_buffer_t *) data;
+    uint32_t frame_num = *((uint32_t *) match_data);
+    LOGD(" Matching FrameNum :%d and %d",frame_num,job->frameNumber);
+    return job->frameNumber == frame_num;
+}
+
 
 /*===========================================================================
  * FUNCTION   : needsReprocess
@@ -704,21 +792,64 @@ int32_t QCamera3PostProcessor::processData(qcamera_fwk_input_pp_data_t *frame)
  *              none-zero failure code
  *
  *==========================================================================*/
-int32_t QCamera3PostProcessor::processPPMetadata(mm_camera_super_buf_t *reproc_meta)
+int32_t QCamera3PostProcessor::processPPMetadata(mm_camera_super_buf_t *reproc_meta,
+                               uint32_t framenum, bool dropFrame)
 {
     LOGD("E");
     pthread_mutex_lock(&mReprocJobLock);
+
+    qcamera_hal3_meta_pp_buffer_t *ppMetaBuf =
+        (qcamera_hal3_meta_pp_buffer_t *)malloc(sizeof(qcamera_hal3_meta_pp_buffer_t));
+
     // enqueue to metadata input queue
-    m_inputMetaQ.enqueue((void *)reproc_meta);
+    ppMetaBuf->metabuf = reproc_meta;
+    ppMetaBuf->metaFrameNumber = framenum;
+    ppMetaBuf->dropFrame = dropFrame;
+    /* Need to send notifyError before meta for Error Buffer */
     if (!(m_inputPPQ.isEmpty())) {
-       LOGD("pp queue is not empty, do next job");
-       m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_DO_NEXT_JOB, FALSE, FALSE);
+        qcamera_hal3_pp_buffer_t *reproc_job = isFrameMatched(framenum);
+        if(reproc_job != NULL) {
+            ReprocessBuffer reproc;
+            reproc.metaBuffer = ppMetaBuf;
+            reproc.reprocBuf = reproc_job;
+            mReprocessNode.push_back(reproc);
+            LOGD("pp queue is not empty, do next job");
+            m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_DO_NEXT_JOB, FALSE, FALSE);
+        } else {
+             m_inputMetaQ.enqueue((void *)ppMetaBuf);
+        }
     } else {
+             m_inputMetaQ.enqueue((void *)ppMetaBuf);
        LOGD("pp queue is empty, not calling do next job");
     }
     pthread_mutex_unlock(&mReprocJobLock);
     return NO_ERROR;
 }
+
+
+/*===========================================================================
+ * FUNCTION   : isFrameMatched
+ *
+ * DESCRIPTION: corresponding meta detection
+ *
+ * PARAMETERS :
+ *   @frame   : frame number
+ *
+ * RETURN     :
+ *  TRUE if Frame is present
+ *  FALSE if Frame is not released.
+ *
+ *==========================================================================*/
+qcamera_hal3_pp_buffer_t* QCamera3PostProcessor::isFrameMatched(uint32_t resultFrameNumber)
+{
+    qcamera_hal3_pp_buffer_t *reprocess_job =
+            (qcamera_hal3_pp_buffer_t *)
+            m_inputPPQ.dequeue(matchReprocessFrameNum, (void*)&resultFrameNumber);
+    if(reprocess_job != NULL)
+        return reprocess_job;
+    return NULL;
+}
+
 
 /*===========================================================================
  * FUNCTION   : processJpegSettingData
@@ -896,7 +1027,9 @@ void QCamera3PostProcessor::releaseMetadata(void *data, void *user_data)
 {
     QCamera3PostProcessor *pme = (QCamera3PostProcessor *)user_data;
     if (NULL != pme) {
-        pme->m_parent->metadataBufDone((mm_camera_super_buf_t *)data);
+        qcamera_hal3_meta_pp_buffer_t *buf  = (qcamera_hal3_meta_pp_buffer_t *)data;
+        pme->m_parent->metadataBufDone((mm_camera_super_buf_t *)buf->metabuf);
+        free(buf);
     }
 }
 
@@ -2119,11 +2252,16 @@ void *QCamera3PostProcessor::dataProcessRoutine(void *data)
 
                     LOGH("dequeuing pp frame");
                     pthread_mutex_lock(&pme->mReprocJobLock);
-                    if(!pme->m_inputPPQ.isEmpty() && !pme->m_inputMetaQ.isEmpty()) {
-                        qcamera_hal3_pp_buffer_t *pp_buffer =
-                            (qcamera_hal3_pp_buffer_t *)pme->m_inputPPQ.dequeue();
+                    if(pme->mReprocessNode.size()) {
+                        List<ReprocessBuffer>::iterator reprocData;
+                        reprocData = pme->mReprocessNode.begin();
+                        qcamera_hal3_pp_buffer_t *pp_buffer = reprocData->reprocBuf;
+                        qcamera_hal3_meta_pp_buffer_t *meta_pp_buffer = reprocData->metaBuffer;
+                        pme->mReprocessNode.erase(pme->mReprocessNode.begin());
+                        LOGD(" Reprocess Buffer Frame Number :%d  and %d",
+                                pp_buffer->frameNumber, meta_pp_buffer->metaFrameNumber);
                         meta_buffer =
-                            (mm_camera_super_buf_t *)pme->m_inputMetaQ.dequeue();
+                            (mm_camera_super_buf_t *)meta_pp_buffer->metabuf;
                         jpeg_settings_t *jpeg_settings =
                            (jpeg_settings_t *)pme->m_jpegSettingsQ.dequeue();
                         pthread_mutex_unlock(&pme->mReprocJobLock);

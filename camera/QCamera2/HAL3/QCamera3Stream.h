@@ -122,6 +122,7 @@ private:
     cam_padding_info_t mPaddingInfo;
     QCamera3Channel *mChannel;
     Mutex mLock;    //Lock controlling access to 'mBufDefs'
+    Mutex mParamLock;    //Lock setparam
 
     uint32_t mBatchSize; // 0: No batch, non-0: Number of imaage bufs in a batch
     uint8_t mNumBatchBufs; //Number of batch buffers which can hold image bufs

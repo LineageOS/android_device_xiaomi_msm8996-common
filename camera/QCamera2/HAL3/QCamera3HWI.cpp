@@ -3028,12 +3028,14 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
 
         // Check whether any stream buffer corresponding to this is dropped or not
         // If dropped, then send the ERROR_BUFFER for the corresponding stream
+        bool dropFrame = false;
         if (p_cam_frame_drop) {
             /* Clear notify_msg structure */
             camera3_notify_msg_t notify_msg;
             memset(&notify_msg, 0, sizeof(camera3_notify_msg_t));
             for (List<RequestedBufferInfo>::iterator j = i->buffers.begin();
                     j != i->buffers.end(); j++) {
+                dropFrame = false;
                 QCamera3ProcessingChannel *channel = (QCamera3ProcessingChannel *)j->stream->priv;
                 uint32_t streamID = channel->getStreamID(channel->getStreamTypeMask());
                 for (uint32_t k = 0; k < p_cam_frame_drop->num_streams; k++) {
@@ -3109,7 +3111,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                     internalPproc = true;
                     QCamera3ProcessingChannel *channel =
                             (QCamera3ProcessingChannel *)iter->stream->priv;
-                    channel->queueReprocMetadata(metadata_buf);
+                    channel->queueReprocMetadata(metadata_buf, i->frame_number, dropFrame);
                     break;
                 }
             }
@@ -3120,7 +3122,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                     internalPproc = true;
                     QCamera3ProcessingChannel *channel =
                             (QCamera3ProcessingChannel *)itr->stream->priv;
-                    channel->queueReprocMetadata(metadata_buf);
+                    channel->queueReprocMetadata(metadata_buf, i->frame_number, dropFrame);
                     break;
                 }
             }
@@ -3196,6 +3198,18 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                             }
                         }
                         j->buffer->status |= mPendingBuffersMap.getBufErrStatus(j->buffer->buffer);
+                        if (j->buffer->status & CAMERA3_BUFFER_STATUS_ERROR) {
+                            LOGI("CAMERA3_BUFFER_STATUS_ERROR frame_number=%u,"
+                                    "buffer=%p mCameraId: %d",
+                                    frame_number, j->buffer->buffer, mCameraId);
+                            camera3_notify_msg_t notify_msg;
+                            memset(&notify_msg, 0, sizeof(camera3_notify_msg_t));
+                            notify_msg.type = CAMERA3_MSG_ERROR;
+                            notify_msg.message.error.frame_number = frame_number;
+                            notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_BUFFER ;
+                            notify_msg.message.error.error_stream = j->stream;
+                            orchestrateNotify(&notify_msg);
+                        }
                         mPendingBuffersMap.removeBuf(j->buffer->buffer);
                         result_buffers[result_buffers_idx++] = *(j->buffer);
                         free(j->buffer);
@@ -3407,7 +3421,7 @@ void QCamera3HardwareInterface::handleBufferWithLock(
         }
         buffer->status |= mPendingBuffersMap.getBufErrStatus(buffer->buffer);
         result.output_buffers = buffer;
-        LOGH("result frame_number = %d, buffer = %p",
+        LOGE("result frame_number = %d, buffer = %p",
                  frame_number, buffer->buffer);
 
         mPendingBuffersMap.removeBuf(buffer->buffer);
@@ -3442,6 +3456,10 @@ void QCamera3HardwareInterface::handleBufferWithLock(
                }
             }
             buffer->status |= mPendingBuffersMap.getBufErrStatus(buffer->buffer);
+            if (buffer->status & CAMERA3_BUFFER_STATUS_ERROR) {
+                LOGI("Input buffer CAMERA3_BUFFER_STATUS_ERROR frame_number=%u, buffer=%p",
+                        frame_number, buffer->buffer);
+            }
             mPendingBuffersMap.removeBuf(buffer->buffer);
 
             camera3_capture_result result;
@@ -4829,6 +4847,10 @@ no_error:
             if (ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters, CAM_INTF_META_STREAM_ID, streamsArray)) {
                 LOGE("Failed to set stream type mask in the parameters");
                 return BAD_VALUE;
+            }
+            for (uint32_t i = 0; i < streamsArray.num_streams; i++) {
+                LOGH("Stream Id: %d and Buf Index: %d and framenum = %d", streamsArray.stream_request[i].streamID,
+                        streamsArray.stream_request[i].buf_index, frameNumber);
             }
 
             rc = mCameraHandle->ops->set_parms(mCameraHandle->camera_handle,
@@ -11585,8 +11607,12 @@ int32_t PendingBuffersMap::getBufErrStatus(buffer_handle_t *buffer)
 {
     for (auto& req : mPendingBuffersInRequest) {
         for (auto& k : req.mPendingBufferList) {
-            if (k.buffer == buffer)
+            if (k.buffer == buffer) {
+                if (k.bufStatus & CAMERA3_BUFFER_STATUS_ERROR) {
+                    LOGH("CAMERA3_BUFFER_STATUS_ERROR, buffer=%p", buffer);
+                }
                 return k.bufStatus;
+            }
         }
     }
     return CAMERA3_BUFFER_STATUS_OK;
