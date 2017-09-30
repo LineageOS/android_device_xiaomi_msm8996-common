@@ -21,20 +21,26 @@
      for different hardware and product builds. -->
 <resources>
 
+    <!-- The VoiceMail default value is displayed to my own number if it is true -->
+    <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
+
+    <!-- Configure mobile network MTU. Carrier specific value is set here. -->
+    <integer name="config_mobile_mtu">1422</integer>
+
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
     <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
     <integer-array translatable="false" name="config_tether_upstream_types">
-        <item>1</item>
-        <item>4</item>
-        <item>7</item>
-        <item>9</item>
+      <item>1</item>
+      <item>4</item>
+      <item>7</item>
+      <item>9</item>
     </integer-array>
 
-    <!-- Use ERI text for network name on CDMA LTE -->
-    <bool name="config_LTE_eri_for_network_name">false</bool>
+    <!-- Default network policy warning threshold, in megabytes. -->
+    <integer name="config_networkPolicyDefaultWarning">51200</integer>
 
-    <!-- Values for GPS configuration (Verizon) -->
+    <!-- Values for GPS configuration (Sprint) -->
     <string-array translatable="false" name="config_gpsParameters">
         <item>SUPL_HOST=supl.google.com</item>
         <item>SUPL_PORT=7275</item>
@@ -47,10 +53,10 @@
         <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
         <item>ERR_ESTIMATE=0</item>
         <item>INTERMEDIATE_POS=0</item>
-        <item>LPP_PROFILE=3</item>
         <item>GPS_LOCK=3</item>
-        <item>SUPL_MODE=0</item>
-        <item>SUPL_ES=1</item>
+        <item>LPP_PROFILE=2</item>
+        <item>SUPL_MODE=1</item>
+        <item>SUPL_ES=0</item>
     </string-array>
 
     <!-- Entitlement APP provisioning for Tethering -->
@@ -58,7 +64,11 @@
         <item>com.google.android.tetheringentitlement</item>
         <item>com.google.android.tetheringentitlement.CarrierEntitlementActivity</item>
     </string-array>
-    <string translatable="false" name="config_mobile_hotspot_provision_app_no_ui">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK</string>
-    <string translatable="false" name="config_mobile_hotspot_provision_response">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT</string>
+    <string translatable="false" name="config_mobile_hotspot_provision_app_no_ui">
+         com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK
+    </string>
+    <string translatable="false" name="config_mobile_hotspot_provision_response">
+         com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT
+    </string>
 
 </resources>
