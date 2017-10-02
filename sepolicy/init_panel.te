@@ -1,4 +1,4 @@
-type init_panel, domain, domain_deprecated;
+type init_panel, domain;
 type init_panel_exec, exec_type, file_type;
 
 # Allow for transition from init domain to init_panel
