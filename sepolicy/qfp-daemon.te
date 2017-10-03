@@ -1,4 +1,4 @@
-allow qfp-daemon self:socket create_socket_perms;
+allow qfp-daemon self:socket create_socket_perms_no_ioctl;
 
 allow qfp-daemon captouch_device:chr_file rw_file_perms;
 
