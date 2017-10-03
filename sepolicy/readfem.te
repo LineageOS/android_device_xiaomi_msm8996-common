@@ -15,7 +15,7 @@ allow readfem persist_file:file create_file_perms;
 allow readfem sysfs_cnss_common:dir search;
 allow readfem sysfs_cnss_common:file rw_file_perms;
 
-allow readfem self:socket create_socket_perms;
+allow readfem self:socket create_socket_perms_no_ioctl;
 
 allow readfem diag_device:chr_file rw_file_perms;
 allow readfem sysfs:file r_file_perms;
