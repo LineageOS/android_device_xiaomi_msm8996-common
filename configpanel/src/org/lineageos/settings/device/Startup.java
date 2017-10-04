@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package org.lineageos.settings.device;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -26,7 +26,7 @@ import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
-import org.cyanogenmod.internal.util.FileUtils;
+import org.lineageos.internal.util.FileUtils;
 
 public class Startup extends BroadcastReceiver {
 
@@ -35,7 +35,7 @@ public class Startup extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
-        if (cyanogenmod.content.Intent.ACTION_INITIALIZE_CM_HARDWARE.equals(action)) {
+        if (lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE.equals(action)) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
             // Disable button settings if needed
