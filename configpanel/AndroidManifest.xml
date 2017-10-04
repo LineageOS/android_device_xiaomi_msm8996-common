@@ -17,13 +17,13 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           android:sharedUserId="android.uid.system"
-          package="com.cyanogenmod.settings.device"
+          package="org.lineageos.settings.device"
           android:versionCode="6"
           android:versionName="2.4" >
 
-    <protected-broadcast android:name="com.cyanogenmod.settings.device.CUST_UPDATE" />
+    <protected-broadcast android:name="org.lineageos.settings.device.CUST_UPDATE" />
 
-    <uses-permission android:name="cyanogenmod.permission.HARDWARE_ABSTRACTION_ACCESS" />
+    <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <uses-sdk
         android:minSdkVersion="24" />
@@ -37,7 +37,7 @@
 
         <provider
             android:name=".ConfigPanelSearchIndexablesProvider"
-            android:authorities="com.cyanogenmod.settings.device"
+            android:authorities="org.lineageos.settings.device"
             android:multiprocess="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.READ_SEARCH_INDEXABLES"
@@ -65,7 +65,7 @@
 
         <receiver android:name=".Startup" >
             <intent-filter>
-                <action android:name="cyanogenmod.intent.action.INITIALIZE_CM_HARDWARE" />
+                <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
             </intent-filter>
         </receiver>
     </application>
