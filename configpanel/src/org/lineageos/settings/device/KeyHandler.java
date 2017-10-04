@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package org.lineageos.settings.device;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,9 +26,9 @@ import android.view.KeyEvent;
 
 import com.android.internal.os.DeviceKeyHandler;
 
-import org.cyanogenmod.internal.util.FileUtils;
+import org.lineageos.internal.util.FileUtils;
 
-import cyanogenmod.hardware.CMHardwareManager;
+import lineageos.hardware.LineageHardwareManager;
 
 public class KeyHandler implements DeviceKeyHandler {
 
@@ -62,8 +62,8 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public boolean handleKeyEvent(KeyEvent event) {
-        CMHardwareManager hardware = CMHardwareManager.getInstance(mContext);
-        boolean virtualKeysEnabled = hardware.get(CMHardwareManager.FEATURE_KEY_DISABLE);
+        LineageHardwareManager hardware = LineageHardwareManager.getInstance(mContext);
+        boolean virtualKeysEnabled = hardware.get(LineageHardwareManager.FEATURE_KEY_DISABLE);
         boolean fingerprintHomeButtonEnabled = FileUtils.isFileReadable(FP_HOME_NODE) &&
                 FileUtils.readOneLine(FP_HOME_NODE).equals("1");
 
