@@ -16,7 +16,14 @@
      limitations under the License.
 -->
 <resources>
-    <style name="Theme.Main" parent="@android:style/Theme.Material.Settings">
-        <item name="preferenceTheme">@android:style/Theme.Material.Settings</item>
+    <style name="Theme.Main" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="preferenceTheme">@style/SettingsPreference</item>
+    </style>
+
+    <!-- Preferences -->
+    <style name="SettingsPreference">
+        <item name="allowDividerAbove">false</item>
+        <item name="allowDividerBelow">false</item>
+        <item name="singleLineTitle">false</item>
     </style>
 </resources>
