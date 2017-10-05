@@ -7,29 +7,22 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_PACKAGE_NAME := ConfigPanel
 LOCAL_REQUIRED_MODULES := XiaomiPocketMode
 
-LOCAL_STATIC_JAVA_LIBRARIES := \
+LOCAL_USE_AAPT2 := true
+
+LOCAL_STATIC_ANDROID_LIBRARIES := \
     android-support-v4 \
     android-support-v7-appcompat \
     android-support-v7-preference \
     android-support-v7-recyclerview \
     android-support-v13 \
     android-support-v14-preference \
-    org.lineageos.platform.internal
 
-LOCAL_AAPT_FLAGS := \
-    --auto-add-overlay \
-    --extra-packages android.support.v14.preference \
-    --extra-packages android.support.v7.appcompat \
-    --extra-packages android.support.v7.preference \
-    --extra-packages android.support.v7.recyclerview
+LOCAL_STATIC_JAVA_LIBRARIES := \
+    org.lineageos.platform.internal
 
 LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res \
-    $(LOCAL_PATH)/../../../../packages/resources/devicesettings/res \
-    frameworks/support/v14/preference/res \
-    frameworks/support/v7/appcompat/res \
-    frameworks/support/v7/preference/res \
-    frameworks/support/v7/recyclerview/res
+    $(TOP)/packages/resources/devicesettings/res
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
