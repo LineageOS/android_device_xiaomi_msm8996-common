@@ -49,16 +49,14 @@
 
         <activity
             android:name=".ButtonSettingsActivity"
-            android:label="@string/button_panel_title">
+            android:label="@string/button_panel_title"
+            android:icon="@drawable/ic_settings_additional_buttons">
             <intent-filter>
-                <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
             <meta-data
-                android:name="com.android.settings.icon"
-                android:resource="@drawable/ic_settings_additional_buttons" />
-            <meta-data
                 android:name="com.android.settings.category"
-                android:value="com.android.settings.category.device" />
+                android:value="com.android.settings.category.ia.system" />
         </activity>
 
         <activity android:name=".KeyHandler" />
