@@ -34,6 +34,4 @@ LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
-include frameworks/base/packages/SettingsLib/common.mk
-
 include $(BUILD_PACKAGE)
