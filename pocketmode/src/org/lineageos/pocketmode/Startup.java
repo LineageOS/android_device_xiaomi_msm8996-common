@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.pocketmode;
+package org.lineageos.pocketmode;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,7 +30,7 @@ public class Startup extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
-        if (cyanogenmod.content.Intent.ACTION_INITIALIZE_CM_HARDWARE.equals(action)) {
+        if (lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE.equals(action)) {
             Log.d(TAG, "Starting");
             context.startServiceAsUser(new Intent(context, PocketModeService.class),
                     UserHandle.CURRENT);
