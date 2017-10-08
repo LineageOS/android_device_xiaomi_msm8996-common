@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cyanogenmod.pocketmode"
+    package="org.lineageos.pocketmode"
     android:versionCode="1"
     android:versionName="1.1"
     android:sharedUserId="android.uid.system">
 
-    <uses-permission android:name="cyanogenmod.permission.HARDWARE_ABSTRACTION_ACCESS" />
+    <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -35,7 +35,7 @@
 
         <receiver android:name=".Startup" >
             <intent-filter android:priority="99" >
-                <action android:name="cyanogenmod.intent.action.INITIALIZE_CM_HARDWARE" />
+                <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
             </intent-filter>
         </receiver>
 
