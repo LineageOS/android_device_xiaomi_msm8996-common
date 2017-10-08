@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.pocketmode;
+package org.lineageos.pocketmode;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -32,7 +32,7 @@ public class PocketModeService extends Service {
     private static final String TAG = "PocketModeService";
     private static final boolean DEBUG = false;
 
-    private static final String CUST_INTENT = "com.cyanogenmod.settings.device.CUST_UPDATE";
+    private static final String CUST_INTENT = "org.lineageos.settings.device.CUST_UPDATE";
     private static final String CUST_INTENT_EXTRA = "pocketmode_service";
 
     private static List<BroadcastReceiver> receivers = new ArrayList<BroadcastReceiver>();
