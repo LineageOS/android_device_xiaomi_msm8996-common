@@ -304,7 +304,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+    vendor.lineage.vibrator@1.0-service
 
 # WiFi
 PRODUCT_PACKAGES += \
