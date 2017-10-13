@@ -86,8 +86,6 @@ persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
 
 # IMS
-persist.dbg.volte_avail_ovr=1
-persist.dbg.vt_avail_ovr=1
 persist.radio.NO_STAPA=1
 persist.radio.VT_HYBRID_ENABLE=1
 
