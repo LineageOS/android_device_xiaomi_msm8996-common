@@ -22,6 +22,29 @@
       "revId": "0251fcf7976d908356662d36f465b041ca177517",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "846f07f2_3f5b2deb",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-10-13T11:58:35Z",
+      "side": 0,
+      "message": "You lose livedisplay jni after the removal.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 36
+      },
+      "revId": "0251fcf7976d908356662d36f465b041ca177517",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
