@@ -22,6 +22,30 @@
       "revId": "ecc4873bc0e39a1e4b76681f865fed0fa3a8d173",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91652b80_e4884726",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-17T14:02:34Z",
+      "side": 1,
+      "message": "Yea, they should: https://github.com/LineageOS/android_hardware_qcom_audio/blob/lineage-15.0-caf-8996/configs/msm8996/msm8996.mk#L82-L84",
+      "parentUuid": "8a181c00_291ee867",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 98
+      },
+      "revId": "ecc4873bc0e39a1e4b76681f865fed0fa3a8d173",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
