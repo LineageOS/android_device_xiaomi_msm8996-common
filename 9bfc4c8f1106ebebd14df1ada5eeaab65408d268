@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e42fff59_0f541544",
+        "filename": "system.prop",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-17T14:34:17Z",
+      "side": 0,
+      "message": "It\u0027s not a typo, this prop has died.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 28
+      },
+      "revId": "9bfc4c8f1106ebebd14df1ada5eeaab65408d268",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "419c83a2_eb367a35",
+        "filename": "system.prop",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-17T14:34:17Z",
+      "side": 0,
+      "message": "Same with these two.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "9bfc4c8f1106ebebd14df1ada5eeaab65408d268",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
