@@ -537,11 +537,23 @@ typedef struct mm_camera_obj {
     uint32_t sessionid; /* Camera server session id */
 } mm_camera_obj_t;
 
+//HACKED camera_info struct from hardware/libhardware/include/hardware/camera_common.h
+typedef struct xiaomi_camera_info {
+    int facing;
+    int orientation;
+    uint32_t device_version;
+    const camera_metadata_t *static_camera_characteristics;
+    int resource_cost;
+    char** conflicting_devices;
+    size_t conflicting_devices_length;
+    volatile char xiaomi_reserved[20];//uknown addition by xiaomi
+} xiaomi_camera_info_t;
+
 typedef struct {
     int8_t num_cam;
     char video_dev_name[MM_CAMERA_MAX_NUM_SENSORS][MM_CAMERA_DEV_NAME_LEN];
     mm_camera_obj_t *cam_obj[MM_CAMERA_MAX_NUM_SENSORS];
-    struct camera_info info[MM_CAMERA_MAX_NUM_SENSORS];
+    struct xiaomi_camera_info info[MM_CAMERA_MAX_NUM_SENSORS]; //hacked struct 20*5 bytes bigger in xiaomi blobs
     cam_sync_type_t cam_type[MM_CAMERA_MAX_NUM_SENSORS];
     cam_sync_mode_t cam_mode[MM_CAMERA_MAX_NUM_SENSORS];
     uint8_t is_yuv[MM_CAMERA_MAX_NUM_SENSORS]; // 1=CAM_SENSOR_YUV, 0=CAM_SENSOR_RAW
