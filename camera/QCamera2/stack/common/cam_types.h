@@ -2186,6 +2186,9 @@ typedef enum {
     CAM_INTF_PARM_JPEG_SCALE_DIMENSION,
     /*Param for updating Quadra CFA mode */
     CAM_INTF_PARM_QUADRA_CFA,
+    XIAOMI_DUMMY1,
+    XIAOMI_DUMMY2,
+    XIAOMI_DUMMY3,
     CAM_INTF_PARM_MAX
 } cam_intf_parm_type_t;
 

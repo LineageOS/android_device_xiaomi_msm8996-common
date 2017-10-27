@@ -1628,7 +1628,7 @@ void sort_camera_info(int num_cam)
     int idx = 0, i;
     int8_t is_yuv_aux_cam_exposed = 0;
     char prop[PROPERTY_VALUE_MAX];
-    struct camera_info temp_info[MM_CAMERA_MAX_NUM_SENSORS];
+    struct xiaomi_camera_info temp_info[MM_CAMERA_MAX_NUM_SENSORS];
     cam_sync_type_t temp_type[MM_CAMERA_MAX_NUM_SENSORS];
     cam_sync_mode_t temp_mode[MM_CAMERA_MAX_NUM_SENSORS];
     uint8_t temp_is_yuv[MM_CAMERA_MAX_NUM_SENSORS];
@@ -1972,7 +1972,8 @@ static int32_t mm_camera_intf_register_stream_buf_cb(uint32_t camera_handle,
 struct camera_info *get_cam_info(uint32_t camera_id, cam_sync_type_t *pCamType)
 {
     *pCamType = g_cam_ctrl.cam_type[camera_id];
-    return &g_cam_ctrl.info[camera_id];
+    //HACK to get proper structure from xiaomi one
+    return (struct camera_info*)(&g_cam_ctrl.info[camera_id]);
 }
 
 uint8_t is_yuv_sensor(uint32_t camera_id)
