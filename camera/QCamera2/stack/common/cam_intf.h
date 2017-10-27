@@ -369,7 +369,7 @@ typedef struct{
 
     /* nano seconds */
     int64_t exposure_time_range[EXPOSURE_TIME_RANGE_CNT];
-
+    volatile char         xiaomi_reserved1[8];
     /* nano seconds */
     int64_t max_frame_duration;
 
@@ -790,6 +790,7 @@ typedef struct {
     INCLUDE(CAM_INTF_META_FRAME_NUMBER_VALID,           int32_t,                     1);
     INCLUDE(CAM_INTF_META_URGENT_FRAME_NUMBER_VALID,    int32_t,                     1);
     INCLUDE(CAM_INTF_META_FRAME_DROPPED,                cam_stream_ID_t,             1);
+    INCLUDE(XIAOMI_DUMMY1,                              uint8_t,                    32);
     INCLUDE(CAM_INTF_META_FRAME_NUMBER,                 uint32_t,                    1);
     INCLUDE(CAM_INTF_META_URGENT_FRAME_NUMBER,          uint32_t,                    1);
     INCLUDE(CAM_INTF_META_COLOR_CORRECT_MODE,           uint32_t,                    1);
@@ -987,6 +988,7 @@ typedef struct {
     INCLUDE(CAM_INTF_META_REPROCESS_FLAGS,              uint8_t,                     1);
     INCLUDE(CAM_INTF_PARM_JPEG_ENCODE_CROP,             cam_stream_crop_info_t,      1);
     INCLUDE(CAM_INTF_PARM_JPEG_SCALE_DIMENSION,         cam_dimension_t,             1);
+    INCLUDE(XIAOMI_DUMMY2,                              uint8_t,                    56);
 } metadata_data_t;
 
 /* Update clear_metadata_buffer() function when a new is_xxx_valid is added to
