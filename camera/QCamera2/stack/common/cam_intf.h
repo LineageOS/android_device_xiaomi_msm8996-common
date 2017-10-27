@@ -369,7 +369,7 @@ typedef struct{
 
     /* nano seconds */
     int64_t exposure_time_range[EXPOSURE_TIME_RANGE_CNT];
-
+    volatile char         xiaomi_reserved1[8];
     /* nano seconds */
     int64_t max_frame_duration;
 
@@ -605,7 +605,7 @@ typedef struct {
         cam_request_frames frameRequest; /*do TNR process*/
         cam_perf_mode_t perf_mode;       /*request operational mode*/
     };
-} cam_stream_parm_buffer_t;
+} cam_stream_parm_buffer_t; //OK
 
 /* stream info */
 typedef struct {
@@ -661,7 +661,7 @@ typedef struct {
 
     /* if frames will not be received */
     uint8_t noFrameExpected;
-} cam_stream_info_t;
+} cam_stream_info_t; //OK
 
 /*****************************************************************************
  *                 Code for Domain Socket Based Parameters                   *
@@ -758,7 +758,7 @@ typedef struct {
  **************************************************************************************/
     /* common between HAL1 and HAL3 */
     INCLUDE(CAM_INTF_META_HISTOGRAM,                    cam_hist_stats_t,               1);
-    INCLUDE(CAM_INTF_META_FACE_DETECTION,               cam_face_detection_data_t,      1);
+    INCLUDE(CAM_INTF_META_FACE_DETECTION,               cam_face_detection_data_t,      1); //OK ?
     INCLUDE(CAM_INTF_META_FACE_RECOG,                   cam_face_recog_data_t,          1);
     INCLUDE(CAM_INTF_META_FACE_BLINK,                   cam_face_blink_data_t,          1);
     INCLUDE(CAM_INTF_META_FACE_GAZE,                    cam_face_gaze_data_t,           1);
@@ -787,17 +787,18 @@ typedef struct {
     INCLUDE(CAM_INTF_BUF_DIVERT_INFO,                   cam_buf_divert_info_t,          1);
 
     /* Specific to HAL3 */
-    INCLUDE(CAM_INTF_META_FRAME_NUMBER_VALID,           int32_t,                     1);
+    INCLUDE(CAM_INTF_META_FRAME_NUMBER_VALID,           int32_t,                     1); //OK
     INCLUDE(CAM_INTF_META_URGENT_FRAME_NUMBER_VALID,    int32_t,                     1);
     INCLUDE(CAM_INTF_META_FRAME_DROPPED,                cam_stream_ID_t,             1);
+    INCLUDE(XIAOMI_DUMMY1,                              uint8_t,                    32);
     INCLUDE(CAM_INTF_META_FRAME_NUMBER,                 uint32_t,                    1);
     INCLUDE(CAM_INTF_META_URGENT_FRAME_NUMBER,          uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_COLOR_CORRECT_MODE,           uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_COLOR_CORRECT_TRANSFORM,      cam_color_correct_matrix_t,  1);
-    INCLUDE(CAM_INTF_META_COLOR_CORRECT_GAINS,          cam_color_correct_gains_t,   1);
-    INCLUDE(CAM_INTF_META_PRED_COLOR_CORRECT_TRANSFORM, cam_color_correct_matrix_t,  1);
-    INCLUDE(CAM_INTF_META_PRED_COLOR_CORRECT_GAINS,     cam_color_correct_gains_t,   1);
-    INCLUDE(CAM_INTF_META_AEC_ROI,                      cam_area_t,                  1);
+    INCLUDE(CAM_INTF_META_COLOR_CORRECT_MODE,           uint32_t,                    1); //OK
+    INCLUDE(CAM_INTF_META_COLOR_CORRECT_TRANSFORM,      cam_color_correct_matrix_t,  1);//OK
+    INCLUDE(CAM_INTF_META_COLOR_CORRECT_GAINS,          cam_color_correct_gains_t,   1);//OK
+    INCLUDE(CAM_INTF_META_PRED_COLOR_CORRECT_TRANSFORM, cam_color_correct_matrix_t,  1);//OK
+    INCLUDE(CAM_INTF_META_PRED_COLOR_CORRECT_GAINS,     cam_color_correct_gains_t,   1);//OK
+    INCLUDE(CAM_INTF_META_AEC_ROI,                      cam_area_t,                  1);//OK ??
     INCLUDE(CAM_INTF_META_AEC_STATE,                    uint32_t,                    1);
     INCLUDE(CAM_INTF_PARM_FOCUS_MODE,                   uint32_t,                    1);
     INCLUDE(CAM_INTF_PARM_MANUAL_FOCUS_POS,             cam_manual_focus_parm_t,     1);
@@ -806,40 +807,40 @@ typedef struct {
     INCLUDE(CAM_INTF_PARM_WHITE_BALANCE,                int32_t,                     1);
     INCLUDE(CAM_INTF_META_AWB_REGIONS,                  cam_area_t,                  1);
     INCLUDE(CAM_INTF_META_AWB_STATE,                    uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_BLACK_LEVEL_LOCK,             uint32_t,                    1);
+    INCLUDE(CAM_INTF_META_BLACK_LEVEL_LOCK,             uint32_t,                    1);//OK
     INCLUDE(CAM_INTF_META_MODE,                         uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_EDGE_MODE,                    cam_edge_application_t,      1);
-    INCLUDE(CAM_INTF_META_FLASH_POWER,                  uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_FLASH_FIRING_TIME,            int64_t,                     1);
-    INCLUDE(CAM_INTF_META_FLASH_MODE,                   uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_FLASH_STATE,                  int32_t,                     1);
-    INCLUDE(CAM_INTF_META_HOTPIXEL_MODE,                uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_LENS_APERTURE,                float,                       1);
-    INCLUDE(CAM_INTF_META_LENS_FILTERDENSITY,           float,                       1);
-    INCLUDE(CAM_INTF_META_LENS_FOCAL_LENGTH,            float,                       1);
+    INCLUDE(CAM_INTF_META_EDGE_MODE,                    cam_edge_application_t,      1); //OK
+    INCLUDE(CAM_INTF_META_FLASH_POWER,                  uint32_t,                    1); //OK
+    INCLUDE(CAM_INTF_META_FLASH_FIRING_TIME,            int64_t,                     1);//OK
+    INCLUDE(CAM_INTF_META_FLASH_MODE,                   uint32_t,                    1); //OK
+    INCLUDE(CAM_INTF_META_FLASH_STATE,                  int32_t,                     1);//OK 50716
+    INCLUDE(CAM_INTF_META_HOTPIXEL_MODE,                uint32_t,                    1);//OK
+    INCLUDE(CAM_INTF_META_LENS_APERTURE,                float,                       1);//OK
+    INCLUDE(CAM_INTF_META_LENS_FILTERDENSITY,           float,                       1);//OK
+    INCLUDE(CAM_INTF_META_LENS_FOCAL_LENGTH,            float,                       1);//OK
     INCLUDE(CAM_INTF_META_LENS_FOCUS_DISTANCE,          float,                       1);
     INCLUDE(CAM_INTF_META_LENS_FOCUS_RANGE,             float,                       2);
     INCLUDE(CAM_INTF_META_LENS_STATE,                   cam_af_lens_state_t,         1);
-    INCLUDE(CAM_INTF_META_LENS_OPT_STAB_MODE,           uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_VIDEO_STAB_MODE,              uint32_t,                    1);
+    INCLUDE(CAM_INTF_META_LENS_OPT_STAB_MODE,           uint32_t,                    1);//OK
+    INCLUDE(CAM_INTF_META_VIDEO_STAB_MODE,              uint32_t,                    1);//OK
     INCLUDE(CAM_INTF_META_LENS_FOCUS_STATE,             uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_NOISE_REDUCTION_MODE,         uint32_t,                    1);
+    INCLUDE(CAM_INTF_META_NOISE_REDUCTION_MODE,         uint32_t,                    1);//OK
     INCLUDE(CAM_INTF_META_NOISE_REDUCTION_STRENGTH,     uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_SCALER_CROP_REGION,           cam_crop_region_t,           1);
-    INCLUDE(CAM_INTF_META_SCENE_FLICKER,                uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_SENSOR_EXPOSURE_TIME,         int64_t,                     1);
-    INCLUDE(CAM_INTF_META_SENSOR_FRAME_DURATION,        int64_t,                     1);
-    INCLUDE(CAM_INTF_META_SENSOR_SENSITIVITY,           int32_t,                     1);
+    INCLUDE(CAM_INTF_META_SCALER_CROP_REGION,           cam_crop_region_t,           1);//OK
+    INCLUDE(CAM_INTF_META_SCENE_FLICKER,                uint32_t,                    1);//OK
+    INCLUDE(CAM_INTF_META_SENSOR_EXPOSURE_TIME,         int64_t,                     1);//OK
+    INCLUDE(CAM_INTF_META_SENSOR_FRAME_DURATION,        int64_t,                     1);//OK
+    INCLUDE(CAM_INTF_META_SENSOR_SENSITIVITY,           int32_t,                     1);//OK
     INCLUDE(CAM_INTF_META_ISP_SENSITIVITY ,             int32_t,                     1);
     INCLUDE(CAM_INTF_META_SENSOR_TIMESTAMP,             int64_t,                     1);
-    INCLUDE(CAM_INTF_META_SENSOR_ROLLING_SHUTTER_SKEW,  int64_t,                     1);
-    INCLUDE(CAM_INTF_META_SHADING_MODE,                 uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_STATS_FACEDETECT_MODE,        uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_STATS_HISTOGRAM_MODE,         uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_STATS_SHARPNESS_MAP_MODE,     uint32_t,                    1);
+    INCLUDE(CAM_INTF_META_SENSOR_ROLLING_SHUTTER_SKEW,  int64_t,                     1);//OK
+    INCLUDE(CAM_INTF_META_SHADING_MODE,                 uint32_t,                    1); //OK
+    INCLUDE(CAM_INTF_META_STATS_FACEDETECT_MODE,        uint32_t,                    1);//OK
+    INCLUDE(CAM_INTF_META_STATS_HISTOGRAM_MODE,         uint32_t,                    1);//OK
+    INCLUDE(CAM_INTF_META_STATS_SHARPNESS_MAP_MODE,     uint32_t,                    1);//OK
     INCLUDE(CAM_INTF_META_STATS_SHARPNESS_MAP,          cam_sharpness_map_t,         3);
-    INCLUDE(CAM_INTF_META_TONEMAP_CURVES,               cam_rgb_tonemap_curves,      1);
-    INCLUDE(CAM_INTF_META_LENS_SHADING_MAP,             cam_lens_shading_map_t,      1);
+    INCLUDE(CAM_INTF_META_TONEMAP_CURVES,               cam_rgb_tonemap_curves,      1);//OK
+    INCLUDE(CAM_INTF_META_LENS_SHADING_MAP,             cam_lens_shading_map_t,      1);//OK
     INCLUDE(CAM_INTF_META_AEC_INFO,                     cam_3a_params_t,             1);
     INCLUDE(CAM_INTF_META_SENSOR_INFO,                  cam_sensor_params_t,         1);
     INCLUDE(CAM_INTF_META_EXIF_DEBUG_AE,                cam_ae_exif_debug_t,         1);
@@ -851,21 +852,21 @@ typedef struct {
     INCLUDE(CAM_INTF_META_EXIF_DEBUG_BHIST,             cam_bhist_buffer_exif_debug_t,   1);
     INCLUDE(CAM_INTF_META_EXIF_DEBUG_3A_TUNING,         cam_q3a_tuning_info_t,       1);
     INCLUDE(CAM_INTF_META_ASD_SCENE_CAPTURE_TYPE,       cam_auto_scene_t,            1);
-    INCLUDE(CAM_INTF_PARM_EFFECT,                       uint32_t,                    1);
+    INCLUDE(CAM_INTF_PARM_EFFECT,                       uint32_t,                    1);//OK
     /* Defining as int32_t so that this array is 4 byte aligned */
     INCLUDE(CAM_INTF_META_PRIVATE_DATA,                 int32_t,
-            MAX_METADATA_PRIVATE_PAYLOAD_SIZE_IN_BYTES / 4);
+            MAX_METADATA_PRIVATE_PAYLOAD_SIZE_IN_BYTES / 4);//OK
 
     /* Following are Params only and not metadata currently */
     INCLUDE(CAM_INTF_PARM_HAL_VERSION,                  int32_t,                     1);
     /* Shared between HAL1 and HAL3 */
     INCLUDE(CAM_INTF_PARM_ANTIBANDING,                  uint32_t,                    1);
-    INCLUDE(CAM_INTF_PARM_EXPOSURE_COMPENSATION,        int32_t,                     1);
+    INCLUDE(CAM_INTF_PARM_EXPOSURE_COMPENSATION,        int32_t,                     1);//OK
     INCLUDE(CAM_INTF_PARM_EV_STEP,                      cam_rational_type_t,         1);
-    INCLUDE(CAM_INTF_PARM_AEC_LOCK,                     uint32_t,                    1);
-    INCLUDE(CAM_INTF_PARM_FPS_RANGE,                    cam_fps_range_t,             1);
-    INCLUDE(CAM_INTF_PARM_AWB_LOCK,                     uint32_t,                    1);
-    INCLUDE(CAM_INTF_PARM_BESTSHOT_MODE,                uint32_t,                    1);
+    INCLUDE(CAM_INTF_PARM_AEC_LOCK,                     uint32_t,                    1); //OK
+    INCLUDE(CAM_INTF_PARM_FPS_RANGE,                    cam_fps_range_t,             1); //OK
+    INCLUDE(CAM_INTF_PARM_AWB_LOCK,                     uint32_t,                    1); //OK
+    INCLUDE(CAM_INTF_PARM_BESTSHOT_MODE,                uint32_t,                    1); //OK
     INCLUDE(CAM_INTF_PARM_DIS_ENABLE,                   int32_t,                     1);
     INCLUDE(CAM_INTF_PARM_LED_MODE,                     int32_t,                     1);
     INCLUDE(CAM_INTF_META_LED_MODE_OVERRIDE,            uint32_t,                    1);
@@ -873,7 +874,7 @@ typedef struct {
     /* dual camera specific params */
     INCLUDE(CAM_INTF_PARM_RELATED_SENSORS_CALIBRATION,  cam_related_system_calibration_data_t, 1);
     INCLUDE(CAM_INTF_META_AF_FOCAL_LENGTH_RATIO,        cam_focal_length_ratio_t, 1);
-    INCLUDE(CAM_INTF_META_SNAP_CROP_INFO_SENSOR,        cam_stream_crop_info_t,   1);
+    INCLUDE(CAM_INTF_META_SNAP_CROP_INFO_SENSOR,        cam_stream_crop_info_t,   1); //OK ?
     INCLUDE(CAM_INTF_META_SNAP_CROP_INFO_CAMIF,         cam_stream_crop_info_t,   1);
     INCLUDE(CAM_INTF_META_SNAP_CROP_INFO_ISP,           cam_stream_crop_info_t,   1);
     INCLUDE(CAM_INTF_META_SNAP_CROP_INFO_CPP,           cam_stream_crop_info_t,   1);
@@ -945,48 +946,53 @@ typedef struct {
     INCLUDE(CAM_INTF_META_SHARPNESS_STRENGTH,           int32_t,                     1);
     INCLUDE(CAM_INTF_META_GEOMETRIC_MODE,               uint32_t,                    1);
     INCLUDE(CAM_INTF_META_GEOMETRIC_STRENGTH,           uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_LENS_SHADING_MAP_MODE,        uint32_t,                    1);
+    INCLUDE(CAM_INTF_META_LENS_SHADING_MAP_MODE,        uint32_t,                    1);//OK
     INCLUDE(CAM_INTF_META_SHADING_STRENGTH,             uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_TONEMAP_MODE,                 uint32_t,                    1);
+    INCLUDE(CAM_INTF_META_TONEMAP_MODE,                 uint32_t,                    1);//OK
     INCLUDE(CAM_INTF_META_STREAM_ID,                    cam_stream_ID_t,             1);
-    INCLUDE(CAM_INTF_PARM_STATS_DEBUG_MASK,             uint32_t,                    1);
-    INCLUDE(CAM_INTF_PARM_STATS_AF_PAAF,                uint32_t,                    1);
+    INCLUDE(XIAOMI_DUMMY2,                              uint8_t,                     32); //HACK
+    INCLUDE(CAM_INTF_PARM_STATS_DEBUG_MASK,             uint32_t,                    1);//BAD vendor +32 OK
+    INCLUDE(CAM_INTF_PARM_STATS_AF_PAAF,                uint32_t,                    1);//BAD vendor+32 OK 
     INCLUDE(CAM_INTF_PARM_FOCUS_BRACKETING,             cam_af_bracketing_t,         1);
     INCLUDE(CAM_INTF_PARM_FLASH_BRACKETING,             cam_flash_bracketing_t,      1);
-    INCLUDE(CAM_INTF_META_JPEG_GPS_COORDINATES,         double,                      3);
-    INCLUDE(CAM_INTF_META_JPEG_GPS_PROC_METHODS,        uint8_t,                     GPS_PROCESSING_METHOD_SIZE);
-    INCLUDE(CAM_INTF_META_JPEG_GPS_TIMESTAMP,           int64_t,                     1);
-    INCLUDE(CAM_INTF_META_JPEG_ORIENTATION,             int32_t,                     1);
-    INCLUDE(CAM_INTF_META_JPEG_QUALITY,                 uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_JPEG_THUMB_QUALITY,           uint32_t,                    1);
-    INCLUDE(CAM_INTF_META_JPEG_THUMB_SIZE,              cam_dimension_t,             1);
-    INCLUDE(CAM_INTF_META_TEST_PATTERN_DATA,            cam_test_pattern_data_t,     1);
-    INCLUDE(CAM_INTF_META_PROFILE_TONE_CURVE,           cam_profile_tone_curve,      1);
-    INCLUDE(CAM_INTF_META_OTP_WB_GRGB,                  float,                       1);
+    INCLUDE(CAM_INTF_META_JPEG_GPS_COORDINATES,         double,                      3);//BAD vendor +32 OK
+    INCLUDE(CAM_INTF_META_JPEG_GPS_PROC_METHODS,        uint8_t,                     GPS_PROCESSING_METHOD_SIZE);//BAD vendor +32 OK
+    INCLUDE(CAM_INTF_META_JPEG_GPS_TIMESTAMP,           int64_t,                     1);//BAD vendor+32 OK
+    INCLUDE(CAM_INTF_META_JPEG_ORIENTATION,             int32_t,                     1);//BAD vendor +32 OK
+    INCLUDE(CAM_INTF_META_JPEG_QUALITY,                 uint32_t,                    1);//BAD vendor +32
+    INCLUDE(CAM_INTF_META_JPEG_THUMB_QUALITY,           uint32_t,                    1);//BAD vendor +32
+    INCLUDE(CAM_INTF_META_JPEG_THUMB_SIZE,              cam_dimension_t,             1);//BAD vendor +32 ??
+    INCLUDE(CAM_INTF_META_TEST_PATTERN_DATA,            cam_test_pattern_data_t,     1);//BAD stock +32
+    INCLUDE(CAM_INTF_META_PROFILE_TONE_CURVE,           cam_profile_tone_curve,      1);//BAD stock +32
+    INCLUDE(CAM_INTF_META_OTP_WB_GRGB,                  float,                       1);//BAD stock +32
     INCLUDE(CAM_INTF_META_IMG_HYST_INFO,                cam_img_hysterisis_info_t,   1);
     INCLUDE(CAM_INTF_META_CAC_INFO,                     cam_cac_info_t,              1);
     INCLUDE(CAM_INTF_PARM_CAC,                          cam_aberration_mode_t,       1);
-    INCLUDE(CAM_INTF_META_NEUTRAL_COL_POINT,            cam_neutral_col_point_t,     1);
-    INCLUDE(CAM_INTF_PARM_ROTATION,                     cam_rotation_info_t,         1);
+    INCLUDE(CAM_INTF_META_NEUTRAL_COL_POINT,            cam_neutral_col_point_t,     1);//BAD vendor +32 OK
+    INCLUDE(CAM_INTF_PARM_ROTATION,                     cam_rotation_info_t,         1); //BAD stock +32 OK
     INCLUDE(CAM_INTF_PARM_HW_DATA_OVERWRITE,            cam_hw_data_overwrite_t,     1);
     INCLUDE(CAM_INTF_META_IMGLIB,                       cam_intf_meta_imglib_t,      1);
     INCLUDE(CAM_INTF_PARM_CAPTURE_FRAME_CONFIG,         cam_capture_frame_config_t,  1);
     INCLUDE(CAM_INTF_PARM_CUSTOM,                       custom_parm_buffer_t,        1);
     INCLUDE(CAM_INTF_PARM_FLIP,                         int32_t,                     1);
     INCLUDE(CAM_INTF_META_USE_AV_TIMER,                 uint8_t,                     1);
-    INCLUDE(CAM_INTF_META_EFFECTIVE_EXPOSURE_FACTOR,    float,                       1);
+    INCLUDE(CAM_INTF_META_EFFECTIVE_EXPOSURE_FACTOR,    float,                       1);//BAD stock +32 OK
     INCLUDE(CAM_INTF_META_LDAF_EXIF,                    uint32_t,                    2);
-    INCLUDE(CAM_INTF_META_BLACK_LEVEL_SOURCE_PATTERN,   cam_black_level_metadata_t,  1);
-    INCLUDE(CAM_INTF_META_BLACK_LEVEL_APPLIED_PATTERN,  cam_black_level_metadata_t,  1);
-    INCLUDE(CAM_INTF_META_LOW_LIGHT,                    cam_low_light_mode_t,        1);
+    INCLUDE(CAM_INTF_META_BLACK_LEVEL_SOURCE_PATTERN,   cam_black_level_metadata_t,  1);//BAD ???
+    INCLUDE(CAM_INTF_META_BLACK_LEVEL_APPLIED_PATTERN,  cam_black_level_metadata_t,  1);//BAD ???
+    INCLUDE(CAM_INTF_META_LOW_LIGHT,                    cam_low_light_mode_t,        1);//+32 OK
     INCLUDE(CAM_INTF_META_IMG_DYN_FEAT,                 cam_dyn_img_data_t,          1);
     INCLUDE(CAM_INTF_PARM_MANUAL_CAPTURE_TYPE,          cam_manual_capture_type,     1);
-    INCLUDE(CAM_INTF_AF_STATE_TRANSITION,               uint8_t,                     1);
-    INCLUDE(CAM_INTF_PARM_INITIAL_EXPOSURE_INDEX,       uint32_t,                    1);
-    INCLUDE(CAM_INTF_PARM_INSTANT_AEC,                  uint8_t,                     1);
-    INCLUDE(CAM_INTF_META_REPROCESS_FLAGS,              uint8_t,                     1);
-    INCLUDE(CAM_INTF_PARM_JPEG_ENCODE_CROP,             cam_stream_crop_info_t,      1);
-    INCLUDE(CAM_INTF_PARM_JPEG_SCALE_DIMENSION,         cam_dimension_t,             1);
+    INCLUDE(CAM_INTF_AF_STATE_TRANSITION,               uint8_t,                     1);// +32 OK ?
+    INCLUDE(CAM_INTF_PARM_INITIAL_EXPOSURE_INDEX,       uint32_t,                    1); // +32 OK?
+    volatile char         xiaomi_reserved1[4];
+    INCLUDE(CAM_INTF_PARM_INSTANT_AEC,                  uint8_t,                     1);// BAD +36 OK
+    volatile char         xiaomi_reserved2[7];
+    INCLUDE(CAM_INTF_META_REPROCESS_FLAGS,              uint8_t,                     1);//BAD stock +43 OK
+    volatile char         xiaomi_reserver3[4]; //not sure about this  and below
+    INCLUDE(CAM_INTF_PARM_JPEG_ENCODE_CROP,             cam_stream_crop_info_t,      1); // BAD + 4 ?
+    INCLUDE(CAM_INTF_PARM_JPEG_SCALE_DIMENSION,         cam_dimension_t,             1); //BAD stock +44
+    INCLUDE(XIAOMI_DUMMY3,                              uint8_t,                     5);
 } metadata_data_t;
 
 /* Update clear_metadata_buffer() function when a new is_xxx_valid is added to
