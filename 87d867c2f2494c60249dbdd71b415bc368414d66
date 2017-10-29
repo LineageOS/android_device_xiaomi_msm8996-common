@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7abc8011_3c15ed65",
+        "filename": "camera/QCamera2/Android.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-10-29T13:26:57Z",
+      "side": 0,
+      "message": "Revert this edit.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "87d867c2f2494c60249dbdd71b415bc368414d66",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
