@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e020942_49983f6c",
+        "filename": "camera/QCamera2/stack/common/cam_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 17162
+      },
+      "writtenOn": "2017-10-30T15:41:50Z",
+      "side": 1,
+      "message": "found taht remaining issues may be caused by this enum is incorrect, 2 of XIAOMI_DUMMY should be moved somewhere above, need more reverse to know where exact. CAM_INTF_PARM_JPEG_SCALE_DIMENSION for sure should be numbered 226, not 224 as this patch",
+      "revId": "e8565bcd238d8e02154450287f59f02c26307b92",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
