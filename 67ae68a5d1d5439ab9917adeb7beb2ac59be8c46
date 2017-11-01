@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bb09162_d3267e54",
+        "filename": "camera/QCamera2/stack/common/cam_types.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-11-01T14:08:13Z",
+      "side": 1,
+      "message": "Was this changed back here on purpose?",
+      "range": {
+        "startLine": 2189,
+        "startChar": 4,
+        "endLine": 2190,
+        "endChar": 18
+      },
+      "revId": "67ae68a5d1d5439ab9917adeb7beb2ac59be8c46",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
