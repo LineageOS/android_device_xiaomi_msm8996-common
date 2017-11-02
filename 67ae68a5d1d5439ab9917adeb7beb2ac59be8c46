@@ -22,6 +22,30 @@
       "revId": "67ae68a5d1d5439ab9917adeb7beb2ac59be8c46",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5453a289_72c9a9c7",
+        "filename": "camera/QCamera2/stack/common/cam_types.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 17162
+      },
+      "writtenOn": "2017-11-02T00:51:47Z",
+      "side": 1,
+      "message": "No accedential checked out wrong version, have to move it back to above",
+      "parentUuid": "8bb09162_d3267e54",
+      "range": {
+        "startLine": 2189,
+        "startChar": 4,
+        "endLine": 2190,
+        "endChar": 18
+      },
+      "revId": "67ae68a5d1d5439ab9917adeb7beb2ac59be8c46",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
