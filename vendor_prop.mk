@@ -100,7 +100,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=480 \
     sdm.debug.disable_rotator_split=1 \
     sdm.debug.disable_skip_validate=1 \
-    sdm.perf_hint_window=50
+    sdm.perf_hint_window=50 \
+    vendor.display.enable_default_color_mode=1
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
