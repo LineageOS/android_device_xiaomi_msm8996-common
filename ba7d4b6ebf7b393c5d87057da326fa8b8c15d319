@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1c7ff04_bd76f5c0",
+        "filename": "msm8996.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2017-11-15T16:58:23Z",
+      "side": 1,
+      "message": "This isn\u0027t used, it\u0027s for debug tools",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "ba7d4b6ebf7b393c5d87057da326fa8b8c15d319",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
