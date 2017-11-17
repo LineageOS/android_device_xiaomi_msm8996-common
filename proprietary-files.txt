@@ -311,7 +311,7 @@ bin/lowi-server
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
-etc/permissions/com.qualcomm.location.xml
+etc/permissions/com.qualcomm.location.xml|03f0d34d1a34315856195bb1ed3e618f90ff3cb1
 etc/permissions/izat.xt.srv.xml
 etc/cacert_location.pem
 etc/xtra_root_cert.pem
@@ -520,7 +520,7 @@ vendor/lib64/libdisp-aba.so
 
 # QMI
 bin/irsc_util
-etc/permissions/qti_permissions.xml
+etc/permissions/qti_permissions.xml|2826b33ed8e2756cc748c80bd6c466ff8af97ac5
 lib64/libqminvapi.so
 lib/libqminvapi.so
 vendor/lib64/libdiag.so
