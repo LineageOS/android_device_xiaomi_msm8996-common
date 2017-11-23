@@ -61,28 +61,28 @@ public class KeyHandler implements DeviceKeyHandler {
         mContext.registerReceiver(mScreenStateReceiver, screenStateFilter);
     }
 
-    public boolean handleKeyEvent(KeyEvent event) {
+    public KeyEvent handleKeyEvent(KeyEvent event) {
         CMHardwareManager hardware = CMHardwareManager.getInstance(mContext);
         boolean virtualKeysEnabled = hardware.get(CMHardwareManager.FEATURE_KEY_DISABLE);
         boolean fingerprintHomeButtonEnabled = FileUtils.isFileReadable(FP_HOME_NODE) &&
                 FileUtils.readOneLine(FP_HOME_NODE).equals("1");
 
         if (!hasSetupCompleted()) {
-            return false;
+            return event;
         }
 
         if (event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
             if (event.getScanCode() == 96) {
                 if (DEBUG) Log.d(TAG, "Fingerprint home button tapped");
-                return virtualKeysEnabled;
+                return virtualKeysEnabled ? null : event;
             }
             if (event.getScanCode() == 102) {
                 if (DEBUG) Log.d(TAG, "Mechanical home button pressed");
                 return sScreenTurnedOn &&
-                        (virtualKeysEnabled || fingerprintHomeButtonEnabled);
+                        (virtualKeysEnabled || fingerprintHomeButtonEnabled) ? null : event;
             }
         }
-        return false;
+        return event;
     }
 
     private boolean hasSetupCompleted() {
