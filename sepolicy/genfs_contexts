@@ -2,3 +2,5 @@ genfscon debugfs /rmt_storage u:object_r:debugfs_rmt:s0
 
 genfscon proc /buttons       u:object_r:proc_buttons:s0
 genfscon proc /touchpanel    u:object_r:proc_touchpanel:s0
+
+genfscon sysfs /devices/soc/6a00000.ssusb/6a00000.dwc3/gadget/lun0/     u:object_r:sysfs_android_usb:s0
