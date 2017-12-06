@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f5d1ae9_ccf7b666",
+        "filename": "gps/etc/izat.conf",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-12-06T09:58:40Z",
+      "side": 1,
+      "message": "rfs_shared is oem_2952",
+      "range": {
+        "startLine": 216,
+        "startChar": 29,
+        "endLine": 216,
+        "endChar": 37
+      },
+      "revId": "29868f918ccf83d146de39a8a6c1943aeb607e33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
