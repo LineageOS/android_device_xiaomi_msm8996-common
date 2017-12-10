@@ -623,10 +623,10 @@ bin/qvop-daemon
 vendor/lib64/libqvop-service.so
 vendor/lib/libqvop-service.so
 
-# Widevine DRM - from marlin - OPR3.170623.013
-vendor/bin/hw/android.hardware.drm@1.0-service.widevine|832d07eedf669c4b59f9863685926e9856139130
+# Widevine DRM - from marlin - OPM1.171019.011
+vendor/bin/hw/android.hardware.drm@1.0-service.widevine|fd6e14710c196fdd4131afe2ce10c4a5be1b309c
 vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc|51a3168a0dbc064d78ee11ca83614c0cd2e6daa5
-vendor/lib/libwvhidl.so|88276cfc0fcb8033ef69d61e6838ce915bfcf697
+vendor/lib/libwvhidl.so|f7288f7a7ed6765bd1d80d639a0aeb0c31eda795
 
 # WiFi
 bin/cnss-daemon
