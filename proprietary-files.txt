@@ -57,11 +57,13 @@ vendor/lib/libaudcal.so
 vendor/lib/libaudiodevarb.so
 
 # Bluetooth
+# aptX - from marlin - OPM1.171019.011
 bin/btnvtool
 bin/wcnss_filter
-vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
-vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so
-vendor/lib/libaptXScheduler.so
+lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
+lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
+lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
+lib/libaptXHD_encoder.so|3af681e3068a75af02ca9c2d4955e66c6aa2a737
 vendor/lib64/libbtnv.so
 vendor/lib/libbtnv.so
 
