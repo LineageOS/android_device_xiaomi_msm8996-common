@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e0fec02_f4590bd4",
+        "filename": "audio/audio_effects.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-12-18T11:01:01Z",
+      "side": 0,
+      "message": "Only this garbage was dropped.",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 344,
+        "endChar": 2
+      },
+      "revId": "8a2163a7a5f0db8ed18583f9fd2a4dc2a80eea9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
