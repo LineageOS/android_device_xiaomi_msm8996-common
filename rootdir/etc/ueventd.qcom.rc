@@ -133,6 +133,10 @@
 /dev/system_health_monitor 0644  radio      system
 /dev/mdss_rotator         0664   system     system
 /dev/elliptic0            0777   system     system
+
+# QDSS
+/dev/byte-cntr            0660   system    oem_2902
+
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
