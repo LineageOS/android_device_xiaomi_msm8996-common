@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9059417_8230783e",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-12-18T15:33:26Z",
+      "side": 1,
+      "message": "remove this in another Ps, so it matches taimen",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 89
+      },
+      "revId": "ce488c58a8a6c7cb093ec52603c030e451f9d547",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
