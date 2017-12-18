@@ -22,6 +22,30 @@
       "revId": "ce488c58a8a6c7cb093ec52603c030e451f9d547",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b8baa4d_7e188fc0",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-12-18T15:38:34Z",
+      "side": 1,
+      "message": "Yea, I was doing that when you were writing. ;)",
+      "parentUuid": "f9059417_8230783e",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 89
+      },
+      "revId": "ce488c58a8a6c7cb093ec52603c030e451f9d547",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
