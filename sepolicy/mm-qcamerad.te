@@ -1,3 +1,5 @@
 r_dir_file(mm-qcamerad, dsp_file)
 
 unix_socket_connect(mm-qcamerad, mpctl, perfd)
+
+allow mm-qcamerad camera_data_file:sock_file { create unlink };
