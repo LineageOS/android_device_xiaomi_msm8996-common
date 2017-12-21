@@ -1,0 +1,6 @@
+binder_use(rild)
+
+allow rild radio_data_file:dir rw_dir_perms;
+allow rild radio_data_file:file create_file_perms;
+
+set_prop(rild, system_radio_prop)
