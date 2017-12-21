@@ -1,5 +1,5 @@
 # ADSP
-bin/adsprpcd
+bin/adsprpcd:vendor/bin/adsprpcd
 vendor/lib64/libadsprpc.so
 vendor/lib64/libadsp_default_listener.so
 vendor/lib64/libfastcvadsp_stub.so
@@ -58,8 +58,8 @@ vendor/lib/libaudiodevarb.so
 
 # Bluetooth
 # aptX - from marlin - OPM1.171019.011
-bin/btnvtool
-bin/wcnss_filter
+bin/btnvtool:vendor/bin/btnvtool
+bin/wcnss_filter:vendor/bin/btnvtool
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
@@ -80,7 +80,7 @@ etc/firmware/rampatch_tlv_3.0.tlv
 etc/firmware/rampatch_tlv_3.2.tlv
 
 # Camera
-bin/mm-qcamera-daemon
+bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
 lib/hw/camera.msm8996.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
@@ -221,10 +221,10 @@ vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
 
 # Charger
-bin/hvdcp_opti
+bin/hvdcp_opti:vendor/bin/hvdcp_opti
 
 # CNE
-bin/cnd|832b9bb467eebc858ea030356e1d664909bc9c97
+bin/cnd:vendor/bin/cnd|832b9bb467eebc858ea030356e1d664909bc9c97
 etc/cne/SwimConfig.xml
 etc/cne/andsfCne.xml
 etc/cne/wqeclient/ATT/ATT_profile1.xml
@@ -265,7 +265,7 @@ vendor/lib/libwqe.so
 vendor/lib/libxml.so
 
 # DPM
-bin/dpmd
+bin/dpmd:vendor/bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
 etc/permissions/com.qti.dpmframework.xml
@@ -286,7 +286,7 @@ vendor/lib/libdpmnsrm.so
 vendor/lib/libdpmtcm.so
 
 # DRM and SEE
-bin/qseecomd
+bin/qseecomd:vendor/bin/qseecomd
 vendor/bin/qseeproxydaemon
 vendor/lib64/lib-sec-disp.so
 vendor/lib64/libGPreqcancel.so
@@ -308,10 +308,10 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS
-bin/loc_launcher
-bin/lowi-server
-bin/xtwifi-client
-bin/xtwifi-inet-agent
+bin/loc_launcher:vendor/bin/loc_launcher
+bin/lowi-server:vendor/bin/lowi-server
+bin/xtwifi-client:vendor/bin/xtwifi-client
+bin/xtwifi-inet-agent:vendor/bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml|2bebdd2bf3f4aa7e84beb24c973759a17a5f1e82
 etc/permissions/izat.xt.srv.xml
@@ -416,10 +416,10 @@ etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
 
 # IMS
-bin/ims_rtp_daemon
-bin/imscmservice
-bin/imsdatadaemon
-bin/imsqmidaemon
+bin/ims_rtp_daemon:vendor/bin/ims_rtp_daemon
+bin/imscmservice:vendor/bin/imscmservice
+bin/imsdatadaemon:vendor/bin/imsdatadaemon
+bin/imsqmidaemon:vendor/bin/imsqmidaemon
 etc/permissions/imscm.xml
 framework/imscmlibrary.jar
 framework/rcsimssettings.jar
@@ -487,8 +487,8 @@ vendor/lib/libQtiTether.so
 vendor/lib/libconnctrl.so
 
 # Perf
-bin/energy-awareness
-bin/iop
+bin/energy-awareness:vendor/bin/energy-awareness
+bin/iop:vendor/bin/iop
 vendor/bin/perfd
 vendor/etc/perf-profile0.conf
 vendor/etc/perf-profile1.conf
@@ -505,8 +505,8 @@ vendor/lib/libqti-iop.so
 vendor/lib/libqti-perfd-client.so
 
 # Peripheral manager
-bin/pm-proxy
-bin/pm-service
+bin/pm-proxy:vendor/bin/pm-proxy
+bin/pm-service:vendor/bin/pm-service
 vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
@@ -518,7 +518,7 @@ vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
 
 # QMI
-bin/irsc_util
+bin/irsc_util:vendor/bin/irsc_util
 etc/permissions/qti_permissions.xml|30f240377e8af499bd0f9496eb98455bacf064d1
 lib64/libqminvapi.so
 lib/libqminvapi.so
@@ -559,10 +559,10 @@ vendor/lib/libsmemlog.so
 -app/embms/embms.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
-bin/netmgrd
-bin/radish
-bin/rmt_storage
-bin/tftp_server
+bin/netmgrd:vendor/bin/netmgrd
+bin/radish:vendor/bin/radish
+bin/rmt_storage:vendor/bin/rmt_storage
+bin/tftp_server:vendor/bin/tftp_server
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/modem/Diag.cfg
@@ -592,7 +592,7 @@ vendor/lib/libmdmdetect.so
 vendor/qcril.db
 
 # Sensors
-bin/sensors.qcom
+bin/sensors.qcom:vendor/bin/sensors.qcom
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
@@ -614,14 +614,14 @@ vendor/lib64/libthermalioctl.so
 
 # Time services
 -app/TimeService/TimeService.apk
-bin/time_daemon
+bin/time_daemon:vendor/bin/time_daemon
 vendor/lib64/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
 
 # Voice fingerprint
-bin/qvop-daemon
+bin/qvop-daemon:vendor/bin/qvop-daemon
 vendor/lib64/libqvop-service.so
 vendor/lib/libqvop-service.so
 
@@ -631,4 +631,4 @@ vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc|51a3168a0dbc064d78e
 vendor/lib/libwvhidl.so|f7288f7a7ed6765bd1d80d639a0aeb0c31eda795
 
 # WiFi
-bin/cnss-daemon
+bin/cnss-daemon:vendor/bin/cnss-daemon
