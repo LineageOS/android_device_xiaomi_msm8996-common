@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8825b4bb_19f3b9cd",
+        "filename": "config.fs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-12-21T18:25:26Z",
+      "side": 1,
+      "message": "add both /system and /vendor paths like CAF does",
+      "revId": "3d3568f9c121ecdf9bd439841bf0163773c2c98c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
