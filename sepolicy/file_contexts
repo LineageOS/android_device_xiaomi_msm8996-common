@@ -5,7 +5,12 @@
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
+# DPM
+/(vendor|system/vendor)/bin/dpmd      u:object_r:dpmd_exec:s0
+
 # Sys files
+/sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9]+/panel_(color|vendor)             u:object_r:sysfs_panel:s0
+
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-0020/input/input[0-9]+/reversed_keys    u:object_r:proc_touchpanel:s0
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-004a/reversed_keys                      u:object_r:proc_touchpanel:s0
 
@@ -21,6 +26,29 @@
 /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
 /data/misc/netmgr(/.*)?               u:object_r:netmgr_data_file:s0
 
+# Dumpstate
+/(vendor|system/vendor)/bin/iop       u:object_r:dumpstate_exec:s0
+
+# HVDCP
+/sys/devices/soc/75b5000\.i2c/i2c-7/7-001d(/.*)?   u:object_r:sysfs_battery_supply:s0
+/sys/devices/soc/[a-z0-9]+\.i2c/i2c-[0-9]/[0-9]-[a-z0-9]+/power_supply/usb-parallel(/.*)?   u:object_r:sysfs_battery_supply:s0
+
+# IMS
+/dev/socket/ims_rtpd                  u:object_r:ims_socket:s0
+/(vendor|system/vendor)/bin/imscmservice   u:object_r:imscm_exec:s0
+
+# IOP
+/data/misc/iop(/.*)?                  u:object_r:iop_data_file:s0
+
+# Location
+/data/misc/location(/.*)?             u:object_r:location_data_file:s0
+/data/misc/location/mq/location-mq-s  u:object_r:location_socket:s0
+
+# Perfd
+/(vendor|system/vendor)/bin/perfd     u:object_r:perfd_exec:s0
+/data/system/perfd(/.*)?              u:object_r:mpctl_data_file:s0
+/dev/socket/perfd                     u:object_r:mpctl_socket:s0
+
 # Persist files
 /persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
 /persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
@@ -29,5 +57,9 @@
 /system/bin/readfem                   u:object_r:readfem_exec:s0
 /system/bin/readmac                   u:object_r:readmac_exec:s0
 
+# QFP
+/data/misc/stargate(/.*)?             u:object_r:qfp-daemon_data_file:s0
+
 # Shell scripts
 /system/bin/init\.panel\.sh           u:object_r:init_panel_exec:s0
+/system/bin/init\.qcom\.sh            u:object_r:init_qcom_exec:s0
