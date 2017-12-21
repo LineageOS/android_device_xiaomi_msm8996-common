@@ -5,6 +5,9 @@
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
+# DPM
+/(vendor|system/vendor)/bin/dpmd      u:object_r:dpmd_exec:s0
+
 # Sys files
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-0020/input/input[0-9]+/reversed_keys    u:object_r:proc_touchpanel:s0
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-004a/reversed_keys                      u:object_r:proc_touchpanel:s0
@@ -20,6 +23,17 @@
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
 /data/misc/netmgr(/.*)?               u:object_r:netmgr_data_file:s0
+
+# Dumpstate
+/(vendor|system/vendor)/bin/iop       u:object_r:dumpstate_exec:s0
+
+# IMS
+/(vendor|system/vendor)/bin/imscmservice   u:object_r:imscm_exec:s0
+
+# Perfd
+/(vendor|system/vendor)/bin/perfd     u:object_r:perfd_exec:s0
+/data/system/perfd(/.*)?              u:object_r:mpctl_data_file:s0
+/dev/socket/perfd                     u:object_r:mpctl_socket:s0
 
 # Persist files
 /persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
