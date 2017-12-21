@@ -1,0 +1,1 @@
+allow dataservice_app ipa_dev:chr_file rw_file_perms;
