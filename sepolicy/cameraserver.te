@@ -1,0 +1,2 @@
+# interaction with mptcl and thermal sockets
+unix_socket_connect(cameraserver, mpctl, perfd)

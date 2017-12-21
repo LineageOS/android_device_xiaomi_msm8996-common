@@ -1,0 +1,46 @@
+type perfd, domain;
+type perfd_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(perfd)
+
+allow perfd {
+    sysfs_devices_system_cpu
+    sysfs_cpu_online
+    sysfs_scsi_host
+    proc
+    sysfs
+}:file rw_file_perms;
+
+# Allow access to devfreq sysfs entry
+r_dir_file(perfd, sysfs_devfreq)
+allow perfd sysfs_devfreq:file write;
+
+# Allow access to msm_perf sysfs entry
+r_dir_file(perfd, sysfs_msm_perf)
+allow perfd sysfs_msm_perf:file write;
+
+# Allow access to msm_power sysfs entry
+r_dir_file(perfd, sysfs_msm_power)
+allow perfd sysfs_msm_power:file write;
+
+# Allow access to lib sysfs entry
+allow perfd sysfs_lib:file w_file_perms;
+
+# Allow access to kgsl sysfs entry
+r_dir_file(perfd, sysfs_kgsl)
+
+# mpctl socket
+allow perfd mpctl_socket:sock_file rw_file_perms;
+
+# default_values file
+allow perfd mpctl_data_file:dir rw_dir_perms;
+allow perfd mpctl_data_file:file create_file_perms;
+
+# Thermal lib access
+unix_socket_connect(perfd, thermal, thermal-engine)
+
+# Allow perfd to set properties
+set_prop(perfd, freq_prop)
+
+allow perfd cgroup:file r_file_perms;
+allow perfd sysfs:dir r_dir_perms;
