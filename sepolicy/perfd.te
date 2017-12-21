@@ -1,0 +1,30 @@
+type perfd, domain;
+type perfd_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(perfd)
+
+allow perfd {
+    sysfs_devices_system_cpu
+    sysfs_cpu_online
+    sysfs_scsi_host
+    proc
+    sysfs
+}:file rw_file_perms;
+
+# Allow access to devfreq sysfs entry
+r_dir_file(perfd, sysfs_devfreq)
+allow perfd sysfs_devfreq:file write;
+
+# Allow access to lpm sysfs entry
+r_dir_file(perfd, sysfs_lpm)
+allow perfd sysfs_lpm:file write;
+
+# Allow access to msm_perf sysfs entry
+r_dir_file(perfd, sysfs_msm_perf)
+allow perfd sysfs_msm_perf:file write;
+
+# mpctl socket
+allow perfd mpctl_socket:sock_file rw_file_perms;
+
+# Allow perfd to set properties
+set_prop(perfd, freq_prop)
