@@ -1,3 +1,7 @@
+# Allow communication with netd
+allow netmgrd netd_socket:sock_file w_file_perms;
+r_dir_file(netmgrd, net_data_file)
+
 # Read and write /data/misc/netmgr
 userdebug_or_eng(`
   allow netmgrd netmgr_data_file:dir rw_dir_perms;

@@ -1,0 +1,2 @@
+type init_qcom, domain;
+type init_qcom_exec, exec_type, file_type;
