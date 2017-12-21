@@ -1,0 +1,231 @@
+From 72da0afd56e3c49338b820c3c356b21bf2c0cca1 Mon Sep 17 00:00:00 2001
+From: LuK1337 <priv.luk@gmail.com>
+Date: Thu, 21 Dec 2017 16:06:59 +0100
+Subject: [PATCH] msm8996-common: sepolicy: Initial SELinux O updates
+
+Change-Id: Iae783fda17c9e747a824bce8b12a39971faa0bdc
+---
+ sepolicy/audioserver.te             |  5 +++++
+ sepolicy/cameraserver.te            |  2 ++
+ sepolicy/file_contexts              | 13 +++++++++++++
+ sepolicy/fingerprintd.te            | 11 -----------
+ sepolicy/hal_fingerprint_default.te | 14 ++++++++++++++
+ sepolicy/imscm.te                   |  4 ++++
+ sepolicy/mediacodec.te              |  1 +
+ sepolicy/mm-pp-daemon.te            |  4 ++++
+ sepolicy/perfd.te                   |  7 +++++++
+ sepolicy/qfp-daemon.te              |  3 +++
+ sepolicy/qseeproxy.te               |  5 +++++
+ sepolicy/radio.te                   |  1 +
+ sepolicy/rild.te                    |  6 ++++++
+ sepolicy/surfaceflinger.te          |  4 ++++
+ sepolicy/system_server.te           |  5 +++++
+ 15 files changed, 74 insertions(+), 11 deletions(-)
+ create mode 100644 sepolicy/cameraserver.te
+ delete mode 100644 sepolicy/fingerprintd.te
+ create mode 100644 sepolicy/hal_fingerprint_default.te
+ create mode 100644 sepolicy/imscm.te
+ create mode 100644 sepolicy/mediacodec.te
+ create mode 100644 sepolicy/mm-pp-daemon.te
+ create mode 100644 sepolicy/perfd.te
+ create mode 100644 sepolicy/qseeproxy.te
+ create mode 100644 sepolicy/radio.te
+ create mode 100644 sepolicy/rild.te
+ create mode 100644 sepolicy/surfaceflinger.te
+
+diff --git a/sepolicy/audioserver.te b/sepolicy/audioserver.te
+index bd6e1dc..d8f7add 100644
+--- a/sepolicy/audioserver.te
++++ b/sepolicy/audioserver.te
+@@ -1,3 +1,8 @@
++# access to perflock
++allow audioserver mpctl_socket:dir r_dir_perms;
++unix_socket_send(audioserver, mpctl, perfd)
++unix_socket_connect(audioserver, mpctl, perfd)
++
+ allow audioserver persist_file:dir search;
+ 
+ r_dir_file(audioserver, persist_usf_cal_file)
+diff --git a/sepolicy/cameraserver.te b/sepolicy/cameraserver.te
+new file mode 100644
+index 0000000..da56dde
+--- /dev/null
++++ b/sepolicy/cameraserver.te
+@@ -0,0 +1,2 @@
++# interaction with mptcl and thermal sockets
++unix_socket_connect(cameraserver, mpctl, perfd)
+diff --git a/sepolicy/file_contexts b/sepolicy/file_contexts
+index a575d62..0ef1072 100644
+--- a/sepolicy/file_contexts
++++ b/sepolicy/file_contexts
+@@ -5,6 +5,9 @@
+ /dev/pn548                            u:object_r:nfc_device:s0
+ /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
+ 
++# DPM
++/system/vendor/bin/dpmd               u:object_r:dpmd_exec:s0
++
+ # Sys files
+ /sys/devices/soc/75ba000\.i2c/i2c-12/12-0020/input/input[0-9]+/reversed_keys    u:object_r:proc_touchpanel:s0
+ /sys/devices/soc/75ba000\.i2c/i2c-12/12-004a/reversed_keys                      u:object_r:proc_touchpanel:s0
+@@ -21,6 +24,16 @@
+ /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
+ /data/misc/netmgr(/.*)?               u:object_r:netmgr_data_file:s0
+ 
++# Dumpstate
++/system/vendor/bin/iop                u:object_r:dumpstate_exec:s0
++
++# IMS
++/system/vendor/bin/imscmservice       u:object_r:imscm_exec:s0
++
++# Perfd
++/system/vendor/bin/perfd              u:object_r:perfd_exec:s0
++/dev/socket/perfd                     u:object_r:mpctl_socket:s0
++
+ # Persist files
+ /persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
+ /persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
+diff --git a/sepolicy/fingerprintd.te b/sepolicy/fingerprintd.te
+deleted file mode 100644
+index 64033dd..0000000
+--- a/sepolicy/fingerprintd.te
++++ /dev/null
+@@ -1,11 +0,0 @@
+-# Allow fingerprintd to open firmware images
+-r_dir_file(fingerprintd, firmware_file)
+-
+-allow fingerprintd fpc_data_file:dir rw_dir_perms;
+-allow fingerprintd fpc_data_file:file create_file_perms;
+-allow fingerprintd fpc_data_file:sock_file { create unlink };
+-allow fingerprintd sysfs_fpc:dir r_dir_perms;
+-allow fingerprintd sysfs_fpc:file rw_file_perms;
+-allow fingerprintd sysmatdrv_device:chr_file w_file_perms;
+-allow fingerprintd tee_device:chr_file rw_file_perms;
+-allow fingerprintd uhid_device:chr_file rw_file_perms;
+diff --git a/sepolicy/hal_fingerprint_default.te b/sepolicy/hal_fingerprint_default.te
+new file mode 100644
+index 0000000..cf09897
+--- /dev/null
++++ b/sepolicy/hal_fingerprint_default.te
+@@ -0,0 +1,14 @@
++binder_call(hal_fingerprint_default, qfp-daemon)
++binder_use(hal_fingerprint_default)
++
++# Allow hal_fingerprint_default to open firmware images
++r_dir_file(hal_fingerprint_default, firmware_file)
++
++allow hal_fingerprint_default fpc_data_file:dir rw_dir_perms;
++allow hal_fingerprint_default fpc_data_file:file create_file_perms;
++allow hal_fingerprint_default fpc_data_file:sock_file { create unlink };
++allow hal_fingerprint_default sysfs_fpc:dir r_dir_perms;
++allow hal_fingerprint_default sysfs_fpc:file rw_file_perms;
++allow hal_fingerprint_default sysmatdrv_device:chr_file w_file_perms;
++allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
++allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
+diff --git a/sepolicy/imscm.te b/sepolicy/imscm.te
+new file mode 100644
+index 0000000..9c6d467
+--- /dev/null
++++ b/sepolicy/imscm.te
+@@ -0,0 +1,4 @@
++type imscm, domain;
++type imscm_exec, exec_type, vendor_file_type, file_type;
++
++init_daemon_domain(imscm)
+diff --git a/sepolicy/mediacodec.te b/sepolicy/mediacodec.te
+new file mode 100644
+index 0000000..e0d7d0a
+--- /dev/null
++++ b/sepolicy/mediacodec.te
+@@ -0,0 +1 @@
++unix_socket_connect(mediacodec, mpctl, perfd)
+diff --git a/sepolicy/mm-pp-daemon.te b/sepolicy/mm-pp-daemon.te
+new file mode 100644
+index 0000000..3b2adb6
+--- /dev/null
++++ b/sepolicy/mm-pp-daemon.te
+@@ -0,0 +1,4 @@
++binder_use(mm-pp-daemon)
++
++# Allow connections between sensor manager and mm-pp-daemon
++allow mm-pp-daemon system_server:unix_stream_socket rw_socket_perms;
+diff --git a/sepolicy/perfd.te b/sepolicy/perfd.te
+new file mode 100644
+index 0000000..46c2c08
+--- /dev/null
++++ b/sepolicy/perfd.te
+@@ -0,0 +1,7 @@
++type perfd, domain;
++type perfd_exec, exec_type, vendor_file_type, file_type;
++
++init_daemon_domain(perfd)
++
++# mpctl socket
++allow perfd mpctl_socket:sock_file rw_file_perms;
+diff --git a/sepolicy/qfp-daemon.te b/sepolicy/qfp-daemon.te
+index f02d037..4c5e715 100644
+--- a/sepolicy/qfp-daemon.te
++++ b/sepolicy/qfp-daemon.te
+@@ -1,3 +1,6 @@
++binder_call(qfp-daemon, hal_fingerprint_default)
++binder_use(qfp-daemon)
++
+ allow qfp-daemon self:socket create_socket_perms_no_ioctl;
+ 
+ allow qfp-daemon captouch_device:chr_file rw_file_perms;
+diff --git a/sepolicy/qseeproxy.te b/sepolicy/qseeproxy.te
+new file mode 100644
+index 0000000..4bed601
+--- /dev/null
++++ b/sepolicy/qseeproxy.te
+@@ -0,0 +1,5 @@
++# Allow qseeproxy to use Binder IPC
++binder_use(qseeproxy)
++
++# Mark qseeproxy as a Binder service domain
++binder_service(qseeproxy)
+diff --git a/sepolicy/radio.te b/sepolicy/radio.te
+new file mode 100644
+index 0000000..89f36d1
+--- /dev/null
++++ b/sepolicy/radio.te
+@@ -0,0 +1 @@
++qmux_socket(radio)
+diff --git a/sepolicy/rild.te b/sepolicy/rild.te
+new file mode 100644
+index 0000000..6c188b4
+--- /dev/null
++++ b/sepolicy/rild.te
+@@ -0,0 +1,6 @@
++binder_use(rild)
++
++allow rild radio_data_file:dir rw_dir_perms;
++allow rild radio_data_file:file create_file_perms;
++
++set_prop(rild, system_radio_prop)
+diff --git a/sepolicy/surfaceflinger.te b/sepolicy/surfaceflinger.te
+new file mode 100644
+index 0000000..050883c
+--- /dev/null
++++ b/sepolicy/surfaceflinger.te
+@@ -0,0 +1,4 @@
++# access to perflock
++allow surfaceflinger mpctl_socket:dir r_dir_perms;
++unix_socket_send(surfaceflinger, mpctl, perfd)
++unix_socket_connect(surfaceflinger, mpctl, perfd)
+diff --git a/sepolicy/system_server.te b/sepolicy/system_server.te
+index 95e685f..86da65e 100644
+--- a/sepolicy/system_server.te
++++ b/sepolicy/system_server.te
+@@ -1,3 +1,8 @@
++# access to perflock
++allow system_server mpctl_socket:dir r_dir_perms;
++unix_socket_send(system_server, mpctl, perfd)
++unix_socket_connect(system_server, mpctl, perfd)
++
+ allow system_server lirc_device:chr_file rw_file_perms;
+ allow system_server persist_file:file r_file_perms;
+ allow system_server proc_touchpanel:dir search;
+-- 
+2.13.1
+
