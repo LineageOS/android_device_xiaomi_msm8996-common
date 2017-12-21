@@ -1,0 +1,9 @@
+# allow cnd the following capability
+allow cnd self:capability {
+    setuid
+    setgid
+    dac_override
+    net_raw
+    chown
+    fsetid
+};
