@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca750611_9304ce5d",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-12-21T15:51:53Z",
+      "side": 1,
+      "message": "/(vendor|system/vendor)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "ba24dce050d8f6638c9b806a7941cd127597f881",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d47e56f7_e914ecb2",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-12-21T15:51:53Z",
+      "side": 1,
+      "message": "/(vendor|system/vendor)",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 14
+      },
+      "revId": "ba24dce050d8f6638c9b806a7941cd127597f881",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56a4e72d_f72116ab",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-12-21T15:51:53Z",
+      "side": 1,
+      "message": "/(vendor|system/vendor)",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "ba24dce050d8f6638c9b806a7941cd127597f881",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41b4cec3_5cb242f7",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2017-12-21T15:51:53Z",
+      "side": 1,
+      "message": "/(vendor|system/vendor)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "ba24dce050d8f6638c9b806a7941cd127597f881",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
