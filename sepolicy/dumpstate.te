@@ -1,0 +1,3 @@
+# default_values file
+allow dumpstate iop_data_file:dir rw_dir_perms;
+allow dumpstate iop_data_file:file create_file_perms;
