@@ -1,3 +1,8 @@
+# access to perflock
+allow audioserver mpctl_socket:dir r_dir_perms;
+unix_socket_send(audioserver, mpctl, perfd)
+unix_socket_connect(audioserver, mpctl, perfd)
+
 allow audioserver persist_file:dir search;
 
 r_dir_file(audioserver, persist_usf_cal_file)
