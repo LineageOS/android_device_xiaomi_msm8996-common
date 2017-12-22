@@ -453,7 +453,7 @@ vendor/lib64/hw/keystore.msm8996.so
 vendor/lib/hw/keystore.msm8996.so
 
 # Listen
-vendor/lib/hw/sound_trigger.primary.msm8996.so
+vendor/lib/hw/sound_trigger.primary.msm8996.so|cfda5e7638c8cd64865b4b818f93cceccb2abfbc
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
