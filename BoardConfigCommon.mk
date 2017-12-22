@@ -19,6 +19,7 @@ BOARD_VENDOR := xiaomi
 
 VENDOR_PATH := device/xiaomi/msm8996-common
 
+TARGET_COPY_OUT_VENDOR := system
 TARGET_SPECIFIC_HEADER_PATH := $(VENDOR_PATH)/include
 
 # Architecture
