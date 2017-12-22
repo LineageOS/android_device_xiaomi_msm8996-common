@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "292642ef_6023b362",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2017-12-22T16:29:13Z",
+      "side": 1,
+      "message": "For all vendor references, perhaps use $(TARGET_COPY_OUT_VENDOR)",
+      "revId": "7b695578f2b22421583f486dd3b3ecd58c897229",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
