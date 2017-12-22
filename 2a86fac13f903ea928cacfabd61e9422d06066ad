@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bf45d99_7e3afacd",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-12-22T16:49:23Z",
+      "side": 1,
+      "message": "OPM1.171019.011",
+      "range": {
+        "startLine": 352,
+        "startChar": 27,
+        "endLine": 352,
+        "endChar": 44
+      },
+      "revId": "2a86fac13f903ea928cacfabd61e9422d06066ad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
