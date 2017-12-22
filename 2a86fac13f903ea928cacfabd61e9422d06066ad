@@ -22,6 +22,30 @@
       "revId": "2a86fac13f903ea928cacfabd61e9422d06066ad",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "132b16c1_5922d4a8",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-12-22T16:54:21Z",
+      "side": 1,
+      "message": "I was pretty sure I changed that, weird.",
+      "parentUuid": "0bf45d99_7e3afacd",
+      "range": {
+        "startLine": 352,
+        "startChar": 27,
+        "endLine": 352,
+        "endChar": 44
+      },
+      "revId": "2a86fac13f903ea928cacfabd61e9422d06066ad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
