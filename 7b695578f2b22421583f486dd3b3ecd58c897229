@@ -16,6 +16,24 @@
       "revId": "7b695578f2b22421583f486dd3b3ecd58c897229",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe4b4caa_be13af9f",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-12-22T16:47:15Z",
+      "side": 1,
+      "message": "Hehe. I have been there: https://review.lineageos.org/#/c/199568/1 and https://review.lineageos.org/#/c/199569/1. Luca demoted me from doing it.\n\nThe fact is that we *may* re-use an unused partition that Xiaomi devices have (/cust) as /vendor, but we\u0027re not doing so at the moment. For the time being if we replaced system by $(TARGET_COPY_OUT_VENDOR), everything that we want to move right now would stay in the same place (because we won\u0027t set $(TARGET_COPY_OUT_VENDOR) :\u003d vendor).",
+      "parentUuid": "292642ef_6023b362",
+      "revId": "7b695578f2b22421583f486dd3b3ecd58c897229",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
