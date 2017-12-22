@@ -34,6 +34,24 @@
       "revId": "7b695578f2b22421583f486dd3b3ecd58c897229",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f0ff3af_12ec33ad",
+        "filename": "msm8996.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-12-22T17:42:46Z",
+      "side": 1,
+      "message": "Nevermind, this can work because it defaults to /system/vendor which is what we want for now.",
+      "parentUuid": "fe4b4caa_be13af9f",
+      "revId": "7b695578f2b22421583f486dd3b3ecd58c897229",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
