@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3f4518b_dd6d1143",
+        "filename": "sepolicy/init_qcom.te",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2017-12-23T11:33:09Z",
+      "side": 1,
+      "message": "Yes, I tried \u0027system\u0027 and \u0027radio\u0027 groups.",
+      "range": {
+        "startLine": 8,
+        "startChar": 40,
+        "endLine": 8,
+        "endChar": 52
+      },
+      "revId": "9b0583f332610fe41a65cc5f90ebce299913f0cb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
