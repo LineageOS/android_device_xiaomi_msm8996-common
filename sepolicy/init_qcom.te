@@ -1,2 +1,29 @@
 type init_qcom, domain;
 type init_qcom_exec, exec_type, file_type;
+
+# Allow for transition from init domain to init_qcom
+init_daemon_domain(init_qcom)
+
+# Allow to use chown & dac_override
+allow init_qcom self:capability { chown dac_override };
+
+# Allow to write in /proc/sys/kernel/printk
+allow init_qcom proc:file w_file_perms;
+
+# Allow to read, write and setattr in /proc/touchpanel
+allow init_qcom proc_touchpanel:dir { rw_dir_perms setattr };
+allow init_qcom proc_touchpanel:file { rw_file_perms setattr };
+
+# Allow to read, write and setattr in /data/misc/radio
+allow init_qcom radio_data_file:dir { r_dir_perms setattr };
+allow init_qcom radio_data_file:file { rw_file_perms setattr };
+
+# Allow to getattr and setattr in panel sysfs
+allow init_qcom sysfs:file { getattr setattr };
+
+# Allow to read firmware files
+allow init_qcom firmware_file:file r_file_perms;
+
+# Shell script needs to execute /system/bin/sh
+allow init_qcom shell_exec:file rx_file_perms;
+allow init_qcom toolbox_exec:file rx_file_perms;
