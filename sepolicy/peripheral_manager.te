@@ -1,1 +1,3 @@
 binder_use(per_mgr)
+
+allow per_mgr binder_per_mgr_service:service_manager { add find };
