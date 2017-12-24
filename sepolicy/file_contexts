@@ -5,6 +5,9 @@
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
+# Debugfs files
+/sys/kernel/debug/rmt_storage(/.*)?                                             u:object_r:debugfs_rmt:s0
+
 # Sys files
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9]+/panel_(color|vendor)             u:object_r:sysfs_panel:s0
 

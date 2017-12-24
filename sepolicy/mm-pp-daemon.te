@@ -2,3 +2,7 @@ binder_use(mm-pp-daemon)
 
 # Allow connections between sensor manager and mm-pp-daemon
 allow mm-pp-daemon system_server:unix_stream_socket rw_socket_perms;
+
+# Allow sensor and permission services to be found
+allow mm-pp-daemon sensorservice_service:service_manager find;
+allow mm-pp-daemon permission_service:service_manager find;
