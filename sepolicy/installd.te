@@ -1,0 +1,1 @@
+allow installd dsp_file:filesystem quotaget;
