@@ -1,5 +1,7 @@
 binder_use(rild)
 
+allow rild binder_per_mgr_service:service_manager find;
+
 allow rild radio_data_file:dir rw_dir_perms;
 allow rild radio_data_file:file create_file_perms;
 

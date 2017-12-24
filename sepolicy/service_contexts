@@ -1,0 +1,2 @@
+com.qualcomm.qti.qseeproxy                     u:object_r:binder_qseeproxy_service:s0
+vendor.qcom.PeripheralManager                  u:object_r:binder_per_mgr_service:s0
