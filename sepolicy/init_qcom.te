@@ -22,7 +22,11 @@ allow init_qcom radio_data_file:file { rw_file_perms setattr };
 allow init_qcom sysfs:file { getattr setattr };
 
 # Allow to read firmware files
+allow init_qcom firmware_file:dir search;
 allow init_qcom firmware_file:file r_file_perms;
+
+# Allow to write radio images
+allow init_qcom radio_data_file:dir write;
 
 # Shell script needs to execute /system/bin/sh
 allow init_qcom shell_exec:file rx_file_perms;
