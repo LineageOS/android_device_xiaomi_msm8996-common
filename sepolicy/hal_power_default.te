@@ -1,0 +1,5 @@
+r_dir_file(hal_power_default, debugfs_wlan)
+
+# Allow writing to files in /proc/touchpanel
+allow hal_power_default proc_touchpanel:dir search;
+allow hal_power_default sysfs:file rw_file_perms;
