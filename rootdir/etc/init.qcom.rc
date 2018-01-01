@@ -596,11 +596,6 @@ service adsprpcd /system/vendor/bin/adsprpcd
     user media
     group media
 
-service audiod /system/bin/audiod
-    class late_start
-    user system
-    group system
-
 service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
