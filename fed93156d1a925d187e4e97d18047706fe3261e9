@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d80bcc7_191d5fa2",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-01-04T16:43:51Z",
+      "side": 1,
+      "message": "This is redundante since it\u0027s already done in init.qcom.power.rc script.",
+      "range": {
+        "startLine": 386,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 60
+      },
+      "revId": "fed93156d1a925d187e4e97d18047706fe3261e9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
