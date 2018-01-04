@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bb1975c_402fa090",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-01-04T13:26:49Z",
+      "side": 1,
+      "message": "To fix later",
+      "range": {
+        "startLine": 352,
+        "startChar": 18,
+        "endLine": 352,
+        "endChar": 21
+      },
+      "revId": "637f730db74ba3b1a5df3e0a8145ff837adba746",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8cc9009_84cacdaf",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-01-04T13:26:49Z",
+      "side": 1,
+      "message": "To fix later",
+      "range": {
+        "startLine": 438,
+        "startChar": 22,
+        "endLine": 438,
+        "endChar": 25
+      },
+      "revId": "637f730db74ba3b1a5df3e0a8145ff837adba746",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
