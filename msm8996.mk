@@ -206,10 +206,6 @@ PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
     android.hidl.manager@1.0
 
-# IMS
-PRODUCT_PACKAGES += \
-    libshims_ims
-
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
@@ -292,8 +288,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librmnetctl \
-    libxml2 \
-    libshims_rild_socket
+    libxml2
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
