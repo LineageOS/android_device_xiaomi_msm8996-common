@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddd7c2a9_d066bb5b",
+        "filename": "msm8996.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-01-09T09:26:18Z",
+      "side": 1,
+      "message": "Gotta validate this.",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 23
+      },
+      "revId": "a39be791dd413c0041ef03a397cfdc5259cc7fa4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
