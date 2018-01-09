@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de6b9f6a_db7151ab",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2018-01-09T10:38:26Z",
+      "side": 1,
+      "message": "Remove 32bit ones?",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 76
+      },
+      "revId": "4d3b0191ad2ff636f9ddba41b59d8fc28092d9c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0f88536_afab3a06",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2018-01-09T10:38:26Z",
+      "side": 1,
+      "message": "^",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 90
+      },
+      "revId": "4d3b0191ad2ff636f9ddba41b59d8fc28092d9c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
