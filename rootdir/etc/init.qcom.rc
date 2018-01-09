@@ -610,6 +610,10 @@ service ppd /system/vendor/bin/mm-pp-dpps
     socket pps stream 0660 system system
     disabled
 
+on property:vold.decrypt=trigger_restart_framework
+    stop camera-provider-2-4
+    start camera-provider-2-4
+
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
