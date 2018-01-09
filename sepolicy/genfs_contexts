@@ -5,6 +5,9 @@ genfscon proc /touchpanel    u:object_r:proc_touchpanel:s0
 genfscon sysfs /devices/soc/75ba000.i2c/i2c-12/12-0020/panel_color     u:object_r:sysfs_panel:s0
 genfscon sysfs /devices/soc/75ba000.i2c/i2c-12/12-0020/panel_vendor    u:object_r:sysfs_panel:s0
 
+genfscon sysfs /devices/soc/75b7000.i2c/i2c-9/9-0030/leds    u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/soc/leds-qpnp-30/leds                u:object_r:sysfs_leds:s0
+
 genfscon sysfs /devices/soc/75ba000.i2c/i2c-12/12-0020/input/input[0-9]+/reversed_keys    u:object_r:proc_touchpanel:s0
 genfscon sysfs /devices/soc/75ba000.i2c/i2c-12/12-004a/reversed_keys                      u:object_r:proc_touchpanel:s0
 
