@@ -71,18 +71,6 @@ include $(BUILD_EXECUTABLE)
 
 ################################################################################
 
-define ADD_TEST
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := $1
-LOCAL_SRC_FILES    := $1
-LOCAL_MODULE_CLASS := ipacm
-LOCAL_MODULE_TAGS  := debug
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)
-include $(BUILD_PREBUILT)
-
-endef
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := IPACM_cfg.xml
 LOCAL_MODULE_CLASS := ETC
