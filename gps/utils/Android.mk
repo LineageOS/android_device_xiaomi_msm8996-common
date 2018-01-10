@@ -1,10 +1,6 @@
-ifneq ($(BUILD_TINY_ANDROID),true)
-#Compile this library only for builds with the latest modem image
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-
 
 ## Libs
 LOCAL_SHARED_LIBRARIES := \
@@ -48,8 +44,6 @@ LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib
 LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_PRELINK_MODULE := false
-
 LOCAL_CFLAGS += $(GNSS_CFLAGS)
 
 include $(BUILD_SHARED_LIBRARY)
@@ -60,4 +54,3 @@ LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)
 include $(BUILD_HEADER_LIBRARY)
 
 include $(addsuffix /Android.mk, $(addprefix $(LOCAL_PATH)/, platform_lib_abstractions))
-endif # not BUILD_TINY_ANDROID
