@@ -1,5 +1,3 @@
-ifneq ($(BUILD_TINY_ANDROID),true)
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -49,8 +47,4 @@ LOCAL_COPY_HEADERS:= \
     loc_core_log.h \
     LocAdapterProxyBase.h
 
-LOCAL_PRELINK_MODULE := false
-
 include $(BUILD_SHARED_LIBRARY)
-
-endif # not BUILD_TINY_ANDROID
