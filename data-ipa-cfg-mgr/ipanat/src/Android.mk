@@ -12,7 +12,10 @@ LOCAL_SRC_FILES := ipa_nat_drv.c \
 
 
 LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64
-LOCAL_CFLAGS := -DDEBUG -Wall -Werror
+LOCAL_CFLAGS := -Wall -Werror
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+LOCAL_CFLAGS += -DDEBUG
+endif
 LOCAL_CFLAGS += -DFEATURE_IPA_ANDROID
 LOCAL_MODULE := libipanat
 LOCAL_MODULE_TAGS := optional
