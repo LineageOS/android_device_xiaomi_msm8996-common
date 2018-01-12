@@ -1,15 +1,11 @@
-# ADSP
-bin/adsprpcd:vendor/bin/adsprpcd
-vendor/lib64/libadsprpc.so
-vendor/lib64/libadsp_default_listener.so
-vendor/lib64/libfastcvadsp_stub.so
-vendor/lib64/libfastcvopt.so
-vendor/lib/libadsprpc.so
-vendor/lib/libadsp_default_listener.so
-vendor/lib/libadsp_hvx_callback_skel.so
-vendor/lib/libadsp_hvx_stub.so
-vendor/lib/libfastcvadsp_stub.so
-vendor/lib/libfastcvopt.so
+# ADSP - from tissot
+vendor/bin/adsprpcd|35b15f3197e193f742cef0c9f51bbfba9f7e27ad
+vendor/lib/libadsp_default_listener.so|3b56c2d00bef6585b8de11ba5afbec3772456d2d
+vendor/lib/libadsprpc.so|903160c2bf36fd3155720048c3ae2ab5e7fea7b4
+vendor/lib/libfastcvopt.so|1eae508500eb3e8bb3e97617a196d054d9d4f11c
+vendor/lib64/libadsp_default_listener.so|7ae782755ddc945edb22ae11e964e0118a3b01a9
+vendor/lib64/libadsprpc.so|88a4f07391e70f9b83a0aae90d087afbe64ecfa5
+vendor/lib64/libfastcvopt.so|5c0c7331eb2836ed1791cdefaef20cb66df02cb5
 
 # ADSP modules
 vendor/lib/rfsa/adsp/libadsp_fd_skel.so
@@ -34,27 +30,34 @@ vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
-# Audio libraries
-lib/soundfx/libdirac.so
-vendor/lib64/soundfx/libqcbassboost.so
-vendor/lib64/soundfx/libqcreverb.so
-vendor/lib64/soundfx/libqcvirt.so
-vendor/lib64/libacdb-fts.so
-vendor/lib64/libacdbloader.so
-vendor/lib64/libacdbrtac.so
-vendor/lib64/libadiertac.so
-vendor/lib64/libaudcal.so
-vendor/lib64/libaudiodevarb.so
-vendor/lib/soundfx/libqcbassboost.so
-vendor/lib/soundfx/libqcreverb.so
-vendor/lib/soundfx/libqcvirt.so
-vendor/lib/libadm.so
-vendor/lib/libacdb-fts.so
-vendor/lib/libacdbloader.so
-vendor/lib/libacdbrtac.so
-vendor/lib/libadiertac.so
-vendor/lib/libaudcal.so
-vendor/lib/libaudiodevarb.so
+# Audio libraries - from tissot
+vendor/lib/libacdb-fts.so|432041db714bfaafb4dd12ff5dadf832fe322785
+vendor/lib/libacdbloader.so|9c6ebfaf00e7dddf9e5f156dd6aaf0d616ad683e
+vendor/lib/libacdbmapper.so|9a7bd224e08b4448723720d2a94de2951da16bf2
+vendor/lib/libacdbrtac.so|8186bce33a5fbf79a11163c29b1669e85f9f1f84
+vendor/lib/libadiertac.so|cd008e30ad53d375d56c843c02e10717198ac4bf
+vendor/lib/libadm.so|5a02d7fd358eb488460ddb323990091e41e0822e
+vendor/lib/libaudcal.so|17c572176aaa38dcc1989dc6f8e6d554856e8bdb
+vendor/lib/libaudio_log_utils.so|26df212145a58bf797c10925932a51836dd4b04f
+vendor/lib/libaudioalsa.so|a0170e763a7875f06de42ee90b887be6a9bb192a
+vendor/lib/libmdsprpc.so|c1bf9d1c2dee28c6fdee999acb9b72859d28416b
+vendor/lib/libqtigef.so|50f3a6fa607a9e4a525d05a4852aaf091c79d2ac
+vendor/lib/soundfx/libqcbassboost.so|cf029cdd42aa2439c7cda0d0c2acfc8de6ef732d
+vendor/lib/soundfx/libqcreverb.so|bd74bc0d62d835dcf3cd90521a532d27259541df
+vendor/lib/soundfx/libqcvirt.so|43cf84b66ccee38ae21910e502aa8c72731ff475
+vendor/lib64/libacdb-fts.so|f7ff3f4d87c2791a11eee69e328a1beb33256299
+vendor/lib64/libacdbloader.so|0beeac377de2d275cf94e86d30a99163d9e8b527
+vendor/lib64/libacdbmapper.so|bcaf7b7ef3e3a709e8d79d6c987be441f16a7734
+vendor/lib64/libacdbrtac.so|e351b36a4f14dc6b6626e6dca2bfc0915e68ccc2
+vendor/lib64/libadiertac.so|b145d356dd4eeed3243f394ea53b3f7b8e3e2bd7
+vendor/lib64/libaudcal.so|b14a42b8eb0fc8ec8f24c1375c622f9cbad60dbc
+vendor/lib64/libaudio_log_utils.so|09c6b56338072e9690e83369a400812848261167
+vendor/lib64/libaudioalsa.so|e0c80f38802cfd6cc74352a108040ff5f165614b
+vendor/lib64/libmdsprpc.so|21d2e79900608d7dc7b3d3c12e405fc576c3ff0c
+vendor/lib64/libqtigef.so|63a415a14489f2a45315038a45f8e0f4fe7efa2c
+vendor/lib64/soundfx/libqcbassboost.so|280663da3238288914ecd028ce324fc98d084d8c
+vendor/lib64/soundfx/libqcreverb.so|cbbcba339a8ad9d769bf1c89cff3c2c1a5772563
+vendor/lib64/soundfx/libqcvirt.so|6d8720c7adc40c888509cd0c1e8942fcde161059
 
 # Bluetooth
 # aptX - from marlin - OPM1.171019.011
