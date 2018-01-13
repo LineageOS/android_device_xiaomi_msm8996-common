@@ -10,4 +10,3 @@ type sysfs_fpc_wakeup, sysfs_type, fs_type;
 type sysfs_fpc_proximity, sysfs_type, fs_type;
 type sysfs_panel, sysfs_type, fs_type;
 type thermal_data_file, file_type;
-type netmgr_data_file, file_type;
