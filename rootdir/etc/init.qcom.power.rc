@@ -199,14 +199,6 @@ service hvdcp_opti /system/vendor/bin/hvdcp_opti
     user root
     group system wakelock
 
-service iop /system/vendor/bin/iop
-    class main
-    user root
-    group root
-    disabled
-    socket iop seqpacket 0666 root system
-    writepid /dev/cpuset/system-background/tasks
-
 service perfd /system/vendor/bin/perfd
     class main
     user root
