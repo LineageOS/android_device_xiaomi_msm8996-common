@@ -283,23 +283,22 @@ vendor/lib64/libxml.so|28642c2ee9abf46130f5b44b3665b63b008d150d
 /vendor/lib/com.qualcomm.qti.dpm.api@1.0_vendor.so|b7a9b3fc933e9f2155e74252ceeb4bf2fe6619d2
 /vendor/lib/libdpmqmihal.so|81cd7b99f480466c37f8a1212e448afe1998b5d2
 
-# DRM and SEE
-bin/qseecomd:vendor/bin/qseecomd
-vendor/bin/qseeproxydaemon
-vendor/lib64/lib-sec-disp.so
-vendor/lib64/libGPreqcancel.so
-vendor/lib64/libGPreqcancel_svc.so
-vendor/lib64/libQSEEComAPI.so
-vendor/lib64/libSecureUILib.so
-vendor/lib64/libStDrvInt.so
-vendor/lib64/libdrmfs.so
-vendor/lib64/libdrmtime.so
-vendor/lib64/libqisl.so
-vendor/lib64/librpmb.so
-vendor/lib64/libsecureui.so
-vendor/lib64/libsecureui_svcsock.so
-vendor/lib64/libssd.so
-vendor/lib/libQSEEComAPI.so
+# DRM and SEE - from op3 - OPR6.170623.013
+vendor/bin/qseecomd|afd6f74e091e0ba21a4f84b4a69b5db8c755afb0
+vendor/lib64/lib-sec-disp.so|e34d0a03eec000d5455f818710cb255800e7d348
+vendor/lib64/libGPreqcancel.so|1f00e7a539f5851a2a8fb55a5cedd806a12472aa
+vendor/lib64/libGPreqcancel_svc.so|7e36ee7225ff30e74fa00132ba8e5dfc9dc8bb2b
+vendor/lib64/libQSEEComAPI.so|4c7e40896d8b92cac02f457dce605b7eeff139e6
+vendor/lib64/libSecureUILib.so|d650623d3cf8840e38f9b3d4be6400ab601644f9
+vendor/lib64/libStDrvInt.so|987a06865440e3c20ce3130d5e65d7bbe84a0c2b
+vendor/lib64/libdrmfs.so|caaa4442b3bd3b2be345d3cddf86b0b4d6e7cbe5
+vendor/lib64/libdrmtime.so|0d8c67f8bd42906d9dde3131b690051cfc33e29c
+vendor/lib64/libqisl.so|83eb6617d7f0a11593df45adb9d09e485abe14b6
+vendor/lib64/librpmb.so|1be8d44919ad1d457b73fdc987335f4ec2620842
+vendor/lib64/libsecureui.so|96e8730968a044ecce63d478be9f0ce07c97c746
+vendor/lib64/libsecureui_svcsock.so|b18eaba3019428b6b2d92a33cd166924b20eca2d
+vendor/lib64/libssd.so|2a07064578f0b8dde52d755b44227f354af15c77
+vendor/lib/libQSEEComAPI.so|7062cdfb83a986d44190d6fd9762da43d508e10a
 
 # Gatekeeper
 vendor/lib64/hw/gatekeeper.msm8996.so
