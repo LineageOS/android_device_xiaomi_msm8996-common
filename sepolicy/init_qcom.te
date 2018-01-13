@@ -14,15 +14,15 @@ allow init_qcom proc:file w_file_perms;
 allow init_qcom proc_touchpanel:dir { rw_dir_perms setattr };
 allow init_qcom proc_touchpanel:file { rw_file_perms setattr };
 
-# Allow to read, write and setattr in /data/misc/radio
-allow init_qcom radio_data_file:dir { r_dir_perms setattr };
-allow init_qcom radio_data_file:file { rw_file_perms setattr };
+# Allow to read, write and create in /data/vendor/radio
+allow init_qcom vendor_radio_data_file:dir create_dir_perms;
+allow init_qcom vendor_radio_data_file:file create_file_perms;
 
 # Allow to getattr and setattr in panel sysfs
 allow init_qcom sysfs:file { getattr setattr };
 
 # Allow to read firmware files
-allow init_qcom firmware_file:file r_file_perms;
+r_dir_file(init_qcom, firmware_file)
 
 # Shell script needs to execute /system/bin/sh
 allow init_qcom shell_exec:file rx_file_perms;
