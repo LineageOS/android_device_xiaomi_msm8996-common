@@ -529,23 +529,44 @@ vendor/lib64/libmm-color-convertor.so|2efb05d595c2d55457d88897562115e340631fe6
 vendor/lib64/libvpphvx.so|1a83a5b32b4f65725a0d4485b402356dfbcd859c
 vendor/lib64/libvpplibrary.so|733e8aa44490239a8b038eaa862cd4f1bdbe259e
 
-# Perf
-bin/energy-awareness:vendor/bin/energy-awareness
-bin/iop:vendor/bin/iop
-vendor/bin/perfd
-vendor/etc/perf-profile0.conf
-vendor/etc/perf-profile1.conf
-vendor/etc/perf-profile2.conf
-vendor/etc/perf-profile3.conf
-vendor/etc/perf-profile4.conf
-vendor/etc/perf-profile5.conf
-vendor/etc/perf-profile6.conf
-vendor/lib64/libqti-iop-client.so
-vendor/lib64/libqti-iop.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib/libqti-iop-client.so
-vendor/lib/libqti-iop.so
-vendor/lib/libqti-perfd-client.so
+# Perf - from op3 - OPR6.170623.013
+lib/libqti_performance.so|cbfc139ba2fa7b631659d173f390dd18c9a9d60b
+lib/libqti-perfd-client_system.so|efeb93e7fc6a74f3d5a8ea328e23eb4c630b6b2b
+lib/vendor.qti.hardware.iop@1.0.so|4b10cacd0488a44922a4d81e67054e9754907b19
+lib/vendor.qti.hardware.perf@1.0.so|bf9adef7e841e7966473f531f15d17ad00f4b058
+lib64/libqti_performance.so|84fd081621ed52f5540d20721fd39afd1216ddad
+lib64/libqti-perfd-client_system.so|0d29facd286caeeb1b7607e6a186f767e59027fe
+lib64/vendor.qti.hardware.iop@1.0.so|141495da678c7b00542eb2a30593a55dae3938de
+lib64/vendor.qti.hardware.perf@1.0.so|ec585364cd9fc6beea35cce101fc54ae99ebf5cc
+vendor/bin/energy-awareness|fa8efd67299b9adf0663858c25f6d740923e4c1b
+vendor/bin/hw/vendor.qti.hardware.iop@1.0-service|271a9e0522eeea121287c67da73b3f30c1406c67
+vendor/bin/hw/vendor.qti.hardware.perf@1.0-service|bb8a3305bdb21abb5dfeeafecd7bdd46f2973d10
+vendor/etc/init/vendor.qti.hardware.iop@1.0-service.rc|32890b3d05b3733ee92cdd030d5757ceab847848
+vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc|b50182aadab2e31409df61c523d0fb914a394e43
+vendor/etc/perf/perfboostsconfig.xml|57ab3e5177690fdb32908ff217853bb459b73a1e
+vendor/etc/perf/perf-profile0.conf|02204355bf29ceb0460cd53e6716552bb9d9b05f
+vendor/etc/perf/perf-profile1.conf|58c8333b58183fe2412061e5ff22c218b7da305c
+vendor/etc/perf/perf-profile2.conf|66ac3877bf0030b72c99107f665bb392538d0237
+vendor/etc/perf/perf-profile3.conf|3a1edfaeaf087effcadba7c652737ab6dd2d87b5
+vendor/etc/perf/perf-profile4.conf|0bc4779472306b1b225e9fc9be40af54e14e2266
+vendor/etc/perf/perf-profile5.conf|5bc85ed4a0f3cedd57e1e046416f423a83dc4f63
+vendor/etc/perf/perf-profile6.conf|910a193b8425bbe0080f746d6788e66986b2e762
+vendor/lib/hw/vendor.qti.hardware.iop@1.0-impl.so|73e3b89d4f6c59298f45a122c69058e7413cc3af
+vendor/lib/libperfgluelayer.so|977d97ddcbb504f251008334f9f1dbdd9cf408ee
+vendor/lib/libqti-iopd.so|fd2a170886f153815c5cd7ff61936b723ea35ce1
+vendor/lib/libqti-iopd-client.so|14edb382ad4ba874e529b0e8418f8c7a7a0f774c
+vendor/lib/libqti-perfd.so|ca7a25935b5f82af9b84feeaaab71cc5c5a2a785
+vendor/lib/libqti-perfd-client.so|a08891449e45877138086903536178f5a42426e8
+vendor/lib/vendor.qti.hardware.iop@1.0_vendor.so|29e7d42132277f2a4a6c50b0e626355231342ea7
+vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so|b14ffe580529265c3dc55fbfab1198a5a53feee0
+vendor/lib64/hw/vendor.qti.hardware.iop@1.0-impl.so|5242900c4e416672157ff1c43e11b0f2659dfff5
+vendor/lib64/libperfgluelayer.so|ab28ff6dd5c12a038316738050eb14bb125165c3
+vendor/lib64/libqti-iopd.so|5df670facf64cb0d0d8fa350e82503a6396a1d5c
+vendor/lib64/libqti-iopd-client.so|415ec293c1b66da7b24794e6af3eb9d4eea282f4
+vendor/lib64/libqti-perfd.so|08febe8ab9a2fe6ce0b7c29f796f28ce88348721
+vendor/lib64/libqti-perfd-client.so|1636ef392c2a07dbf262c290adbf62b6e4cd96de
+vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so|ee8736cf16a2675c35b532d8e1b7b05e46f33927
+vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so|6249b9c70b4751353f71e6c9beff6f6f9c61727b
 
 # Peripheral manager
 bin/pm-proxy:vendor/bin/pm-proxy
