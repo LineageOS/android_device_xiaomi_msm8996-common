@@ -547,11 +547,11 @@ vendor/lib/libqti-iop-client.so
 vendor/lib/libqti-iop.so
 vendor/lib/libqti-perfd-client.so
 
-# Peripheral manager
-bin/pm-proxy:vendor/bin/pm-proxy
-bin/pm-service:vendor/bin/pm-service
-vendor/lib64/libperipheral_client.so
-vendor/lib/libperipheral_client.so
+# Peripheral manager - from tissot - OPR1.170623.026
+vendor/bin/pm-proxy|e12c72d05c764a2c45b2a5d4d1886519cba3fb16
+vendor/bin/pm-service|83fac998bf8f651f2f0cd2385f6e1b7c3eefe5ea
+vendor/lib64/libperipheral_client.so|d6db5efd4667ae3e831403f4e313fa38a5ae7bc8
+vendor/lib/libperipheral_client.so|0dabab6dc68748c2b0d3a97a5708ee555b3d5650
 
 # Postprocessing - from cheeseburger - OPR6.170623.013
 etc/permissions/com.qti.snapdragon.sdk.display.xml|0bff16d681e75f203c1e11ff33afba82490e49b3
