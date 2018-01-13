@@ -14,9 +14,9 @@ allow init_qcom proc:file w_file_perms;
 allow init_qcom proc_touchpanel:dir { rw_dir_perms setattr };
 allow init_qcom proc_touchpanel:file { rw_file_perms setattr };
 
-# Allow to read, write and setattr in /data/misc/radio
-allow init_qcom radio_data_file:dir { r_dir_perms setattr };
-allow init_qcom radio_data_file:file { rw_file_perms setattr };
+# Allow to read, write and setattr in /data/vendor/radio
+allow init_qcom vendor_radio_data_file:dir { r_dir_perms setattr };
+allow init_qcom vendor_radio_data_file:file { rw_file_perms setattr };
 
 # Allow to getattr and setattr in panel sysfs
 allow init_qcom sysfs:file { getattr setattr };
