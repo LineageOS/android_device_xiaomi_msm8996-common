@@ -1,3 +1,6 @@
+binder_call(qfp-daemon, hal_fingerprint_default)
+binder_use(qfp-daemon)
+
 allow qfp-daemon self:socket create_socket_perms_no_ioctl;
 
 allow qfp-daemon captouch_device:chr_file rw_file_perms;
