@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5206c638_4b8131a6",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-01-14T01:40:54Z",
+      "side": 1,
+      "message": "Move this above to join with the rest of the \"data files\"",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "4d356de5dde9c680b24295df89ed7bf31e59fd8d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
