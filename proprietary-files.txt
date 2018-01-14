@@ -300,9 +300,9 @@ vendor/lib64/libsecureui_svcsock.so|b18eaba3019428b6b2d92a33cd166924b20eca2d
 vendor/lib64/libssd.so|2a07064578f0b8dde52d755b44227f354af15c77
 vendor/lib/libQSEEComAPI.so|7062cdfb83a986d44190d6fd9762da43d508e10a
 
-# Gatekeeper
-vendor/lib64/hw/gatekeeper.msm8996.so
-vendor/lib/hw/gatekeeper.msm8996.so
+# Gatekeeper - from op3 - OPR6.170623.013
+vendor/lib64/hw/gatekeeper.msm8996.so|285d7f197ee11a5eac1b1e333f7dfe8684087859
+vendor/lib/hw/gatekeeper.msm8996.so|ac555627694d57b1dd79b4ddf3faec2e9174967f
 
 # GPS - from tissot - OPR1.170623.026
 etc/permissions/com.qti.location.sdk.xml|cb68a566bd77dcc75bb7547199d528289fac01cb
@@ -483,9 +483,9 @@ vendor/lib64/lib-uceservice.so|3d782c0bbcc3727541ffa63a887060cdf559d916
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so|f6113715ce15dd8c1400d8017e0e033b75e0faf3
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so|cda7a4da8436db7a71496fbc6b75136d99af0658
 
-# Keystore
-vendor/lib64/hw/keystore.msm8996.so
-vendor/lib/hw/keystore.msm8996.so
+# Keystore - from op3 - OPR6.170623.013
+vendor/lib64/hw/keystore.msm8996.so|ade812bb2991c103f6af397e9662460ed0e48d5f
+vendor/lib/hw/keystore.msm8996.so|bd92d1ccbc294e6bcb0fdb4018749646d1ba0193
 
 # Listen
 vendor/lib/hw/sound_trigger.primary.msm8996.so|cfda5e7638c8cd64865b4b818f93cceccb2abfbc
