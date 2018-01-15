@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f18e72b_dd7a4c68",
+        "filename": "sepolicy/hal_bluetooth_default.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-15T05:27:43Z",
+      "side": 1,
+      "message": "we should update it to O because it uses the proper dir /data/vendor",
+      "revId": "e076f14a84da69d5db9f572fce39aa35af62367d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95818ebe_53c4dfbd",
+        "filename": "sepolicy/hal_bluetooth_default.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-15T05:27:43Z",
+      "side": 1,
+      "message": "ditto for wcnss_filter",
+      "revId": "e076f14a84da69d5db9f572fce39aa35af62367d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
