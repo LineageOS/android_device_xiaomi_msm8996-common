@@ -6,10 +6,9 @@
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
 # Sys files
-/sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9]+/panel_(color|vendor)             u:object_r:sysfs_panel:s0
+/sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+/panel_(color|vendor)                  u:object_r:sysfs_panel:s0
 
-/sys/devices/soc/75ba000\.i2c/i2c-12/12-0020/input/input[0-9]+/reversed_keys    u:object_r:proc_touchpanel:s0
-/sys/devices/soc/75ba000\.i2c/i2c-12/12-004a/reversed_keys                      u:object_r:proc_touchpanel:s0
+/sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+(/input/input[0-9]+)?/reversed_keys    u:object_r:proc_touchpanel:s0
 
 /sys/devices/soc/soc:fpc_fpc1020/irq                                            u:object_r:sysfs_fpc:s0
 /sys/devices/soc/soc:fpc_fpc1020/enable_key_events                              u:object_r:sysfs_fpc_keyevents:s0
