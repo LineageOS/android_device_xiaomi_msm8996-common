@@ -56,15 +56,16 @@ vendor/lib/libadiertac.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudiodevarb.so
 
-# Bluetooth
-# aptX - from marlin - OPM1.171019.011
-bin/wcnss_filter:vendor/bin/wcnss_filter
+# Bluetooth - from tissot - OPR1.170623.026
+vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
+vendor/lib64/libbtnv.so|19c1fde09804422dd0988888254383c4b907122e
+vendor/lib/libbtnv.so|89b57498c5e5e554f9e36c77b958e8bc8f8ca17c
+
+# Bluetooth (aptX) - from marlin - OPM1.171019.011
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
 lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
-vendor/lib64/libbtnv.so
-vendor/lib/libbtnv.so
 
 # Bluetooth firmware
 etc/firmware/nvm_tlv.bin
@@ -725,5 +726,5 @@ vendor/bin/hw/android.hardware.drm@1.0-service.widevine|fd6e14710c196fdd4131afe2
 vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc|51a3168a0dbc064d78ee11ca83614c0cd2e6daa5
 vendor/lib/libwvhidl.so|f7288f7a7ed6765bd1d80d639a0aeb0c31eda795
 
-# WiFi
-bin/cnss-daemon:vendor/bin/cnss-daemon
+# WiFi - from tissot - OPR1.170623.026
+vendor/bin/cnss-daemon|2336903c6a526568b8c74fff4b429d5fabe71d1d
