@@ -1,3 +1,5 @@
+allow audioserver hal_perf_default:binder call;
+allow audioserver hal_perf_hwservice:hwservice_manager find;
 allow audioserver persist_file:dir search;
 
 r_dir_file(audioserver, persist_usf_cal_file)
