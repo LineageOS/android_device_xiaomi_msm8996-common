@@ -1,0 +1,1 @@
+allow cameraserver hal_perf_default:binder call;
