@@ -278,11 +278,11 @@ vendor/lib64/libwqe.so|1ee0763c75da97daf3ef50a34be34cdb6465683f
 vendor/lib64/libxml.so|28642c2ee9abf46130f5b44b3665b63b008d150d
 
 # DPM - from tissot - OPR1.170623.026
-/vendor/bin/dpmQmiMgr|2d2c8f1bc822874ae1c335315110756521d0c5da
-/vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so|0f23520fc925b8a5bb4cebc73c544cb2d012ce7e
-/vendor/lib64/libdpmqmihal.so|25bcb5d6853ccbf30fbe38230f9442049688c49a
-/vendor/lib/com.qualcomm.qti.dpm.api@1.0_vendor.so|b7a9b3fc933e9f2155e74252ceeb4bf2fe6619d2
-/vendor/lib/libdpmqmihal.so|81cd7b99f480466c37f8a1212e448afe1998b5d2
+vendor/bin/dpmQmiMgr|2d2c8f1bc822874ae1c335315110756521d0c5da
+vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so|0f23520fc925b8a5bb4cebc73c544cb2d012ce7e
+vendor/lib64/libdpmqmihal.so|25bcb5d6853ccbf30fbe38230f9442049688c49a
+vendor/lib/com.qualcomm.qti.dpm.api@1.0_vendor.so|b7a9b3fc933e9f2155e74252ceeb4bf2fe6619d2
+vendor/lib/libdpmqmihal.so|81cd7b99f480466c37f8a1212e448afe1998b5d2
 
 # DRM and SEE - from op3 - OPR6.170623.013
 vendor/bin/qseecomd|afd6f74e091e0ba21a4f84b4a69b5db8c755afb0
@@ -433,7 +433,7 @@ etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
 
 # IMS - from tissot - OPR1.170623.026
--app/ims/ims.apk|2eababb6ac1a108d2575b98768adf4649520ba96
+-app/ims/ims.apk|42881dc3adfd5e4f716bdb4d510ca45a0b415b74
 -app/imssettings/imssettings.apk|e09821a12dc92d138e82d68b0d63e67f497b6106
 etc/permissions/qti-vzw-ims-internal.xml|3e41b645dd4ad8bad6775c103a34bfd7a507a4f7
 lib/com.qualcomm.qti.imscmservice@1.0.so|1dec77e0803ea99d85c87874c81c54688d4bd59d
@@ -444,7 +444,6 @@ lib/lib-imsvtutils.so|4de6be85e718495ca699594b9775c781e14255bf
 lib/libdiag_system.so|f207e0075be87f67ecd7c0c629cb542212884e28
 lib/libimscamera_jni.so|eaebe72065e1d7e70b30310e40c17b673855f7dc
 lib/libimsmedia_jni.so|ee3ee24a5ca27eabb85b4c55b43b1a6816aec9a0
-lib/libqdMetaData.system.so|726d5ed97695a4c182639f7f9c535da9f0e0942c
 lib/librcc.so|955ecd4a4c59b7f9c961471c05d9f6d91a9039f9
 lib/vendor.qti.imsrtpservice@1.0.so|60be108ebb7f9c8f46a8821c3b39b205c17cfb40
 lib64/com.qualcomm.qti.imscmservice@1.0.so|00f25863f784410c753561795ad9a024997a5c07
@@ -456,7 +455,6 @@ lib64/lib-imsvtutils.so|b7dd9742015f0cdf565c08ad2260bf460875a42d
 lib64/libdiag_system.so|1f44b1dabe2c680f66c412ef2de4118670f2414a
 lib64/libimscamera_jni.so|3e53b8d01268da279829abbf7c1b93e5a4179d92
 lib64/libimsmedia_jni.so|c895e5e439f33f509f0529edee5f5273785bc14b
-lib64/libqdMetaData.system.so|2c411a0944271dd427cc90b13fe63940b70e270a
 lib64/librcc.so|fc24d9e5e0b3d6b858911d2640373ed530556861
 lib64/vendor.qti.imsrtpservice@1.0.so|4513f234548a66f5493f211e0e0fc41a5bf0f1a3
 vendor/bin/ims_rtp_daemon|46439ac81e5580bf46d0d161e6a63da6a204cdf4
@@ -647,7 +645,6 @@ etc/permissions/telephonyservice.xml|b297c8a27443570377d78586b00198839ce326bb
 -framework/qcrilhook.jar|cb56e114f8f8ecf1c7ea5f35107bafc6bf49a194
 -framework/qti-telephony-common.jar|2eba987ae297a892e895ec1e9a302b41dbe0232e
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk|f313f243661c8e516ecc6a5785e8f0829daedb1c
-vendor/bin/hw/rild|67d29a1b4679a4ab4b4ab4ed9922ca6268cb81da
 vendor/bin/netmgrd|748b87d905aa6727e812694de559e54b958f3832
 vendor/bin/qti|a67280f22725799c47d78e07570d9e173e6624f1
 vendor/bin/rmt_storage|5b821f0aa673febf158892a6c8ec97a35817f876
@@ -670,7 +667,7 @@ vendor/lib64/libmdmdetect.so|7f6848e5768592af51af54d0bb7c2bd0a4adb8b5
 vendor/lib64/libnetmgr.so|bb572b6e8764e3cfa1c17756f3f34643b55b6c92
 vendor/lib64/libqcmaputils.so|da441a26497420a60962a4cda5414a48753f6081
 vendor/lib64/libril-qc-ltedirectdisc.so|de4824424cb5e3fea7acadfe9c49073e8a469ab2
-vendor/lib64/libril-qc-qmi-1.so|676472f615c1a478400ad2ace2ceae5995a1876a
+vendor/lib64/libril-qc-qmi-1.so|bd5ebb5a8407cf5643c133f009516812c30d59d5
 vendor/lib64/libril-qc-radioconfig.so|46b35fab92aee25425d50f464e608639ac28e452
 vendor/lib64/libril-qcril-hook-oem.so|c1a9af8e2ed69e9f69c2313790fc9be79b3d6ca0
 vendor/lib64/librilqmiservices.so|c753bbe1c7abbf3187be31996a49857ef477917e
