@@ -444,7 +444,6 @@ lib/lib-imsvtutils.so|4de6be85e718495ca699594b9775c781e14255bf
 lib/libdiag_system.so|f207e0075be87f67ecd7c0c629cb542212884e28
 lib/libimscamera_jni.so|eaebe72065e1d7e70b30310e40c17b673855f7dc
 lib/libimsmedia_jni.so|ee3ee24a5ca27eabb85b4c55b43b1a6816aec9a0
-lib/libqdMetaData.system.so|726d5ed97695a4c182639f7f9c535da9f0e0942c
 lib/librcc.so|955ecd4a4c59b7f9c961471c05d9f6d91a9039f9
 lib/vendor.qti.imsrtpservice@1.0.so|60be108ebb7f9c8f46a8821c3b39b205c17cfb40
 lib64/com.qualcomm.qti.imscmservice@1.0.so|00f25863f784410c753561795ad9a024997a5c07
@@ -456,7 +455,6 @@ lib64/lib-imsvtutils.so|b7dd9742015f0cdf565c08ad2260bf460875a42d
 lib64/libdiag_system.so|1f44b1dabe2c680f66c412ef2de4118670f2414a
 lib64/libimscamera_jni.so|3e53b8d01268da279829abbf7c1b93e5a4179d92
 lib64/libimsmedia_jni.so|c895e5e439f33f509f0529edee5f5273785bc14b
-lib64/libqdMetaData.system.so|2c411a0944271dd427cc90b13fe63940b70e270a
 lib64/librcc.so|fc24d9e5e0b3d6b858911d2640373ed530556861
 lib64/vendor.qti.imsrtpservice@1.0.so|4513f234548a66f5493f211e0e0fc41a5bf0f1a3
 vendor/bin/ims_rtp_daemon|46439ac81e5580bf46d0d161e6a63da6a204cdf4

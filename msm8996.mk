@@ -152,20 +152,26 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     ueventd.qcom.rc
 
-# Display
+# Display / Graphics
 PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.0-service \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
     copybit.msm8996 \
     gralloc.msm8996 \
     hwcomposer.msm8996 \
-    memtrack.msm8996 \
     libdisplayconfig \
     liboverlay \
-    libtinyxml
+    libqdMetaData.system \
+    libtinyxml \
+    memtrack.msm8996 \
+    vendor.display.color@1.0-impl \
+    vendor.display.color@1.0-service
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg
