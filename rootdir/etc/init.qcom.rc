@@ -57,6 +57,16 @@ on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on late-fs
+    # Start services for bootanim
+    start surfaceflinger
+    start bootanim
+    start hwcomposer-2-1
+    start configstore-hal-1-0
+    start gralloc-2-0
+
+    # Mount RW partitions which need run fsck
+    mount_all /vendor/etc/fstab.qcom --late
+
     # boot time fs tune
     write /sys/block/sda/queue/iostats 0
     write /sys/block/sda/queue/scheduler cfq
@@ -204,7 +214,10 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all /vendor/etc/fstab.qcom
+    mount_all /vendor/etc/fstab.qcom --early
+
+    # Start HW service manager early
+    start hwservicemanager
 
 on post-fs-data
     # Create directory used by display clients
@@ -622,8 +635,6 @@ on property:init.svc.surfaceflinger=running
     start ppd
 
 on property:init.svc.surfaceflinger=restarting
-    stop hwcomposer-2-1
-    start hwcomposer-2-1
     stop ppd
 
 on property:init.svc.zygote=stopped
