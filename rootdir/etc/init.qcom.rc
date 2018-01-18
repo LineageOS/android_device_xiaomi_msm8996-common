@@ -66,6 +66,16 @@ on late-fs
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
+    # Start services for bootanim
+    start surfaceflinger
+    start bootanim
+    start hwcomposer-2-1
+    start configstore-hal-1-0
+    start gralloc-2-0
+
+    # Mount RW partitions which need run fsck
+    mount_all fstab.qcom --late
+
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -236,7 +246,10 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all fstab.qcom
+    mount_all fstab.qcom --early
+
+    # Start HW service manager early
+    start hwservicemanager
 
 on post-fs-data
     # Create directory used by display clients
