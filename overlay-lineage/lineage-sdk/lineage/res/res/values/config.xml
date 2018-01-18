@@ -36,4 +36,10 @@
          that support pulsating and RGB control would set this config
          to 75. -->
     <integer name="config_deviceLightCapabilities">107</integer>
+
+    <!-- Lineage hardware features that should be disabled.
+         Logical OR of lineage-sdk LineageHardwareManager FEATURE_* constants.
+         Our libsdm-disp-vnd-apis claims support for color balance but it doesn't
+         actually work so disable it.  (FEATURE_COLOR_BALANCE = 0x20000) -->
+    <integer name="config_disableHardwareFeatures">131072</integer>
 </resources>
