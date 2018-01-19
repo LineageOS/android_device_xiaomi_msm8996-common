@@ -245,9 +245,10 @@ on late-fs
     # Start services for bootanim
     start surfaceflinger
     start bootanim
-    start hwcomposer-2-1
     start configstore-hal-1-0
     start gralloc-2-0
+    wait_for_prop service.sf.primary_display_ready 1
+    start hwcomposer-2-1
 
     # Mount RW partitions which need run fsck
     mount_all fstab.qcom --late
