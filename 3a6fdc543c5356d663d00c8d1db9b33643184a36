@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f58f8cb_094dca3c",
+        "filename": "light/Light.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-19T14:42:21Z",
+      "side": 1,
+      "message": "useless\nditto elsewhere",
+      "range": {
+        "startLine": 118,
+        "startChar": 35,
+        "endLine": 118,
+        "endChar": 48
+      },
+      "revId": "3a6fdc543c5356d663d00c8d1db9b33643184a36",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
