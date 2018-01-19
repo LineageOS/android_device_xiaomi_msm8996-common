@@ -32,6 +32,7 @@
 # Binaries
 /system/bin/readfem                   u:object_r:readfem_exec:s0
 /system/bin/readmac                   u:object_r:readmac_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.xiaomi_8996    u:object_r:hal_light_default_exec:s0
 
 # Shell scripts
 /system/bin/init\.panel\.sh           u:object_r:init_panel_exec:s0
