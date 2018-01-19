@@ -615,7 +615,7 @@ vendor/lib/vendor.display.postproc@1.0_vendor.so|dcabce39e2a9cab878fea28a52be053
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|8414feb896b30cf23c1af2055c836e54843a90d7
 
 # QMI - from tissot - OPR1.170623.026
-etc/permissions/qti_libpermissions.xml|593bcb72cce68ceb0a70f50bcae7d460114e7c62
+etc/permissions/qti_libpermissions.xml|ef3c88495f2f61a2d16e1445113a9d80f8db0e0a
 etc/permissions/qti_permissions.xml|e6ff4572352b1a4f91b6b9d7cbb1cad9924410a0
 lib/libdiag_system.so|f207e0075be87f67ecd7c0c629cb542212884e28
 lib/libqmi_cci_system.so|ca8fd2db052699c80ee50a8919794cb215d7e5a6
