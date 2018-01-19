@@ -544,6 +544,7 @@ vendor/etc/perf/perf-profile4.conf|0bc4779472306b1b225e9fc9be40af54e14e2266
 vendor/etc/perf/perf-profile5.conf|5bc85ed4a0f3cedd57e1e046416f423a83dc4f63
 vendor/etc/perf/perf-profile6.conf|910a193b8425bbe0080f746d6788e66986b2e762
 vendor/lib/hw/vendor.qti.hardware.iop@1.0-impl.so|73e3b89d4f6c59298f45a122c69058e7413cc3af
+vendor/lib/libfeedbackhandler.so|e4517583915a79efc1b6bf121854be150b0373a8
 vendor/lib/libperfgluelayer.so|977d97ddcbb504f251008334f9f1dbdd9cf408ee
 vendor/lib/libqti-iopd.so|fd2a170886f153815c5cd7ff61936b723ea35ce1
 vendor/lib/libqti-iopd-client.so|14edb382ad4ba874e529b0e8418f8c7a7a0f774c
@@ -553,6 +554,7 @@ vendor/lib/libqti-util.so|6175b079c151ac04c893c4af1311713ebe6cdfbb
 vendor/lib/vendor.qti.hardware.iop@1.0_vendor.so|29e7d42132277f2a4a6c50b0e626355231342ea7
 vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so|b14ffe580529265c3dc55fbfab1198a5a53feee0
 vendor/lib64/hw/vendor.qti.hardware.iop@1.0-impl.so|5242900c4e416672157ff1c43e11b0f2659dfff5
+vendor/lib64/libfeedbackhandler.so|d9892463f4fc6ffadb0ed8a087cc7d7b29d42087
 vendor/lib64/libperfgluelayer.so|ab28ff6dd5c12a038316738050eb14bb125165c3
 vendor/lib64/libqti-iopd.so|5df670facf64cb0d0d8fa350e82503a6396a1d5c
 vendor/lib64/libqti-iopd-client.so|415ec293c1b66da7b24794e6af3eb9d4eea282f4
