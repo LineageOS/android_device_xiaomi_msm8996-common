@@ -6,6 +6,9 @@
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
 # Sys files
+/sys/devices/soc/75b7000\.i2c/i2c-9/9-[0-9a-f]+/leds(/.*)?    u:object_r:sysfs_leds:s0
+/sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                  u:object_r:sysfs_leds:s0
+
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+/panel_(color|vendor)                  u:object_r:sysfs_panel:s0
 
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+(/input/input[0-9]+)?/reversed_keys    u:object_r:proc_touchpanel:s0
@@ -32,6 +35,7 @@
 # Binaries
 /system/bin/readfem                   u:object_r:readfem_exec:s0
 /system/bin/readmac                   u:object_r:readmac_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.xiaomi_8996    u:object_r:hal_light_default_exec:s0
 
 # Shell scripts
 /system/bin/init\.panel\.sh           u:object_r:init_panel_exec:s0
