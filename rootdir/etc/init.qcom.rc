@@ -126,6 +126,9 @@ on post-fs-data
     # Create directory for radio
     mkdir /data/vendor/radio 0770 system radio
 
+    # Create directory for modem_config
+    mkdir /data/vendor/modem_config 0550 system radio
+
     # Create directories for Location services
     mkdir /data/vendor/location 0770 gps gps
     mkdir /data/vendor/location/mq 0770 gps gps
@@ -431,6 +434,9 @@ service qcom-sh /vendor/bin/init.qcom.sh
     class late_start
     user root
     oneshot
+
+on property:ro.runtime.mbn_copy_completed=1
+    write /data/vendor/radio/copy_complete 1
 
 service panel-sh /vendor/bin/init.panel.sh
     class core
