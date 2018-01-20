@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65d54608_9054b70d",
+        "filename": "light/Light.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-20T19:29:25Z",
+      "side": 1,
+      "message": "100 chars",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 41
+      },
+      "revId": "efbc12f388144c921b6494f8907d07a8ee7910c3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf3c1fa5_efa81f4d",
+        "filename": "light/Light.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-20T19:29:25Z",
+      "side": 1,
+      "message": "100 chars",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "efbc12f388144c921b6494f8907d07a8ee7910c3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
