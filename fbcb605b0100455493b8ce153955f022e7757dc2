@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3533d796_d8f6857d",
+        "filename": "light/Light.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-20T08:25:26Z",
+      "side": 1,
+      "message": "constexpr the array?",
+      "revId": "fbcb605b0100455493b8ce153955f022e7757dc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e358022_a3949cd3",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-20T08:25:26Z",
+      "side": 1,
+      "message": "I would move this under it\u0027s own section, like # HALs",
+      "revId": "fbcb605b0100455493b8ce153955f022e7757dc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
