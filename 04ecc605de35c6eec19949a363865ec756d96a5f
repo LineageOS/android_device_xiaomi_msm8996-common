@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f05d9eb_72a699d7",
+        "filename": "sepolicy/system_server.te",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-20T18:36:06Z",
+      "side": 1,
+      "message": "I think this can go as well",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 56
+      },
+      "revId": "04ecc605de35c6eec19949a363865ec756d96a5f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
