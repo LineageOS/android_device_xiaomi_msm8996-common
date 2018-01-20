@@ -484,12 +484,12 @@ service loc_launcher /vendor/bin/loc_launcher
     group gps inet diag wifi
     writepid /dev/cpuset/system-background/tasks
 
-service qcom-sh /system/bin/init.qcom.sh
+service qcom-sh /vendor/bin/init.qcom.sh
     class late_start
     user root
     oneshot
 
-service panel-sh /system/bin/init.panel.sh
+service panel-sh /vendor/bin/init.panel.sh
     class core
     user root
     oneshot

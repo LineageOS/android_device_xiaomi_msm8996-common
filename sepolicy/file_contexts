@@ -41,6 +41,5 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.xiaomi_8996    u:object_r:hal_light_default_exec:s0
 
 # Shell scripts
-/system/bin/init\.panel\.sh           u:object_r:init_panel_exec:s0
-/system/bin/init\.qcom\.sh            u:object_r:init_qcom_exec:s0
-/system/bin/init\.tfa\.sh             u:object_r:init_tfa_exec:s0
+/(vendor|system/vendor)/bin/init\.panel\.sh    u:object_r:init_panel_exec:s0
+/(vendor|system/vendor)/bin/init\.tfa\.sh      u:object_r:init_tfa_exec:s0
