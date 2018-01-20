@@ -1,2 +1,9 @@
+# Allow to write in /proc/sys/kernel/printk
+allow qti_init_shell proc:file w_file_perms;
+
+# Allow to read, write and setattr in /proc/touchpanel
 allow qti_init_shell proc_touchpanel:dir { rw_dir_perms setattr };
-allow qti_init_shell proc_touchpanel:file { getattr setattr };
+allow qti_init_shell proc_touchpanel:file { rw_file_perms setattr };
+
+# Allow to setattr in panel sysfs
+allow qti_init_shell sysfs:file setattr;

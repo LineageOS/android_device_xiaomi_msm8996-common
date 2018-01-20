@@ -1,5 +1,5 @@
 type init_panel, domain;
-type init_panel_exec, exec_type, file_type;
+type init_panel_exec, exec_type, vendor_file_type, file_type;
 
 # Allow for transition from init domain to init_panel
 init_daemon_domain(init_panel)
@@ -7,9 +7,9 @@ init_daemon_domain(init_panel)
 # Allow to read panel color and vendor sysfs
 allow init_panel sysfs_panel:file r_file_perms;
 
-# Shell script needs to execute /system/bin/sh
-allow init_panel shell_exec:file rx_file_perms;
-allow init_panel toolbox_exec:file rx_file_perms;
+# Shell script needs to execute /vendor/bin/sh
+allow init_panel vendor_shell_exec:file rx_file_perms;
+allow init_panel vendor_toolbox_exec:file rx_file_perms;
 
 # Set panel property
 set_prop(init_panel, system_panel_prop)
