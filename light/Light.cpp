@@ -29,6 +29,8 @@ static constexpr int RAMP_STEP_DURATION = 50;
 static constexpr int BRIGHTNESS_RAMP[RAMP_SIZE] = { 0, 12, 25, 37, 50, 72, 85, 100 };
 static constexpr int DEFAULT_MAX_BRIGHTNESS = 255;
 
+static constexpr uint32_t DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS = 0x80;
+
 static uint32_t rgbToBrightness(const LightState& state) {
     uint32_t color = state.color & 0x00ffffff;
     return ((77 * ((color >> 16) & 0xff)) + (150 * ((color >> 8) & 0xff)) +
@@ -67,7 +69,7 @@ Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
              std::ofstream&& red_pause_hi, std::ofstream&& green_pause_hi, std::ofstream&& blue_pause_hi,
              std::ofstream&& red_ramp_step_ms, std::ofstream&& green_ramp_step_ms, std::ofstream&& blue_ramp_step_ms,
              std::ofstream&& red_blink, std::ofstream&& green_blink, std::ofstream&& blue_blink,
-             std::ofstream&& rgb_blink) :
+             std::ofstream&& rgb_blink, std::ofstream&& persistence) :
     mLcdBacklight(std::move(lcd_backlight)),
     mButtonBacklight(std::move(button_backlight)),
     mRedLed(std::move(red_led)),
@@ -91,7 +93,8 @@ Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
     mRedBlink(std::move(red_blink)),
     mGreenBlink(std::move(green_blink)),
     mBlueBlink(std::move(blue_blink)),
-    mRgbBlink(std::move(rgb_blink)) {
+    mRgbBlink(std::move(rgb_blink)),
+    mPersistence(std::move(persistence) {
     auto attnFn(std::bind(&Light::setAttentionLight, this, std::placeholders::_1));
     auto backlightFn(std::bind(&Light::setLcdBacklight, this, std::placeholders::_1));
     auto batteryFn(std::bind(&Light::setBatteryLight, this, std::placeholders::_1));
@@ -139,6 +142,20 @@ void Light::setLcdBacklight(const LightState& state) {
     std::lock_guard<std::mutex> lock(mLock);
 
     uint32_t brightness = rgbToBrightness(state);
+    unsigned int lpEnabled = state.brightnessMode == BRIGHTNESS_MODE_LOW_PERSISTENCE;
+
+    // If we're not in lp mode and it has been enabled or if we are in lp mode
+    // and it has been disabled send an ioctl to the display with the update
+    if ((mLastBacklightMode != state.brightnessMode && lpEnabled) ||
+        (!lpEnabled && mLastBacklightMode == BRIGHTNESS_MODE_LOW_PERSISTENCE)) {
+        mPersistence << lpEnabled << std::endl;
+
+        if (lpEnabled != 0) {
+            brightness = DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS;
+        }
+    }
+
+    mLastBacklightMode = state.brightnessMode;
 
     // If max panel brightness is not the default (255),
     // apply linear scaling across the accepted range.
