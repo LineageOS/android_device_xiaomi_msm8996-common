@@ -309,7 +309,6 @@ etc/permissions/com.qualcomm.location.xml|e837966b6a1a63430ac7ff648e84b0312cd3a4
 etc/permissions/izat.xt.srv.xml|a0f460056f27b5495a4d6e959eecf0e429c42a57
 framework/com.qti.location.sdk.jar|a9e650c6e9847eb0e344a93be803cfd51ec88086
 framework/izat.xt.srv.jar|3c7bb115236e9e521bb31cded902d1d6eb620f59
-lib64/libqsap_sdk.so|5e430ec1352a5155b2497f1f60832bc1559b197f
 lib64/liblocationservice_jni.so|070ebf90b37113b932e11aa546ccb0a0288da79e
 lib64/libxt_native.so|162580006aaf75008a84d4c8b1718b6daabf4863
 lib64/vendor.qti.gnss@1.0.so|efac71bc5a75ad147f5916feef05b58ec3259ffb
