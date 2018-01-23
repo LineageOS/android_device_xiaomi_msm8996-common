@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09459e7c_6a251f16",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 38
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-01-23T10:11:16Z",
+      "side": 1,
+      "message": "Worth trying:\n\nhttps://source.codeaurora.org/quic/la/platform/hardware/qcom/camera/commit/?h\u003dLA.UM.6.5.r1-05300-8x96.0\u0026id\u003dad5feef0531aa95720df12c9660fc20832e838ff\n+ https://source.codeaurora.org/quic/la/platform/hardware/qcom/camera/commit/?h\u003dLA.UM.6.5.r1-05300-8x96.0\u0026id\u003dd1c0ea05cb68c49ad25f4eac71c7ec9a536c8b5b",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 615,
+        "endChar": 29
+      },
+      "revId": "0c7a190eb18585775139462ef5ad8b242f5750b5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
