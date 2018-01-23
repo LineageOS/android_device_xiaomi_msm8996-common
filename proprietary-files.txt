@@ -504,11 +504,6 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so|cda7a4da8436db7a71496fbc6b75
 vendor/lib64/hw/keystore.msm8996.so|ade812bb2991c103f6af397e9662460ed0e48d5f
 vendor/lib/hw/keystore.msm8996.so|bd92d1ccbc294e6bcb0fdb4018749646d1ba0193
 
-# Listen
-vendor/lib/hw/sound_trigger.primary.msm8996.so|cfda5e7638c8cd64865b4b818f93cceccb2abfbc
-vendor/lib/libadpcmdec.so
-vendor/lib/libsmwrapper.so
-
 # Media - from op3 - OPR6.170623.013
 -vendor/lib/libgpustats.so|176395bf6055b3475080d9bae65684820bafab49
 vendor/lib/libI420colorconvert.so|38212d068cd62a91a7cf88337a9655c0fd2c46ca
@@ -733,10 +728,13 @@ vendor/lib64/libTimeService.so
 vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
 
-# Voice fingerprint
-bin/qvop-daemon:vendor/bin/qvop-daemon
-vendor/lib64/libqvop-service.so
-vendor/lib/libqvop-service.so
+# Voice print - from op3 - OPR6.170623.013
+vendor/lib64/hw/sound_trigger.primary.msm8996.so|d81639f09364ff39a1132f7ee8497a13aa1bd988
+vendor/lib64/vendor.qti.voiceprint@1.0.so|e68fb38066c46a7f2b5be0f9a11300e01ec74dee
+vendor/lib/hw/sound_trigger.primary.msm8996.so|82906637605944c0dea3de007bd3ad063b610cd0
+vendor/lib/libadpcmdec.so|cce776b6e1edac56705b155444c3f28362055442
+vendor/lib/libsmwrapper.so|cd54c73eaafbe3fe9eacafc845a04d25e44fe553
+vendor/lib/vendor.qti.voiceprint@1.0.so|a706a35926dde53af240cafea640ab9e607f0cf1
 
 # Widevine DRM - from marlin - OPM1.171019.011
 vendor/bin/hw/android.hardware.drm@1.0-service.widevine|fd6e14710c196fdd4131afe2ce10c4a5be1b309c
