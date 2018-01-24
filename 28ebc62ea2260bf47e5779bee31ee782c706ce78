@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df3bd410_a716f282",
+        "filename": "sepolicy/hal_camera_default.te",
+        "patchSetId": 39
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-24T22:15:28Z",
+      "side": 1,
+      "message": "we should pull the upstream patch to change the data path",
+      "revId": "28ebc62ea2260bf47e5779bee31ee782c706ce78",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
