@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e0491b9_44831abc",
+        "filename": "manifest.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-26T17:08:13Z",
+      "side": 0,
+      "message": "You can remove the corresponding lib",
+      "range": {
+        "startLine": 408,
+        "startChar": 14,
+        "endLine": 408,
+        "endChar": 48
+      },
+      "revId": "170120562552696d277d11f8146b20bffeb23c06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5a6e634_849b7e2f",
+        "filename": "manifest.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-26T17:08:13Z",
+      "side": 0,
+      "message": "ditto",
+      "range": {
+        "startLine": 506,
+        "startChar": 14,
+        "endLine": 506,
+        "endChar": 35
+      },
+      "revId": "170120562552696d277d11f8146b20bffeb23c06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
