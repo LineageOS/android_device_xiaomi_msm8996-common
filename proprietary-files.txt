@@ -718,11 +718,11 @@ vendor/lib/libsensor_user_cal.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
-# Thermal
-vendor/bin/thermal-engine
--vendor/lib64/libthermalclient.so
-vendor/lib64/libthermalioctl.so
--vendor/lib/libthermalclient.so
+# Thermal - from tissot - OPR1.170623.026
+vendor/bin/thermal-engine|e8adca1cf42c7328e03050b8776ba87a183b5dce
+-vendor/lib64/libthermalclient.so|9beae9671d80ee9b1d47689ed32b5780a863cb77
+vendor/lib64/libthermalioctl.so|ca2dca5f433073df781073f449fd7ed73a4e4d3c
+-vendor/lib/libthermalclient.so|6096637d37150d89caf3c730c9964ac07797fa55
 
 # Time services
 -app/TimeService/TimeService.apk
