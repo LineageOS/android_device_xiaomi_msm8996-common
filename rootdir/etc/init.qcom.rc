@@ -558,7 +558,7 @@ service readmac /vendor/bin/readmac
     group root oem_2950
     oneshot
 
-service thermal-engine /vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine -c ${ro.thermal.config}
     class main
     user root
     socket thermal-send-client stream 0666 system system
@@ -566,6 +566,10 @@ service thermal-engine /vendor/bin/thermal-engine
     socket thermal-recv-passive-client stream 0666 system system
     group root
     writepid /dev/cpuset/system-background/tasks
+    disabled
+
+on property:ro.thermal.config=*
+    start thermal-engine
 
 service adsprpcd /vendor/bin/adsprpcd
     class main
