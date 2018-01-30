@@ -16,3 +16,6 @@ allow qfp-daemon iqfp_service:service_manager add;
 
 r_dir_file(qfp-daemon, persist_qc_senseid_file)
 r_dir_file(qfp-daemon, sensors_persist_file)
+
+# Ignore all logging requests
+dontaudit qfp-daemon storage_file:dir search;

@@ -14,3 +14,6 @@ allow hal_fingerprint_default sysfs_fpc:file rw_file_perms;
 allow hal_fingerprint_default sysmatdrv_device:chr_file w_file_perms;
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
+
+# Ignore all logging requests
+dontaudit hal_fingerprint_default storage_file:dir search;
