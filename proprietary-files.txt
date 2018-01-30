@@ -718,11 +718,11 @@ vendor/lib/libsensor_user_cal.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
-# Thermal
-vendor/bin/thermal-engine
--vendor/lib64/libthermalclient.so
-vendor/lib64/libthermalioctl.so
--vendor/lib/libthermalclient.so
+# Thermal - from OnePlus 3
+vendor/bin/thermal-engine|8598eb10cc3316f8fa00c9ba792b2102a5d646ed
+-vendor/lib64/libthermalclient.so|9beae9671d80ee9b1d47689ed32b5780a863cb77
+vendor/lib64/libthermalioctl.so|17a44f42569ce02e36f155109f459638471d54ba
+-vendor/lib/libthermalclient.so|e14cd4d090e52394cb5a39912e71b50091873bcb
 
 # Time services
 -app/TimeService/TimeService.apk
