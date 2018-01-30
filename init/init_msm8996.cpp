@@ -100,11 +100,16 @@ void check_device()
 
 void vendor_load_properties()
 {
-    std::string platform;
-
-    platform = GetProperty("ro.board.platform", "");
+    std::string platform = GetProperty("ro.board.platform", "");
     if (platform != ANDROID_TARGET)
         return;
+
+    std::string device = GetProperty("ro.product.device", "");
+    std::string hwversion = GetProperty("ro.boot.hwversion", "");
+    if (device == "gemini" && hwversion != "2.2.0")
+        property_set("ro.thermal.config", "/vendor/etc/thermal-engine-msm8996-a1.conf");
+    else
+        property_set("ro.thermal.config", "/vendor/etc/thermal-engine-msm8996.conf");
 
     check_device();
 
