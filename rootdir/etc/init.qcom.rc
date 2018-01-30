@@ -558,7 +558,7 @@ service readmac /vendor/bin/readmac
     group root oem_2950
     oneshot
 
-service thermal-engine /vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine-8996.conf}
     class main
     user root
     socket thermal-send-client stream 0666 system system
