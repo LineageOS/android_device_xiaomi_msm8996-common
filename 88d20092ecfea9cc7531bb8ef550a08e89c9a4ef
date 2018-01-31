@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ce96240_5cff8df2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-01-31T12:28:30Z",
+      "side": 1,
+      "message": "pirats",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 11
+      },
+      "revId": "88d20092ecfea9cc7531bb8ef550a08e89c9a4ef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
