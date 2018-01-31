@@ -204,7 +204,7 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all fstab.qcom
+    mount_all /vendor/etc/fstab.qcom
 
 on post-fs-data
     # Create directory used by display clients
@@ -347,7 +347,7 @@ on post-fs-data
 
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
-    swapon_all fstab.qcom
+    swapon_all /vendor/etc/fstab.qcom
 
     # end boot time fs tune
     write /sys/block/sda/queue/read_ahead_kb 128
