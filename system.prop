@@ -52,9 +52,6 @@ persist.data.mode=concurrent
 persist.data.netmgrd.qos.enable=true
 ro.use_data_netmgrd=true
 
-# Device was launched with M
-ro.product.first_api_level=23
-
 # Display (Qualcomm AD)
 ro.qualcomm.cabl=0
 ro.qcom.ad=1
