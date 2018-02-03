@@ -53,7 +53,6 @@ framework/audiosphere.jar|e12a3ee72672b82dffc9a5675d0c30ddf0328807
 lib/soundfx/libdirac.so|bece5d936afa4bab82d17117df59fd8a68ac86b2
 vendor/lib/libacdb-fts.so|ee1f3eaca02136afdc848197139c7f6dfc434b09
 vendor/lib/libacdbloader.so|7ccb1d9b307c987fac919656dafbeb6f9d2d70a8
-vendor/lib/libacdbmapper.so|a63cd5b705062b36eea6fadaf4ce2983d1c3408d
 vendor/lib/libacdbrtac.so|f2caec1b357d5029fa5cdcbef439635554bfae12
 vendor/lib/libadiertac.so|e9ec23379e16bbb24c6d5f3507743be30c8d00dd
 vendor/lib/libadm.so|9a7141ae4fcf91ef217a5ca5d4a82480695fc304
@@ -68,7 +67,6 @@ vendor/lib/soundfx/libqcvirt.so|8760fa2ce574c747937053612991676168da68fc
 vendor/lib/soundfx/libshoebox.so|81226397eb8e1be9485605ca74cbb565bec80e90
 vendor/lib64/libacdb-fts.so|d1a52ad05b228eb1c5aebebfcb95a2868c1ff619
 vendor/lib64/libacdbloader.so|d5228e85d5525200c0f540d9291a668816ca1c2d
-vendor/lib64/libacdbmapper.so|bcaf7b7ef3e3a709e8d79d6c987be441f16a7734
 vendor/lib64/libacdbrtac.so|ff5c6495ccbec40de5ba44c3ab6b27ce7de2c33f
 vendor/lib64/libadiertac.so|9875fc2b87ef464d6508c03ebab2e18b6eb902d6
 vendor/lib64/libaudcal.so|c8d37a73a77ef2c09a543fb497ce68864f7100e3
@@ -91,18 +89,6 @@ lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
 lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
-
-# Bluetooth firmware
-etc/firmware/nvm_tlv.bin
-etc/firmware/nvm_tlv_1.3.bin
-etc/firmware/nvm_tlv_2.1.bin
-etc/firmware/nvm_tlv_3.0.bin
-etc/firmware/nvm_tlv_3.2.bin
-etc/firmware/rampatch_tlv.img
-etc/firmware/rampatch_tlv_1.3.tlv
-etc/firmware/rampatch_tlv_2.1.tlv
-etc/firmware/rampatch_tlv_3.0.tlv
-etc/firmware/rampatch_tlv_3.2.tlv
 
 # Camera
 bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
@@ -456,7 +442,6 @@ etc/firmware/a530v3_seq.fw2
 
 # IMS - from tissot - OPR1.170623.026
 -app/ims/ims.apk|42881dc3adfd5e4f716bdb4d510ca45a0b415b74
--app/imssettings/imssettings.apk|e09821a12dc92d138e82d68b0d63e67f497b6106
 etc/permissions/qti-vzw-ims-internal.xml|3e41b645dd4ad8bad6775c103a34bfd7a507a4f7
 lib/com.qualcomm.qti.imscmservice@1.0.so|1dec77e0803ea99d85c87874c81c54688d4bd59d
 lib/lib-imscamera.so|b5229cfab8d44b9184de250196d108e813a0df85
@@ -507,6 +492,12 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so|cda7a4da8436db7a71496fbc6b75
 # Keystore - from op3 - OPR6.170623.013
 vendor/lib64/hw/keystore.msm8996.so|ade812bb2991c103f6af397e9662460ed0e48d5f
 vendor/lib/hw/keystore.msm8996.so|bd92d1ccbc294e6bcb0fdb4018749646d1ba0193
+
+# Listen - from op3 - OPR6.170623.013
+vendor/lib64/hw/sound_trigger.primary.msm8996.so|d81639f09364ff39a1132f7ee8497a13aa1bd988
+vendor/lib/hw/sound_trigger.primary.msm8996.so|82906637605944c0dea3de007bd3ad063b610cd0
+vendor/lib/libadpcmdec.so|cce776b6e1edac56705b155444c3f28362055442
+vendor/lib/libsmwrapper.so|cd54c73eaafbe3fe9eacafc845a04d25e44fe553
 
 # Media - from op3 - OPR6.170623.013
 -vendor/lib/libgpustats.so|176395bf6055b3475080d9bae65684820bafab49
@@ -656,7 +647,6 @@ vendor/lib64/libqmiservices.so|911cc82311f16570c8b511949493bf4a046b55c3
 vendor/lib64/libsmemlog.so|512653d3d9563fda55acb84d76006c298eb78ba2
 
 # RIL - from tissot - OPR1.170623.026
--app/SimSettings/SimSettings.apk|bbaa9e20d51d054af178ada318a164c15d22f8b1
 -app/QtiTelephonyService/QtiTelephonyService.apk|7d7104c26c7c1e9487d9c41d48f0e0348135cb61
 etc/permissions/qcrilhook.xml|9fc58a3d54d20ac1d53bab14608815121aefbce5
 etc/permissions/telephonyservice.xml|b297c8a27443570377d78586b00198839ce326bb
@@ -728,14 +718,6 @@ vendor/lib64/libthermalioctl.so|ca2dca5f433073df781073f449fd7ed73a4e4d3c
 -vendor/app/TimeService/TimeService.apk|0d0b2d8b737b3083668d6cddd41b608825a5e5be
 vendor/bin/time_daemon|aecfad5b0eb3a1ad85cee394cbcb2e2006a8bce7
 vendor/lib64/libtime_genoff.so|0f5b21c5d9abd69249774a7d5c2c5195558e549d
-
-# Voice print - from op3 - OPR6.170623.013
-vendor/lib64/hw/sound_trigger.primary.msm8996.so|d81639f09364ff39a1132f7ee8497a13aa1bd988
-vendor/lib64/vendor.qti.voiceprint@1.0.so|e68fb38066c46a7f2b5be0f9a11300e01ec74dee
-vendor/lib/hw/sound_trigger.primary.msm8996.so|82906637605944c0dea3de007bd3ad063b610cd0
-vendor/lib/libadpcmdec.so|cce776b6e1edac56705b155444c3f28362055442
-vendor/lib/libsmwrapper.so|cd54c73eaafbe3fe9eacafc845a04d25e44fe553
-vendor/lib/vendor.qti.voiceprint@1.0.so|a706a35926dde53af240cafea640ab9e607f0cf1
 
 # Widevine DRM - from marlin - OPM1.171019.011
 vendor/bin/hw/android.hardware.drm@1.0-service.widevine|fd6e14710c196fdd4131afe2ce10c4a5be1b309c
