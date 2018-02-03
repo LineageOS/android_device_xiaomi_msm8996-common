@@ -21,6 +21,8 @@
 /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup                                  u:object_r:sysfs_fpc_wakeup:s0
 /sys/devices/soc/soc:fpc_fpc1020/proximity_state                                u:object_r:sysfs_fpc_proximity:s0
 
+/sys/devices/virtual/timed_output/vibrator(/.*)?                                u:object_r:sysfs_vibrator:s0
+
 /sys/module/cnss_common/parameters/bdwlan_file                                  u:object_r:sysfs_cnss_common:s0
 
 # Data files
@@ -37,8 +39,9 @@
 /(vendor|system/vendor)/bin/readmac   u:object_r:readmac_exec:s0
 
 # HALs
-/(vendor|system/vendor)/bin/hw/android\.hardware\.ir@1\.0-service.xiaomi_8996       u:object_r:hal_ir_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.xiaomi_8996    u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.ir@1\.0-service.xiaomi_8996        u:object_r:hal_ir_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.xiaomi_8996     u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.vibrator@1\.1-service\.xiaomi_8996 u:object_r:hal_vibrator_default_exec:s0
 
 # Shell scripts
 /(vendor|system/vendor)/bin/init\.panel\.sh    u:object_r:init_panel_exec:s0
