@@ -724,11 +724,11 @@ vendor/bin/thermal-engine|ef05fa3e09dafb74775a69e6a10c5d00194e3d53
 vendor/lib64/libthermalioctl.so|ca2dca5f433073df781073f449fd7ed73a4e4d3c
 -vendor/lib/libthermalclient.so|6096637d37150d89caf3c730c9964ac07797fa55
 
-# Time services
--app/TimeService/TimeService.apk
-bin/time_daemon:vendor/bin/time_daemon
-vendor/lib64/libTimeService.so
-vendor/lib64/libtime_genoff.so
+# Time services - from op3 - OPR6.170623.013
+-vendor/app/TimeService/TimeService.apk|ba2c7ea87183844f788a4e9dd51ed1d3943cbf7c
+vendor/bin/time_daemon|29e74b994fcd6305882795aca89b903df76da5dc
+vendor/lib64/libtime_genoff.so|ee8253978e1329e9ba5df37b1699af409865bb11
+vendor/lib64/libTimeService.so|b40e23974c049693eb325059f247236b32801396
 
 # Voice print - from op3 - OPR6.170623.013
 vendor/lib64/hw/sound_trigger.primary.msm8996.so|d81639f09364ff39a1132f7ee8497a13aa1bd988

@@ -7,7 +7,4 @@ allow system_app sysfs_fpc_wakeup:file rw_file_perms;
 # Allow PocketMode to work
 allow system_app sysfs_fpc_proximity:file rw_file_perms;
 
-# Access to time_daemon
-allow system_app time_daemon:unix_stream_socket connectto;
-
 allow system_app qfp_proxy_service:service_manager add;
