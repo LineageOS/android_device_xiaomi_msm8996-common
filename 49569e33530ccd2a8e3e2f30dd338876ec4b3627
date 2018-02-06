@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81a52433_f4b778c6",
+        "filename": "system.prop",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-02-06T13:11:50Z",
+      "side": 1,
+      "message": "https://github.com/LineageOS/android_hardware_qcom_audio/commit/7498ddb713f9b45a9af9697f22ff0f917995fe94",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 40
+      },
+      "revId": "49569e33530ccd2a8e3e2f30dd338876ec4b3627",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af05a95_e59a36ce",
+        "filename": "system.prop",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-02-06T13:11:50Z",
+      "side": 1,
+      "message": "Framework support for these props was not added.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 37
+      },
+      "revId": "49569e33530ccd2a8e3e2f30dd338876ec4b3627",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
