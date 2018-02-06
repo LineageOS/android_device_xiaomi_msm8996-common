@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35569858_d42c4ebb",
+        "filename": "vibrator/Vibrator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2018-02-06T18:12:27Z",
+      "side": 1,
+      "message": "NOTE: This should be made per device or something.",
+      "range": {
+        "startLine": 36,
+        "startChar": 41,
+        "endLine": 36,
+        "endChar": 45
+      },
+      "revId": "fcd2a4753ea382feecd847f0e3b43bf92464e6c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
