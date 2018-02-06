@@ -59,9 +59,6 @@ ro.qcom.ad=1
 ro.qcom.ad.calib.data=/system/etc/calib.cfg
 ro.qcom.ad.sensortype=2
 
-# Display feature (bit0-ColorPrefer bit1-EyeCare bit2-AD bit3-CE bit4-CABC bit5-SRGB)
-ro.sys.display.support=63
-
 # DRM
 drm.service.enabled=true
 
@@ -83,16 +80,9 @@ sdm.debug.disable_rotator_split=1
 sdm.debug.disable_skip_validate=1
 sdm.perf_hint_window=50
 
-# GPS
-persist.gps.qc_nlp_in_use=1
-persist.loc.nlp_name=com.qualcomm.location
-ro.gps.agps_provider=1
-
 # IMS
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
-persist.radio.NO_STAPA=1
-persist.radio.VT_HYBRID_ENABLE=1
 
 # Media
 vendor.vidc.enc.disable.pq=true
@@ -102,10 +92,6 @@ ro.nfc.port=I2C
 persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 
 # Perf
-ro.am.reschedule_service=true
-ro.min_freq_0=307200
-ro.min_freq_4=307200
-ro.sys.fw.bg_apps_limit=60
 ro.vendor.extension_library=libqti-perfd-client.so
 
 # Radio
@@ -118,12 +104,12 @@ ro.telephony.default_network=20,20
 persist.data.qmi.adb_logmask=0
 persist.net.doxlat=true
 persist.radio.apm_sim_not_pwdn=1
-persist.radio.custom_ecc=1
 persist.radio.force_on_dc=true
 persist.radio.multisim.config=dsds
-persist.radio.rat_on=combine
 persist.radio.redir_party_num=1
-persist.radio.sib16_support=1
+persist.vendor.radio.custom_ecc=1
+persist.vendor.radio.rat_on=combine
+persist.vendor.radio.sib16_support=1
 
 # RmNet Data
 persist.rmnet.data.enable=true
