@@ -45,6 +45,29 @@
       "revId": "49569e33530ccd2a8e3e2f30dd338876ec4b3627",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ada6d9ad_49c32189",
+        "filename": "system.prop",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-02-06T13:31:35Z",
+      "side": 1,
+      "message": "kill \u0027em",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 37
+      },
+      "revId": "49569e33530ccd2a8e3e2f30dd338876ec4b3627",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
