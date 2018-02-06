@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e79be7f5_9c46e3d3",
+        "filename": "vibrator/Vibrator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-02-06T17:36:04Z",
+      "side": 1,
+      "message": "move i++) {",
+      "revId": "84d44322f22a599bea8935b7f4e5bd3c0329e5e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9baf3cf9_315df154",
+        "filename": "vibrator/Vibrator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-02-06T17:36:04Z",
+      "side": 1,
+      "message": "move std::endl",
+      "revId": "84d44322f22a599bea8935b7f4e5bd3c0329e5e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
