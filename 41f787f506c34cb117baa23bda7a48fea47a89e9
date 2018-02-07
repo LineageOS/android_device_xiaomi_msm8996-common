@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e2f807f_e8e4af5f",
+        "filename": "rootdir/etc/init.qcom.power.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-02-07T10:48:03Z",
+      "side": 1,
+      "message": "This is no longer needed since /system is now early mounted.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 72
+      },
+      "revId": "41f787f506c34cb117baa23bda7a48fea47a89e9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
