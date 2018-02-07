@@ -233,6 +233,7 @@ vendor/lib/libmmcamera_isp_sub_module.so
 
 # Charger
 bin/hvdcp_opti:vendor/bin/hvdcp_opti
+-sbin/charger;rootfs
 
 # CNE - from tissot - OPR1.170623.026
 etc/cne/andsfCne.xml|f81a69eac5dd16bbb195a0fcf1211a51cc014553
