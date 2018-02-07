@@ -60,8 +60,6 @@ on charger
     write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
-    wait /dev/block/bootdevice/by-name/system
-    mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 300000
     write /sys/devices/system/cpu/cpu1/online 1
@@ -71,6 +69,7 @@ on charger
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/msm_thermal/parameters/enabled "N"
     start hvdcp_opti
+    start thermal-engine
 
 on enable-low-power
     # Disable thermal hotplug to switch governor
@@ -182,11 +181,10 @@ on property:sys.boot_completed=1
 on property:init.svc.recovery=running
     trigger enable-low-power
 
-service charger /charger
+service charger /sbin/chargeonlymode
     class charger
-    group log
+    group system graphics
     seclabel u:r:charger:s0
-    writepid /dev/cpuset/system-background/tasks
 
 service energy-awareness /vendor/bin/energy-awareness
     class main
