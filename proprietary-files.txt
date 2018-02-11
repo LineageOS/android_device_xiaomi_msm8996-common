@@ -693,20 +693,18 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so|d30462843
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so|e9bcbdf6544c5334a1f2e461d733d5766cd1b129
 vendor/radio/qcril_database/qcril.db|8405d20c8e1184c79eba1c4f19ecfb92d7529bdf
 
-# Sensors
-bin/sensors.qcom:vendor/bin/sensors.qcom
-vendor/lib64/hw/activity_recognition.msm8996.so
-vendor/lib64/libsensor1.so
-vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_user_cal.so
-vendor/lib64/sensors.oem.so
-vendor/lib64/sensors.ssc.so
-vendor/lib/hw/activity_recognition.msm8996.so
-vendor/lib/libsensor1.so
-vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_user_cal.so
-vendor/lib/sensors.oem.so
-vendor/lib/sensors.ssc.so
+# Sensors - from tissot - OPR1.170623.026
+vendor/bin/sensors.qcom|a175898ba5c55379a4fb15d87703db58666ddeb7
+vendor/lib64/hw/activity_recognition.msm8996.so|1760cd35fa5e786630a795d308dbbb24fccf0f4e
+vendor/lib64/libsensor1.so|48119f1ae57517699cf4dd5ac665a075465c19fe
+vendor/lib64/libsensor_reg.so|687cac41f342ff446ef4e078079a82b621e9067b
+vendor/lib64/libsensor_user_cal.so|5db27c02f41594740cdf5c0ef75f423bd56d8648
+vendor/lib64/sensors.ssc.so|ab10d321434e08a499dbd58b2ca1a92c74b10674
+vendor/lib/hw/activity_recognition.msm8996.so|a93ab9aa549c2ce5b9ba5b1b8d62a192a66a6c1a
+vendor/lib/libsensor1.so|4fce964db2d627f8c76b93c31d7c4f2b3b0fabc9
+vendor/lib/libsensor_reg.so|b4d7021b9f52b1af4b088a53288f17909e6968a4
+vendor/lib/libsensor_user_cal.so|b758a03d38090f15e094d64e64ba898f31b32cce
+vendor/lib/sensors.ssc.so|39d40e928ca9ef558506a7632baa341f16dd85b6
 
 # Thermal - from tissot - OPR1.170623.026
 vendor/bin/thermal-engine|ef05fa3e09dafb74775a69e6a10c5d00194e3d53
