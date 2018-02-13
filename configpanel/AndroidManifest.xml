@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2016 The CyanogenMod Project
-                   2017 The LineageOS Project
+     Copyright (C) 2017-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          android:sharedUserId="android.uid.system"
-          package="org.lineageos.settings.device"
-          android:versionCode="6"
-          android:versionName="2.4" >
+    package="org.lineageos.settings.device"
+    android:versionCode="6"
+    android:versionName="2.5"
+    android:sharedUserId="android.uid.system">
 
     <protected-broadcast android:name="org.lineageos.settings.device.CUST_UPDATE" />
 
     <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <uses-sdk
-        android:minSdkVersion="24" />
+        android:minSdkVersion="27" />
 
     <application
         android:icon="@mipmap/ic_launcher_settings"
