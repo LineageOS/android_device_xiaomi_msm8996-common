@@ -29,7 +29,7 @@
         android:minSdkVersion="27" />
 
     <application
-        android:icon="@mipmap/ic_launcher_settings"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/device_settings_app_name"
         android:theme="@style/Theme.Main"
         android:defaultToDeviceProtectedStorage="true"
