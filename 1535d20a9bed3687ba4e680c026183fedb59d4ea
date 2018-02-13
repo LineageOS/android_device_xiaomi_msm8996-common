@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "125401cb_727e9849",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-02-13T11:08:51Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be properly picked: https://source.codeaurora.org/quic/la/platform/hardware/qcom/camera/commit/?h\u003dLA.UM.5.5.r1-04000-8x96.0\u0026id\u003d7f8e8ab076c2ee10096a846f008bf6cf01d63b48",
+      "range": {
+        "startLine": 21,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 63
+      },
+      "revId": "1535d20a9bed3687ba4e680c026183fedb59d4ea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
