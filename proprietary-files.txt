@@ -344,57 +344,57 @@ vendor/lib64/libxtadapter.so|dd494a0618b53d4c8f6fee88d13daadca1ff1ab7
 vendor/lib64/libxtwifi_ulp_adaptor.so|9e3d3b35ca62d3db539ae7fc28a14a8dbc8d8a8c
 vendor/lib64/vendor.qti.gnss@1.0_vendor.so|de8d436508413b3b9de93940a120cca028af4b3d
 
-# Graphics - from mata - OPM1.170911.213
-vendor/lib/egl/eglSubDriverAndroid.so|4eefcd82b666a95588af1213c28eb4e9b9d9ee33
+# Graphics - from cheeseburger - OPR6.170623.013
+vendor/lib/egl/eglSubDriverAndroid.so|ac4d51b7a0f0d04f34042f980fd84b7af64140c2
 vendor/lib/egl/libEGL_adreno.so|7e9cef1dae8c675962a83638539d6e87c8070f6e
 vendor/lib/egl/libGLESv1_CM_adreno.so|b6804a9e72fab7f7708cc23e6c6c166c0cc3df3e
-vendor/lib/egl/libGLESv2_adreno.so|6a4b12190c297c8f21bba777876cfd6c27207158
+vendor/lib/egl/libGLESv2_adreno.so|3251cc22ebd6da9ac406d66fddb39422f81283c1
 vendor/lib/egl/libq3dtools_adreno.so|0859b1ea8b49ed14429ca45826551f1633895264
 vendor/lib/egl/libQTapGLES.so|59a92cc3ffc98147498ee6895e60d66d8549796a
 vendor/lib/libadreno_utils.so|4efe5db073db43b7244d9ec50fc30d59601daf58
-vendor/lib/libbccQTI.so|3040265d853927de8560c997a4c4e618eb28f7ed
+vendor/lib/libbccQTI.so|b3c81111663a75c3c33c4a02bfbc0ea8bc6c5bb2
 vendor/lib/libC2D2.so|8830eb461ac5f920b21526ed5c536da162cbadaa
 vendor/lib/libc2d30_bltlib.so|d33d00cb11bc9851046a718f0929752fe462f214
 vendor/lib/libc2d30-a5xx.so|958fb589a61cde6813f9a98f2e2500dc36a207f0
-vendor/lib/libCB.so|3434a758b6ab785f54d7c48d88b269e6fdda6581
+vendor/lib/libCB.so|6b3caddd5b37b06ab9b6a8f8594a89c45d42fbef
 vendor/lib/libgsl.so|415c0a927a2fc896b2264d1500f86c3e08daa824
-vendor/lib/libllvm-glnext.so|a1b8ca878225846d694b22ff1a8759dbdff601b1
-vendor/lib/libllvm-qcom.so|c6faabffd7839537a7b25fb6743c6aadbcd22147
-vendor/lib/libllvm-qgl.so|1d3c6e398505324d8fac9997c34e0a36c8ae5c18
-vendor/lib/libmm-disp-apis.so|111288b23bd2e68b4e01eb9b93959096ca5bbfcc
-vendor/lib/libmm-qdcm.so|0ca97b59682e297256d20116acc750472aeb00fd
+vendor/lib/libllvm-glnext.so|088c1e73bf360fe8ac619ecb48c2222446152e1c
+vendor/lib/libllvm-qcom.so|f386dfb25738923f6d85bd02e2f6da0824da24bc
+vendor/lib/libllvm-qgl.so|e16cb0919b12738fff78c9b4c16b9205abff88cb
+vendor/lib/libmm-disp-apis.so|01875b0eedf37f224fdada719377451ccd27e640
+vendor/lib/libmm-qdcm.so|b06fcb152371a82248724863ddff98ce26fa0621
 vendor/lib/libOpenCL.so|5dc66f1d3008e79c1a1b9483399423dbe737a773
-vendor/lib/libqseed3.so|9f93d730b8d2c44a9864aea18bca4f5eb1a11fe5
-vendor/lib/librs_adreno_sha1.so|14a760b6d06e3f6b8911b8f0c034ec91cce8a954
+vendor/lib/libqseed3.so|1f533a4f49953577ceab0caae4467ec50fde1193
+vendor/lib/librs_adreno_sha1.so|106b78053703bae0f62a8a5d6503510d445de64b
 vendor/lib/librs_adreno.so|ba45fb2ac5ea9f881eb54fda685d19752859893e
-vendor/lib/libRSDriver_adreno.so|2136ecfc36098b3d1ea6e83668c987bad92f32d4
-vendor/lib64/egl/eglSubDriverAndroid.so|13952992a54300c02ba8302f899b4285bc231180
+vendor/lib/libRSDriver_adreno.so|201410b612bbf14936ddca9858e6d2fa608d5fd9
+vendor/lib64/egl/eglSubDriverAndroid.so|f65610275a6834a161bf20e8fa0270803deaafe3
 vendor/lib64/egl/libEGL_adreno.so|60375ff06520aaee699771e2c5ce03943c665290
 vendor/lib64/egl/libGLESv1_CM_adreno.so|f82b3e4b5b13258654957328b7b8ad6a55270718
-vendor/lib64/egl/libGLESv2_adreno.so|eb674f2bf5ed88d76c53272f7ee5a6e75332b1f2
+vendor/lib64/egl/libGLESv2_adreno.so|871d74d9bdaef7b928d19f5aeee7fbc08e3831bd
 vendor/lib64/egl/libq3dtools_adreno.so|ed700e0cafafad66293e1406d9a189e41b5fcba7
 vendor/lib64/egl/libQTapGLES.so|5842caa7a0c8e04c3a9900cd3178971fe47ec55e
 vendor/lib64/libadreno_utils.so|df34a647e6e381c8474f9961d1e45b0f33ea9b78
-vendor/lib64/libbccQTI.so|073d468d5feedbd227652efe069a2bd32131db4f
+vendor/lib64/libbccQTI.so|12049b2950dda021771ff3b74c342316e30077fa
 vendor/lib64/libC2D2.so|12f97946eb0e201e10128f7cf483bf97de604fea
 vendor/lib64/libc2d30_bltlib.so|5c1625ce6618f39a779ed05fb6c803a0d2b2619f
 vendor/lib64/libc2d30-a5xx.so|7c93d41e945a7bc9855bb754c4f95d89c2d9a94b
-vendor/lib64/libCB.so|8058fbce88890253eb05c1e647d7cccfe284d44b
+vendor/lib64/libCB.so|339bc32a208f138dc6220f374ff5a6172cbc4783
 vendor/lib64/libgsl.so|2f54e4f0b4bdb1ac8a54be6dfe7fdfca1a1cc664
-vendor/lib64/libllvm-glnext.so|d30ca2dca50f4a70cfdc2615c090abf94714c39e
-vendor/lib64/libllvm-qcom.so|e0bb85dd6dc2b1c14f3b97129276455fb1bb4e44
-vendor/lib64/libllvm-qgl.so|7b302d3923bcec768de104029db53038135b56dc
-vendor/lib64/libmm-disp-apis.so|5360bcf2c25fd1f97073302e2a80003479d41241
-vendor/lib64/libmm-qdcm.so|cf8b25a503a2727e7fb189e6c6c809568e769058
+vendor/lib64/libllvm-glnext.so|d70b9c49ab16944ca3f9f8542ee72ad80c920f69
+vendor/lib64/libllvm-qcom.so|b0c9938edd357894944777dc07af0fa7dcf491ea
+vendor/lib64/libllvm-qgl.so|eb55611e95d9b01f68c0adad08f024b8ef29a540
+vendor/lib64/libmm-disp-apis.so|d4ed09c076e25c115a8184ca26340907fdf98c86
+vendor/lib64/libmm-qdcm.so|2b679cb476dcdd69eadbb97543eeebd2e4032596
 vendor/lib64/libOpenCL.so|eae487ec35aa44b075ebbfc5b306387ca55f01bb
-vendor/lib64/libqseed3.so|e06822d342c84d6c5412325ad316c3578b04d793
-vendor/lib64/librs_adreno_sha1.so|f9a039d517869d0abc61ce168cac525e354c18b1
+vendor/lib64/libqseed3.so|639aec109c64d26321849b2c7012f0e3d0b1af72
+vendor/lib64/librs_adreno_sha1.so|8e492eb0656a4dfae6936ab52b754f5006d8d25a
 vendor/lib64/librs_adreno.so|25a9a431fb34c32344f1b706224b46747667e130
-vendor/lib64/libRSDriver_adreno.so|17de89c1c3b5001dc354d20613d38a027ea8c851
+vendor/lib64/libRSDriver_adreno.so|5356c65f29b46964ffefa8065b3e2c0261433c40
 
-# Graphics (HDR) - from mata - OPM1.170911.213
-vendor/lib/libhdr_tm.so|c6d5abfa703cd8336da201641f9b4b98426c2ed2
-vendor/lib64/libhdr_tm.so|821897a43b0980dfbd39a4e15dc743448fbf0fb0
+# Graphics (HDR) - from cheeseburger - OPR6.170623.013
+vendor/lib/libhdr_tm.so|cf23edb8174445f87c6e6394c48cdbda70dff98b
+vendor/lib64/libhdr_tm.so|8ced1c36da811e0f66d2eed9f6f9d6218ab93bd0
 
 # Graphics (SDM) - from cheeseburger - OPR6.170623.013
 lib/libsdm-disp-apis.so:vendor/lib/libsdm-disp-apis.so|152b51f294f170ebd3528d80c6e65fcc4436f6aa
