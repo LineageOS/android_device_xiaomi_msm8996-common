@@ -20,6 +20,8 @@ package org.lineageos.settings.device;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lineageos.internal.util.FileUtils;
+
 public class Constants {
 
     // Category keys
@@ -32,6 +34,7 @@ public class Constants {
     public static final String FP_WAKEUP_KEY = "fp_wakeup";
 
     // Nodes
+    public static final String CYTTSP_BUTTON_SWAP_NODE = "/proc/buttons/reversed_keys_enable";
     public static final String BUTTON_SWAP_NODE = "/proc/touchpanel/reversed_keys_enable";
     public static final String FP_HOME_KEY_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_key_events";
     public static final String FP_WAKEUP_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_wakeup";
@@ -61,7 +64,11 @@ public class Constants {
     };
 
     static {
-        sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+        if (FileUtils.fileExists(Constants.CYTTSP_BUTTON_SWAP_NODE)) {
+            sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, CYTTSP_BUTTON_SWAP_NODE);
+        } else if (FileUtils.fileExists(Constants.BUTTON_SWAP_NODE)) {
+            sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+        }
         sBooleanNodePreferenceMap.put(FP_HOME_KEY, FP_HOME_KEY_NODE);
         sBooleanNodePreferenceMap.put(FP_WAKEUP_KEY, FP_WAKEUP_NODE);
 

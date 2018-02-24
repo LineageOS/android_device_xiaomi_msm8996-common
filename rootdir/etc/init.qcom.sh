@@ -34,8 +34,9 @@ start_copying_prebuilt_qcril_db()
     fi
 }
 
-# Set shared touchpanel nodes ownership (these are proc_symlinks to the real sysfs nodes)
+# Set shared touchpanel and buttons nodes ownership (these are proc_symlinks to the real sysfs nodes)
 chown -LR system.system /proc/touchpanel
+chown -LR system.system /proc/buttons
 
 #
 # Copy qcril.db if needed for RIL
