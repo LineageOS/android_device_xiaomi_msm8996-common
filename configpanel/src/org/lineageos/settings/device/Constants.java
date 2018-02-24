@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017 The LineageOS Project
+ *           (C) 2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
 
 package org.lineageos.settings.device;
 
+import org.lineageos.internal.util.FileUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,9 +34,10 @@ public class Constants {
     public static final String FP_WAKEUP_KEY = "fp_wakeup";
 
     // Nodes
-    public static final String BUTTON_SWAP_NODE = "/proc/touchpanel/reversed_keys_enable";
+    public static final String CYTTSP_BUTTON_SWAP_NODE = "/proc/buttons/reversed_keys_enable";
     public static final String FP_HOME_KEY_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_key_events";
     public static final String FP_WAKEUP_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_wakeup";
+    public static final String TOUCHPANEL_BUTTON_SWAP_NODE = "/proc/touchpanel/reversed_keys_enable";
     public static final String VIRTUAL_KEYS_NODE = "/proc/touchpanel/capacitive_keys_enable";
 
     // Intents
@@ -61,7 +64,11 @@ public class Constants {
     };
 
     static {
-        sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+        if (FileUtils.fileExists(Constants.CYTTSP_BUTTON_SWAP_NODE)) {
+            sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, CYTTSP_BUTTON_SWAP_NODE);
+        } else if (FileUtils.fileExists(Constants.TOUCHPANEL_BUTTON_SWAP_NODE)) {
+            sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, TOUCHPANEL_BUTTON_SWAP_NODE);
+        }
         sBooleanNodePreferenceMap.put(FP_HOME_KEY, FP_HOME_KEY_NODE);
         sBooleanNodePreferenceMap.put(FP_WAKEUP_KEY, FP_WAKEUP_NODE);
 
