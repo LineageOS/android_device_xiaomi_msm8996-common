@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "869dcbcc_8348f50d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2018-02-28T22:26:18Z",
+      "side": 1,
+      "message": "-nofuse is unnecessary, there\u0027s no ambiguity with sdfat to whether or not it\u0027s fuse or nofuse, it\u0027s always a kernel driver.",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "294beb08a8d85b84616c4ba5f1f1ec160dc67639",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
