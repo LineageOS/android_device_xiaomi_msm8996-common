@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf443403_562c4807",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-07T16:20:40Z",
+      "side": 0,
+      "message": "This was a no-op.\n\n/* This feature requires the dependent cfg.ini \"gRoamPrefer5GHz\" set to 1 */",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 666,
+        "endChar": 19
+      },
+      "revId": "406ac31c7a6375022be1b2679794b7edfccd75c8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0653ae9_3f546da4",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-07T16:20:40Z",
+      "side": 0,
+      "message": "qcacld-2.0\u0027s default is 0",
+      "range": {
+        "startLine": 673,
+        "startChar": 25,
+        "endLine": 673,
+        "endChar": 26
+      },
+      "revId": "406ac31c7a6375022be1b2679794b7edfccd75c8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea80f54e_fca4cf6f",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-07T16:20:40Z",
+      "side": 0,
+      "message": "qcacld-2.0\u0027s default is 1",
+      "range": {
+        "startLine": 677,
+        "startChar": 17,
+        "endLine": 677,
+        "endChar": 18
+      },
+      "revId": "406ac31c7a6375022be1b2679794b7edfccd75c8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "542aea46_7004de41",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 2
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-07T16:20:40Z",
+      "side": 0,
+      "message": "qcacld-2.0\u0027s default is 10",
+      "range": {
+        "startLine": 682,
+        "startChar": 20,
+        "endLine": 682,
+        "endChar": 22
+      },
+      "revId": "406ac31c7a6375022be1b2679794b7edfccd75c8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4f30c84_ebc6fe5e",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-07T16:20:40Z",
+      "side": 0,
+      "message": "qcacld-2.0\u0027s default is 10",
+      "range": {
+        "startLine": 683,
+        "startChar": 20,
+        "endLine": 683,
+        "endChar": 22
+      },
+      "revId": "406ac31c7a6375022be1b2679794b7edfccd75c8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
