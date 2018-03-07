@@ -30,6 +30,8 @@
 
 # Persist files
 /persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
+/persist/PRSensorData.txt             u:object_r:sensors_persist_file:s0
+/persist/PSensor3cm_ct.txt            u:object_r:sensors_persist_file:s0
 /persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
 
 # Binaries
