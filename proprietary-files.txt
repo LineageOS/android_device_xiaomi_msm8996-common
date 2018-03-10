@@ -700,10 +700,10 @@ vendor/bin/thermal-engine|ef05fa3e09dafb74775a69e6a10c5d00194e3d53
 vendor/lib64/libthermalioctl.so|ca2dca5f433073df781073f449fd7ed73a4e4d3c
 -vendor/lib/libthermalclient.so|6096637d37150d89caf3c730c9964ac07797fa55
 
-# Time services - from tissot - OPR1.170623.026
--vendor/app/TimeService/TimeService.apk|0d0b2d8b737b3083668d6cddd41b608825a5e5be
-vendor/bin/time_daemon|aecfad5b0eb3a1ad85cee394cbcb2e2006a8bce7
-vendor/lib64/libtime_genoff.so|0f5b21c5d9abd69249774a7d5c2c5195558e549d
+# Time services - from bardock-pro - OPM1.171019.011
+-vendor/app/TimeService/TimeService.apk|5055619766db32fe499cda86b892c9f3081219c5
+vendor/bin/time_daemon|8ea7d65a65c1d50afc6553ad52848b454c62563d
+vendor/lib64/libtime_genoff.so|7683a85cae9f17cd535e8960fceda1d6831074a0
 
 # Widevine DRM - from marlin - OPM1.171019.011
 vendor/bin/hw/android.hardware.drm@1.0-service.widevine|fd6e14710c196fdd4131afe2ce10c4a5be1b309c
