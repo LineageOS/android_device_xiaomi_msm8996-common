@@ -93,6 +93,7 @@ persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.qti.sys.fw.bg_apps_limit=60
 
 # Radio
 DEVICE_PROVISIONED=1
