@@ -1,15 +1,15 @@
-# ADSP - from sagit - OPR1.170623.027
-vendor/bin/adsprpcd|a8e947d46be6ad97ed6b41c5aeb80c6c1c8e3654
-vendor/lib64/libadsprpc.so|fa562dd439d525488e77a08f288168e34b56e586
-vendor/lib64/libadsp_default_listener.so|c88b356ff24c66a640ddaa41798ceddf97a483f1
-vendor/lib64/libfastcvadsp_stub.so|247eb7f36c178503b0e8f539d74d1ae1d686329a
-vendor/lib64/libfastcvopt.so|0058c2619a807a6e592498ab2438ddea54e7cff8
-vendor/lib/libadsprpc.so|e0f216269aef7c26531d7937156f8bfcccaaf856
-vendor/lib/libadsp_default_listener.so|b5bd382d217d887db727b9ae61ce64619306e0ae
-vendor/lib/libadsp_hvx_callback_skel.so|ce9b385131e988a7eb98fdd6346b4cc48ef51280
-vendor/lib/libadsp_hvx_stub.so|6c9513231420af1b230caa443f9803f4cbf12817
-vendor/lib/libfastcvadsp_stub.so|d30060f942dbe3ee59054ddff5f1bce0653d7e80
-vendor/lib/libfastcvopt.so|f20bd53866f187350d5266727ba9aa199e0baec0
+# ADSP
+vendor/bin/adsprpcd
+vendor/lib64/libadsprpc.so
+vendor/lib64/libadsp_default_listener.so
+vendor/lib64/libfastcvadsp_stub.so
+vendor/lib64/libfastcvopt.so
+vendor/lib/libadsprpc.so
+vendor/lib/libadsp_default_listener.so
+vendor/lib/libadsp_hvx_callback_skel.so
+vendor/lib/libadsp_hvx_stub.so
+vendor/lib/libfastcvadsp_stub.so
+vendor/lib/libfastcvopt.so
 
 # ADSP modules - from sagit - OPR1.170623.027
 vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so|03b56d0beb64409efcac531da384f84d10dd5ed6
@@ -47,37 +47,37 @@ vendor/lib/rfsa/adsp/libvpp_frc.so|536a323ebc3eda0079746d9371b32b7b9d0467ec
 vendor/lib/rfsa/adsp/misound_res.bin
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
-# Audio libraries - from sagit - OPR1.170623.027
-etc/permissions/audiosphere.xml|3c6d8f14bd99e52a424282fd5d0a5b9b06485dea
-framework/audiosphere.jar|e12a3ee72672b82dffc9a5675d0c30ddf0328807
-lib/soundfx/libdirac.so|bece5d936afa4bab82d17117df59fd8a68ac86b2
-vendor/lib/libacdb-fts.so|ee1f3eaca02136afdc848197139c7f6dfc434b09
-vendor/lib/libacdbloader.so|7ccb1d9b307c987fac919656dafbeb6f9d2d70a8
-vendor/lib/libacdbrtac.so|f2caec1b357d5029fa5cdcbef439635554bfae12
-vendor/lib/libadiertac.so|e9ec23379e16bbb24c6d5f3507743be30c8d00dd
-vendor/lib/libadm.so|9a7141ae4fcf91ef217a5ca5d4a82480695fc304
-vendor/lib/libaudcal.so|2b0571414125d0f165b345944a23e646c0e80634
-vendor/lib/libaudioalsa.so|1749da4be0e271e43f4c4fbcef048862dfb2a75f
-vendor/lib/libmdsprpc.so|3f4c12972b8fde1adef5cdea93b53a9f8a7f8a4f
-vendor/lib/libqtigef.so|388c29d5ec35f45a035e24d2c0406ddebfec4cd0
-vendor/lib/soundfx/libasphere.so|47c11c1f35c4f84c55eb154257f49f97d5b445e8
-vendor/lib/soundfx/libqcbassboost.so|1272f6dd4c716a9bb590f955f1197799906b67fc
-vendor/lib/soundfx/libqcreverb.so|0ee2758c1cb47dd318d5a472cd611becd1a9f551
-vendor/lib/soundfx/libqcvirt.so|8760fa2ce574c747937053612991676168da68fc
-vendor/lib/soundfx/libshoebox.so|81226397eb8e1be9485605ca74cbb565bec80e90
-vendor/lib64/libacdb-fts.so|d1a52ad05b228eb1c5aebebfcb95a2868c1ff619
-vendor/lib64/libacdbloader.so|d5228e85d5525200c0f540d9291a668816ca1c2d
-vendor/lib64/libacdbrtac.so|ff5c6495ccbec40de5ba44c3ab6b27ce7de2c33f
-vendor/lib64/libadiertac.so|9875fc2b87ef464d6508c03ebab2e18b6eb902d6
-vendor/lib64/libaudcal.so|c8d37a73a77ef2c09a543fb497ce68864f7100e3
-vendor/lib64/libaudioalsa.so|e0c80f38802cfd6cc74352a108040ff5f165614b
-vendor/lib64/libmdsprpc.so|1787cc629e6f635be3f8792ac4e97c624f03bfb7
-vendor/lib64/libqtigef.so|da7f8d943cdaa9b1d47b22e07162b70d8d20c673
-vendor/lib64/soundfx/libasphere.so|9bbef4a17304a19bd71cd52612257e7acbcb6ab7
-vendor/lib64/soundfx/libqcbassboost.so|1778982359c22db62f22a4d98a9ea8386ee4fbc8
-vendor/lib64/soundfx/libqcreverb.so|51cf62bd8754bad3c2e7c425cd639d1b0f59e94c
-vendor/lib64/soundfx/libqcvirt.so|25427388d43806769c1cbd08318bcc056b1be68d
-vendor/lib64/soundfx/libshoebox.so|f78894b08091c8b70f8cacee8242c3325d185e1f
+# Audio libraries
+etc/permissions/audiosphere.xml
+framework/audiosphere.jar
+vendor/lib/soundfx/libdirac.so
+vendor/lib/libacdb-fts.so
+vendor/lib/libacdbloader.so
+vendor/lib/libacdbrtac.so
+vendor/lib/libadiertac.so
+vendor/lib/libadm.so
+vendor/lib/libaudcal.so
+vendor/lib/libaudioalsa.so
+vendor/lib/libmdsprpc.so
+vendor/lib/libqtigef.so
+vendor/lib/soundfx/libasphere.so
+vendor/lib/soundfx/libqcbassboost.so
+vendor/lib/soundfx/libqcreverb.so
+vendor/lib/soundfx/libqcvirt.so
+vendor/lib/soundfx/libshoebox.so
+vendor/lib64/libacdb-fts.so
+vendor/lib64/libacdbloader.so
+vendor/lib64/libacdbrtac.so
+vendor/lib64/libadiertac.so
+vendor/lib64/libaudcal.so
+vendor/lib64/libaudioalsa.so
+vendor/lib64/libmdsprpc.so
+vendor/lib64/libqtigef.so
+vendor/lib64/soundfx/libasphere.so
+vendor/lib64/soundfx/libqcbassboost.so
+vendor/lib64/soundfx/libqcreverb.so
+vendor/lib64/soundfx/libqcvirt.so
+vendor/lib64/soundfx/libshoebox.so
 
 # Bluetooth - from tissot - OPR1.170623.026
 vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
