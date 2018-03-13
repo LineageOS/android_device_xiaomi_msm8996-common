@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da39fbc7_7302c841",
+        "filename": "vendor.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-13T08:24:57Z",
+      "side": 1,
+      "message": "This prop was removed by CAF at some point, but recently restored in the latest tag: https://source.codeaurora.org/quic/la/platform/vendor/qcom/thulium/commit/system.prop?h\u003dLA.UM.6.5.r1-06600-8x96.0\u0026id\u003d7b301f621ac3ef58bf98e3b903cf28ce1866d888",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 29
+      },
+      "revId": "2f8a1e924ddcaa7bb89973afecb1aed1eb2cc3cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aca4a4a_57c3df14",
+        "filename": "vendor.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-03-13T08:24:57Z",
+      "side": 1,
+      "message": "Here: https://github.com/LineageOS/android_device_xiaomi_msm8996-common/blob/lineage-15.1/camera/QCamera2/HAL/QCamera2HWI.cpp#L2646. This may be a no-op for us because we\u0027re not building HAL1, but I\u0027d prefer to leave it here anyway.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 32
+      },
+      "revId": "2f8a1e924ddcaa7bb89973afecb1aed1eb2cc3cc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
