@@ -166,7 +166,7 @@ on enable-low-power
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
     # Set perfd properties
-    setprop sys.post_boot.parsed 1
+    setprop vendor.post_boot.parsed 1
 
 on property:sys.boot_completed=1
     trigger enable-low-power
