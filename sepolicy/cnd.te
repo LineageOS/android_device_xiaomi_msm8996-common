@@ -1,1 +1,3 @@
+typeattribute cnd socket_between_core_and_vendor_violators;
+
 allow cnd system_wpa_socket:sock_file unlink;

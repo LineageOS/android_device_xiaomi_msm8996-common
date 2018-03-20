@@ -1,3 +1,5 @@
+typeattribute qfp-daemon binder_in_vendor_violators;
+
 binder_call(qfp-daemon, hal_fingerprint_default)
 binder_use(qfp-daemon)
 
