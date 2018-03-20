@@ -1,3 +1,5 @@
+typeattribute hal_fingerprint_default data_between_core_and_vendor_violators;
+
 binder_call(hal_fingerprint_default, qfp-daemon)
 binder_use(hal_fingerprint_default)
 
