@@ -96,6 +96,9 @@ persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 ro.vendor.extension_library=libqti-perfd-client.so
 ro.vendor.qti.sys.fw.bg_apps_limit=60
 
+# Priv-app permissions whitelist
+ro.control_privapp_permissions=enforce
+
 # Radio
 DEVICE_PROVISIONED=1
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
