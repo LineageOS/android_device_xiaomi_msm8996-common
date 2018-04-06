@@ -2,10 +2,6 @@
 # Common vendor properties for msm8996
 #
 
-# Adreno
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
-
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
