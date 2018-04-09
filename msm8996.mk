@@ -356,10 +356,6 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
-# USB
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
-
 # VNDK
 PRODUCT_PACKAGES += \
     vndk-sp
