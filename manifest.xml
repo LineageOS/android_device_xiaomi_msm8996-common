@@ -199,6 +199,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+       <name>android.hardware.radio.config</name>
+       <transport>hwbinder</transport>
+       <version>1.0</version>
+       <interface>
+           <name>IRadioConfig</name>
+           <instance>radioconfig</instance>
+       </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.radio.deprecated</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -216,6 +225,16 @@
             <name>IDevice</name>
             <instance>default</instance>
         </interface>
+    </hal>
+    <hal format="hidl">
+       <name>android.hardware.secure_element</name>
+       <transport>hwbinder</transport>
+       <version>1.0</version>
+       <interface>
+           <name>ISecureElement</name>
+           <instance>SIM1</instance>
+           <instance>SIM2</instance>
+       </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.sensors</name>
