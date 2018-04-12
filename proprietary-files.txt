@@ -80,9 +80,17 @@ vendor/lib64/soundfx/libqcvirt.so|25427388d43806769c1cbd08318bcc056b1be68d
 vendor/lib64/soundfx/libshoebox.so|f78894b08091c8b70f8cacee8242c3325d185e1f
 
 # Bluetooth - from tissot - OPR1.170623.026
+lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
+lib/com.qualcomm.qti.bluetooth_audio@1.0.so
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
+vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
+vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib64/libbtnv.so|19c1fde09804422dd0988888254383c4b907122e
+vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
+vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib/libbtnv.so|89b57498c5e5e554f9e36c77b958e8bc8f8ca17c
+vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 
 # Bluetooth (aptX) - from marlin - OPM1.171019.011
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
