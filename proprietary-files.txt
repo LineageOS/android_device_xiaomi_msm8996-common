@@ -80,15 +80,27 @@ vendor/lib64/soundfx/libqcvirt.so|25427388d43806769c1cbd08318bcc056b1be68d
 vendor/lib64/soundfx/libshoebox.so|f78894b08091c8b70f8cacee8242c3325d185e1f
 
 # Bluetooth - from tissot - OPR1.170623.026
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|0408245d1d50af98970a8613edfde56504b6caa6
 vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
+vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so|190a2f6b1fa4610c1c0c92ec4674859a1aa3416f
 vendor/lib64/libbtnv.so|19c1fde09804422dd0988888254383c4b907122e
+vendor/lib64/libbt-hidlclient.so|be758e47b5b7091f8fc475162ea4f9c7071f6813
+vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so|6b321d7d8a33d12e2b57806111585327fd904e13
 vendor/lib/libbtnv.so|89b57498c5e5e554f9e36c77b958e8bc8f8ca17c
+vendor/lib/libbt-hidlclient.so|1a28797e0536f709dac800a3a71fb1a7ada60c8b
+vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc|1a2dc1c2d217f47b9c99a0afa9e4912abd32e381
 
 # Bluetooth (aptX) - from marlin - OPM1.171019.011
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
 lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
+
+# Bluetooth (shared dependencies) - from tissot - OPR1.170623.026
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so|0634c77cf7634a3477947fe844fd397edf18673c
+vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so|3ad80eb89f806b2ec0b3d97929b2f8431c68cd91
+vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so|eb729d3a84dc3d76690635177b0f323dc2ded583
+vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so|4b18365e8d23417abe99663723b503c26ff60c8c
 
 # Camera
 bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
