@@ -79,6 +79,16 @@ vendor/lib64/soundfx/libqcreverb.so|51cf62bd8754bad3c2e7c425cd639d1b0f59e94c
 vendor/lib64/soundfx/libqcvirt.so|25427388d43806769c1cbd08318bcc056b1be68d
 vendor/lib64/soundfx/libshoebox.so|f78894b08091c8b70f8cacee8242c3325d185e1f
 
+# ANT+ - from tissot - OPR1.170623.026
+lib/com.qualcomm.qti.ant@1.0.so|c0e6c04047b4c88e83cd43de423fc96dce08c34c
+-lib/libantradio.so|2d733d878ed289b7a46aef80b2003987f9e440f9
+lib64/com.qualcomm.qti.ant@1.0.so|2702823b832b9c9a70259f052150465340814aa7
+-lib64/libantradio.so|3cd329cc6cad12d109a6768d97fa2f4a1c13e72e
+vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so|eb729d3a84dc3d76690635177b0f323dc2ded583
+vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so|ccf61a7e1921363ed7c945367bec2dc839a13e59
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so|0634c77cf7634a3477947fe844fd397edf18673c
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|5a606fed31e59e5272b2f5c4723580b0fa3ecbd1
+
 # Bluetooth - from tissot - OPR1.170623.026
 lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
 lib/com.qualcomm.qti.bluetooth_audio@1.0.so
