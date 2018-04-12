@@ -47,6 +47,16 @@ vendor/lib/rfsa/adsp/libvpp_frc.so|536a323ebc3eda0079746d9371b32b7b9d0467ec
 vendor/lib/rfsa/adsp/misound_res.bin
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
+# ANT+ - from tissot - OPR1.170623.026
+lib/com.qualcomm.qti.ant@1.0.so|c0e6c04047b4c88e83cd43de423fc96dce08c34c
+-lib/libantradio.so|2d733d878ed289b7a46aef80b2003987f9e440f9
+lib64/com.qualcomm.qti.ant@1.0.so|2702823b832b9c9a70259f052150465340814aa7
+-lib64/libantradio.so|3cd329cc6cad12d109a6768d97fa2f4a1c13e72e
+vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so|eb729d3a84dc3d76690635177b0f323dc2ded583
+vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so|ccf61a7e1921363ed7c945367bec2dc839a13e59
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so|0634c77cf7634a3477947fe844fd397edf18673c
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|5a606fed31e59e5272b2f5c4723580b0fa3ecbd1
+
 # Audio libraries - from sagit - OPR1.170623.027
 etc/permissions/audiosphere.xml|3c6d8f14bd99e52a424282fd5d0a5b9b06485dea
 framework/audiosphere.jar|e12a3ee72672b82dffc9a5675d0c30ddf0328807
@@ -99,9 +109,7 @@ lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
 lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
 
 # Bluetooth (shared dependencies) - from tissot - OPR1.170623.026
-vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so|0634c77cf7634a3477947fe844fd397edf18673c
 vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so|3ad80eb89f806b2ec0b3d97929b2f8431c68cd91
-vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so|eb729d3a84dc3d76690635177b0f323dc2ded583
 vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so|4b18365e8d23417abe99663723b503c26ff60c8c
 
 # Camera
