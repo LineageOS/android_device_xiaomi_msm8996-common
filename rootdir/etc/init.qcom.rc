@@ -355,19 +355,7 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2901
-    disabled
-
-on property:wc_transport.start_root=true
-    start hci_filter_root
-
-on property:wc_transport.start_root=false
-    stop hci_filter_root
-
-service hci_filter_root /vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth oem_2901 system
+    group bluetooth diag system wakelock
     disabled
 
 service atfwd /vendor/bin/ATFWD-daemon
