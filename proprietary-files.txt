@@ -30,6 +30,14 @@ vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
+# ANT+
+lib64/com.qualcomm.qti.ant@1.0.so
+-lib64/libantradio.so
+lib/com.qualcomm.qti.ant@1.0.so
+-lib/libantradio.so
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+
 # Audio libraries
 etc/permissions/audiosphere.xml
 framework/audiosphere.jar
@@ -77,7 +85,6 @@ lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
 lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
 
 # Bluetooth (shared dependencies)
-vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
 
 # Camera
