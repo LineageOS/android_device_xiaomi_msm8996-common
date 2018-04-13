@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4a49e6b_fe90264b",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-04-13T15:01:38Z",
+      "side": 1,
+      "message": "This is related with SplitA2DP feature (https://source.codeaurora.org/quic/la/platform/system/bt/commit/main/Android.bp?h\u003dLA.UM.6.4.c1-12600-8x98.0\u0026id\u003d943cc1e263b5a1ecb1bc02057978a4394f59f3b6). Considering that we\u0027re tracking AOSP for system/bt, this is useless to ship. Besides, the feature is not even supported on 8996: https://github.com/LineageOS/android_hardware_qcom_audio/commit/7498ddb713f9b45a9af9697f22ff0f917995fe94",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 100
+      },
+      "revId": "30d9e89b6f7ec820c9f4c1beed46e5d3685185ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
