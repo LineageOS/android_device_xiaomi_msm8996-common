@@ -127,7 +127,7 @@ on post-fs-data
     mkdir /data/vendor/radio 0770 system radio
 
     # Create directory for modem_config
-    mkdir /data/vendor/modem_config 0550 system radio
+    mkdir /data/vendor/modem_config 0570 radio root
 
     # Create directories for Location services
     mkdir /data/vendor/location 0770 gps gps
