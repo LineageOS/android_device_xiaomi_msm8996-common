@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abb3d7b9_becddacd",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2018-04-15T12:19:54Z",
+      "side": 1,
+      "message": "32bit libs are probably not needed.",
+      "revId": "f07f0c81ed4902d1d0f6bd543b16e58ce7cc0ede",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50d1ba72_968e2272",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2018-04-15T12:19:54Z",
+      "side": 1,
+      "message": "lib then lib64\n32bit libs are probably not needed.",
+      "revId": "f07f0c81ed4902d1d0f6bd543b16e58ce7cc0ede",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
