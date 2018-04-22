@@ -1,0 +1,6 @@
+allow hal_sensors_default audioserver:binder { call transfer };
+allow hal_sensors_default audioserver_service:service_manager find;
+
+allow hal_sensors_default sound_device:chr_file rw_file_perms;
+
+binder_use(hal_sensors_default)
