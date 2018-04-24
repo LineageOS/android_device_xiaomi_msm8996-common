@@ -70,7 +70,7 @@ on charger
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/msm_thermal/parameters/enabled "N"
-    start hvdcp_opti
+    start vendor.hvdcp_opti
     start thermal-engine
 
 on enable-low-power
@@ -191,7 +191,7 @@ service energy-awareness /vendor/bin/energy-awareness
     group system
     oneshot
 
-service hvdcp_opti /vendor/bin/hvdcp_opti
+service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     class main
     user root
     group system wakelock
