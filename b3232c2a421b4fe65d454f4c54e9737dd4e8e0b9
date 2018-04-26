@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "746c19f7_489484ad",
+        "filename": "light/Light.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-04-26T10:44:05Z",
+      "side": 1,
+      "message": "split alpha and colorRGB in 2 lines, I prefer to split assigned values",
+      "parentUuid": "",
+      "revId": "b3232c2a421b4fe65d454f4c54e9737dd4e8e0b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
