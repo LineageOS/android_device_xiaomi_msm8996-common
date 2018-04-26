@@ -22,6 +22,24 @@
       "revId": "2abe2752861fbca5b02934266256d28548d4ed47",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6eebf29_73aff3f4",
+        "filename": "light/Light.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-04-26T14:47:58Z",
+      "side": 1,
+      "message": "No, you can remove the rgb \u003c 0 checks",
+      "parentUuid": "c7717bc9_0e69b4f9",
+      "revId": "2abe2752861fbca5b02934266256d28548d4ed47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
