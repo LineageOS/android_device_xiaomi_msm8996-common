@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7717bc9_0e69b4f9",
+        "filename": "light/Light.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-04-26T14:44:34Z",
+      "side": 1,
+      "message": "Do we really need these checks? Is there any case where red/green/blue can be a negative number?",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 22
+      },
+      "revId": "2abe2752861fbca5b02934266256d28548d4ed47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
