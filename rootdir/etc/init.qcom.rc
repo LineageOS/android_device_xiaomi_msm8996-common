@@ -375,7 +375,7 @@ service vendor.ipacm /vendor/bin/ipacm
     group radio inet
     writepid /dev/cpuset/system-background/tasks
 
-service qti /vendor/bin/qti
+service vendor.dataqti /vendor/bin/qti
     class main
     user radio
     group radio oem_2901 diag usb
