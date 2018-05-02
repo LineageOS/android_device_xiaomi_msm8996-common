@@ -92,16 +92,14 @@ Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
       mGreenBlink(std::move(green_blink)),
       mBlueBlink(std::move(blue_blink)),
       mRgbBlink(std::move(rgb_blink)) {
-    auto attnFn(std::bind(&Light::setAttentionLight, this, std::placeholders::_1));
     auto backlightFn(std::bind(&Light::setLcdBacklight, this, std::placeholders::_1));
-    auto batteryFn(std::bind(&Light::setBatteryLight, this, std::placeholders::_1));
     auto buttonsFn(std::bind(&Light::setButtonsBacklight, this, std::placeholders::_1));
-    auto notifFn(std::bind(&Light::setNotificationLight, this, std::placeholders::_1));
-    mLights.emplace(std::make_pair(Type::ATTENTION, attnFn));
+    auto indicatorFn(std::bind(&Light::setIndicatorLight, this, std::placeholders::_1));
+    mLights.emplace(std::make_pair(Type::ATTENTION, indicatorFn));
     mLights.emplace(std::make_pair(Type::BACKLIGHT, backlightFn));
-    mLights.emplace(std::make_pair(Type::BATTERY, batteryFn));
+    mLights.emplace(std::make_pair(Type::BATTERY, indicatorFn));
     mLights.emplace(std::make_pair(Type::BUTTONS, buttonsFn));
-    mLights.emplace(std::make_pair(Type::NOTIFICATIONS, notifFn));
+    mLights.emplace(std::make_pair(Type::NOTIFICATIONS, indicatorFn));
 }
 
 // Methods from ::android::hardware::light::V2_0::ILight follow.
@@ -127,12 +125,6 @@ Return<void> Light::getSupportedTypes(getSupportedTypes_cb _hidl_cb) {
     _hidl_cb(types);
 
     return Void();
-}
-
-void Light::setAttentionLight(const LightState& state) {
-    std::lock_guard<std::mutex> lock(mLock);
-    mAttentionState = state;
-    setSpeakerBatteryLightLocked();
 }
 
 void Light::setLcdBacklight(const LightState& state) {
@@ -161,40 +153,23 @@ void Light::setButtonsBacklight(const LightState& state) {
     }
 }
 
-void Light::setBatteryLight(const LightState& state) {
+void Light::setIndicatorLight(const LightState& state) {
     std::lock_guard<std::mutex> lock(mLock);
-    mBatteryState = state;
-    setSpeakerBatteryLightLocked();
-}
 
-void Light::setNotificationLight(const LightState& state) {
-    std::lock_guard<std::mutex> lock(mLock);
-    mNotificationState = state;
-    setSpeakerBatteryLightLocked();
-}
+    int red, green, blue, blink;
+    int onMs, offMs, stepDuration, pauseHi;
+    uint32_t alpha;
 
-void Light::setSpeakerBatteryLightLocked() {
-    if (isLit(mNotificationState)) {
-        setSpeakerLightLocked(mNotificationState);
-    } else if (isLit(mAttentionState)) {
-        setSpeakerLightLocked(mAttentionState);
-    } else if (isLit(mBatteryState)) {
-        setSpeakerLightLocked(mBatteryState);
-    } else {
-        // Lights off
+    if (!isLit(state)) {
+        // Turn off all the lights
         mRedLed << 0 << std::endl;
         mGreenLed << 0 << std::endl;
         mBlueLed << 0 << std::endl;
         mRedBlink << 0 << std::endl;
         mGreenBlink << 0 << std::endl;
         mBlueBlink << 0 << std::endl;
+        return;
     }
-}
-
-void Light::setSpeakerLightLocked(const LightState& state) {
-    int red, green, blue, blink;
-    int onMs, offMs, stepDuration, pauseHi;
-    uint32_t alpha;
 
     // Extract brightness from AARRGGBB
     alpha = (state.color >> 24) & 0xff;

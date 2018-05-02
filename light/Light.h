@@ -47,13 +47,9 @@ struct Light : public ILight {
     Return<void> getSupportedTypes(getSupportedTypes_cb _hidl_cb) override;
 
   private:
-    void setAttentionLight(const LightState& state);
-    void setBatteryLight(const LightState& state);
     void setButtonsBacklight(const LightState& state);
     void setLcdBacklight(const LightState& state);
-    void setNotificationLight(const LightState& state);
-    void setSpeakerBatteryLightLocked();
-    void setSpeakerLightLocked(const LightState& state);
+    void setIndicatorLight(const LightState& state);
 
     std::pair<std::ofstream, uint32_t> mLcdBacklight;
     std::vector<std::ofstream> mButtonBacklight;
@@ -79,10 +75,6 @@ struct Light : public ILight {
     std::ofstream mGreenBlink;
     std::ofstream mBlueBlink;
     std::ofstream mRgbBlink;
-
-    LightState mAttentionState;
-    LightState mBatteryState;
-    LightState mNotificationState;
 
     std::unordered_map<Type, std::function<void(const LightState&)>> mLights;
     std::mutex mLock;
