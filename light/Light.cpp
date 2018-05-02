@@ -110,6 +110,9 @@ Return<Status> Light::setLight(Type type, const LightState& state) {
         return Status::LIGHT_NOT_SUPPORTED;
     }
 
+    // Lock global mutex until light state is updated
+    std::lock_guard<std::mutex> lock(mGlobalLock);
+
     it->second(state);
 
     return Status::SUCCESS;
@@ -128,8 +131,6 @@ Return<void> Light::getSupportedTypes(getSupportedTypes_cb _hidl_cb) {
 }
 
 void Light::setLcdBacklight(const LightState& state) {
-    std::lock_guard<std::mutex> lock(mLock);
-
     uint32_t brightness = rgbToBrightness(state);
 
     // If max panel brightness is not the default (255),
@@ -144,8 +145,6 @@ void Light::setLcdBacklight(const LightState& state) {
 }
 
 void Light::setButtonsBacklight(const LightState& state) {
-    std::lock_guard<std::mutex> lock(mLock);
-
     uint32_t brightness = rgbToBrightness(state);
 
     for (auto& button : mButtonBacklight) {
@@ -154,8 +153,6 @@ void Light::setButtonsBacklight(const LightState& state) {
 }
 
 void Light::setIndicatorLight(const LightState& state) {
-    std::lock_guard<std::mutex> lock(mLock);
-
     int red, green, blue, blink;
     int onMs, offMs, stepDuration, pauseHi;
     uint32_t alpha;

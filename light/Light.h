@@ -77,7 +77,7 @@ struct Light : public ILight {
     std::ofstream mRgbBlink;
 
     std::unordered_map<Type, std::function<void(const LightState&)>> mLights;
-    std::mutex mLock;
+    std::mutex mGlobalLock;
 };
 
 }  // namespace implementation
