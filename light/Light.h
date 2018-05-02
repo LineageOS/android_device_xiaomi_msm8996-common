@@ -85,7 +85,7 @@ struct Light : public ILight {
     LightState mNotificationState;
 
     std::unordered_map<Type, std::function<void(const LightState&)>> mLights;
-    std::mutex mLock;
+    std::mutex mGlobalLock;
 };
 
 }  // namespace implementation
