@@ -1,6 +1,7 @@
 /*
    Copyright (c) 2015, The Linux Foundation. All rights reserved.
    Copyright (C) 2016 The CyanogenMod Project.
+   Copyright (C) 2017-2018 The LineageOS Project.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -28,8 +29,7 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
 #include <sys/sysinfo.h>
 
 #include <android-base/file.h>
@@ -72,12 +72,11 @@ static void init_alarm_boot_properties()
          * 7 -> CBLPWR_N pin toggled (for external power supply)
          * 8 -> KPDPWR_N pin toggled (power key pressed)
          */
-         if ((Trim(boot_reason) == "3" || reboot_reason == "true")
-                 && Trim(power_off_alarm) == "1") {
-             property_set("ro.alarm_boot", "true");
-         } else {
-             property_set("ro.alarm_boot", "false");
-         }
+        if ((Trim(boot_reason) == "3" || reboot_reason == "true")
+                && Trim(power_off_alarm) == "1")
+            property_set("ro.alarm_boot", "true");
+        else
+            property_set("ro.alarm_boot", "false");
     }
 }
 
@@ -100,12 +99,6 @@ void check_device()
 
 void vendor_load_properties()
 {
-    std::string platform;
-
-    platform = GetProperty("ro.board.platform", "");
-    if (platform != ANDROID_TARGET)
-        return;
-
     check_device();
 
     property_set("dalvik.vm.heapstartsize", "8m");
