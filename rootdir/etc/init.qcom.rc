@@ -42,9 +42,6 @@ on early-init
     write /proc/sys/vm/page-cluster 0
 
 on init
-    # Set permissions for persist partition
-    mkdir /persist 0771 root system
-
     # Create cgroup mount point for memory
     mkdir /sys/fs/cgroup/memory/bg 0750 root system
     write /sys/fs/cgroup/memory/bg/memory.swappiness 140
@@ -59,6 +56,13 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
     mount_all /vendor/etc/fstab.qcom
+
+    # Set permissions for persist partition
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/bms 0700 root system
+    mkdir /mnt/vendor/persist/data 0700 system system
+    restorecon_recursive /mnt/vendor/persist
 
 on late-fs
     # boot time fs tune
@@ -247,15 +251,12 @@ on boot
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
     mkdir /persist/time 0770 system system
-    mkdir /persist/data 0700 system system
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
     mkdir /persist/qc_senseid 0700 system system
-    mkdir /persist/bms 0700 root system
     mkdir /persist/wlan_bt 0770 system system
     mkdir /persist/audio 0777 media audio
     mkdir /persist/display 0770 system graphics
-    restorecon_recursive /persist
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
