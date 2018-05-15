@@ -127,6 +127,9 @@ persist.data.df.mux_count=8
 persist.data.df.iwlan_mux=9
 persist.data.df.dev_name=rmnet_usb0
 
+# Security patch level
+ro.vendor.build.security_patch=2018-02-01
+
 # TimeService
 persist.timed.enable=true
 
