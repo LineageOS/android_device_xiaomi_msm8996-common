@@ -201,6 +201,10 @@ include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
 
+# Treble
+BOARD_VNDK_RUNTIME_DISABLE := true
+BOARD_VNDK_VERSION := current
+
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm8996
 TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8996
