@@ -1,6 +1,6 @@
 # Copyright (C) 2009 The Android Open Source Project
 # Copyright (c) 2011, The Linux Foundation. All rights reserved.
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017-2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,8 +30,9 @@ def AddModemAssertion(info, input_zip):
   android_info = info.input_zip.read("OTA/android-info.txt")
   m = re.search(r'require\s+version-modem\s*=\s*(.+)', android_info)
   if m:
-    version = m.group(1).rstrip()
-    if len(version) and '*' not in version:
-      cmd = 'assert(xiaomi.verify_modem("' + version + '") == "1");'
-      info.script.AppendExtra(cmd)
+    time_stamp,firmware_version = m.group(1).rstrip().split(',')
+    if ((len(time_stamp) and '*' not in time_stamp) and \
+        (len(firmware_version) and '*' not in firmware_version)):
+      cmd = 'assert(xiaomi.verify_modem("{}") == "1" || abort("Error: This package requires firmware version {} or newer. Please upgrade firmware and retry!"););'
+      info.script.AppendExtra(cmd.format(time_stamp, firmware_version))
   return
