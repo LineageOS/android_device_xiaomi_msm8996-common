@@ -264,15 +264,6 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS - from bardock-pro - OPM1.171019.019
-etc/permissions/com.qti.location.sdk.xml|cb68a566bd77dcc75bb7547199d528289fac01cb
-etc/permissions/com.qualcomm.location.xml|e837966b6a1a63430ac7ff648e84b0312cd3a46b
-etc/permissions/izat.xt.srv.xml|a0f460056f27b5495a4d6e959eecf0e429c42a57
-framework/com.qti.location.sdk.jar|f2e9f1d49201e1bad83008445fdafe9541e9b2bd
-framework/izat.xt.srv.jar|e10f1baf6ae0f70c4a529e5711559cebbc3644c9
-lib64/liblocationservice_jni.so|84fddd9ace2be661d26cad1864281c386b709cb2
-lib64/libxt_native.so|e4f2c1813d08ff7452dcba59fa1e23deea2494e4
-lib64/vendor.qti.gnss@1.0.so|716a812a9f4cdb45c57eb0a6fabb17624a91d553
--priv-app/com.qualcomm.location/com.qualcomm.location.apk|397314f080f553489440c63da44d01f482e6b761
 vendor/bin/hw/vendor.qti.gnss@1.0-service|bdf23fe2af07c2afb74721023431446104fd828d
 vendor/bin/loc_launcher|0675f4524d2c9e94f7e978b5e00734c0835ddf15
 vendor/bin/lowi-server|b9c62aefd4633a2a50287fd768a8000c37ae1b0e
@@ -282,25 +273,21 @@ vendor/etc/cacert_location.pem|0789bf799c7e45d352a83e2f79ddb0cea86db85b
 vendor/etc/init/vendor.qti.gnss@1.0-service.rc|98655e2adc2158a052b0ecf06b065535f0a2aac7
 vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
 vendor/lib64/hw/vendor.qti.gnss@1.0-impl.so|3a66e268286ebfad3f1e35f54b041d6b3d2ed191
-vendor/lib64/libalarmservice_jni.so|cf455802dcabf759bc6ac43767d7f227df8e3517
 vendor/lib64/libdataitems.so|e175d6254907cde80b1352da2874d88c3607d77f
 vendor/lib64/libdrplugin_client.so|312ef07b275bdbfb923cca18e961edf146736616
 vendor/lib64/libDRPlugin.so|d4f1127ed8f98011fe9687d40e8942e5738f4273
 vendor/lib64/libevent_observer.so|c163884372303f68e1fc073cf42d30959ef771c6
 vendor/lib64/libflp.so|3ccecdd103f0ff8689e22b6f0105ba1b6a1c2b27
-vendor/lib64/libgdtap.so|899a336541f8603f4db4dbab83b840d3bc226cc0
 vendor/lib64/libgeofence.so|b666ad9429e910f3644e73066a2fd2fd5bc7df1e
 vendor/lib64/libizat_client_api.so|896931c51c7fa8a9f626c971361679823e635d77
 vendor/lib64/libizat_core.so|49a29753966951814cb94b5ca0b899a3bfb74297
 vendor/lib64/liblbs_core.so|0ec82e6a32738036473ca0d6e000068f38dc2c7f
--vendor/lib64/libloc_api_v02.so|6f7cda15869af111d2017df4f9e2f561a0d07033
+vendor/lib64/libloc_api_v02.so|6f7cda15869af111d2017df4f9e2f561a0d07033
 vendor/lib64/libloc_ds_api.so|88bd00eef7b3e052e2725ce8883a8da0d95028f0
-vendor/lib64/libloc_externalDr.so|0b1ddef9675097306ea03c79069f8df054c2cd06
 vendor/lib64/liblocationservice_glue.so|9f56f0e9089f0eadc29036c2cffd5a06852f4cb0
 vendor/lib64/liblocationservice.so|13eae193a44f991daf2c54eb2311901bd32a6d8b
 vendor/lib64/liblowi_client.so|89305e655cbdbe53dde3afc804b5dddb5fa9ce6e
 vendor/lib64/liblowi_wifihal.so|a72819c88a88c26784281287a6f7c37435632fcf
-vendor/lib64/libquipc_os_api.so|91747d4df79ae73cd52f5d499c87c3552be9a673
 vendor/lib64/libulp2.so|1a92023fbe40d5042239f3efbdcd82f3299e8b17
 vendor/lib64/libxtadapter.so|9a8fbd106994aaaf380be883fa2ef37d04e20401
 vendor/lib64/libxtwifi_ulp_adaptor.so|078124cc018badf89c1f5588e9102e9f7c034da2
