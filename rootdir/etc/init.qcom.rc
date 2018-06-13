@@ -435,7 +435,7 @@ service qcom-sh /vendor/bin/init.qcom.sh
     user root
     oneshot
 
-on property:ro.runtime.mbn_copy_completed=1
+on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
 
 service panel-sh /vendor/bin/init.panel.sh
