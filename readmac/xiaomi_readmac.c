@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *               2017 The LineageOS Project
+ *               2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@
 #define LOG_TAG "xiaomi_readmac"
 #define LOG_NDEBUG 0
 
-#include <cutils/log.h>
-
 #include <dlfcn.h>
+#include <log/log.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define MAC_ADDR_SIZE 6
 #define WLAN_MAC_BIN "/persist/wlan_mac.bin"

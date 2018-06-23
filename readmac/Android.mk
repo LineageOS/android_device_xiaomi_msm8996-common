@@ -8,5 +8,6 @@ LOCAL_PROPRIETARY_MODULE := true
 LOCAL_SRC_FILES          := xiaomi_readmac.c
 LOCAL_CFLAGS             += -Wall -Werror
 LOCAL_SHARED_LIBRARIES   := liblog
+LOCAL_HEADER_LIBRARIES   := libcutils_headers
 include $(BUILD_EXECUTABLE)
 endif
