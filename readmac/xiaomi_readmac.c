@@ -23,6 +23,7 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define MAC_ADDR_SIZE 6
 #define WLAN_MAC_BIN "/persist/wlan_mac.bin"
