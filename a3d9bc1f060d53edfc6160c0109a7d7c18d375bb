@@ -22,6 +22,30 @@
       "revId": "a3d9bc1f060d53edfc6160c0109a7d7c18d375bb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a3852f2_5c8c89d8",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-07-19T13:20:08Z",
+      "side": 1,
+      "message": "Don\u0027t know yet. I hope that this is just for the OSS part: https://review.lineageos.org/#/c/LineageOS/android_device_xiaomi_msm8996-common/+/220824/1/gps/utils/gps_extended_c.h",
+      "parentUuid": "0eb34396_cbaf71a8",
+      "range": {
+        "startLine": 137,
+        "startChar": 10,
+        "endLine": 137,
+        "endChar": 30
+      },
+      "revId": "a3d9bc1f060d53edfc6160c0109a7d7c18d375bb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
