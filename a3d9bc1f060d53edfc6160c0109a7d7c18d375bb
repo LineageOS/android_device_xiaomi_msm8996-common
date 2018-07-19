@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0eb34396_cbaf71a8",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-07-19T13:13:08Z",
+      "side": 1,
+      "message": "We gotta sed our blobs or these are used only by qc location?",
+      "range": {
+        "startLine": 137,
+        "startChar": 10,
+        "endLine": 137,
+        "endChar": 30
+      },
+      "revId": "a3d9bc1f060d53edfc6160c0109a7d7c18d375bb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
