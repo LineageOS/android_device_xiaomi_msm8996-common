@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57686383_8ead8327",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2018-08-02T16:21:11Z",
+      "side": 1,
+      "message": "Pretty sure both elliptic don\u0027t need 777",
+      "range": {
+        "startLine": 137,
+        "startChar": 27,
+        "endLine": 137,
+        "endChar": 30
+      },
+      "revId": "00a68e8009620b802814373573b06cdc8c72b7b1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
