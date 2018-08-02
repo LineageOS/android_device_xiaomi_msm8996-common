@@ -1,14 +1,11 @@
-[AID_QCOM_DIAG]
-value:2950
-
 [AID_QTI_DIAG]
 value:2901
 
 [AID_RFS]
-value:2951
+value:2903
 
 [AID_RFS_SHARED]
-value:2952
+value:2904
 
 [vendor/bin/wcnss_filter]
 mode: 0755

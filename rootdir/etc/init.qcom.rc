@@ -355,7 +355,7 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950
+    group bluetooth oem_2901
     disabled
 
 on property:wc_transport.start_root=true
@@ -367,7 +367,7 @@ on property:wc_transport.start_root=false
 service hci_filter_root /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950 system
+    group bluetooth oem_2901 system
     disabled
 
 service atfwd /vendor/bin/ATFWD-daemon
@@ -391,7 +391,7 @@ service ipacm /vendor/bin/ipacm
 service qti /vendor/bin/qti
     class main
     user radio
-    group radio oem_2950 usb
+    group radio oem_2901 diag usb
     writepid /dev/cpuset/system-background/tasks
 
 service sensors /vendor/bin/sensors.qcom
@@ -507,13 +507,13 @@ on property:sys.shutdown.requested=*
 service readfem /vendor/bin/readfem
     class main
     user root
-    group root oem_2950
+    group root oem_2901
     oneshot
 
 service readmac /vendor/bin/readmac
     class main
     user root
-    group root oem_2950
+    group root oem_2901
     oneshot
 
 service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine-8996.conf}
