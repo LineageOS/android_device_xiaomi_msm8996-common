@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c947ec9_ccdf36b5",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-08-02T15:04:52Z",
+      "side": 0,
+      "message": "Can you check is this exists in any of your devices? The was removed in gemini\u0027s ueventd.",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 90
+      },
+      "revId": "5058a06160525ccc36e75947fbd56d34e3fa9cac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
