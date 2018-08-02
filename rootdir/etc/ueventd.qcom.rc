@@ -116,6 +116,7 @@
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
+/dev/smcinvoke            0660   system     system
 /dev/qsee_ipc_irq_spss    0660   system     drmrpc
 /dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
@@ -133,6 +134,8 @@
 /dev/system_health_monitor 0644  radio      system
 /dev/mdss_rotator         0664   system     system
 /dev/elliptic0            0777   system     system
+/dev/elliptic1            0777   system     system
+/dev/tiload_node          0660   system     system
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -196,9 +199,6 @@
 /dev/tsc_mux0             0660   media       media
 /dev/tsc_ci0              0660   media       media
 
-# ultrasonic fingerprint
-/sys/devices/soc/757a000.i2c/i2c-6/*                eeprom         0440    system   system
-
 # sensors
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 enable         0660    input    system
@@ -257,15 +257,10 @@
 # Capacitive touch emulation device
 /dev/captouch             0666   system     system
 
-#ImproveTouch device
-/dev/hbtp_input           0660   system     system
-/dev/hbtp_vm              0660   system     system
-
 # IR device
 /dev/lirc0                0660   system     system
 
 # Device block for FRP
-/dev/block/bootdevice/by-name/frp                                  0660   system     system
 /dev/block/platform/soc/624000.ufshc/by-name/frp                   0660   system     system
 
 # Kmsg device
