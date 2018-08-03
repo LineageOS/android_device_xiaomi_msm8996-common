@@ -255,6 +255,27 @@ vendor/lib/libwqe.so
 vendor/lib/libxml.so
 
 # DPM
+bin/dpmd
+etc/dpm/dpm.conf
+etc/dpm/nsrm/NsrmConfiguration.xml
+etc/init/dpmd.rc
+etc/permissions/com.qti.dpmframework.xml
+etc/permissions/dpmapi.xml
+framework/com.qti.dpmframework.jar
+framework/dpmapi.jar
+lib64/com.qualcomm.qti.dpm.api@1.0.so
+lib64/libdpmctmgr.so
+lib64/libdpmfdmgr.so
+lib64/libdpmframework.so
+lib64/libdpmnsrm.so
+lib64/libdpmtcm.so
+lib/com.qualcomm.qti.dpm.api@1.0.so
+lib/libdpmctmgr.so
+lib/libdpmfdmgr.so
+lib/libdpmframework.so
+lib/libdpmnsrm.so
+lib/libdpmtcm.so
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/bin/dpmQmiMgr
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so
 vendor/lib64/libdpmqmihal.so
@@ -278,6 +299,16 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS - from bardock-pro - OPM1.171019.019
+etc/permissions/com.qti.location.sdk.xml
+etc/permissions/com.qualcomm.location.xml
+etc/permissions/izat.xt.srv.xml
+etc/permissions/privapp-permissions-com.qualcomm.location.xml
+framework/com.qti.location.sdk.jar
+framework/izat.xt.srv.jar
+lib64/liblocationservice_jni.so
+lib64/libxt_native.so
+lib64/vendor.qti.gnss@1.0.so
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/hw/vendor.qti.gnss@1.0-service|bdf23fe2af07c2afb74721023431446104fd828d
 vendor/bin/loc_launcher|0675f4524d2c9e94f7e978b5e00734c0835ddf15
 vendor/bin/lowi-server|b9c62aefd4633a2a50287fd768a8000c37ae1b0e
