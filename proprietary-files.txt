@@ -255,6 +255,27 @@ vendor/lib/libwqe.so
 vendor/lib/libxml.so
 
 # DPM
+bin/dpmd
+etc/dpm/dpm.conf
+etc/dpm/nsrm/NsrmConfiguration.xml
+etc/init/dpmd.rc
+etc/permissions/com.qti.dpmframework.xml
+etc/permissions/dpmapi.xml
+framework/com.qti.dpmframework.jar
+framework/dpmapi.jar
+lib64/com.qualcomm.qti.dpm.api@1.0.so
+lib64/libdpmctmgr.so
+lib64/libdpmfdmgr.so
+lib64/libdpmframework.so
+lib64/libdpmnsrm.so
+lib64/libdpmtcm.so
+lib/com.qualcomm.qti.dpm.api@1.0.so
+lib/libdpmctmgr.so
+lib/libdpmfdmgr.so
+lib/libdpmframework.so
+lib/libdpmnsrm.so
+lib/libdpmtcm.so
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/bin/dpmQmiMgr
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so
 vendor/lib64/libdpmqmihal.so
