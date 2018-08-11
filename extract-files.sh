@@ -45,6 +45,9 @@ function blob_fixup() {
     vendor/lib64/lib-uceservice.so)
         patchelf --add-needed "libbase_shim.so" "${2}"
         ;;
+    vendor/lib64/vendor.qti.gnss@1.0_vendor.so)
+        patchelf --replace-needed "android.hardware.gnss@1.0.so" "android.hardware.gnss@1.0-v27.so" "${2}"
+        ;;
     vendor/lib/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
