@@ -223,9 +223,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/qpnp_pon.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/qpnp_pon.kl
 
 # IPA Manager
-PRODUCT_PACKAGES += \
-    ipacm \
-    IPACM_cfg.xml
+# PRODUCT_PACKAGES += \
+#     ipacm \
+#     IPACM_cfg.xml
 
 # IPC router config
 PRODUCT_COPY_FILES += \
