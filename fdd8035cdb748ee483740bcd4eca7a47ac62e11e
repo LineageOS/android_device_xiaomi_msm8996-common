@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "468c3ce9_f083241b",
+        "filename": "usb/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-08-13T12:50:51Z",
+      "side": 1,
+      "message": "Typo: \"noraml\" instead of normal.",
+      "revId": "fdd8035cdb748ee483740bcd4eca7a47ac62e11e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
