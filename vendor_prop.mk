@@ -123,8 +123,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.bg_apps_limit=60
 
 # Priv-app permissions whitelist
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=enforce
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.control_privapp_permissions=enforce
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
