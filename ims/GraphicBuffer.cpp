@@ -7,3 +7,8 @@ extern "C" void _ZN7android13GraphicBuffer4lockEjPPv(void* thisptr, uint32_t inU
         void** vaddr) {
     _ZN7android13GraphicBuffer4lockEjPPvPiS3_(thisptr, inUsage, vaddr, nullptr, nullptr);
 }
+
+// android::Fence::~Fence()
+extern "C" void _ZN7android5FenceD1Ev() {
+  // no-op, the explicit destructor was replaced with = default;
+}
