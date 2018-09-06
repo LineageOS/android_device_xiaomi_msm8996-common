@@ -359,21 +359,20 @@ vendor/lib/libRSDriver_adreno.so|c0551aea7d32e21efde69a6a43b8b45bf69e0528
 vendor/lib/libhdr_tm.so|9f191fda6909c92b29ac15c3d2cbf65c2db94b13
 vendor/lib64/libhdr_tm.so|9a61ddbece993d3329d337265f7be5278c237833
 
-# Graphics (SDM) - from bardock-pro - OPM1.171019.019
-lib64/libsdm-disp-apis.so|6a43376f167b146a8b8b571d87235a83af9841e1
-lib/libsdm-disp-apis.so|57422f6469e1e5dd2ff890742a2783237dd19395
-vendor/lib64/libscalar.so|fa8715f4ef91443744e921cf7912516a677c9f9d
-vendor/lib64/libsdm-color.so|864ba48cda7279a7c2bb07ce9182bd4417dec4ff
-vendor/lib64/libsdm-diag.so|0e5be5803c36ed004724be97553f5ae18a1f24de
--vendor/lib64/libsdm-disp-vndapis.so|4e936b7cbc00bb05381d03b70c8c53e377676bb3
-vendor/lib64/libsdmextension.so|be02dd004708b621e1fc639a51b6bcffb2c1c60d
-vendor/lib64/libtinyxml2_1.so|5ffb12fd2162910fc95be463fcde04ab5c427045
-vendor/lib/libscalar.so|d8fa500e6a1250c1f5e251ec9bbe44177a5352b8
-vendor/lib/libsdm-color.so|2a265d34873f3d02bed7641640e84ea75edb977a
-vendor/lib/libsdm-diag.so|ac8b0130258ab08354cedfca89f73fb063e67290
--vendor/lib/libsdm-disp-vndapis.so|fc41b9e6c877a77e665d5766984aa1639ab167f4
-vendor/lib/libsdmextension.so|c8bd2bc2c4f94f409446c0ac1b5f39e63dfeae4b
+# Graphics (SDM) - from "LA.UM.6.4.r1-08900-8x98.0"
+vendor/lib/libqseed3.so|e29a10228dfd0cceee2e0ac59c27535d8e87db92
+vendor/lib/libsdm-color.so|d391f304027feaae6df5cfe8a377be1c17dbbb50
+vendor/lib/libsdm-diag.so|e62985d3514636333b889235647bfd65dc38c2b1
+-vendor/lib/libsdm-disp-vndapis.so|8db9815165439774b5fba9d83f048c19b71f3495
+vendor/lib/libsdmextension.so|5a113315fd1c55b3d4db06e00f8185d532f16625
 vendor/lib/libtinyxml2_1.so|3ee768813f5b351b71bd7dd2367b13a3698a591a
+vendor/lib64/libqseed3.so|d23c424bf8e5530049562c7e1d5d3cbda20ca79e
+vendor/lib64/libscalar.so|b7dd9afe0770e045a837c3af67d70193c5a1e081
+vendor/lib64/libsdm-color.so|52f7ac30a7d1b9b53e3350d3ede1b198bd5a45c7
+vendor/lib64/libsdm-diag.so|05555ff56e2fd4f0db0f9b3a803927c90a3ae430
+-vendor/lib64/libsdm-disp-vndapis.so|76e10024f48b66c5da1e354aee8e431ce1fe2f96
+vendor/lib64/libsdmextension.so|45d71be8c8480bf91cc0fbdf4c050c491427e72f
+vendor/lib64/libtinyxml2_1.so|5ffb12fd2162910fc95be463fcde04ab5c427045
 
 # Graphics (Vulkan)
 vendor/lib/hw/vulkan.msm8996.so
