@@ -360,21 +360,20 @@ vendor/lib/libRSDriver_adreno.so|c0551aea7d32e21efde69a6a43b8b45bf69e0528
 vendor/lib/libhdr_tm.so|9f191fda6909c92b29ac15c3d2cbf65c2db94b13
 vendor/lib64/libhdr_tm.so|9a61ddbece993d3329d337265f7be5278c237833
 
-# Graphics (SDM) - from bardock-pro - OPM1.171019.019
-lib64/libsdm-disp-apis.so|6a43376f167b146a8b8b571d87235a83af9841e1
-lib/libsdm-disp-apis.so|57422f6469e1e5dd2ff890742a2783237dd19395
-vendor/lib64/libscalar.so|fa8715f4ef91443744e921cf7912516a677c9f9d
-vendor/lib64/libsdm-color.so|864ba48cda7279a7c2bb07ce9182bd4417dec4ff
-vendor/lib64/libsdm-diag.so|0e5be5803c36ed004724be97553f5ae18a1f24de
--vendor/lib64/libsdm-disp-vndapis.so|4e936b7cbc00bb05381d03b70c8c53e377676bb3
-vendor/lib64/libsdmextension.so|be02dd004708b621e1fc639a51b6bcffb2c1c60d
-vendor/lib64/libtinyxml2_1.so|5ffb12fd2162910fc95be463fcde04ab5c427045
-vendor/lib/libscalar.so|d8fa500e6a1250c1f5e251ec9bbe44177a5352b8
-vendor/lib/libsdm-color.so|2a265d34873f3d02bed7641640e84ea75edb977a
-vendor/lib/libsdm-diag.so|ac8b0130258ab08354cedfca89f73fb063e67290
--vendor/lib/libsdm-disp-vndapis.so|fc41b9e6c877a77e665d5766984aa1639ab167f4
-vendor/lib/libsdmextension.so|c8bd2bc2c4f94f409446c0ac1b5f39e63dfeae4b
-vendor/lib/libtinyxml2_1.so|3ee768813f5b351b71bd7dd2367b13a3698a591a
+# Graphics (SDM) - from LA.UM.7.2.r1-03600-sdm660.0
+lib64/libsdm-disp-apis.so|348d104f6e8fa365f610582da8d939bf3b83fad8
+lib/libsdm-disp-apis.so|78e6bf4201c18cae2fb7631de73d24a802ae115f
+vendor/lib64/libscalar.so|b7dd9afe0770e045a837c3af67d70193c5a1e081
+vendor/lib64/libsdm-color.so|ceeb85c8e8c4f9eeb8a0b7e85869eac35bc4b9dc
+vendor/lib64/libsdm-diag.so|db8ca0ea417991ba22e8e7919d918d0a6b908ab3
+-vendor/lib64/libsdm-disp-vndapis.so|7dd94cb4409a987761d0c5b0c0c977e24c548d74
+vendor/lib64/libsdmextension.so|79fc5ce1b3bd237eb60d9d508353acd6f6728998
+vendor/lib64/libtinyxml2_1.so|eae7c0526a56300dad04bce1a4e154a5869b3542
+vendor/lib/libsdm-color.so|1aab62e6739511fe7e123d351dd1674f35aa2834
+vendor/lib/libsdm-diag.so|4e64ac4c22121d7d70ccfb971d8322ed5ef7ced8
+-vendor/lib/libsdm-disp-vndapis.so|66477d2b02a21c14dd734f6ad6dbfbe03ebfc52c
+vendor/lib/libsdmextension.so|282a94d73e837ac58acae257325bc7ec3f02baff
+vendor/lib/libtinyxml2_1.so|6a85a3ebc064319fba7b69c400d7d13f55a5b959
 
 # Graphics (Vulkan)
 vendor/lib/hw/vulkan.msm8996.so
