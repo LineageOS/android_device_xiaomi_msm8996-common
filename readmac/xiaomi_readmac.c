@@ -22,6 +22,7 @@
 #include <log/log.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <time.h>
 
 #define MAC_ADDR_SIZE 6
@@ -58,7 +59,7 @@ static int check_wlan_mac_bin_file() {
     return 1;
 }
 
-static int write_wlan_mac_bin_file(unsigned char wlan_addr[]) {
+static int write_wlan_mac_bin_file(uint8_t wlan_addr[]) {
     FILE* fp;
 
     fp = fopen(WLAN_MAC_BIN, "w");
@@ -68,15 +69,16 @@ static int write_wlan_mac_bin_file(unsigned char wlan_addr[]) {
     fprintf(fp, "Intf0MacAddress=%02X%02X%02X%02X%02X%02X\n", wlan_addr[0], wlan_addr[1],
             wlan_addr[2], wlan_addr[3], wlan_addr[4], wlan_addr[5]);
     fprintf(fp, "Intf1MacAddress=%02X%02X%02X%02X%02X%02X\n", wlan_addr[0], wlan_addr[1],
-            wlan_addr[2], wlan_addr[3], wlan_addr[4], (unsigned char)(wlan_addr[5] + 1));
+            wlan_addr[2], wlan_addr[3], wlan_addr[4], wlan_addr[5] + 1);
     fprintf(fp, "END\n");
     fclose(fp);
+    chmod(WLAN_MAC_BIN, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
     return 1;
 }
 
 int main() {
-    unsigned char wlan_addr[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+    uint8_t wlan_addr[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
     char* nv_wlan_mac = NULL;
     int ret, i;
 
