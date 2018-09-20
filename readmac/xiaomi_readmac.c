@@ -22,12 +22,13 @@
 #include <log/log.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <time.h>
 
-#define MAC_ADDR_SIZE 6
-#define WLAN_MAC_BIN "/persist/wlan_mac.bin"
+const int MAC_ADDR_SIZE = 6;
+const char WLAN_MAC_BIN[] = "/persist/wlan_mac.bin";
 
-#define LIB_QMINVAPI "libqminvapi.so"
+const char LIB_QMINVAPI[] = "libqminvapi.so";
 
 static const char xiaomi_mac_prefix[] = { 0x34, 0x80, 0xb3 };
 
@@ -58,7 +59,7 @@ static int check_wlan_mac_bin_file() {
     return 1;
 }
 
-static int write_wlan_mac_bin_file(unsigned char wlan_addr[]) {
+static int write_wlan_mac_bin_file(uint8_t wlan_addr[]) {
     FILE* fp;
 
     fp = fopen(WLAN_MAC_BIN, "w");
@@ -68,9 +69,10 @@ static int write_wlan_mac_bin_file(unsigned char wlan_addr[]) {
     fprintf(fp, "Intf0MacAddress=%02X%02X%02X%02X%02X%02X\n", wlan_addr[0], wlan_addr[1],
             wlan_addr[2], wlan_addr[3], wlan_addr[4], wlan_addr[5]);
     fprintf(fp, "Intf1MacAddress=%02X%02X%02X%02X%02X%02X\n", wlan_addr[0], wlan_addr[1],
-            wlan_addr[2], wlan_addr[3], wlan_addr[4], (unsigned char)(wlan_addr[5] + 1));
+            wlan_addr[2], wlan_addr[3], wlan_addr[4], wlan_addr[5] + 1);
     fprintf(fp, "END\n");
     fclose(fp);
+    chmod(WLAN_MAC_BIN, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
     return 1;
 }
