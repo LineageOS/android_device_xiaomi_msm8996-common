@@ -54,6 +54,9 @@ on boot
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
 
+    # Disable msm_thermal
+    write /sys/module/msm_thermal/parameters/enabled "N"
+
 on charger
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     # Enable UFS powersaving
