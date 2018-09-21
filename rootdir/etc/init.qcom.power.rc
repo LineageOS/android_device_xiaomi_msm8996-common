@@ -35,6 +35,9 @@ on init
     # Drop write bit from cpu_max_freq so that libqti-perfd can't set it
     chmod 0444 /sys/module/msm_performance/parameters/cpu_max_freq
 
+    # Disable msm_thermal
+    write /sys/module/msm_thermal/parameters/enabled "N"
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
