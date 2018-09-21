@@ -1,0 +1,6 @@
+type_transition thermal-engine socket_device:sock_file thermal_socket "thermal-perfd-send-client";
+type_transition thermal-engine socket_device:sock_file thermal_socket "thermal-perfd-recv-client";
+type_transition thermal-engine socket_device:sock_file thermal_socket "thermal-perfd-recv-passive-client";
+type_transition thermal-engine system_data_file:file thermal_data_file "decrypt.txt";
+
+allow thermal-engine thermal_data_file:file create_file_perms;
