@@ -8,8 +8,8 @@ init_daemon_domain(readfem)
 qmux_socket(readfem)
 
 # Allow reading files in /persist, mainly /persist/ff_flag
-allow readfem persist_file:dir rw_dir_perms;
-allow readfem persist_file:file create_file_perms;
+allow readfem mnt_vendor_file:dir rw_dir_perms;
+allow readfem mnt_vendor_file:file create_file_perms;
 
 # Allow writing to /sys/module/cnss_common/parameters/bdwlan_file
 allow readfem sysfs_cnss_common:dir search;
