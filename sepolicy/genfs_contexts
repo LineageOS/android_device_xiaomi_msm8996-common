@@ -2,3 +2,10 @@ genfscon debugfs /rmt_storage u:object_r:debugfs_rmt:s0
 
 genfscon proc /buttons       u:object_r:proc_buttons:s0
 genfscon proc /touchpanel    u:object_r:proc_touchpanel:s0
+
+genfscon sysfs /devices/soc/6a00000.ssusb/power_supply               u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/75b5000.i2c/i2c-7/7-001d/power_supply    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/msm-bcl-19/power_supply                  u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/qpnp-fg-22/power_supply                  u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/qpnp-smbcharger-21/power_supply          u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/soc:qcom,bcl/power_supply                u:object_r:sysfs_batteryinfo:s0
