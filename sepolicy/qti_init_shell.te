@@ -2,3 +2,5 @@ allow qti_init_shell proc_buttons:dir { r_dir_perms setattr };
 allow qti_init_shell proc_buttons:file { getattr setattr };
 allow qti_init_shell proc_touchpanel:dir { r_dir_perms setattr };
 allow qti_init_shell proc_touchpanel:file { getattr setattr };
+allow qti_init_shell sysfs:file setattr;
+allow qti_init_shell sysfs:file r_file_perms;
