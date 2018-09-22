@@ -1,4 +1,5 @@
 # Devices
+/dev/block/platform/soc/624000\.ufshc/by-name/persist    u:object_r:persist_block_device:s0
 /dev/captouch                         u:object_r:captouch_device:s0
 /dev/elliptic(.*)?                    u:object_r:sound_device:s0
 /dev/lirc[0-9]*                       u:object_r:lirc_device:s0
