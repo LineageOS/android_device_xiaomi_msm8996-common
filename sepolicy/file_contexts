@@ -14,6 +14,7 @@
 
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+(/input/input[0-9]+)?/reversed_keys    u:object_r:proc_touchpanel:s0
 
+/sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+/input/input[0-9]+/0dbutton            u:object_r:proc_touchpanel:s0
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+/input/input[0-9]+/wake_gesture        u:object_r:proc_touchpanel:s0
 /sys/devices/soc/75ba000\.i2c/i2c-12/12-[0-9a-f]+/wakeup_mode                           u:object_r:proc_touchpanel:s0
 
