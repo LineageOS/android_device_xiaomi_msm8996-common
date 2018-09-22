@@ -8,8 +8,8 @@ init_daemon_domain(readmac)
 qmux_socket(readmac)
 
 # Allow readmac to fully access wlan_mac.bin persist file
-allow readmac persist_file:dir rw_dir_perms;
-allow readmac persist_file:file create_file_perms;
+allow readmac mnt_vendor_file:dir rw_dir_perms;
+allow readmac mnt_vendor_file:file create_file_perms;
 
 allow readmac self:socket create_socket_perms;
 allowxperm readmac self:socket ioctl msm_sock_ipc_ioctls;
