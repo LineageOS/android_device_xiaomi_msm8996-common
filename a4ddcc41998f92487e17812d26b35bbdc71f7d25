@@ -22,6 +22,30 @@
       "revId": "a4ddcc41998f92487e17812d26b35bbdc71f7d25",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d680abc5_0d6095f2",
+        "filename": "rootdir/etc/init.qcom.power.rc",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2018-09-24T14:57:34Z",
+      "side": 1,
+      "message": "no, I don\u0027t think it does?",
+      "parentUuid": "d1983131_bf536b06",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 56
+      },
+      "revId": "a4ddcc41998f92487e17812d26b35bbdc71f7d25",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
