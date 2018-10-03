@@ -22,6 +22,30 @@
       "revId": "59b3f11985e2cff566dbde611f2833604cf42ab1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7061a7b3_40b3f38e",
+        "filename": "rootdir/etc/init.qcom.sh",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2018-10-03T15:26:38Z",
+      "side": 1,
+      "message": "you missed two other patches.",
+      "parentUuid": "decb337b_a42ad16e",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 37
+      },
+      "revId": "59b3f11985e2cff566dbde611f2833604cf42ab1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
