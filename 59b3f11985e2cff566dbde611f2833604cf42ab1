@@ -46,6 +46,30 @@
       "revId": "59b3f11985e2cff566dbde611f2833604cf42ab1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81c49b7c_682bfb1f",
+        "filename": "rootdir/etc/init.qcom.sh",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13452
+      },
+      "writtenOn": "2018-10-03T15:29:14Z",
+      "side": 1,
+      "message": "Yep, my bad.",
+      "parentUuid": "7061a7b3_40b3f38e",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 37
+      },
+      "revId": "59b3f11985e2cff566dbde611f2833604cf42ab1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
