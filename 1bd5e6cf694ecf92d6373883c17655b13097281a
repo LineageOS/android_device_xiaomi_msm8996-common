@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "b197537d_38b020fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-10-07T14:36:42Z",
+      "side": 1,
+      "message": "this is correct, I don\u0027t see why we need the latter part?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "1bd5e6cf694ecf92d6373883c17655b13097281a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5388b6c1_8a710bf4",
         "filename": "readmac/xiaomi_readmac.c",
         "patchSetId": 2
