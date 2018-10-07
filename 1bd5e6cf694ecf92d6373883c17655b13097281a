@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce9b94e9_12a2edb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-10-07T14:34:14Z",
+      "side": 1,
+      "message": "This, Luca.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 60
+      },
+      "revId": "1bd5e6cf694ecf92d6373883c17655b13097281a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5388b6c1_8a710bf4",
         "filename": "readmac/xiaomi_readmac.c",
         "patchSetId": 2
