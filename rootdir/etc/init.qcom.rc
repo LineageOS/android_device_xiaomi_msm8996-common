@@ -63,6 +63,7 @@ on fs
     mkdir /mnt/vendor/persist/bluetooth 0770 bluetooth bluetooth
     mkdir /mnt/vendor/persist/bms 0700 root system
     mkdir /mnt/vendor/persist/data 0700 system system
+    mkdir /mnt/vendor/persist/display 0770 system graphics
     mkdir /mnt/vendor/persist/time 0770 system system
     restorecon_recursive /mnt/vendor/persist
 
@@ -256,7 +257,6 @@ on boot
     mkdir /persist/qc_senseid 0700 system system
     mkdir /persist/wlan_bt 0770 system system
     mkdir /persist/audio 0777 media audio
-    mkdir /persist/display 0770 system graphics
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
