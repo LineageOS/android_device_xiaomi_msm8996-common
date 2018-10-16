@@ -220,7 +220,7 @@ service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     user root
     group system wakelock
 
-service power_off_alarm /vendor/bin/power_off_alarm
+service vendor.power_off_alarm /vendor/bin/power_off_alarm
     class core
     group system
     disabled
