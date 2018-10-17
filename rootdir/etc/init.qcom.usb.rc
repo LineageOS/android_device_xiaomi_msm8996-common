@@ -44,8 +44,6 @@ on charger
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     write /sys/class/android_usb/android0/f_ffs/aliases adb
-    enable vendor.qcom-usb-sh
-    start vendor.qcom-usb-sh
     setprop sys.usb.config mass_storage
 
 on boot
@@ -103,15 +101,6 @@ on boot
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=1000,rmode=0770,fmode=0660
     write /sys/class/android_usb/android0/f_ffs/aliases adb
     setprop vendor.usb.controller ${sys.usb.controller}
-
-on load_persist_props_action
-    enable vendor.qcom-usb-sh
-
-service vendor.qcom-usb-sh /vendor/bin/init.qcom.usb.sh
-    class core
-    user root
-    oneshot
-    disabled
 
 on property:persist.vendor.usb.config=*
     setprop persist.sys.usb.config ${persist.vendor.usb.config}
