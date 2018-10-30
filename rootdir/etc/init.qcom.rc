@@ -493,6 +493,7 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+    stop vendor.ims_rtp_daemon
 
 service readfem /vendor/bin/readfem
     class main
