@@ -191,10 +191,11 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl-qti \
+    android.hardware.gnss@1.1-impl-qti \
     libcurl \
     libgnss \
-    libgnsspps
+    libgnsspps \
+    libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
