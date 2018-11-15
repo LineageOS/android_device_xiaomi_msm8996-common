@@ -16,6 +16,24 @@
       "revId": "a2851a71f0cc3a5aa1853cca2e9dd04430fbe491",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f0127d9_640df322",
+        "filename": "readmac/xiaomi_readmac.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-11-15T18:22:19Z",
+      "side": 1,
+      "message": "Is there any reason not to keep the original change? I hate picking commits from others and make changes.",
+      "parentUuid": "2e1b1686_e2d973e5",
+      "revId": "a2851a71f0cc3a5aa1853cca2e9dd04430fbe491",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
