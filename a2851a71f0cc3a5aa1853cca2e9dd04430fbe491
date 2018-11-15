@@ -34,6 +34,24 @@
       "revId": "a2851a71f0cc3a5aa1853cca2e9dd04430fbe491",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a185702_a7527240",
+        "filename": "readmac/xiaomi_readmac.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-11-15T18:23:31Z",
+      "side": 1,
+      "message": "Can you understand the file more being 0644 by looking at these flags?\nit\u0027s just a bit easier imo",
+      "parentUuid": "0f0127d9_640df322",
+      "revId": "a2851a71f0cc3a5aa1853cca2e9dd04430fbe491",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
