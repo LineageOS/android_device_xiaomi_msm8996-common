@@ -499,6 +499,11 @@ vendor/lib/libOmxWmaDec.so|3fd1e369ccc027535eb5bc2be1f5fbea50049758
 vendor/lib/libvpplibrary.so|bb818a5b8d62c236963fc094d0c2627bc78c00ef
 vendor/lib/libvqzip.so|0b906db131e99cd5460b8a72d05e86721243de95
 
+# NFC - SmartCardService
+etc/permissions/org.simalliance.openmobileapi.xml
+framework/org.simalliance.openmobileapi.jar
+-priv-app/SmartcardService/SmartcardService.apk
+
 # Perf
 lib64/vendor.qti.hardware.iop@1.0.so
 lib64/vendor.qti.hardware.perf@1.0.so
