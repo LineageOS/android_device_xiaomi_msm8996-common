@@ -173,7 +173,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
-    sys.usb.controller=6a00000.dwc3
+    sys.usb.controller=6a00000.dwc3 \
+    persist.vendor.usb.config.extra=none \
+    vendor.usb.dpl.inst.name=dpl \
+    vendor.usb.rmnet.func.name=rmnet_bam \
+    vendor.usb.rmnet.inst.name=rmnet \
+    vendor.usb.rndis.func.name=rndis_bam
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
