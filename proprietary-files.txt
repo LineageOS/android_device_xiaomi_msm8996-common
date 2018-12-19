@@ -621,7 +621,7 @@ vendor/bin/ATFWD-daemon
 vendor/bin/netmgrd
 vendor/bin/qti
 vendor/bin/rmt_storage
-vendor/bin/tftp_server
+vendor/bin/tftp_server|05a9c0e0e691e534e703bded4a99083d25a26ebb
 vendor/etc/data/dsi_config.xml
 vendor/etc/data/netmgr_config.xml
 vendor/lib64/libconfigdb.so
@@ -629,6 +629,8 @@ vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
 vendor/lib64/libnetmgr.so
 vendor/lib64/libqcmaputils.so
+vendor/lib64/libqsocket.so|3799e723be152c31c270f93a64e2865c0d9e86c4
+vendor/lib64/libqrtr.so|83676274fde1056a0507b4100a3a5423f5af5021
 vendor/lib64/libril-qc-ltedirectdisc.so
 vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
