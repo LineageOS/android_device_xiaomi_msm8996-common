@@ -12,6 +12,8 @@ ifndef BOARD_VNDK_VERSION
 
 VNDK_SP_LIBRARIES := \
     libdexfile \
+    libdexfile_external \
+    libdexfile_support \
     libartbase \
     libziparchive
 
