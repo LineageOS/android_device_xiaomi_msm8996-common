@@ -183,7 +183,7 @@ on property:init.svc.recovery=running
 service charger /sbin/chargeonlymode
     class charger
     group system graphics
-    seclabel u:r:charger:s0
+    seclabel u:r:healthd:s0
 
 service energy-awareness /vendor/bin/energy-awareness
     class main
