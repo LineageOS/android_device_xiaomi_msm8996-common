@@ -675,3 +675,39 @@ vendor/lib64/libtime_genoff.so|8f4c1f9ace6af463b241b130d6872b5d39cc7b2a
 
 # WiFi - from daisy - PKQ1.180917.001
 vendor/bin/cnss-daemon|badadcc672341e36228301b02c2bfaa36be09233
+
+# WiFi Display - from daisy - PKQ1.180917.001
+bin/wfdservice
+etc/init/wfdservice.rc
+etc/wfdconfig.xml
+etc/wfdconfigsink.xml
+-framework/WfdCommon.jar
+lib/com.qualcomm.qti.wifidisplayhal@1.0.so
+lib/libFileMux.so
+lib/extractors/libmmparser.so
+lib/libmmparser_lite.so
+lib64/libFileMux.so
+lib64/libmmparser_lite.so
+lib64/extractors/libaacextractor.so
+lib64/extractors/libamrextractor.so
+lib64/extractors/libflacextractor.so
+lib64/extractors/libmidiextractor.so
+lib64/extractors/libmkvextractor.so
+lib64/extractors/libmmparser.so
+lib64/extractors/libmp3extractor.so
+lib64/extractors/libmp4extractor.so
+lib64/extractors/libmpeg2extractor.so
+lib64/extractors/liboggextractor.so
+lib64/extractors/libwavextractor.so
+-priv-app/WfdService/WfdService.apk
+vendor/bin/wifidisplayhalservice
+vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
+vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0-halimpl.so
+vendor/lib/libwfdcommonutils_proprietary.so
+vendor/lib/libwfdhaldsmanager.so
+vendor/lib/libwfdhdcpcp.so
+vendor/lib/libwfdhdcpcp.so
+vendor/lib/libwfdmmservice.so
+vendor/lib/libwfdmodulehdcpsession.so
+vendor/lib64/libwfdhdcpcp.so
+vendor/lib64/libwfdhdcpcp.so
