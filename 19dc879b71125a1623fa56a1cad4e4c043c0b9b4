@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ec360a6_5b4e69cb",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 16439
+      },
+      "writtenOn": "2018-12-26T11:38:08Z",
+      "side": 1,
+      "message": "Can be built from source",
+      "revId": "19dc879b71125a1623fa56a1cad4e4c043c0b9b4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
