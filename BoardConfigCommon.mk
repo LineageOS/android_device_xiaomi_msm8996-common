@@ -144,9 +144,6 @@ DEVICE_FRAMEWORK_MANIFEST_FILE := $(VENDOR_PATH)/framework_manifest.xml
 DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(VENDOR_PATH)/compatibility_matrix.xml
 
-# IPA
-USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
-
 # Lineage Hardware
 JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(VENDOR_PATH)/lineagehw|**/*.java
 
