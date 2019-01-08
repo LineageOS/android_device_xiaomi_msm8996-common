@@ -87,6 +87,7 @@ on charger
     setprop sys.usb.configfs 1
 
     start vendor.hvdcp_opti
+    start vendor.power_off_alarm
     start thermal-engine
 
 on enable-low-power
