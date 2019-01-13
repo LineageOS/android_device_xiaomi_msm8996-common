@@ -399,19 +399,19 @@ vendor/lib/libRSDriver_adreno.so|26de2b456a064d9d3ea68b8ceacf26f4a866c067
 vendor/lib64/libhdr_tm.so|df15d487e73560f81017bcf4a73c28c9697b1ed9
 vendor/lib/libhdr_tm.so|8060a5d9ed0283c7b89716165ba8af4b86ef0210
 
-# Graphics (SDM) - from daisy - PKQ1.180917.001
-vendor/lib64/libscalar.so|61c059ca3b9da6a36bdf112e8fbe26a252ad1234
-vendor/lib64/libsdm-color.so|bca0a2a58c2c33e1dbed82de7446ebfcbc8250ff
-vendor/lib64/libsdm-diag.so|87a4f764e894f16246c9a0d6e3f5885df76b750b
--vendor/lib64/libsdm-disp-vndapis.so|fde2de5a3f031577edc39b49036435ef2607b134
-vendor/lib64/libsdmextension.so|b26b05c09aac03153fdb6ece475cc5866f390e1d
-vendor/lib64/libtinyxml2_1.so|b225b16e689e7e4c26fc6144637f6b0c416063f8
+# Graphics (SDM) - from LA.UM.7.5.r1-03700-8x96.0
 vendor/lib/libscalar.so|cad128a6e71195b4ad38494bc0382bf80e1fb0b2
-vendor/lib/libsdm-color.so|9144f6d1e254fc6353fb91386eb1d0ee1964d8a2
+vendor/lib/libsdm-color.so|b13ab5f965f5bb8f40207879415cb1adbb55da42
 vendor/lib/libsdm-diag.so|e2e3a0fba39190c58bafa0568e8cd51b391b71b6
--vendor/lib/libsdm-disp-vndapis.so|55e2d71cb097a2af3310b112e086e919bd81656f
-vendor/lib/libsdmextension.so|04fba39e30c182e4edbf01d78c897c0fd0dc52d9
+-vendor/lib/libsdm-disp-vndapis.so|6c4233ea3676643bc9658c25cfad7edd45c49362
+vendor/lib/libsdmextension.so|a8659e7e0df5f1e20266ede1331da0660e0fe260
 vendor/lib/libtinyxml2_1.so|3882fddae942997be6ad6af789cf209fa45e61b3
+vendor/lib64/libscalar.so|490cc7447863b3279771ad99e92a5625525db055
+vendor/lib64/libsdm-color.so|9bb3f5147c277eae08c7f918e7de3bd2fccf1f74
+vendor/lib64/libsdm-diag.so|7ab5d2a980029ac9bd20fe68656823b21e483e11
+-vendor/lib64/libsdm-disp-vndapis.so|6ae24866bbd413ed112778650c8fd7a2631cb1a9
+vendor/lib64/libsdmextension.so|e91aaf852df780e42bb083c3089f5b42c87c49f7
+vendor/lib64/libtinyxml2_1.so|b743b93bbb47bb2d80322fcfb985b7b8c696fa1b
 
 # Graphics (Vulkan) - from marlin - PPR2.180905.006
 vendor/lib/hw/vulkan.msm8996.so|1e62d0727748c40269f7cb6b432bd03b56c7323d
