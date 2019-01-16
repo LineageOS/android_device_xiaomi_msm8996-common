@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2ff23b8_d6b2cb5d",
+        "filename": "readmac/xiaomi_readmac.c",
+        "patchSetId": 61
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-01-16T07:36:21Z",
+      "side": 1,
+      "message": "It really hurts to see the S_* macros, they can\u0027t be read and even Linux itself started moving towards octal permission for clarity...",
+      "revId": "1d838869737a069f79d20f7a55b3333bd3e96ff8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
