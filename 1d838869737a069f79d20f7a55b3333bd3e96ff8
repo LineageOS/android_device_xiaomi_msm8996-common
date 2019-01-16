@@ -16,6 +16,24 @@
       "revId": "1d838869737a069f79d20f7a55b3333bd3e96ff8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2afadafd_e4905b73",
+        "filename": "readmac/xiaomi_readmac.c",
+        "patchSetId": 61
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-01-16T07:38:11Z",
+      "side": 1,
+      "message": "I didn\u0027t ignore your previous comments. I just wanted to keep close to the original change and do a follow-up one to address your comments.",
+      "parentUuid": "f2ff23b8_d6b2cb5d",
+      "revId": "1d838869737a069f79d20f7a55b3333bd3e96ff8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
