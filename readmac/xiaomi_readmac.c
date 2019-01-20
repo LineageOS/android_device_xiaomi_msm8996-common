@@ -72,7 +72,7 @@ static int write_wlan_mac_bin_file(uint8_t wlan_addr[]) {
             wlan_addr[2], wlan_addr[3], wlan_addr[4], wlan_addr[5] + 1);
     fprintf(fp, "END\n");
     fclose(fp);
-    chmod(WLAN_MAC_BIN, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    chmod(WLAN_MAC_BIN, 0644);
 
     return 1;
 }
