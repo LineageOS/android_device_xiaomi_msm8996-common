@@ -15,6 +15,7 @@ VNDK_SP_LIBRARIES := \
     libdexfile_external \
     libdexfile_support \
     libartbase \
+    libartpalette \
     libziparchive
 
 install_in_hw_dir := \
