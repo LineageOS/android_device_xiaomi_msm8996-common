@@ -1,0 +1,2 @@
+# Allow dataservice_app to read files in cnd_core_data_file
+r_dir_file(dataservice_app, cnd_core_data_file)

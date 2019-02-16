@@ -1,1 +1,5 @@
+# Allow cnd to access cnd_core_data_file
+allow cnd cnd_core_data_file:file create_file_perms;
+allow cnd cnd_core_data_file:sock_file { unlink create setattr };
+
 allow cnd system_wpa_socket:sock_file unlink;
