@@ -5050,6 +5050,7 @@ QCamera3HardwareInterface::translateFromHalMetadata(
     IF_META_AVAILABLE(cam_edge_application_t, edgeApplication,
             CAM_INTF_META_EDGE_MODE, metadata) {
         camMetadata.update(ANDROID_EDGE_MODE, &(edgeApplication->edge_mode), 1);
+        camMetadata.update(QCAMERA3_SHARPNESS_STRENGTH, &(edgeApplication->sharpness), 1);
     }
 
     IF_META_AVAILABLE(uint32_t, flashPower, CAM_INTF_META_FLASH_POWER, metadata) {
