@@ -313,17 +313,6 @@ on property:sys.boot_completed=1
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service vendor.cnd /vendor/bin/cnd
-    class main
-    user system
-    group system wifi inet radio wakelock net_admin
-    writepid /dev/cpuset/system-background/tasks
-
-service dpmQmiMgr /vendor/bin/dpmQmiMgr
-    class main
-    user system
-    group radio system
-
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
     user root
