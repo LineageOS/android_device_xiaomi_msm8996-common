@@ -8,6 +8,9 @@ allow qfp-daemon captouch_device:chr_file rw_file_perms;
 
 allow qfp-daemon mnt_vendor_file:dir search;
 
+allow qfp-daemon qfp-daemon_core_data_file:dir { rw_dir_perms setattr };
+allow qfp-daemon qfp-daemon_core_data_file:file create_file_perms;
+
 # Access QFP Android Proxy
 allow qfp-daemon qfp_proxy_service:service_manager find;
 

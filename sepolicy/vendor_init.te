@@ -2,6 +2,7 @@ allow vendor_init {
   camera_data_file
   media_rw_data_file
   nfc_data_file
+  qfp-daemon_core_data_file
   system_data_file
   time_data_file
   wifi_data_file
