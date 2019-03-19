@@ -6,6 +6,7 @@ type persist_qc_senseid_file, file_type;
 type persist_usf_cal_file, file_type;
 type proc_buttons, sysfs_type, fs_type;
 type proc_touchpanel, sysfs_type, fs_type;
+type qfp-daemon_core_data_file, file_type, core_data_file_type, data_file_type;
 type sysfs_cnss_common, sysfs_type, fs_type;
 type sysfs_fpc, sysfs_type, fs_type;
 type sysfs_fpc_keyevents, sysfs_type, fs_type;
