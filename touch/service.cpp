@@ -17,7 +17,6 @@
 #define LOG_TAG "vendor.lineage.touch@1.0-service.xiaomi_8996"
 
 #include <android-base/logging.h>
-#include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
 
 #include "KeyDisabler.h"
