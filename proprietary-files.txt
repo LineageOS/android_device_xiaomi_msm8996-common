@@ -508,44 +508,31 @@ etc/permissions/org.simalliance.openmobileapi.xml
 framework/org.simalliance.openmobileapi.jar
 -priv-app/SmartcardService/SmartcardService.apk
 
-# Perf
-lib64/vendor.qti.hardware.iop@1.0.so
-lib64/vendor.qti.hardware.perf@1.0.so
-lib/vendor.qti.hardware.iop@1.0.so
-lib/vendor.qti.hardware.perf@1.0.so
-vendor/bin/energy-awareness
-vendor/bin/hw/vendor.qti.hardware.iop@1.0-service
-vendor/bin/hw/vendor.qti.hardware.perf@1.0-service
-vendor/etc/init/vendor.qti.hardware.iop@1.0-service.rc
-vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc
-vendor/etc/perf/perfboostsconfig.xml
-vendor/etc/perf/perf-profile0.conf
-vendor/etc/perf/perf-profile1.conf
-vendor/etc/perf/perf-profile2.conf
-vendor/etc/perf/perf-profile3.conf
-vendor/etc/perf/perf-profile4.conf
-vendor/etc/perf/perf-profile5.conf
-vendor/etc/perf/perf-profile6.conf
-vendor/lib64/hw/vendor.qti.hardware.iop@1.0-impl.so
-vendor/lib64/libfeedbackhandler.so
-vendor/lib64/libperfgluelayer.so
-vendor/lib64/libqti-iopd.so
-vendor/lib64/libqti-iopd-client.so
-vendor/lib64/libqti-perfd.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib64/libqti-util.so
-vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
-vendor/lib/hw/vendor.qti.hardware.iop@1.0-impl.so
-vendor/lib/libfeedbackhandler.so
-vendor/lib/libperfgluelayer.so
-vendor/lib/libqti-iopd.so
-vendor/lib/libqti-iopd-client.so
-vendor/lib/libqti-perfd.so
-vendor/lib/libqti-perfd-client.so
-vendor/lib/libqti-util.so
-vendor/lib/vendor.qti.hardware.iop@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
+# Perf - from op3 - PKQ1.181203.001
+vendor/bin/energy-awareness|3f1aa4d518ff361aa3ed9e41ace3e16d36cf0bbe
+vendor/bin/hw/vendor.qti.hardware.perf@1.0-service|7a38f7ef085ddb1a5cd8731e9d2fc1540c3e85ad
+vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc|b50182aadab2e31409df61c523d0fb914a394e43
+vendor/etc/perf/commonresourceconfigs.xml|73fc37a6fa498a98758b5a91ebacb87ef0ffdcdf
+vendor/etc/perf/perf-profile0.conf|02204355bf29ceb0460cd53e6716552bb9d9b05f
+vendor/etc/perf/perf-profile1.conf|58c8333b58183fe2412061e5ff22c218b7da305c
+vendor/etc/perf/perf-profile2.conf|66ac3877bf0030b72c99107f665bb392538d0237
+vendor/etc/perf/perf-profile3.conf|3a1edfaeaf087effcadba7c652737ab6dd2d87b5
+vendor/etc/perf/perf-profile4.conf|0bc4779472306b1b225e9fc9be40af54e14e2266
+vendor/etc/perf/perf-profile5.conf|5bc85ed4a0f3cedd57e1e046416f423a83dc4f63
+vendor/etc/perf/perf-profile6.conf|910a193b8425bbe0080f746d6788e66986b2e762
+vendor/etc/perf/perfboostsconfig.xml|57ab3e5177690fdb32908ff217853bb459b73a1e
+vendor/etc/perf/targetconfig.xml|b2ea39d05d52364774dbd390732cb5f29ae14941
+vendor/etc/perf/targetresourceconfigs.xml|478715f7bcb07e08e62be023ac0b6302ef65bdb3
+vendor/lib64/libperfgluelayer.so|627a324616de86ba90889a7c8dd7a05c46a30aaa
+vendor/lib64/libqti-perfd.so|68c995a76cad4c8b0af1c4743a5157b70dad1dd1
+vendor/lib64/libqti-perfd-client.so|1e84aa49a8cff0f69f0261c69dd8843534efd79e
+vendor/lib64/libqti-util.so|0c34c7cbb07197841e9f097925fe961f3226e621
+vendor/lib64/vendor.qti.hardware.perf@1.0.so|f3d180595bdfeac68d13e13ecf704f892e7a52a5
+vendor/lib/libperfgluelayer.so|3850d4ea3dbead227b622fcc47fcec29955fcc63
+vendor/lib/libqti-perfd.so|2a2077cf455d5a6b03c0bb2b6eeca554ee28a363
+vendor/lib/libqti-perfd-client.so|a4a6da47ee26fcd5116c514f7fed15b91306aea3
+vendor/lib/libqti-util.so|d65f3ef240cebea73bd1ba8b1132a7e639aa05bb
+vendor/lib/vendor.qti.hardware.perf@1.0.so|84e437b0dea2d8c1d5712a9fadf132ae5d665d46
 
 # Peripheral manager
 vendor/bin/pm-proxy
@@ -667,11 +654,11 @@ vendor/lib/libsensor_reg.so
 vendor/lib/libsensor_user_cal.so
 vendor/lib/sensors.ssc.so
 
-# Thermal - from op3 - OPR1.170623.032
-vendor/bin/thermal-engine|ab1d429f5b859c9f10b91db25de9b5f5b7ce5a49
--vendor/lib64/libthermalclient.so|7f2a2b0bc3614cf6411ea11c85ac1b6a8392738f
-vendor/lib64/libthermalioctl.so|4d11093bc25909edc8df3e1164f5fb990c9e8975
--vendor/lib/libthermalclient.so|e14cd4d090e52394cb5a39912e71b50091873bcb
+# Thermal - from op3 - PKQ1.181203.001
+vendor/bin/thermal-engine|b15c9e8fa54ebb15dfeb36c7fbc834a28b4c836e
+-vendor/lib64/libthermalclient.so|94424d7c8f8daff8bbfd7454fe4d5f1fbf411260
+vendor/lib64/libthermalioctl.so|aa2a0abd8fb9792024efd93f648c129b6a22619e
+-vendor/lib/libthermalclient.so|270ea373c617584af092dc4ea2aa1c7bf27be7f4
 
 # Time services - from daisy - PKQ1.180917.001
 -vendor/app/TimeService/TimeService.apk|78109530538aa8fb533ad288c9d356c57481a10e
