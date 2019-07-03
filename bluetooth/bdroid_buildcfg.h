@@ -52,6 +52,9 @@ static inline const char* BtmGetDefaultName()
 #define BLE_VND_INCLUDED   TRUE
 #define BT_CLEAN_TURN_ON_DISABLED 1
 
+/* Use WBS */
+#define BTIF_HF_WBS_PREFERRED TRUE
+
 /* Increasing SEPs to 12 from 6 to support SHO/MCast i.e. two streams per codec */
 #define AVDT_NUM_SEPS 12
 
