@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2016 The CyanogenMod Project
- *               2017 The LineageOS Project
+ *               2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,17 +23,14 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.util.Log;
 
-public class Startup extends BroadcastReceiver {
+public class BootCompletedReceiver extends BroadcastReceiver {
 
     private static final String TAG = "XiaomiPocketMode";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        final String action = intent.getAction();
-        if (lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE.equals(action)) {
-            Log.d(TAG, "Starting");
-            context.startServiceAsUser(new Intent(context, PocketModeService.class),
-                    UserHandle.CURRENT);
-        }
+        Log.d(TAG, "Starting");
+        context.startServiceAsUser(new Intent(context, PocketModeService.class),
+                UserHandle.CURRENT);
     }
 }

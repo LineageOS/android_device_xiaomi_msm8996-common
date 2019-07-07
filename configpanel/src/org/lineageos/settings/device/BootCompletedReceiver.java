@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017-2018 The LineageOS Project
+ *           (C) 2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,44 +28,41 @@ import android.util.Log;
 
 import org.lineageos.internal.util.FileUtils;
 
-public class Startup extends BroadcastReceiver {
+public class BootCompletedReceiver extends BroadcastReceiver {
 
-    private static final String TAG = Startup.class.getSimpleName();
+    private static final String TAG = BootCompletedReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        final String action = intent.getAction();
-        if (lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE.equals(action)) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-            // Disable button settings if needed
-            if (!hasButtonProcs()) {
-                disableComponent(context, ButtonSettingsActivity.class.getName());
-            } else {
-                enableComponent(context, ButtonSettingsActivity.class.getName());
+        // Disable button settings if needed
+        if (!hasButtonProcs()) {
+            disableComponent(context, ButtonSettingsActivity.class.getName());
+        } else {
+            enableComponent(context, ButtonSettingsActivity.class.getName());
 
-                // Restore nodes to saved preference values
-                for (String pref : Constants.sButtonPrefKeys) {
-                    String node, value;
-                    if (Constants.sStringNodePreferenceMap.containsKey(pref)) {
-                        node = Constants.sStringNodePreferenceMap.get(pref);
-                        value = Utils.getPreferenceString(context, pref);
-                    } else {
-                        node = Constants.sBooleanNodePreferenceMap.get(pref);
-                        value = Utils.isPreferenceEnabled(context, pref) ? "1" : "0";
-                    }
-                    if (!FileUtils.writeLine(node, value)) {
-                        Log.w(TAG, "Write to node " + node +
-                            " failed while restoring saved preference values");
-                    }
+            // Restore nodes to saved preference values
+            for (String pref : Constants.sButtonPrefKeys) {
+                String node, value;
+                if (Constants.sStringNodePreferenceMap.containsKey(pref)) {
+                    node = Constants.sStringNodePreferenceMap.get(pref);
+                    value = Utils.getPreferenceString(context, pref);
+                } else {
+                    node = Constants.sBooleanNodePreferenceMap.get(pref);
+                    value = Utils.isPreferenceEnabled(context, pref) ? "1" : "0";
                 }
-
-                // Send initial broadcasts
-                final boolean shouldEnablePocketMode =
-                        prefs.getBoolean(Constants.FP_WAKEUP_KEY, false) &&
-                        prefs.getBoolean(Constants.FP_POCKETMODE_KEY, false);
-                Utils.broadcastCustIntent(context, shouldEnablePocketMode);
+                if (!FileUtils.writeLine(node, value)) {
+                    Log.w(TAG, "Write to node " + node +
+                        " failed while restoring saved preference values");
+                }
             }
+
+            // Send initial broadcasts
+            final boolean shouldEnablePocketMode =
+                    prefs.getBoolean(Constants.FP_WAKEUP_KEY, false) &&
+                    prefs.getBoolean(Constants.FP_POCKETMODE_KEY, false);
+            Utils.broadcastCustIntent(context, shouldEnablePocketMode);
         }
     }
 
