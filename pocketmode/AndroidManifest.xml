@@ -33,8 +33,9 @@
         android:directBootAware="true">
 
         <receiver android:name=".Startup" >
-            <intent-filter android:priority="99" >
-                <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
