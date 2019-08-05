@@ -343,18 +343,6 @@ service vendor.tftp_server /vendor/bin/tftp_server
     user root
     writepid /dev/cpuset/system-background/tasks
 
-on property:vendor.wc_transport.start_hci=true
-    start vendor.start_hci_filter
-
-on property:vendor.wc_transport.start_hci=false
-    stop vendor.start_hci_filter
-
-service vendor.start_hci_filter /vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth diag system wakelock
-    disabled
-
 service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
