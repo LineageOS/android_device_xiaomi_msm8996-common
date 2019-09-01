@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017 The LineageOS Project
+ *           (C) 2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
 
 public class Utils {
 
