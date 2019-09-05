@@ -35,6 +35,10 @@
 # Data vendor files
 /data/vendor/misc/audio(/.*)?         u:object_r:vendor_audio_data_file:s0
 
+# Root files
+/bt_firmware(/.*)?    u:object_r:bt_firmware_file:s0
+/firmware(/.*)?       u:object_r:firmware_file:s0
+
 # Persist files
 /(mnt/vendor)/persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
 /(mnt/vendor)/persist/PRSensorData\.txt            u:object_r:sensors_persist_file:s0
