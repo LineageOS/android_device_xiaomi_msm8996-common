@@ -41,6 +41,10 @@
 /(mnt/vendor)/persist/PSensor3cm_ct\.txt           u:object_r:sensors_persist_file:s0
 /(mnt/vendor)/persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
 
+# Root files
+/bt_firmware(/.*)?    u:object_r:bt_firmware_file:s0
+/firmware(/.*)?       u:object_r:firmware_file:s0
+
 # Binaries
 /system/bin/chargeonlymode            u:object_r:charger_exec:s0
 /(vendor|system/vendor)/bin/readfem   u:object_r:readfem_exec:s0
