@@ -23,3 +23,12 @@ cc_library {
     srcs: ["gui_shim.cpp"],
     system_ext_specific: true,
 }
+
+cc_library_shared {
+    name: "libui_shim",
+
+    srcs: ["GraphicBuffer.cpp"],
+    shared_libs: ["libui"],
+
+    compile_multilib: "64",
+}
