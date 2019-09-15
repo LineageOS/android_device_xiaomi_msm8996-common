@@ -21,6 +21,5 @@
 /dev/block/bootdevice/by-name/bluetooth      /vendor/bt_firmware     vfat    ro,shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0   wait
 /dev/block/bootdevice/by-name/misc           /misc              emmc    defaults                                                    defaults
 /dev/block/zram0                             none               swap    defaults                                                    zramsize=536870912,max_comp_streams=4
-/mnt/vendor/persist                          /persist           none    bind                                                        wait
 
 /devices/soc/6a00000.ssusb/6a00000.dwc3/xhci-hcd.0.auto/usb1*       auto               auto    defaults                                                    voldmanaged=usb:auto
