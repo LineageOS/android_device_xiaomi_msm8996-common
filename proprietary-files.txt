@@ -80,10 +80,10 @@ vendor/lib64/libbtnv.so
 vendor/lib64/libbt-hidlclient.so
 
 # Bluetooth (aptX) - from marlin - OPM1.171019.011
-lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
-lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
-lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
-lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
+#lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
+#lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
+#lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
+#lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
 
 # Bluetooth (shared dependencies)
 vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
@@ -279,7 +279,7 @@ vendor/lib64/vendor.qti.latency@2.0.so|15e50ce40e210993343406947dd2c959920f40c8
 # DPM - from daisy - PKQ1.180917.001
 bin/dpmd|1b38829a7faf33d5cbdc195d703f99384c20c9f4
 etc/dpm/dpm.conf|5f19d3984b5291ac956552bda2a84c10c535df0a
-etc/init/dpmd.rc|52ca6ad920a1804e4ff608113cece063730f5e0c
+#etc/init/dpmd.rc|52ca6ad920a1804e4ff608113cece063730f5e0c
 etc/permissions/com.qti.dpmframework.xml|36b94c9338069e434b83359a92cdc7ff62b822df
 etc/permissions/dpmapi.xml|ded29f9befaef20a7ccee0c75427fda1d1d04890
 framework/com.qti.dpmframework.jar|4a48456f8ed4b751135b05a99f273996bf35fd9c
@@ -675,7 +675,7 @@ vendor/bin/cnss-daemon|badadcc672341e36228301b02c2bfaa36be09233
 
 # WiFi Display - from op3 - PKQ1.181203.001
 bin/wfdservice|edeb291221024401cbae69c2fa4e58733b7efc4c
-etc/init/wfdservice.rc|311bfdd1675e56499662f39455536b75b78477bb
+#etc/init/wfdservice.rc|311bfdd1675e56499662f39455536b75b78477bb
 etc/wfdconfig.xml|522340c3a3026dfebbd669f9def3bd165514611d
 etc/wfdconfigsink.xml|7b57de947134e63ebf5441f8cd152e1e1a22d631
 -framework/WfdCommon.jar|54c335128814e8d5f7c00a99d155139f55b9802e
