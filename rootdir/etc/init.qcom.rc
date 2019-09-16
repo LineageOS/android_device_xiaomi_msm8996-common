@@ -555,3 +555,6 @@ on property:init.svc.surfaceflinger=restarting
 
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
+
+on property:apexd.status=ready
+    mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
