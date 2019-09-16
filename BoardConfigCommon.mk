@@ -192,7 +192,7 @@ include device/qcom/sepolicy-legacy-um/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
 
 # Vendor init
-TARGET_INIT_VENDOR_LIB := libinit.xiaomi_8996
+TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit.xiaomi_8996
 TARGET_RECOVERY_DEVICE_MODULES := libinit.xiaomi_8996
 
 # Wifi
