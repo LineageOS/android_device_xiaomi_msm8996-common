@@ -1,3 +1,8 @@
+# Keep keyhandler constructor
+-keep public class * implements com.android.internal.os.DeviceKeyHandler {
+    public <init>(android.content.Context);
+}
+
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
 }
