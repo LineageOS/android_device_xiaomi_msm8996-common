@@ -211,6 +211,7 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/devices/soc/757a000.i2c/i2c-6/*                eeprom         0440    system   system
 
 # sensors
+/dev/sensors              0660   system     system
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 enable         0660    input    system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 poll_delay     0660    input    system
