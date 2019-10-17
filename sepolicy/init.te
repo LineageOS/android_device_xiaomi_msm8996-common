@@ -1,2 +1,5 @@
 allow init adsprpcd_file:filesystem { mount relabelfrom relabelto };
 allow init debugfs:file write;
+
+# Allow init to bind mount loader config for media swcodec
+allow init system_file:file mounton;
