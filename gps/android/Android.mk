@@ -34,8 +34,6 @@ LOCAL_HEADER_LIBRARIES := \
 LOCAL_SHARED_LIBRARIES := \
     liblog \
     libhidlbase \
-    libhidltransport \
-    libhwbinder \
     libutils \
     android.hardware.gnss@1.0 \
 
@@ -86,9 +84,7 @@ LOCAL_SHARED_LIBRARIES := \
     libutils \
 
 LOCAL_SHARED_LIBRARIES += \
-    libhwbinder \
     libhidlbase \
-    libhidltransport \
     android.hardware.gnss@1.0 \
 
 LOCAL_CFLAGS += $(GNSS_CFLAGS)
