@@ -384,6 +384,21 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
 
 # VNDK
+PRODUCT_PACKAGES += \
+    android.hardware.power-V2-cpp.vendor \
+    android.frameworks.bufferhub@1.0.vendor_32 \
+    audioclient-types-aidl-cpp.vendor \
+    audioflinger-aidl-cpp.vendor \
+    audiopolicy-aidl-cpp.vendor \
+    av-types-aidl-cpp.vendor \
+    libandroid_runtime_lazy.vendor \
+    libaudioclient_aidl_conversion.vendor \
+    libaudiofoundation.vendor \
+    libdng_sdk.vendor_32 \
+    libstdc++.vendor \
+    mediametricsservice-aidl-cpp.vendor \
+    vndk-ext
+
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v28/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-full.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-full-v28.so \
     prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite-v29.so \
