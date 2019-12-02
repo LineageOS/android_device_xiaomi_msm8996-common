@@ -46,8 +46,9 @@
 /(mnt/vendor)/persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
 
 # Binaries
-/(vendor|system/vendor)/bin/readfem   u:object_r:readfem_exec:s0
-/(vendor|system/vendor)/bin/readmac   u:object_r:readmac_exec:s0
+/(vendor|system/vendor)/bin/readfem         u:object_r:readfem_exec:s0
+/(vendor|system/vendor)/bin/readmac         u:object_r:readmac_exec:s0
+/(vendor|system/vendor)/bin/wcnss_filter    u:object_r:wcnss_filter_exec:s0
 
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey         u:object_r:hal_drm_clearkey_exec:s0
