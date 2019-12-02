@@ -398,19 +398,18 @@ vendor/lib/libRSDriver_adreno.so|c89086f8cd9b9afb7725741e6653bcf7c5efcc75
 vendor/lib64/libhdr_tm.so|7a05d56d8305c8df87392b93929949178c336b83
 vendor/lib/libhdr_tm.so|37381160c5f44f3974af22fb09f394c0fd1fd3bd
 
-# Graphics (SDM) - from op3 - PKQ1.181203.001
-vendor/lib/libscalar.so|cad128a6e71195b4ad38494bc0382bf80e1fb0b2
-vendor/lib/libsdm-color.so|b13ab5f965f5bb8f40207879415cb1adbb55da42
-vendor/lib/libsdm-diag.so|e2e3a0fba39190c58bafa0568e8cd51b391b71b6
--vendor/lib/libsdm-disp-vndapis.so|6c4233ea3676643bc9658c25cfad7edd45c49362
-vendor/lib/libsdmextension.so|4a9b01c3d4cc625152f4c1d586e7d84f4dfeda9a
-vendor/lib/libtinyxml2_1.so|3882fddae942997be6ad6af789cf209fa45e61b3
-vendor/lib64/libscalar.so|490cc7447863b3279771ad99e92a5625525db055
-vendor/lib64/libsdm-color.so|9bb3f5147c277eae08c7f918e7de3bd2fccf1f74
-vendor/lib64/libsdm-diag.so|7ab5d2a980029ac9bd20fe68656823b21e483e11
--vendor/lib64/libsdm-disp-vndapis.so|6ae24866bbd413ed112778650c8fd7a2631cb1a9
-vendor/lib64/libsdmextension.so|d8e738455720e4c1492fcb2f77c030aa8beaa8dd
-vendor/lib64/libtinyxml2_1.so|b743b93bbb47bb2d80322fcfb985b7b8c696fa1b
+# Graphics (SDM) - from LA.UM.8.6.r1-01900-89xx.0
+vendor/lib/libscalar.so|7eb9864f82f5ffeb26ba548919c4812d1412b89e
+vendor/lib/libsdm-color.so|0e9ed4076b322bd630f5a227930c7ce5acf2dccf
+vendor/lib/libsdm-diag.so|427fe7e2e23715041d35fa25cbacb7bca1803219
+vendor/lib/libsdmextension.so|b57d80c0689ed0519762ea740fa163867dfa6a7d
+vendor/lib/libtinyxml2_1.so|89a4da164dfe30fa43f0ba2de198c8de54817162
+vendor/lib64/libscalar.so|d7cb68b0c3269bc8750646cfcf659973ac97c5b1
+vendor/lib64/libsdm-color.so|364aba1e0b7a376c37b79e971d01d49063bf3c1c
+vendor/lib64/libsdm-diag.so|0a2116e2f1e310be896250053761888b2b890dc4
+-vendor/lib64/libsdm-disp-vndapis.so|0289e8fd70c5401d7486ca839c931e987b0e7e9e
+vendor/lib64/libsdmextension.so|a3e3ccd22f0d0a81e70e4e2e39dc270fc94615c9
+vendor/lib64/libtinyxml2_1.so|cb6f4fb572a28cad293f4b6c5312fcff73ad088b
 
 # Graphics (Vulkan) - from op3 - PKQ1.181203.001
 vendor/lib/hw/vulkan.msm8996.so|55c875334793eb80e0d7177f640df1930dbe46a5
