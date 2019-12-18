@@ -31,6 +31,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 #include <sys/time.h>
 #include "log_util.h"
 #include "loc_log.h"
@@ -49,6 +50,12 @@ const char TO_AFW[]     = "<===";
 const char EXIT_TAG[]   = "Exiting";
 const char ENTRY_TAG[]  = "Entering";
 const char EXIT_ERROR_TAG[]  = "Exiting with error";
+
+#define BUILD_TYPE_PROP_NA 0
+#define BUILD_TYPE_PROP_USER 1
+#define BUILD_TYPE_PROP_USERDEBUG 2
+#define BUILD_TYPE_PROP_INVALID 3
+int build_type_prop = BUILD_TYPE_PROP_NA;
 
 /* Logging Mechanism */
 loc_logger_s_type loc_logger;
@@ -197,14 +204,28 @@ SIDE EFFECTS
 ===========================================================================*/
 void loc_logger_init(unsigned long debug, unsigned long timestamp)
 {
-   loc_logger.DEBUG_LEVEL = debug;
-#ifdef TARGET_BUILD_VARIANT_USER
-   // force user builds to 2 or less
-   if (loc_logger.DEBUG_LEVEL > 2) {
-       loc_logger.DEBUG_LEVEL = 2;
-   }
-#endif
-   loc_logger.TIMESTAMP   = timestamp;
+    loc_logger.DEBUG_LEVEL = debug;
+
+    if (BUILD_TYPE_PROP_NA == build_type_prop) {
+        char value[PROPERTY_VALUE_MAX] = "NA";
+        property_get("ro.build.type", value, "userdebug");
+        if (0 == strcmp(value, "user")) {
+            build_type_prop = BUILD_TYPE_PROP_USER;
+        } else if (0 == strcmp(value, "userdebug")) {
+            build_type_prop = BUILD_TYPE_PROP_USERDEBUG;
+        } else {
+            build_type_prop = BUILD_TYPE_PROP_INVALID;
+        }
+    }
+
+    if (BUILD_TYPE_PROP_USER == build_type_prop) {
+        // force user builds to 2 or less
+        if (loc_logger.DEBUG_LEVEL > 2) {
+            loc_logger.DEBUG_LEVEL = 2;
+        }
+     }
+
+    loc_logger.TIMESTAMP = timestamp;
 }
 
 
