@@ -1,7 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
 include $(CLEAR_VARS)
-include $(LOCAL_PATH)/utils/Android.mk
 
 LOCAL_MODULE := android.hardware.gnss@2.0-impl-qti
 LOCAL_SANITIZE += $(GNSS_SANITIZE)

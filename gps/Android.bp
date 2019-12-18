@@ -1,0 +1,17 @@
+GNSS_CFLAGS = [
+    "-Werror",
+    "-Wno-unused-parameter",
+    "-Wno-macro-redefined",
+    "-Wno-reorder",
+    "-Wno-missing-braces",
+    "-Wno-self-assign",
+    "-Wno-enum-conversion",
+    "-Wno-logical-op-parentheses",
+    "-Wno-null-arithmetic",
+    "-Wno-null-conversion",
+    "-Wno-parentheses-equality",
+    "-Wno-undefined-bool-conversion",
+    "-Wno-tautological-compare",
+    "-Wno-switch",
+    "-Wno-date-time",
+]
