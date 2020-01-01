@@ -1,3 +1,4 @@
 dontaudit hvdcp self:capability dac_override;
 
-r_dir_file(hvdcp, sysfs_batteryinfo)
+allow hvdcp sysfs_batteryinfo:dir search;
+allow hvdcp sysfs_batteryinfo:file rw_file_perms;
