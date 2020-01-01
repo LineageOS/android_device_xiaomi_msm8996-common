@@ -1,1 +1,1 @@
-allow thermal-engine sysfs_batteryinfo:dir search;
+r_dir_file(thermal-engine, sysfs_batteryinfo)
