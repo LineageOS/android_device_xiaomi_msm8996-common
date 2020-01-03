@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4916b90_4254eebb",
+        "filename": "sepolicy/time_daemon.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2020-01-03T02:11:02Z",
+      "side": 1,
+      "message": "just kang newer blobs and they\u0027re no longer needed",
+      "range": {
+        "startLine": 1,
+        "startChar": 36,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "803c4ae5150d20023d4711c15b334e8d2d782a23",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
