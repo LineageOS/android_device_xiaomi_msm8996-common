@@ -3,15 +3,11 @@ genfscon debugfs /rmt_storage u:object_r:debugfs_rmt:s0
 genfscon proc /buttons       u:object_r:proc_buttons:s0
 genfscon proc /touchpanel    u:object_r:proc_touchpanel:s0
 
+genfscon sysfs /devices/soc/400f000.qcom,spmi/spmi-0/spmi0-02/400f000.qcom,spmi:qcom,pmi8994@2:bcl@4200/power_supply             u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/400f000.qcom,spmi/spmi-0/spmi0-02/400f000.qcom,spmi:qcom,pmi8994@2:qcom,fg/power_supply              u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/400f000.qcom,spmi/spmi-0/spmi0-02/400f000.qcom,spmi:qcom,pmi8994@2:qcom,qpnp-smbcharger/power_supply u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/soc/6a00000.ssusb/6a00000.dwc3/gadget/lun0/     u:object_r:sysfs_android_usb:s0
-genfscon sysfs /devices/soc/6a00000.ssusb/power_supply                  u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/soc/70000.qcom,msm-core/uio/uio1                u:object_r:sysfs_uio_file:s0
 genfscon sysfs /devices/soc/70000.qcom,msm-thermal/uio/uio2             u:object_r:sysfs_uio_file:s0
+genfscon sysfs /devices/soc/7411000.qusb/power_supply                   u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/soc/75b5000.i2c/i2c-7/7-001d/power_supply       u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/msm-bcl-19/power_supply                     u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/msm-bcl-21/power_supply                     u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/qpnp-fg-22/power_supply                     u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/qpnp-fg-24/power_supply                     u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/qpnp-smbcharger-21/power_supply             u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/qpnp-smbcharger-23/power_supply             u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/soc/soc:qcom,bcl/power_supply                   u:object_r:sysfs_batteryinfo:s0
