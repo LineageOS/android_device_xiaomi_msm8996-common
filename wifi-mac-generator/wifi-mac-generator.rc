@@ -1,0 +1,5 @@
+service vendor.wifi-mac-generator /vendor/bin/wifi-mac-generator
+    class main
+    user system
+    group system
+    oneshot
