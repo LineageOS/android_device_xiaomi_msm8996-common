@@ -15,6 +15,8 @@
 # limitations under the License.
 #
 
+BUILD_BROKEN_PREBUILT_ELF_FILES := true
+
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
 BOARD_VENDOR := xiaomi
