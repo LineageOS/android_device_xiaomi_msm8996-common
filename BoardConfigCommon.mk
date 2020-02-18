@@ -147,6 +147,10 @@ TARGET_USES_MKE2FS := true
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
 TARGET_USES_INTERACTION_BOOST := true
 
+# Properties
+TARGET_SYSTEM_PROP += $(VENDOR_PATH)/system.prop
+TARGET_VENDOR_PROP += $(VENDOR_PATH)/vendor.prop
+
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
 
