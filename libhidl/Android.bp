@@ -1,0 +1,11 @@
+cc_library {
+    name: "android.hidl.base@1.0",
+    shared_libs: ["libhidlbase"],
+    vendor_available: true,
+}
+
+cc_library {
+    name: "android.hidl.manager@1.0",
+    shared_libs: ["libhidlbase"],
+    vendor_available: true,
+}
