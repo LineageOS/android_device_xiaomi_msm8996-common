@@ -17,6 +17,8 @@
 
 BOARD_VENDOR := xiaomi
 
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+
 VENDOR_PATH := device/xiaomi/msm8996-common
 
 # Architecture
