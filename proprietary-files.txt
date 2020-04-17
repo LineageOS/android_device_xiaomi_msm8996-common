@@ -1,3 +1,5 @@
+# Common proprietary files - from gemini's MIUI package V10.2.2.0.OAAMIXM global stable version, unless pinned
+
 # ADSP
 vendor/bin/adsprpcd
 vendor/lib64/libadsprpc.so
