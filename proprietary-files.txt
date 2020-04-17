@@ -661,8 +661,8 @@ vendor/lib64/libthermalioctl.so|aa2a0abd8fb9792024efd93f648c129b6a22619e
 vendor/bin/time_daemon|d67f1c50583b5efca0f5baea00a51056a798b7f8
 vendor/lib64/libtime_genoff.so|8f4c1f9ace6af463b241b130d6872b5d39cc7b2a
 
-# WiFi - from daisy - PKQ1.180917.001
-vendor/bin/cnss-daemon|badadcc672341e36228301b02c2bfaa36be09233
+# WiFi
+vendor/bin/cnss-daemon
 
 # WiFi Display - from daisy - QKQ1.191002.002
 system/bin/wfdservice|934817e5689fe6f8b54032902de58c203b8ec2e7
