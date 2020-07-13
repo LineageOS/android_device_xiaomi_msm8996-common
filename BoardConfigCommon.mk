@@ -15,8 +15,6 @@
 # limitations under the License.
 #
 
-BOARD_VENDOR := xiaomi
-
 VENDOR_PATH := device/xiaomi/msm8996-common
 
 # Architecture
