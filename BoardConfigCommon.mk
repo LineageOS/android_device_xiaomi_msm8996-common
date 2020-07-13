@@ -15,8 +15,6 @@
 # limitations under the License.
 #
 
-BOARD_VENDOR := xiaomi
-
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 VENDOR_PATH := device/xiaomi/msm8996-common
