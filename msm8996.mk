@@ -411,6 +411,7 @@ PRODUCT_PACKAGES += \
     hostapd \
     readfem \
     readmac \
+    TetheringConfigOverlay \
     WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
