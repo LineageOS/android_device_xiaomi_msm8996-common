@@ -306,35 +306,35 @@ vendor/lib/libwvhidl.so|37333d17980282275805807bc648bf8516fd4143
 vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
-# GPS - from daisy - QKQ1.191002.002
-vendor/bin/loc_launcher|06793983f836a9b42b5ff3848f8fe177134c1379
-vendor/bin/lowi-server|1fe78b543c14196169ab411acfd9dabbfb4636dd
-vendor/bin/slim_daemon|925da604895b095d7e39cf84c7031c6825f32ac0
-vendor/bin/xtra-daemon|20ec9dc7d1785a1789e57cf55f8b49b79fde374c
-vendor/etc/cacert_location.pem|6a05f324e7d9ff584811e62aabeb6d89a5239bbe
-vendor/etc/vintf/manifest/vendor.qti.gnss@3.0-service.xml|9b2f6691d6c224bcb9ab9a0d57adfb9e52f1b53e
-vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
-vendor/lib64/hw/vendor.qti.gnss@3.0-impl.so|2328835a0e0221a527c8e55c72e1a0dcef3fcfbe
-vendor/lib64/libdataitems.so|0ff60a5f4273cc3eb9f1f8a4d7bd204107375cec
-vendor/lib64/libgdtap.so|f5151c6425312d37c1eeb78cce1f92b71ae79e10
-vendor/lib64/libizat_client_api.so|b85018c41fb06de3e2f877288b5d8d18ea00077b
-vendor/lib64/libizat_core.so|fe74fb6cd3320ff8c938eb6b35b8f206b7265a4b
-vendor/lib64/liblbs_core.so|a20c4f11667138d372f4318bd532bfd4282b9e23
-vendor/lib64/libloc_api_v02.so|b8649d539b3ba48d3ed63dfb35e2ee827431ffa1
-vendor/lib64/liblocationservice_glue.so|dab65642bfba2756c5ad0a38e0107c3ab04637f9
-vendor/lib64/liblocationservice.so|c8c2493df1a542b9b3efe78795a4887ad81611f3
-vendor/lib64/liblowi_client.so|7ca8773ca8f686459dee81d532e887d3beda53e0
-vendor/lib64/liblowi_wifihal.so|1a5b086558927837302965e68731000f5ddc37db
-vendor/lib64/libqdma_file_agent.so|8bb728b595a3bac39cdbd3c456d523f35a10ef1d
-vendor/lib64/libslimclient.so|d2c67e48e0f9d975a817771f5589f9e23e1ac495
-vendor/lib64/libxtadapter.so|5085a7d7986abc5f64b67ad42065d326662d0c2c
-vendor/lib64/vendor.qti.gnss@1.0.so|bf11e2b7a104ed1689623f5a772269d24e00bd14
-vendor/lib64/vendor.qti.gnss@1.1.so|4b88888fcba1bc3f709889cbf086d9ba2b997b91
-vendor/lib64/vendor.qti.gnss@1.2.so|8073a3bfcfdc7aaf903852349bbbcd9e5d229d3e
-vendor/lib64/vendor.qti.gnss@2.0.so|f6f94bf22b8948c163b84cf092d86fdd25b39850
-vendor/lib64/vendor.qti.gnss@2.1.so|7f69b6098f779f6ed396bbf366b496b0b228c743
-vendor/lib64/vendor.qti.gnss@3.0-service.so|6b3c387f31f4cb91c8907362af4daa3f0cad7911
-vendor/lib64/vendor.qti.gnss@3.0.so|c5ed668d324e7c898ca026fc12dad8829cd8a944
+# GPS
+vendor/bin/hw/vendor.qti.gnss@1.0-service
+vendor/bin/loc_launcher
+vendor/bin/lowi-server
+vendor/bin/slim_daemon
+vendor/bin/xtra-daemon
+vendor/etc/cacert_location.pem
+vendor/etc/init/vendor.qti.gnss@1.0-service.rc
+vendor/etc/xtra_root_cert.pem
+vendor/lib64/hw/vendor.qti.gnss@1.0-impl.so
+vendor/lib64/libdataitems.so
+vendor/lib64/libdrplugin_client.so
+vendor/lib64/libDRPlugin.so
+vendor/lib64/libevent_observer.so
+vendor/lib64/libflp.so
+vendor/lib64/libgeofence.so
+vendor/lib64/libizat_client_api.so
+vendor/lib64/libizat_core.so
+vendor/lib64/liblbs_core.so
+vendor/lib64/libloc_api_v02.so
+vendor/lib64/libloc_ds_api.so
+vendor/lib64/liblocationservice_glue.so
+vendor/lib64/liblocationservice.so
+vendor/lib64/liblowi_client.so
+vendor/lib64/liblowi_wifihal.so
+vendor/lib64/libulp2.so
+vendor/lib64/libxtadapter.so
+vendor/lib64/libxtwifi_ulp_adaptor.so
+vendor/lib64/vendor.qti.gnss@1.0_vendor.so
 
 # Graphics (Adreno) - from daisy - QKQ1.191002.002
 vendor/lib64/egl/eglSubDriverAndroid.so|8edb19893decd259ba43d752b48e0a69c5788db4
