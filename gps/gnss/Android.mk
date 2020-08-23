@@ -1,14 +1,8 @@
-ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
-ifneq ($(BUILD_TINY_ANDROID),true)
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := libgnss
-LOCAL_SANITIZE += $(GNSS_SANITIZE)
-# activate the following line for debug purposes only, comment out for production
-#LOCAL_SANITIZE_DIAG += $(GNSS_SANITIZE_DIAG)
 LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
@@ -41,9 +35,4 @@ LOCAL_HEADER_LIBRARIES := \
 
 LOCAL_CFLAGS += $(GNSS_CFLAGS)
 
-LOCAL_PRELINK_MODULE := false
-
 include $(BUILD_SHARED_LIBRARY)
-
-endif # not BUILD_TINY_ANDROID
-endif # BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE

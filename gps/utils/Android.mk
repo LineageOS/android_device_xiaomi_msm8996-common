@@ -1,7 +1,3 @@
-ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
-ifneq ($(BUILD_TINY_ANDROID),true)
-#Compile this library only for builds with the latest modem image
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -9,7 +5,6 @@ include $(CLEAR_VARS)
 
 ## Libs
 LOCAL_SHARED_LIBRARIES := \
-    libdl \
     libutils \
     libcutils \
     liblog \
@@ -47,9 +42,6 @@ LOCAL_HEADER_LIBRARIES := \
     liblocation_api_headers
 
 LOCAL_MODULE := libgps.utils
-LOCAL_SANITIZE += $(GNSS_SANITIZE)
-# activate the following line for debug purposes only, comment out for production
-#LOCAL_SANITIZE_DIAG += $(GNSS_SANITIZE_DIAG)
 LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
@@ -63,6 +55,3 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libgps.utils_headers
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)
 include $(BUILD_HEADER_LIBRARY)
-
-endif # not BUILD_TINY_ANDROID
-endif # BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE
