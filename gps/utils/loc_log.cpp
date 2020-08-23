@@ -32,10 +32,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include "log_util.h"
+#include <time.h>
 #include "loc_log.h"
 #include "msg_q.h"
-#include <loc_pla.h>
+#include <platform_lib_includes.h>
 
 #define  BUFFER_SIZE  120
 

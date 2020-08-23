@@ -30,26 +30,22 @@
 #define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_core_log"
 
-#include <log_util.h>
 #include <loc_log.h>
 #include <loc_core_log.h>
-#include <loc_pla.h>
+#include <platform_lib_includes.h>
 
 void LocPosMode::logv() const
 {
     LOC_LOGV ("Position mode: %s\n  Position recurrence: %s\n  "
               "min interval: %d\n  preferred accuracy: %d\n  "
-              "preferred time: %d\n  credentials: %s  provider: %s \n  "
-              "power mode: %d\n  tbm %d",
+              "preferred time: %d\n  credentials: %s  provider: %s",
               loc_get_position_mode_name(mode),
               loc_get_position_recurrence_name(recurrence),
               min_interval,
               preferred_accuracy,
               preferred_time,
               credentials,
-              provider,
-              powerMode,
-              timeBetweenMeasurements);
+              provider);
 }
 
 /* GPS status names */
@@ -103,6 +99,26 @@ const char* loc_get_position_recurrence_name(LocGpsPositionRecurrence recur)
 {
     return loc_get_name_from_val(loc_eng_position_recurrences, loc_eng_position_recurrence_num, (long) recur);
 }
+
+
+
+static const loc_name_val_s_type loc_eng_aiding_data_bits[] =
+{
+    NAME_VAL( LOC_GPS_DELETE_EPHEMERIS ),
+    NAME_VAL( LOC_GPS_DELETE_ALMANAC ),
+    NAME_VAL( LOC_GPS_DELETE_POSITION ),
+    NAME_VAL( LOC_GPS_DELETE_TIME ),
+    NAME_VAL( LOC_GPS_DELETE_IONO ),
+    NAME_VAL( LOC_GPS_DELETE_UTC ),
+    NAME_VAL( LOC_GPS_DELETE_HEALTH ),
+    NAME_VAL( LOC_GPS_DELETE_SVDIR ),
+    NAME_VAL( LOC_GPS_DELETE_SVSTEER ),
+    NAME_VAL( LOC_GPS_DELETE_SADATA ),
+    NAME_VAL( LOC_GPS_DELETE_RTI ),
+    NAME_VAL( LOC_GPS_DELETE_CELLDB_INFO ),
+    NAME_VAL( LOC_GPS_DELETE_ALL)
+};
+static const int loc_eng_aiding_data_bit_num = sizeof(loc_eng_aiding_data_bits) / sizeof(loc_name_val_s_type);
 
 const char* loc_get_aiding_data_mask_names(LocGpsAidingData /*data*/)
 {
