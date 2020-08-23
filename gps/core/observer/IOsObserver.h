@@ -90,10 +90,6 @@ public:
     // IFrameworkActionReq Overrides
     inline virtual void turnOn (DataItemId /*dit*/, int /*timeOut*/){}
     inline virtual void turnOff (DataItemId /*dit*/) {}
-#ifdef USE_GLIB
-    inline virtual bool connectBackhaul() { return false; }
-    inline virtual bool disconnectBackhaul() { return false; }
-#endif
 
     /**
      * @brief Destructor

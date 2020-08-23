@@ -1,4 +1,4 @@
-/* Copyright (c) 2017, 2019, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -34,8 +34,8 @@
 #include <string.h>
 #include <sys/time.h>
 #include <pthread.h>
-#include <loc_pla.h>
-#include <log_util.h>
+#include <platform_lib_log_util.h>
+#include <MsgTask.h>
 #include <loc_nmea.h>
 #include <DataItemsFactoryProxy.h>
 #include <SystemStatus.h>
@@ -120,13 +120,6 @@ public:
     double   mAgcGal;     // x16
     int32_t  mLeapSeconds;// x17
     int32_t  mLeapSecUnc; // x18
-    uint32_t mGloBpAmpI;  // x19
-    uint32_t mGloBpAmpQ;  // x1A
-    uint32_t mBdsBpAmpI;  // x1B
-    uint32_t mBdsBpAmpQ;  // x1C
-    uint32_t mGalBpAmpI;  // x1D
-    uint32_t mGalBpAmpQ;  // x1E
-    uint64_t mTimeUncNs;  // x1F
 };
 
 // parser
@@ -161,13 +154,6 @@ private:
         eMax0 = eAgcGal,
         eLeapSeconds = 23,
         eLeapSecUnc = 24,
-        eGloBpAmpI = 25,
-        eGloBpAmpQ = 26,
-        eBdsBpAmpI = 27,
-        eBdsBpAmpQ = 28,
-        eGalBpAmpI = 29,
-        eGalBpAmpQ = 30,
-        eTimeUncNs = 31,
         eMax
     };
     SystemStatusPQWM1 mM1;
@@ -197,13 +183,6 @@ public:
     inline uint32_t   getRecErrorRecovery() { return mM1.mRecErrorRecovery; }
     inline int32_t    getLeapSeconds(){ return mM1.mLeapSeconds; }
     inline int32_t    getLeapSecUnc() { return mM1.mLeapSecUnc; }
-    inline uint32_t   getGloBpAmpI()  { return mM1.mGloBpAmpI; }
-    inline uint32_t   getGloBpAmpQ()  { return mM1.mGloBpAmpQ; }
-    inline uint32_t   getBdsBpAmpI()  { return mM1.mBdsBpAmpI; }
-    inline uint32_t   getBdsBpAmpQ()  { return mM1.mBdsBpAmpQ; }
-    inline uint32_t   getGalBpAmpI()  { return mM1.mGalBpAmpI; }
-    inline uint32_t   getGalBpAmpQ()  { return mM1.mGalBpAmpQ; }
-    inline uint64_t   getTimeUncNs()  { return mM1.mTimeUncNs; }
 
     SystemStatusPQWM1parser(const char *str_in, uint32_t len_in)
         : SystemStatusNmeaBase(str_in, len_in)
@@ -239,17 +218,6 @@ public:
         if (mField.size() > eLeapSecUnc) {
             mM1.mLeapSeconds = atoi(mField[eLeapSeconds].c_str());
             mM1.mLeapSecUnc = atoi(mField[eLeapSecUnc].c_str());
-        }
-        if (mField.size() > eGalBpAmpQ) {
-            mM1.mGloBpAmpI = atoi(mField[eGloBpAmpI].c_str());
-            mM1.mGloBpAmpQ = atoi(mField[eGloBpAmpQ].c_str());
-            mM1.mBdsBpAmpI = atoi(mField[eBdsBpAmpI].c_str());
-            mM1.mBdsBpAmpQ = atoi(mField[eBdsBpAmpQ].c_str());
-            mM1.mGalBpAmpI = atoi(mField[eGalBpAmpI].c_str());
-            mM1.mGalBpAmpQ = atoi(mField[eGalBpAmpQ].c_str());
-        }
-        if (mField.size() > eTimeUncNs) {
-            mM1.mTimeUncNs = strtoull(mField[eTimeUncNs].c_str(), nullptr, 10);
         }
     }
 
@@ -382,19 +350,16 @@ public:
     uint32_t  mBdsXtraAge;
     uint32_t  mGalXtraAge;
     uint32_t  mQzssXtraAge;
-    uint32_t  mNavicXtraAge;
     uint32_t  mGpsXtraValid;
     uint32_t  mGloXtraValid;
     uint64_t  mBdsXtraValid;
     uint64_t  mGalXtraValid;
     uint8_t   mQzssXtraValid;
-    uint32_t  mNavicXtraValid;
 };
 
 class SystemStatusPQWP3parser : public SystemStatusNmeaBase
 {
 private:
-    // todo: update for navic once available
     enum
     {
         eTalker = 0,
@@ -421,13 +386,11 @@ public:
     inline uint32_t   getBdsXtraAge() { return mP3.mBdsXtraAge;       }
     inline uint32_t   getGalXtraAge() { return mP3.mGalXtraAge;       }
     inline uint32_t   getQzssXtraAge() { return mP3.mQzssXtraAge;      }
-    inline uint32_t   getNavicXtraAge() { return mP3.mNavicXtraAge;     }
     inline uint32_t   getGpsXtraValid() { return mP3.mGpsXtraValid;     }
     inline uint32_t   getGloXtraValid() { return mP3.mGloXtraValid;     }
     inline uint64_t   getBdsXtraValid() { return mP3.mBdsXtraValid;     }
     inline uint64_t   getGalXtraValid() { return mP3.mGalXtraValid;     }
     inline uint8_t    getQzssXtraValid() { return mP3.mQzssXtraValid;    }
-    inline uint32_t   getNavicXtraValid() { return mP3.mNavicXtraValid;     }
 
     SystemStatusPQWP3parser(const char *str_in, uint32_t len_in)
         : SystemStatusNmeaBase(str_in, len_in)
@@ -436,7 +399,6 @@ public:
             return;
         }
         memset(&mP3, 0, sizeof(mP3));
-        // todo: update for navic once available
         mP3.mXtraValidMask = strtol(mField[eXtraValidMask].c_str(), NULL, 16);
         mP3.mGpsXtraAge = atoi(mField[eGpsXtraAge].c_str());
         mP3.mGloXtraAge = atoi(mField[eGloXtraAge].c_str());
@@ -517,25 +479,21 @@ public:
     uint64_t  mBdsUnknownMask;
     uint64_t  mGalUnknownMask;
     uint8_t   mQzssUnknownMask;
-    uint32_t  mNavicUnknownMask;
     uint32_t  mGpsGoodMask;
     uint32_t  mGloGoodMask;
     uint64_t  mBdsGoodMask;
     uint64_t  mGalGoodMask;
     uint8_t   mQzssGoodMask;
-    uint32_t  mNavicGoodMask;
     uint32_t  mGpsBadMask;
     uint32_t  mGloBadMask;
     uint64_t  mBdsBadMask;
     uint64_t  mGalBadMask;
     uint8_t   mQzssBadMask;
-    uint32_t  mNavicBadMask;
 };
 
 class SystemStatusPQWP5parser : public SystemStatusNmeaBase
 {
 private:
-    // todo: update for navic once available
     enum
     {
         eTalker = 0,
@@ -565,19 +523,16 @@ public:
     inline uint64_t   getBdsUnknownMask() { return mP5.mBdsUnknownMask;   }
     inline uint64_t   getGalUnknownMask() { return mP5.mGalUnknownMask;   }
     inline uint8_t    getQzssUnknownMask() { return mP5.mQzssUnknownMask;  }
-    inline uint32_t   getNavicUnknownMask() { return mP5.mNavicUnknownMask;   }
     inline uint32_t   getGpsGoodMask() { return mP5.mGpsGoodMask;      }
     inline uint32_t   getGloGoodMask() { return mP5.mGloGoodMask;      }
     inline uint64_t   getBdsGoodMask() { return mP5.mBdsGoodMask;      }
     inline uint64_t   getGalGoodMask() { return mP5.mGalGoodMask;      }
     inline uint8_t    getQzssGoodMask() { return mP5.mQzssGoodMask;     }
-    inline uint32_t   getNavicGoodMask() { return mP5.mNavicGoodMask;      }
     inline uint32_t   getGpsBadMask() { return mP5.mGpsBadMask;       }
     inline uint32_t   getGloBadMask() { return mP5.mGloBadMask;       }
     inline uint64_t   getBdsBadMask() { return mP5.mBdsBadMask;       }
     inline uint64_t   getGalBadMask() { return mP5.mGalBadMask;       }
     inline uint8_t    getQzssBadMask() { return mP5.mQzssBadMask;      }
-    inline uint32_t   getNavicBadMask() { return mP5.mNavicBadMask;       }
 
     SystemStatusPQWP5parser(const char *str_in, uint32_t len_in)
         : SystemStatusNmeaBase(str_in, len_in)
@@ -586,7 +541,6 @@ public:
             return;
         }
         memset(&mP5, 0, sizeof(mP5));
-        // todo: update for navic once available
         mP5.mGpsUnknownMask = strtol(mField[eGpsUnknownMask].c_str(), NULL, 16);
         mP5.mGloUnknownMask = strtol(mField[eGloUnknownMask].c_str(), NULL, 16);
         mP5.mBdsUnknownMask = strtol(mField[eBdsUnknownMask].c_str(), NULL, 16);
@@ -660,7 +614,6 @@ private:
     {
         eTalker = 0,
         eUtcTime = 1,
-        eMin = 2 + SV_ALL_NUM_MIN*3,
         eMax = 2 + SV_ALL_NUM*3
     };
     SystemStatusPQWP7 mP7;
@@ -669,18 +622,11 @@ public:
     SystemStatusPQWP7parser(const char *str_in, uint32_t len_in)
         : SystemStatusNmeaBase(str_in, len_in)
     {
-        uint32_t svLimit = SV_ALL_NUM;
-        if (mField.size() < eMin) {
+        if (mField.size() < eMax) {
             LOC_LOGE("PQWP7parser - invalid size=%zu", mField.size());
             return;
         }
-        if (mField.size() < eMax) {
-            // Try reducing limit, accounting for possibly missing NAVIC support
-            svLimit = SV_ALL_NUM_MIN;
-        }
-
-        memset(mP7.mNav, 0, sizeof(mP7.mNav));
-        for (uint32_t i=0; i<svLimit; i++) {
+        for (uint32_t i=0; i<SV_ALL_NUM; i++) {
             mP7.mNav[i].mType   = GnssEphemerisType(atoi(mField[i*3+2].c_str()));
             mP7.mNav[i].mSource = GnssEphemerisSource(atoi(mField[i*3+3].c_str()));
             mP7.mNav[i].mAgeSec = atoi(mField[i*3+4].c_str());
@@ -743,8 +689,7 @@ SystemStatusTimeAndClock::SystemStatusTimeAndClock(const SystemStatusPQWM1& nmea
     mClockFreqBias(nmea.mClockFreqBias),
     mClockFreqBiasUnc(nmea.mClockFreqBiasUnc),
     mLeapSeconds(nmea.mLeapSeconds),
-    mLeapSecUnc(nmea.mLeapSecUnc),
-    mTimeUncNs(nmea.mTimeUncNs)
+    mLeapSecUnc(nmea.mLeapSecUnc)
 {
 }
 
@@ -758,8 +703,7 @@ bool SystemStatusTimeAndClock::equals(const SystemStatusTimeAndClock& peer)
         (mClockFreqBias != peer.mClockFreqBias) ||
         (mClockFreqBiasUnc != peer.mClockFreqBiasUnc) ||
         (mLeapSeconds != peer.mLeapSeconds) ||
-        (mLeapSecUnc != peer.mLeapSecUnc) ||
-        (mTimeUncNs != peer.mTimeUncNs)) {
+        (mLeapSecUnc != peer.mLeapSecUnc)) {
         return false;
     }
     return true;
@@ -767,7 +711,7 @@ bool SystemStatusTimeAndClock::equals(const SystemStatusTimeAndClock& peer)
 
 void SystemStatusTimeAndClock::dump()
 {
-    LOC_LOGV("TimeAndClock: u=%ld:%ld g=%d:%d v=%d ts=%d tu=%d b=%d bu=%d ls=%d lu=%d un=%" PRIu64,
+    LOC_LOGV("TimeAndClock: u=%ld:%ld g=%d:%d v=%d ts=%d tu=%d b=%d bu=%d ls=%d lu=%d",
              mUtcTime.tv_sec, mUtcTime.tv_nsec,
              mGpsWeek,
              mGpsTowMs,
@@ -777,8 +721,7 @@ void SystemStatusTimeAndClock::dump()
              mClockFreqBias,
              mClockFreqBiasUnc,
              mLeapSeconds,
-             mLeapSecUnc,
-             mTimeUncNs);
+             mLeapSecUnc);
     return;
 }
 
@@ -822,13 +765,7 @@ SystemStatusRfAndParams::SystemStatusRfAndParams(const SystemStatusPQWM1& nmea) 
     mAgcGps(nmea.mAgcGps),
     mAgcGlo(nmea.mAgcGlo),
     mAgcBds(nmea.mAgcBds),
-    mAgcGal(nmea.mAgcGal),
-    mGloBpAmpI(nmea.mGloBpAmpI),
-    mGloBpAmpQ(nmea.mGloBpAmpQ),
-    mBdsBpAmpI(nmea.mBdsBpAmpI),
-    mBdsBpAmpQ(nmea.mBdsBpAmpQ),
-    mGalBpAmpI(nmea.mGalBpAmpI),
-    mGalBpAmpQ(nmea.mGalBpAmpQ)
+    mAgcGal(nmea.mAgcGal)
 {
 }
 
@@ -846,13 +783,7 @@ bool SystemStatusRfAndParams::equals(const SystemStatusRfAndParams& peer)
         (mAgcGps != peer.mAgcGps) ||
         (mAgcGlo != peer.mAgcGlo) ||
         (mAgcBds != peer.mAgcBds) ||
-        (mAgcGal != peer.mAgcGal) ||
-        (mGloBpAmpI != peer.mGloBpAmpI) ||
-        (mGloBpAmpQ != peer.mGloBpAmpQ) ||
-        (mBdsBpAmpI != peer.mBdsBpAmpI) ||
-        (mBdsBpAmpQ != peer.mBdsBpAmpQ) ||
-        (mGalBpAmpI != peer.mGalBpAmpI) ||
-        (mGalBpAmpQ != peer.mGalBpAmpQ)) {
+        (mAgcGal != peer.mAgcGal)) {
         return false;
     }
     return true;
@@ -993,13 +924,11 @@ SystemStatusXtra::SystemStatusXtra(const SystemStatusPQWP3& nmea) :
     mBdsXtraAge(nmea.mBdsXtraAge),
     mGalXtraAge(nmea.mGalXtraAge),
     mQzssXtraAge(nmea.mQzssXtraAge),
-    mNavicXtraAge(nmea.mNavicXtraAge),
     mGpsXtraValid(nmea.mGpsXtraValid),
     mGloXtraValid(nmea.mGloXtraValid),
     mBdsXtraValid(nmea.mBdsXtraValid),
     mGalXtraValid(nmea.mGalXtraValid),
-    mQzssXtraValid(nmea.mQzssXtraValid),
-    mNavicXtraValid(nmea.mNavicXtraValid)
+    mQzssXtraValid(nmea.mQzssXtraValid)
 {
 }
 
@@ -1011,13 +940,11 @@ bool SystemStatusXtra::equals(const SystemStatusXtra& peer)
         (mBdsXtraAge != peer.mBdsXtraAge) ||
         (mGalXtraAge != peer.mGalXtraAge) ||
         (mQzssXtraAge != peer.mQzssXtraAge) ||
-        (mNavicXtraAge != peer.mNavicXtraAge) ||
         (mGpsXtraValid != peer.mGpsXtraValid) ||
         (mGloXtraValid != peer.mGloXtraValid) ||
         (mBdsXtraValid != peer.mBdsXtraValid) ||
         (mGalXtraValid != peer.mGalXtraValid) ||
-        (mQzssXtraValid != peer.mQzssXtraValid) ||
-        (mNavicXtraValid != peer.mNavicXtraValid)) {
+        (mQzssXtraValid != peer.mQzssXtraValid)) {
         return false;
     }
     return true;
@@ -1086,19 +1013,16 @@ SystemStatusSvHealth::SystemStatusSvHealth(const SystemStatusPQWP5& nmea) :
     mBdsUnknownMask(nmea.mBdsUnknownMask),
     mGalUnknownMask(nmea.mGalUnknownMask),
     mQzssUnknownMask(nmea.mQzssUnknownMask),
-    mNavicUnknownMask(nmea.mNavicUnknownMask),
     mGpsGoodMask(nmea.mGpsGoodMask),
     mGloGoodMask(nmea.mGloGoodMask),
     mBdsGoodMask(nmea.mBdsGoodMask),
     mGalGoodMask(nmea.mGalGoodMask),
     mQzssGoodMask(nmea.mQzssGoodMask),
-    mNavicGoodMask(nmea.mNavicGoodMask),
     mGpsBadMask(nmea.mGpsBadMask),
     mGloBadMask(nmea.mGloBadMask),
     mBdsBadMask(nmea.mBdsBadMask),
     mGalBadMask(nmea.mGalBadMask),
-    mQzssBadMask(nmea.mQzssBadMask),
-    mNavicBadMask(nmea.mNavicBadMask)
+    mQzssBadMask(nmea.mQzssBadMask)
 {
 }
 
@@ -1293,7 +1217,8 @@ IOsObserver* SystemStatus::getOsObserver()
 }
 
 SystemStatus::SystemStatus(const MsgTask* msgTask) :
-    mSysStatusObsvr(this, msgTask)
+    mSysStatusObsvr(this, msgTask),
+    mConnected(false)
 {
     int result = 0;
     ENTRY_LOG ();
@@ -1343,10 +1268,17 @@ SystemStatus::SystemStatus(const MsgTask* msgTask) :
 /******************************************************************************
  SystemStatus - storing dataitems
 ******************************************************************************/
-template <typename TYPE_REPORT, typename TYPE_ITEM>
-bool SystemStatus::setIteminReport(TYPE_REPORT& report, TYPE_ITEM&& s)
+template <typename TYPE_SYSTEMSTATUS_ITEM, typename TYPE_REPORT, typename TYPE_ITEMBASE>
+bool SystemStatus::setItemBaseinReport(TYPE_REPORT& report, const TYPE_ITEMBASE& s)
 {
-    if (!report.empty() && report.back().equals(static_cast<TYPE_ITEM&>(s.collate(report.back())))) {
+    TYPE_SYSTEMSTATUS_ITEM sout(s);
+    return setIteminReport(report, sout);
+}
+
+template <typename TYPE_REPORT, typename TYPE_ITEM>
+bool SystemStatus::setIteminReport(TYPE_REPORT& report, const TYPE_ITEM& s)
+{
+    if (!report.empty() && report.back().equals(s)) {
         // there is no change - just update reported timestamp
         report.back().mUtcReported = s.mUtcReported;
         return false;
@@ -1385,10 +1317,11 @@ void SystemStatus::getIteminReport(TYPE_REPORT& reportout, const TYPE_ITEM& c) c
 @param[In]  data pointer to the NMEA string
 @param[In]  len  length of the NMEA string
 
-@return     true when the NMEA is consumed by the method.
+@return     true when successfully done
 ******************************************************************************/
 bool SystemStatus::setNmeaString(const char *data, uint32_t len)
 {
+    bool ret = false;
     if (!loc_nmea_is_debug(data, len)) {
         return false;
     }
@@ -1399,43 +1332,43 @@ bool SystemStatus::setNmeaString(const char *data, uint32_t len)
     pthread_mutex_lock(&mMutexSystemStatus);
 
     // parse the received nmea strings here
-    if (0 == strncmp(data, "$PQWM1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
+    if      (0 == strncmp(data, "$PQWM1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
         SystemStatusPQWM1 s = SystemStatusPQWM1parser(buf, len).get();
-        setIteminReport(mCache.mTimeAndClock, SystemStatusTimeAndClock(s));
-        setIteminReport(mCache.mXoState, SystemStatusXoState(s));
-        setIteminReport(mCache.mRfAndParams, SystemStatusRfAndParams(s));
-        setIteminReport(mCache.mErrRecovery, SystemStatusErrRecovery(s));
+        ret |= setIteminReport(mCache.mTimeAndClock, SystemStatusTimeAndClock(s));
+        ret |= setIteminReport(mCache.mXoState, SystemStatusXoState(s));
+        ret |= setIteminReport(mCache.mRfAndParams, SystemStatusRfAndParams(s));
+        ret |= setIteminReport(mCache.mErrRecovery, SystemStatusErrRecovery(s));
     }
     else if (0 == strncmp(data, "$PQWP1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mInjectedPosition,
+        ret = setIteminReport(mCache.mInjectedPosition,
                 SystemStatusInjectedPosition(SystemStatusPQWP1parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWP2", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mBestPosition,
+        ret = setIteminReport(mCache.mBestPosition,
                 SystemStatusBestPosition(SystemStatusPQWP2parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWP3", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mXtra,
+        ret = setIteminReport(mCache.mXtra,
                 SystemStatusXtra(SystemStatusPQWP3parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWP4", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mEphemeris,
+        ret = setIteminReport(mCache.mEphemeris,
                 SystemStatusEphemeris(SystemStatusPQWP4parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWP5", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mSvHealth,
+        ret = setIteminReport(mCache.mSvHealth,
                 SystemStatusSvHealth(SystemStatusPQWP5parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWP6", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mPdr,
+        ret = setIteminReport(mCache.mPdr,
                 SystemStatusPdr(SystemStatusPQWP6parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWP7", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mNavData,
+        ret = setIteminReport(mCache.mNavData,
                 SystemStatusNavData(SystemStatusPQWP7parser(buf, len).get()));
     }
     else if (0 == strncmp(data, "$PQWS1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        setIteminReport(mCache.mPositionFailure,
+        ret = setIteminReport(mCache.mPositionFailure,
                 SystemStatusPositionFailure(SystemStatusPQWS1parser(buf, len).get()));
     }
     else {
@@ -1443,7 +1376,7 @@ bool SystemStatus::setNmeaString(const char *data, uint32_t len)
     }
 
     pthread_mutex_unlock(&mMutexSystemStatus);
-    return true;
+    return ret;
 }
 
 /******************************************************************************
@@ -1484,92 +1417,94 @@ bool SystemStatus::eventDataItemNotify(IDataItemCore* dataitem)
     switch(dataitem->getId())
     {
         case AIRPLANEMODE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mAirplaneMode,
-                    SystemStatusAirplaneMode(*(static_cast<AirplaneModeDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusAirplaneMode>(mCache.mAirplaneMode,
+                    *(static_cast<AirplaneModeDataItemBase*>(dataitem)));
             break;
         case ENH_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mENH,
-                    SystemStatusENH(*(static_cast<ENHDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusENH>(mCache.mENH,
+                    *(static_cast<ENHDataItemBase*>(dataitem)));
             break;
         case GPSSTATE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mGPSState,
-                    SystemStatusGpsState(*(static_cast<GPSStateDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusGpsState>(mCache.mGPSState,
+                    *(static_cast<GPSStateDataItemBase*>(dataitem)));
             break;
         case NLPSTATUS_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mNLPStatus,
-                    SystemStatusNLPStatus(*(static_cast<NLPStatusDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusNLPStatus>(mCache.mNLPStatus,
+                    *(static_cast<NLPStatusDataItemBase*>(dataitem)));
             break;
         case WIFIHARDWARESTATE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mWifiHardwareState,
-                    SystemStatusWifiHardwareState(*(static_cast<WifiHardwareStateDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusWifiHardwareState>(mCache.mWifiHardwareState,
+                    *(static_cast<WifiHardwareStateDataItemBase*>(dataitem)));
             break;
         case NETWORKINFO_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mNetworkInfo,
-                    SystemStatusNetworkInfo(*(static_cast<NetworkInfoDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusNetworkInfo>(mCache.mNetworkInfo,
+                    *(static_cast<NetworkInfoDataItemBase*>(dataitem)));
             break;
         case RILSERVICEINFO_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mRilServiceInfo,
-                    SystemStatusServiceInfo(*(static_cast<RilServiceInfoDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusServiceInfo>(mCache.mRilServiceInfo,
+                    *(static_cast<RilServiceInfoDataItemBase*>(dataitem)));
             break;
         case RILCELLINFO_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mRilCellInfo,
-                    SystemStatusRilCellInfo(*(static_cast<RilCellInfoDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusRilCellInfo>(mCache.mRilCellInfo,
+                    *(static_cast<RilCellInfoDataItemBase*>(dataitem)));
             break;
         case SERVICESTATUS_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mServiceStatus,
-                    SystemStatusServiceStatus(*(static_cast<ServiceStatusDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusServiceStatus>(mCache.mServiceStatus,
+                    *(static_cast<ServiceStatusDataItemBase*>(dataitem)));
             break;
         case MODEL_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mModel,
-                    SystemStatusModel(*(static_cast<ModelDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusModel>(mCache.mModel,
+                    *(static_cast<ModelDataItemBase*>(dataitem)));
             break;
         case MANUFACTURER_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mManufacturer,
-                    SystemStatusManufacturer(*(static_cast<ManufacturerDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusManufacturer>(mCache.mManufacturer,
+                    *(static_cast<ManufacturerDataItemBase*>(dataitem)));
             break;
         case ASSISTED_GPS_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mAssistedGps,
-                    SystemStatusAssistedGps(*(static_cast<AssistedGpsDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusAssistedGps>(mCache.mAssistedGps,
+                    *(static_cast<AssistedGpsDataItemBase*>(dataitem)));
             break;
         case SCREEN_STATE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mScreenState,
-                    SystemStatusScreenState(*(static_cast<ScreenStateDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusScreenState>(mCache.mScreenState,
+                    *(static_cast<ScreenStateDataItemBase*>(dataitem)));
             break;
         case POWER_CONNECTED_STATE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mPowerConnectState,
-                    SystemStatusPowerConnectState(*(static_cast<PowerConnectStateDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusPowerConnectState>(mCache.mPowerConnectState,
+                    *(static_cast<PowerConnectStateDataItemBase*>(dataitem)));
             break;
         case TIMEZONE_CHANGE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mTimeZoneChange,
-                    SystemStatusTimeZoneChange(*(static_cast<TimeZoneChangeDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusTimeZoneChange>(mCache.mTimeZoneChange,
+                    *(static_cast<TimeZoneChangeDataItemBase*>(dataitem)));
             break;
         case TIME_CHANGE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mTimeChange,
-                    SystemStatusTimeChange(*(static_cast<TimeChangeDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusTimeChange>(mCache.mTimeChange,
+                    *(static_cast<TimeChangeDataItemBase*>(dataitem)));
             break;
         case WIFI_SUPPLICANT_STATUS_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mWifiSupplicantStatus,
-                    SystemStatusWifiSupplicantStatus(*(static_cast<WifiSupplicantStatusDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusWifiSupplicantStatus>(
+                    mCache.mWifiSupplicantStatus,
+                    *(static_cast<WifiSupplicantStatusDataItemBase*>(dataitem)));
             break;
         case SHUTDOWN_STATE_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mShutdownState,
-                    SystemStatusShutdownState(*(static_cast<ShutdownStateDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusShutdownState>(mCache.mShutdownState,
+                    *(static_cast<ShutdownStateDataItemBase*>(dataitem)));
             break;
         case TAC_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mTac,
-                    SystemStatusTac(*(static_cast<TacDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusTac>(mCache.mTac,
+                    *(static_cast<TacDataItemBase*>(dataitem)));
             break;
         case MCCMNC_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mMccMnc,
-                    SystemStatusMccMnc(*(static_cast<MccmncDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusMccMnc>(mCache.mMccMnc,
+                    *(static_cast<MccmncDataItemBase*>(dataitem)));
             break;
         case BTLE_SCAN_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mBtDeviceScanDetail,
-                    SystemStatusBtDeviceScanDetail(*(static_cast<BtDeviceScanDetailsDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusBtDeviceScanDetail>(mCache.mBtDeviceScanDetail,
+                    *(static_cast<BtDeviceScanDetailsDataItemBase*>(dataitem)));
             break;
         case BT_SCAN_DATA_ITEM_ID:
-            ret = setIteminReport(mCache.mBtLeDeviceScanDetail,
-                    SystemStatusBtleDeviceScanDetail(*(static_cast<BtLeDeviceScanDetailsDataItemBase*>(dataitem))));
+            ret = setItemBaseinReport<SystemStatusBtleDeviceScanDetail>(
+                    mCache.mBtLeDeviceScanDetail,
+                    *(static_cast<BtLeDeviceScanDetailsDataItemBase*>(dataitem)));
             break;
         default:
             break;
@@ -1688,7 +1623,7 @@ bool SystemStatus::getReport(SystemStatusReports& report, bool isLatestOnly) con
 
 @return     true when successfully done
 ******************************************************************************/
-bool SystemStatus::setDefaultGnssEngineStates(void)
+bool SystemStatus::setDefaultReport(void)
 {
     pthread_mutex_lock(&mMutexSystemStatus);
 
@@ -1709,6 +1644,29 @@ bool SystemStatus::setDefaultGnssEngineStates(void)
 
     setDefaultIteminReport(mCache.mPositionFailure, SystemStatusPositionFailure());
 
+    setDefaultIteminReport(mCache.mAirplaneMode, SystemStatusAirplaneMode());
+    setDefaultIteminReport(mCache.mENH, SystemStatusENH());
+    setDefaultIteminReport(mCache.mGPSState, SystemStatusGpsState());
+    setDefaultIteminReport(mCache.mNLPStatus, SystemStatusNLPStatus());
+    setDefaultIteminReport(mCache.mWifiHardwareState, SystemStatusWifiHardwareState());
+    setDefaultIteminReport(mCache.mNetworkInfo, SystemStatusNetworkInfo());
+    setDefaultIteminReport(mCache.mRilServiceInfo, SystemStatusServiceInfo());
+    setDefaultIteminReport(mCache.mRilCellInfo, SystemStatusRilCellInfo());
+    setDefaultIteminReport(mCache.mServiceStatus, SystemStatusServiceStatus());
+    setDefaultIteminReport(mCache.mModel, SystemStatusModel());
+    setDefaultIteminReport(mCache.mManufacturer, SystemStatusManufacturer());
+    setDefaultIteminReport(mCache.mAssistedGps, SystemStatusAssistedGps());
+    setDefaultIteminReport(mCache.mScreenState, SystemStatusScreenState());
+    setDefaultIteminReport(mCache.mPowerConnectState, SystemStatusPowerConnectState());
+    setDefaultIteminReport(mCache.mTimeZoneChange, SystemStatusTimeZoneChange());
+    setDefaultIteminReport(mCache.mTimeChange, SystemStatusTimeChange());
+    setDefaultIteminReport(mCache.mWifiSupplicantStatus, SystemStatusWifiSupplicantStatus());
+    setDefaultIteminReport(mCache.mShutdownState, SystemStatusShutdownState());
+    setDefaultIteminReport(mCache.mTac, SystemStatusTac());
+    setDefaultIteminReport(mCache.mMccMnc, SystemStatusMccMnc());
+    setDefaultIteminReport(mCache.mBtDeviceScanDetail, SystemStatusBtDeviceScanDetail());
+    setDefaultIteminReport(mCache.mBtLeDeviceScanDetail, SystemStatusBtleDeviceScanDetail());
+
     pthread_mutex_unlock(&mMutexSystemStatus);
     return true;
 }
@@ -1720,29 +1678,19 @@ bool SystemStatus::setDefaultGnssEngineStates(void)
 
 @return     true when successfully done
 ******************************************************************************/
-bool SystemStatus::eventConnectionStatus(bool connected, int8_t type,
-                                         bool roaming, NetworkHandle networkHandle)
+bool SystemStatus::eventConnectionStatus(bool connected, uint8_t type)
 {
-    // send networkinof dataitem to systemstatus observer clients
-    SystemStatusNetworkInfo s(type, "", "", connected, roaming,
-                              (uint64_t) networkHandle);
-    mSysStatusObsvr.notify({&s});
+    if (connected != mConnected) {
+        mConnected = connected;
 
+        // send networkinof dataitem to systemstatus observer clients
+        SystemStatusNetworkInfo s(type, "", "", false, connected, false);
+        list<IDataItemCore*> dl(0);
+        dl.push_back(&s);
+        mSysStatusObsvr.notify(dl);
+    }
     return true;
 }
 
-/******************************************************************************
-@brief      API to update power connect state
-
-@param[In]  power connect status
-
-@return     true when successfully done
-******************************************************************************/
-bool SystemStatus::updatePowerConnectState(bool charging)
-{
-    SystemStatusPowerConnectState s(charging);
-    mSysStatusObsvr.notify({&s});
-    return true;
-}
 } // namespace loc_core
 
