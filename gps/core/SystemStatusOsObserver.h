@@ -39,9 +39,7 @@
 #include <MsgTask.h>
 #include <DataItemId.h>
 #include <IOsObserver.h>
-#include <loc_pla.h>
-#include <log_util.h>
-#include <LocUnorderedSetMap.h>
+#include <platform_lib_log_util.h>
 
 namespace loc_core
 {
@@ -49,56 +47,38 @@ namespace loc_core
  SystemStatusOsObserver
 ******************************************************************************/
 using namespace std;
-using namespace loc_util;
 
 // Forward Declarations
 class IDataItemCore;
-class SystemStatus;
-class SystemStatusOsObserver;
-typedef map<IDataItemObserver*, list<DataItemId>> ObserverReqCache;
-typedef LocUnorderedSetMap<IDataItemObserver*, DataItemId> ClientToDataItems;
-typedef LocUnorderedSetMap<DataItemId, IDataItemObserver*> DataItemToClients;
-typedef unordered_map<DataItemId, IDataItemCore*> DataItemIdToCore;
-typedef unordered_map<DataItemId, int> DataItemIdToInt;
+template<typename CT, typename DIT> class IClientIndex;
+template<typename CT, typename DIT> class IDataItemIndex;
 
-struct ObserverContext {
+struct SystemContext {
     IDataItemSubscription* mSubscriptionObj;
     IFrameworkActionReq* mFrameworkActionReqObj;
     const MsgTask* mMsgTask;
-    SystemStatusOsObserver* mSSObserver;
 
-    inline ObserverContext(const MsgTask* msgTask, SystemStatusOsObserver* observer) :
-            mSubscriptionObj(NULL), mFrameworkActionReqObj(NULL),
-            mMsgTask(msgTask), mSSObserver(observer) {}
+    inline SystemContext() :
+        mSubscriptionObj(NULL),
+        mFrameworkActionReqObj(NULL),
+        mMsgTask(NULL) {}
 };
+
+typedef map<IDataItemObserver*, list<DataItemId>> ObserverReqCache;
 
 // Clients wanting to get data from OS/Framework would need to
 // subscribe with OSObserver using IDataItemSubscription interface.
 // Such clients would need to implement IDataItemObserver interface
 // to receive data when it becomes available.
+class SystemStatus;
 class SystemStatusOsObserver : public IOsObserver {
 
 public:
     // ctor
-    inline SystemStatusOsObserver(SystemStatus* systemstatus, const MsgTask* msgTask) :
-            mSystemStatus(systemstatus), mContext(msgTask, this),
-            mAddress("SystemStatusOsObserver"),
-            mClientToDataItems(MAX_DATA_ITEM_ID), mDataItemToClients(MAX_DATA_ITEM_ID)
-#ifdef USE_GLIB
-            , mBackHaulConnectReqCount(0)
-#endif
-    {
-    }
-
+    SystemStatusOsObserver(
+            SystemStatus* systemstatus, const MsgTask* msgTask);
     // dtor
     ~SystemStatusOsObserver();
-
-    template <typename CINT, typename COUT>
-    static COUT containerTransfer(CINT& s);
-    template <typename CINT, typename COUT>
-    inline static COUT containerTransfer(CINT&& s) {
-        return containerTransfer<CINT, COUT>(s);
-    }
 
     // To set the subscription object
     virtual void setSubscriptionObj(IDataItemSubscription* subscriptionObj);
@@ -106,66 +86,47 @@ public:
     // To set the framework action request object
     inline void setFrameworkActionReqObj(IFrameworkActionReq* frameworkActionReqObj) {
         mContext.mFrameworkActionReqObj = frameworkActionReqObj;
-#ifdef USE_GLIB
-        if (mBackHaulConnectReqCount > 0) {
-            connectBackhaul();
-            mBackHaulConnectReqCount = 0;
-        }
-#endif
     }
 
     // IDataItemSubscription Overrides
-    inline virtual void subscribe(const list<DataItemId>& l, IDataItemObserver* client) override {
-        subscribe(l, client, false);
-    }
-    virtual void updateSubscription(const list<DataItemId>& l, IDataItemObserver* client) override;
-    inline virtual void requestData(const list<DataItemId>& l, IDataItemObserver* client) override {
-        subscribe(l, client, true);
-    }
-    virtual void unsubscribe(const list<DataItemId>& l, IDataItemObserver* client) override;
-    virtual void unsubscribeAll(IDataItemObserver* client) override;
+    virtual void subscribe(const list<DataItemId>& l, IDataItemObserver* client);
+    virtual void updateSubscription(const list<DataItemId>& l, IDataItemObserver* client);
+    virtual void requestData(const list<DataItemId>& l, IDataItemObserver* client);
+    virtual void unsubscribe(const list<DataItemId>& l, IDataItemObserver* client);
+    virtual void unsubscribeAll(IDataItemObserver* client);
 
     // IDataItemObserver Overrides
-    virtual void notify(const list<IDataItemCore*>& dlist) override;
-    inline virtual void getName(string& name) override {
+    virtual void notify(const list<IDataItemCore*>& dlist);
+    inline virtual void getName(string& name) {
         name = mAddress;
     }
 
     // IFrameworkActionReq Overrides
-    virtual void turnOn(DataItemId dit, int timeOut = 0) override;
-    virtual void turnOff(DataItemId dit) override;
-#ifdef USE_GLIB
-    virtual bool connectBackhaul() override;
-    virtual bool disconnectBackhaul();
-#endif
+    virtual void turnOn(DataItemId dit, int timeOut = 0);
+    virtual void turnOff(DataItemId dit);
 
 private:
     SystemStatus*                                    mSystemStatus;
-    ObserverContext                                  mContext;
+    SystemContext                                    mContext;
     const string                                     mAddress;
-    ClientToDataItems                                mClientToDataItems;
-    DataItemToClients                                mDataItemToClients;
-    DataItemIdToCore                                 mDataItemCache;
-    DataItemIdToInt                                  mActiveRequestCount;
+    IClientIndex<IDataItemObserver*, DataItemId>*    mClientIndex;
+    IDataItemIndex<IDataItemObserver*, DataItemId>*  mDataItemIndex;
+    map<DataItemId, IDataItemCore*>                  mDataItemCache;
+    map<DataItemId, int>                             mActiveRequestCount;
 
     // Cache the subscribe and requestData till subscription obj is obtained
+    ObserverReqCache mSubscribeReqCache;
+    ObserverReqCache mReqDataCache;
     void cacheObserverRequest(ObserverReqCache& reqCache,
             const list<DataItemId>& l, IDataItemObserver* client);
-#ifdef USE_GLIB
-    // Cache the framework action request for connect/disconnect
-    int         mBackHaulConnectReqCount;
-#endif
-
-    void subscribe(const list<DataItemId>& l, IDataItemObserver* client, bool toRequestData);
 
     // Helpers
-    void sendCachedDataItems(const unordered_set<DataItemId>& s, IDataItemObserver* to);
-    bool updateCache(IDataItemCore* d);
-    inline void logMe(const unordered_set<DataItemId>& l) {
-        IF_LOC_LOGD {
-            for (auto id : l) {
-                LOC_LOGD("DataItem %d", id);
-            }
+    void sendFirstResponse(const list<DataItemId>& l, IDataItemObserver* to);
+    void sendCachedDataItems(const list<DataItemId>& l, IDataItemObserver* to);
+    void updateCache(IDataItemCore* d, bool& dataItemUpdated);
+    inline void logMe(const list<DataItemId>& l) {
+        for (auto id : l) {
+            LOC_LOGD("DataItem %d", id);
         }
     }
 };

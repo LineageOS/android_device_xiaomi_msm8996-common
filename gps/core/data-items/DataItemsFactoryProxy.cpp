@@ -32,8 +32,7 @@
 #include <DataItemId.h>
 #include <IDataItemCore.h>
 #include <DataItemsFactoryProxy.h>
-#include <loc_pla.h>
-#include <log_util.h>
+#include <platform_lib_log_util.h>
 
 namespace loc_core
 {
@@ -69,7 +68,7 @@ IDataItemCore* DataItemsFactoryProxy::createNewDataItem(DataItemId id)
             getConcreteDIFunc = (get_concrete_data_item_fn * )
                                     dlsym(dataItemLibHandle, DATA_ITEMS_GET_CONCRETE_DI);
             if (NULL != getConcreteDIFunc) {
-                LOC_LOGD("Loaded function %s : %p",DATA_ITEMS_GET_CONCRETE_DI,getConcreteDIFunc);
+                LOC_LOGD("Loaded function %s : %x",DATA_ITEMS_GET_CONCRETE_DI,getConcreteDIFunc);
                 mydi = (*getConcreteDIFunc)(id);
             }
             else {

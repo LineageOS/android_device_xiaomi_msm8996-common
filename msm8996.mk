@@ -204,13 +204,11 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.0-impl-qti \
-    android.hardware.gnss@2.0-service-qti \
-    libbatching \
-    libgeofencing \
+    android.hardware.gnss@1.0-impl-qti \
+    libcurl \
     libgnss \
-    libsensorndkbridge \
-    libwifi-hal-ctrl
+    libgnsspps \
+    libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \

@@ -32,9 +32,8 @@
 #include <unistd.h>
 #include <MsgTask.h>
 #include <msg_q.h>
-#include <log_util.h>
 #include <loc_log.h>
-#include <loc_pla.h>
+#include <platform_lib_includes.h>
 
 static void LocMsgDestroy(void* msg) {
     delete (LocMsg*)msg;
@@ -74,19 +73,16 @@ void MsgTask::destroy() {
 }
 
 void MsgTask::sendMsg(const LocMsg* msg) const {
-    if (msg && this) {
+    if (msg) {
         msg_q_snd((void*)mQ, (void*)msg, LocMsgDestroy);
     } else {
-        LOC_LOGE("%s: msg is %p and this is %p",
-                 __func__, msg, this);
+        LOC_LOGE("%s: msg is NULL", __func__);
     }
 }
 
 void MsgTask::prerun() {
-#ifndef FEATURE_EXTERNAL_AP
     // make sure we do not run in background scheduling group
-     set_sched_policy(gettid(), SP_FOREGROUND);
-#endif /* FEATURE_EXTERNAL_AP */
+     platform_lib_abstraction_set_sched_policy(platform_lib_abstraction_gettid(), PLA_SP_FOREGROUND);
 }
 
 bool MsgTask::run() {

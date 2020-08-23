@@ -27,15 +27,14 @@
  *
  */
 
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <errno.h>
+#include <loc_timer.h>
 #include <sys/timerfd.h>
 #include <sys/epoll.h>
-#include <log_util.h>
-#include <loc_timer.h>
+#include <unistd.h>
 #include <LocTimer.h>
 #include <LocHeap.h>
 #include <LocThread.h>
