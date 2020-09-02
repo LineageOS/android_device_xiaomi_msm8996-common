@@ -173,6 +173,10 @@ include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 
 BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
 
+# Treble
+PRODUCT_FULL_TREBLE_OVERRIDE := true
+BOARD_VNDK_VERSION := current
+
 # Vendor init
 TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit.xiaomi_8996
 TARGET_RECOVERY_DEVICE_MODULES := libinit.xiaomi_8996
