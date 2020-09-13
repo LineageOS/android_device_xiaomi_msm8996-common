@@ -351,7 +351,8 @@ PRODUCT_PACKAGES += \
 
 # Shims
 PRODUCT_PACKAGES += \
-    libbase_shim
+    libbase_shim \
+    libcutils_shim
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
