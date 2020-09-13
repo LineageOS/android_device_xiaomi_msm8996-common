@@ -300,7 +300,7 @@ vendor/lib/libQSEEComAPI.so
 # DRM Widevine - from marlin - PPR2.181005.003
 vendor/bin/hw/android.hardware.drm@1.1-service.widevine|2c2455a218eb8d5368f1ccd39bea51be8364a0f3
 vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc|5a01d337c1d375ee24a6c8992ba91f54afb7637e
-vendor/lib/libwvhidl.so|37333d17980282275805807bc648bf8516fd4143
+vendor/lib/libwvhidl.so|37333d17980282275805807bc648bf8516fd4143|4a7047baa3c11cf0c61a7be74dbf0fb07b84a238
 
 # Gatekeeper
 vendor/lib64/hw/gatekeeper.msm8996.so
