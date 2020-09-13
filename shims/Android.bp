@@ -4,3 +4,12 @@ cc_library {
     shared_libs: ["libbase"],
     vendor: true
 }
+
+cc_library {
+    name: "libcutils_shim",
+    srcs: [
+        "strdup16to8.cpp",
+        "strdup8to16.cpp",
+    ],
+    shared_libs: ["libcutils"],
+}

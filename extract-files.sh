@@ -33,6 +33,9 @@ source "${HELPER}"
 
 function blob_fixup() {
     case "${1}" in
+    product/lib64/libdpmframework.so)
+        patchelf --add-needed "libcutils_shim.so" "${2}"
+        ;;
     vendor/bin/imsrcsd)
         patchelf --add-needed "libbase_shim.so" "${2}"
         ;;
