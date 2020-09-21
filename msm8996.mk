@@ -369,7 +369,7 @@ PRODUCT_PACKAGES += \
     ims-ext-common_system \
     telephony-ext
 
-PRODUCT_BOOT_JARS += \
+#PRODUCT_BOOT_JARS += \
     ims-ext-common_system \
     telephony-ext
 
@@ -422,5 +422,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnl
 
-PRODUCT_BOOT_JARS += \
+#PRODUCT_BOOT_JARS += \
     WfdCommon
