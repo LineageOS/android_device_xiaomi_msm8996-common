@@ -1,0 +1,5 @@
+allow vendor_dataservice_app system_app_data_file:dir create_dir_perms;
+allow vendor_dataservice_app system_app_data_file:{ file lnk_file } create_file_perms;
+
+# Allow vendor_dataservice_app to read files in cnd_core_data_file
+r_dir_file(vendor_dataservice_app, cnd_core_data_file)
