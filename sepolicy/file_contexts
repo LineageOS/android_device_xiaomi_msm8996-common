@@ -31,6 +31,7 @@
 /data/connectivity(/.*)?              u:object_r:cnd_core_data_file:s0
 /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
 /data/misc/stargate(/.*)?             u:object_r:qfp-daemon_core_data_file:s0
+/data/vendor/misc/audio/acdbdata/delta(/.*)?       u:object_r:acdbdelta_vendor_data_file:s0
 
 # Persist files
 /(mnt/vendor)/persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
