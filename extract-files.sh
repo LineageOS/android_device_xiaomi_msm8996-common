@@ -43,31 +43,31 @@ function blob_fixup() {
         sed -i "s/libhidltransport.so/libcutils-v29.so\x00\x00\x00/" "${2}"
         ;;
     vendor/bin/imsrcsd)
-        patchelf --add-needed "libbase_shim.so" "${2}"
+        "${PATCHELF}" --add-needed "libbase_shim.so" "${2}"
         ;;
     vendor/bin/slim_daemon)
-        patchelf --replace-needed "android.frameworks.sensorservice@1.0.so" "android.frameworks.sensorservice@1.0-v27.so" "${2}"
+        "${PATCHELF}" --replace-needed "android.frameworks.sensorservice@1.0.so" "android.frameworks.sensorservice@1.0-v27.so" "${2}"
         ;;
     vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so)
-        patchelf --add-needed "libbase_shim.so" "${2}"
+        "${PATCHELF}" --add-needed "libbase_shim.so" "${2}"
         ;;
     vendor/lib64/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
     vendor/lib64/lib-uceservice.so)
-        patchelf --add-needed "libbase_shim.so" "${2}"
+        "${PATCHELF}" --add-needed "libbase_shim.so" "${2}"
         ;;
     vendor/lib64/libsettings.so)
-        patchelf --replace-needed "libprotobuf-cpp-full.so" "libprotobuf-cpp-full-v28.so" "${2}"
+        "${PATCHELF}" --replace-needed "libprotobuf-cpp-full.so" "libprotobuf-cpp-full-v28.so" "${2}"
         ;;
     vendor/lib64/vendor.qti.gnss@1.0_vendor.so)
-        patchelf --replace-needed "android.hardware.gnss@1.0.so" "android.hardware.gnss@1.0-v27.so" "${2}"
+        "${PATCHELF}" --replace-needed "android.hardware.gnss@1.0.so" "android.hardware.gnss@1.0-v27.so" "${2}"
         ;;
     vendor/lib/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
     vendor/lib/libwvhidl.so)
-        patchelf --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v28.so" "${2}"
+        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v28.so" "${2}"
         ;;
     esac
 }
