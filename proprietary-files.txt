@@ -416,9 +416,6 @@ product/lib64/libimsmedia_jni.so|3540752cc3658261ea3c909f03018eea4398f84e
 
 # IMS
 -app/uceShimService/uceShimService.apk
-etc/permissions/com.qualcomm.qti.imscmservice.xml
-etc/permissions/qti-vzw-ims-internal.xml
-framework/com.qualcomm.qti.imscmservice@1.0-java.jar
 lib64/com.qualcomm.qti.imscmservice@1.0.so
 lib64/lib-imscamera.so
 lib64/lib-imsvideocodec.so
@@ -432,7 +429,6 @@ vendor/bin/ims_rtp_daemon
 vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
 vendor/bin/imsrcsd
-vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib64/com.qualcomm.qti.imscmservice@1.0_vendor.so
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-imsSDP.so
