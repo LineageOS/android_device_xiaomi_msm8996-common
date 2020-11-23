@@ -140,13 +140,8 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     camera.msm8996 \
     libgui_vendor \
-    libmm-qcamera \
     libstdc++.vendor \
     vendor.qti.hardware.camera.device@1.0
-
-# CNE
-PRODUCT_PACKAGES += \
-    libcnefeatureconfig
 
 # Common init scripts
 PRODUCT_PACKAGES += \
@@ -170,12 +165,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    copybit.msm8996 \
     gralloc.msm8996 \
     hwcomposer.msm8996 \
     memtrack.msm8996 \
     libdisplayconfig \
-    liboverlay \
     libqdMetaData.system \
     libtinyxml
 
@@ -258,12 +251,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
-# IPv6
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes \
-    libebtc
-
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl:64 \
@@ -306,7 +293,6 @@ PRODUCT_PACKAGES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
