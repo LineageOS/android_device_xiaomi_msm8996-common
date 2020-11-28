@@ -9,10 +9,6 @@ allow system_app sysfs_fpc_wakeup:file rw_file_perms;
 # Allow PocketMode to work
 allow system_app sysfs_fpc_proximity:file rw_file_perms;
 
-# Allow system_app to read and create files in cnd_core_data_file
-allow system_app cnd_core_data_file:dir w_dir_perms;
-allow system_app cnd_core_data_file:file create_file_perms;
-
 # Allow system_app to read and create files in qfp-daemon_core_data_file
 allow system_app qfp-daemon_core_data_file:dir create_dir_perms;
 allow system_app qfp-daemon_core_data_file:file create_file_perms;
