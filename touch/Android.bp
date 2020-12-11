@@ -1,4 +1,4 @@
-// Copyright (C) 2019 The LineageOS Project
+// Copyright (C) 2019-2020 The LineageOS Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 cc_binary {
     name: "vendor.lineage.touch@1.0-service.xiaomi_8996",
     init_rc: ["vendor.lineage.touch@1.0-service.xiaomi_8996.rc"],
+    vintf_fragments: ["vendor.lineage.touch@1.0-service.xiaomi_8996.xml"],
     defaults: ["hidl_defaults"],
     relative_install_path: "hw",
     vendor: true,
