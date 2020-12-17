@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017-2018 The LineageOS Project
+ *           (C) 2017-2018,2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ public class ConfigPanelSearchIndexablesProvider extends SearchIndexablesProvide
 
     private List<String> getNonIndexableKeys(Context context) {
         List<String> keys = new ArrayList<>();
-        if (!PackageManagerUtils.isAppInstalled(context, "org.lineageos.pocketmode")) {
+        if (!PackageManagerUtils.isAppEnabled(context, "org.lineageos.pocketmode")) {
             keys.add(Constants.FP_POCKETMODE_KEY);
         }
         if (!FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) &&
