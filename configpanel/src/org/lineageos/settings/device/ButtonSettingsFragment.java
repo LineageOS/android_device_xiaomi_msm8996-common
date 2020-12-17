@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017,2019 The LineageOS Project
+ *           (C) 2017,2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public class ButtonSettingsFragment extends PreferenceFragment
                 (PreferenceCategory) getPreferenceScreen().findPreference(Constants.CATEGORY_FP);
 
         SwitchPreference b = (SwitchPreference) findPreference(Constants.FP_POCKETMODE_KEY);
-        if (!PackageManagerUtils.isAppInstalled(getContext(), "org.lineageos.pocketmode")) {
+        if (!PackageManagerUtils.isAppEnabled(getContext(), "org.lineageos.pocketmode")) {
             fingerprintCategory.removePreference(b);
         } else {
             b.setOnPreferenceChangeListener(this);
