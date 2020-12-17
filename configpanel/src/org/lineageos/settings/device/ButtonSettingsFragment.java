@@ -110,7 +110,7 @@ public class ButtonSettingsFragment extends PreferenceFragment
                 (PreferenceCategory) getPreferenceScreen().findPreference(Constants.CATEGORY_FP);
 
         SwitchPreference b = (SwitchPreference) findPreference(Constants.FP_POCKETMODE_KEY);
-        if (!PackageManagerUtils.isAppInstalled(getContext(), "org.lineageos.pocketmode")) {
+        if (!PackageManagerUtils.isAppEnabled(getContext(), "org.lineageos.pocketmode")) {
             fingerprintCategory.removePreference(b);
         } else {
             b.setOnPreferenceChangeListener(this);
