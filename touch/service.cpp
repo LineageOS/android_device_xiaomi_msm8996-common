@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 #include <hidl/HidlTransportSupport.h>
 
 #include "KeyDisabler.h"
+#include "KeySwapper.h"
 
 using android::OK;
 using android::sp;
@@ -29,10 +30,13 @@ using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 
 using ::vendor::lineage::touch::V1_0::IKeyDisabler;
+using ::vendor::lineage::touch::V1_0::IKeySwapper;
 using ::vendor::lineage::touch::V1_0::implementation::KeyDisabler;
+using ::vendor::lineage::touch::V1_0::implementation::KeySwapper;
 
 int main() {
     sp<KeyDisabler> keyDisabler;
+    sp<KeySwapper> keySwapper;
     status_t status;
 
     LOG(INFO) << "Touch HAL service is starting.";
@@ -40,6 +44,11 @@ int main() {
     keyDisabler = new KeyDisabler();
     if (keyDisabler == nullptr) {
         LOG(ERROR) << "Can not create an instance of Touch HAL KeyDisabler Iface, exiting.";
+        goto shutdown;
+    }
+    keySwapper = new KeySwapper();
+    if (keySwapper == nullptr) {
+        LOG(ERROR) << "Can not create an instance of Touch HAL KeySwapper Iface, exiting.";
         goto shutdown;
     }
 
@@ -50,6 +59,14 @@ int main() {
         LOG(ERROR) << "Could not register service for Touch HAL KeyDisabler Iface ("
                    << status << ")";
         goto shutdown;
+    }
+    if (keySwapper->isSupported()) {
+        status = keySwapper->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for Touch HAL KeySwapper Iface ("
+                       << status << ")";
+            goto shutdown;
+        }
     }
 
     LOG(INFO) << "Touch HAL service is ready.";
