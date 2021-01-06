@@ -1,6 +1,4 @@
 # Allow ConfigPanel to work
-allow system_app proc_buttons:dir search;
-allow system_app proc_buttons:file rw_file_perms;
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file rw_file_perms;
 allow system_app sysfs_fpc_keyevents:file rw_file_perms;
