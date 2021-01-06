@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017-2019 The LineageOS Project
+ *           (C) 2017-2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,10 +68,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     }
 
     static boolean hasButtonProcs() {
-        return (FileUtils.fileExists(Constants.CYTTSP_BUTTON_SWAP_NODE) ||
-                FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) ||
-                FileUtils.fileExists(Constants.FP_WAKEUP_NODE) ||
-                FileUtils.fileExists(Constants.TOUCHPANEL_BUTTON_SWAP_NODE));
+        return (FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) ||
+                FileUtils.fileExists(Constants.FP_WAKEUP_NODE));
     }
 
     private void disableComponent(Context context, String component) {
