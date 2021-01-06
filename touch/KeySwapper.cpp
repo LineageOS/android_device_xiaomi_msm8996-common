@@ -56,7 +56,7 @@ Return<bool> KeySwapper::isEnabled() {
     if (!has_key_swapper_) return false;
 
     if (!ReadFileToString(control_path_, &buf)) {
-        LOG(ERROR) << "Failed to read " << control_path_;
+        LOG(ERROR) << "Failed to read from " << control_path_;
         return false;
     }
 
@@ -67,7 +67,7 @@ Return<bool> KeySwapper::setEnabled(bool enabled) {
     if (!has_key_swapper_) return false;
 
     if (!WriteStringToFile(enabled ? "1" : "0", control_path_, true)) {
-        LOG(ERROR) << "Failed to write " << control_path_;
+        LOG(ERROR) << "Failed to write to " << control_path_;
         return false;
     }
 
