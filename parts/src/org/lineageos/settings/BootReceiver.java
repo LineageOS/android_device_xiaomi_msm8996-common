@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017-2019,2021 The LineageOS Project
+ *               2017-2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.device;
+package org.lineageos.settings;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -28,17 +28,20 @@ import android.util.Log;
 import androidx.preference.PreferenceManager;
 
 import org.lineageos.internal.util.FileUtils;
+import org.lineageos.settings.buttons.Constants;
+import org.lineageos.settings.buttons.ButtonSettingsActivity;
+import org.lineageos.settings.buttons.Utils;
 
-public class BootCompletedReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver {
 
-    private static final String TAG = BootCompletedReceiver.class.getSimpleName();
+    private static final String TAG = "XiaomiParts";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         // Disable button settings if needed
-        if (!hasButtonProcs()) {
+        if (!Utils.hasButtonProcs()) {
             disableComponent(context, ButtonSettingsActivity.class.getName());
         } else {
             enableComponent(context, ButtonSettingsActivity.class.getName());
@@ -59,17 +62,12 @@ public class BootCompletedReceiver extends BroadcastReceiver {
                 }
             }
 
-            // Send initial broadcasts
+            // Start PocketMode service if applicable
             final boolean shouldEnablePocketMode =
                     prefs.getBoolean(Constants.FP_WAKEUP_KEY, false) &&
                     prefs.getBoolean(Constants.FP_POCKETMODE_KEY, false);
-            Utils.broadcastCustIntent(context, shouldEnablePocketMode);
+            Utils.checkPocketModeService(context, shouldEnablePocketMode);
         }
-    }
-
-    static boolean hasButtonProcs() {
-        return (FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) ||
-                FileUtils.fileExists(Constants.FP_WAKEUP_NODE));
     }
 
     private void disableComponent(Context context, String component) {

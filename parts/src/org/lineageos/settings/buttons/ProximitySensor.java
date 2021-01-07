@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2016 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ * Copyright (C) 2016 The CyanogenMod Project
+ *               2017-2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.pocketmode;
+package org.lineageos.settings.buttons;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -34,8 +34,6 @@ public class ProximitySensor implements SensorEventListener {
 
     private static final boolean DEBUG = false;
     private static final String TAG = "PocketModeProximity";
-
-    private static final String FP_PROX_NODE = "/sys/devices/soc/soc:fpc_fpc1020/proximity_state";
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
@@ -57,9 +55,9 @@ public class ProximitySensor implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         boolean isNear = event.values[0] < mSensor.getMaximumRange();
         try {
-            FileUtils.stringToFile(FP_PROX_NODE, isNear ? "1" : "0");
+            FileUtils.stringToFile(Constants.FP_PROX_NODE, isNear ? "1" : "0");
         } catch (IOException e) {
-            Log.e(TAG, "Failed to write to " + FP_PROX_NODE, e);
+            Log.e(TAG, "Failed to write to " + Constants.FP_PROX_NODE, e);
         }
     }
 

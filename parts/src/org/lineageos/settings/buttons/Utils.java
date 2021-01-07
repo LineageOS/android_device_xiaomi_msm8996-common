@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017-2019 The LineageOS Project
+ *               2017-2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.device;
+package org.lineageos.settings.buttons;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +24,8 @@ import android.os.UserHandle;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
+
+import org.lineageos.internal.util.FileUtils;
 
 public class Utils {
 
@@ -58,9 +60,18 @@ public class Utils {
         }
     }
 
-    public static void broadcastCustIntent(Context context, boolean value) {
-        final Intent intent = new Intent(Constants.CUST_INTENT);
-        intent.putExtra(Constants.CUST_INTENT_EXTRA, value);
-        context.sendBroadcastAsUser(intent, UserHandle.CURRENT);
+    public static boolean hasButtonProcs() {
+        return (FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) ||
+                FileUtils.fileExists(Constants.FP_WAKEUP_NODE));
+    }
+
+    public static void checkPocketModeService(Context context, boolean shouldEnable) {
+        if (shouldEnable) {
+            context.startServiceAsUser(new Intent(context, PocketModeService.class),
+                    UserHandle.CURRENT);
+        } else {
+            context.stopServiceAsUser(new Intent(context, PocketModeService.class),
+                    UserHandle.CURRENT);
+        }
     }
 }
