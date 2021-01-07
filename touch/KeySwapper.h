@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_TOUCH_V1_0_KEYSWAPPER_H
-#define VENDOR_LINEAGE_TOUCH_V1_0_KEYSWAPPER_H
+#pragma once
 
 #include <vendor/lineage/touch/1.0/IKeySwapper.h>
 
@@ -46,5 +45,3 @@ class KeySwapper : public IKeySwapper {
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_TOUCH_V1_0_KEYSWAPPER_H
