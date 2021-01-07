@@ -16,14 +16,11 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.lineageos.settings.device"
-    android:versionCode="6"
-    android:versionName="2.5"
+    package="org.lineageos.settings"
+    android:versionCode="1"
+    android:versionName="1.0"
     android:sharedUserId="android.uid.system">
 
-    <protected-broadcast android:name="org.lineageos.settings.device.CUST_UPDATE" />
-
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <application
@@ -33,9 +30,18 @@
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true">
 
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
         <provider
-            android:name=".ConfigPanelSearchIndexablesProvider"
-            android:authorities="org.lineageos.settings.device"
+            android:name=".PartsSearchIndexablesProvider"
+            android:authorities="org.lineageos.settings"
             android:multiprocess="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.READ_SEARCH_INDEXABLES"
@@ -46,7 +52,7 @@
         </provider>
 
         <activity
-            android:name=".ButtonSettingsActivity"
+            android:name=".buttons.ButtonSettingsActivity"
             android:label="@string/button_panel_title"
             android:exported="false" >
             <intent-filter>
@@ -55,16 +61,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".KeyHandler" />
+        <service
+            android:name=".buttons.PocketModeService"
+            android:permission="PocketModeService">
+        </service>
 
-        <receiver android:name=".BootCompletedReceiver"
-                  android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
+        <activity android:name=".device.KeyHandler" />
+
     </application>
 
 </manifest>

@@ -1,8 +1,6 @@
-# Allow ConfigPanel to work
+# Allow XiaomiParts access over hardware button tunables
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file rw_file_perms;
 allow system_app sysfs_fpc_keyevents:file rw_file_perms;
-allow system_app sysfs_fpc_wakeup:file rw_file_perms;
-
-# Allow PocketMode to work
 allow system_app sysfs_fpc_proximity:file rw_file_perms;
+allow system_app sysfs_fpc_wakeup:file rw_file_perms;
