@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017-2018,2020 The LineageOS Project
+ *               2017-2018,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.device;
+package org.lineageos.settings;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -35,14 +35,14 @@ import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS;
 
-import org.lineageos.internal.util.FileUtils;
-import org.lineageos.internal.util.PackageManagerUtils;
+import org.lineageos.settings.buttons.ButtonSettingsActivity;
+import org.lineageos.settings.buttons.ButtonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigPanelSearchIndexablesProvider extends SearchIndexablesProvider {
-    private static final String TAG = "ConfigPanelSearchIndexablesProvider";
+public class PartsSearchIndexablesProvider extends SearchIndexablesProvider {
+    private static final String TAG = "XiaomiPartsSearchIndexablesProvider";
 
     public static final int SEARCH_IDX_BUTTON_PANEL = 0;
 
@@ -60,7 +60,7 @@ public class ConfigPanelSearchIndexablesProvider extends SearchIndexablesProvide
     @Override
     public Cursor queryXmlResources(String[] projection) {
         MatrixCursor cursor = new MatrixCursor(INDEXABLES_XML_RES_COLUMNS);
-        if (BootCompletedReceiver.hasButtonProcs() /* show button panel */) {
+        if (ButtonUtils.hasButtonProcs() /* show button panel */) {
             cursor.addRow(generateResourceRef(INDEXABLE_RES[SEARCH_IDX_BUTTON_PANEL]));
         }
         return cursor;
@@ -73,21 +73,13 @@ public class ConfigPanelSearchIndexablesProvider extends SearchIndexablesProvide
         ref[COLUMN_INDEX_XML_RES_CLASS_NAME] = null;
         ref[COLUMN_INDEX_XML_RES_ICON_RESID] = sir.iconResId;
         ref[COLUMN_INDEX_XML_RES_INTENT_ACTION] = "com.android.settings.action.EXTRA_SETTINGS";
-        ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE] = "org.lineageos.settings.device";
+        ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE] = "org.lineageos.settings";
         ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS] = sir.className;
         return ref;
     }
 
     private List<String> getNonIndexableKeys(Context context) {
         List<String> keys = new ArrayList<>();
-        if (!PackageManagerUtils.isAppEnabled(context, "org.lineageos.pocketmode")) {
-            keys.add(Constants.FP_POCKETMODE_KEY);
-        }
-        if (!FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) &&
-                !FileUtils.fileExists(Constants.FP_WAKEUP_NODE)) {
-            keys.add(Constants.FP_HOME_KEY);
-            keys.add(Constants.FP_WAKEUP_KEY);
-        }
         return keys;
     }
 
