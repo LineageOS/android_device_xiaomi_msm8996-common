@@ -21,6 +21,9 @@
     android:versionName="1.0"
     android:sharedUserId="android.uid.system">
 
+    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <application
@@ -67,6 +70,21 @@
         </service>
 
         <activity android:name=".device.KeyHandler" />
+
+        <activity
+            android:name=".doze.DozeSettingsActivity"
+            android:label="@string/ambient_display_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="org.lineageos.settings.device.DOZE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".doze.DozeService"
+            android:permission="DozeService">
+        </service>
 
     </application>
 
