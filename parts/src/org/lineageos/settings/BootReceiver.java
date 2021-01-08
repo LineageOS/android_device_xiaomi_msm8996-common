@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 
 import org.lineageos.settings.buttons.ButtonSettingsActivity;
 import org.lineageos.settings.buttons.ButtonUtils;
+import org.lineageos.settings.doze.DozeUtils;
 
 public class BootReceiver extends BroadcastReceiver {
 
@@ -44,6 +45,8 @@ public class BootReceiver extends BroadcastReceiver {
             // Start PocketMode service if applicable
             ButtonUtils.checkPocketModeService(context);
         }
+
+        DozeUtils.checkDozeService(context);
     }
 
     private void disableComponent(Context context, String component) {

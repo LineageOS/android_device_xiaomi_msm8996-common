@@ -24,7 +24,7 @@ LOCAL_RESOURCE_DIR := \
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
-LOCAL_MODULE_TAGS := optional
+include frameworks/base/packages/SettingsLib/common.mk
 
 include $(BUILD_PACKAGE)
 

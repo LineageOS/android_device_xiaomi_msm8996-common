@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ * Copyright (C) 2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +16,17 @@
 
 package org.lineageos.settings.doze;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+public final class DozeConstants {
 
-public class BootCompletedReceiver extends BroadcastReceiver {
+    public static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
 
-    private static final boolean DEBUG = false;
-    private static final String TAG = "XiaomiDoze";
+    public static final String ALWAYS_ON_DISPLAY = "always_on_display";
 
-    @Override
-    public void onReceive(final Context context, Intent intent) {
-        if (DEBUG) Log.d(TAG, "Received boot completed intent");
-        Utils.checkDozeService(context);
-    }
+    public static final String CATEG_TILT_SENSOR = "tilt_sensor";
+    public static final String CATEG_PROX_SENSOR = "proximity_sensor";
+
+    public static final String GESTURE_PICK_UP_KEY = "gesture_pick_up";
+    public static final String GESTURE_HAND_WAVE_KEY = "gesture_hand_wave";
+    public static final String GESTURE_POCKET_KEY = "gesture_pocket";
+
 }
