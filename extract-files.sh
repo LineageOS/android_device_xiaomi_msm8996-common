@@ -43,19 +43,25 @@ function blob_fixup() {
         sed -i "s/libhidltransport.so/libcutils-v29.so\x00\x00\x00/" "${2}"
         ;;
     vendor/bin/imsrcsd)
-        "${PATCHELF}" --add-needed "libbase_shim.so" "${2}"
+        for LIBBASE_SHIM in $(grep -L "libbase_shim.so" "${2}"); do
+            "${PATCHELF}" --add-needed "libbase_shim.so" "$LIBBASE_SHIM"
+        done
         ;;
     vendor/bin/slim_daemon)
         "${PATCHELF}" --replace-needed "android.frameworks.sensorservice@1.0.so" "android.frameworks.sensorservice@1.0-v27.so" "${2}"
         ;;
     vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so)
-        "${PATCHELF}" --add-needed "libbase_shim.so" "${2}"
+        for LIBBASE_SHIM in $(grep -L "libbase_shim.so" "${2}"); do
+            "${PATCHELF}" --add-needed "libbase_shim.so" "$LIBBASE_SHIM"
+        done
         ;;
     vendor/lib64/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
     vendor/lib64/lib-uceservice.so)
-        "${PATCHELF}" --add-needed "libbase_shim.so" "${2}"
+        for LIBBASE_SHIM in $(grep -L "libbase_shim.so" "${2}"); do
+            "${PATCHELF}" --add-needed "libbase_shim.so" "$LIBBASE_SHIM"
+        done
         ;;
     vendor/lib64/libsettings.so)
         "${PATCHELF}" --replace-needed "libprotobuf-cpp-full.so" "libprotobuf-cpp-full-v28.so" "${2}"
