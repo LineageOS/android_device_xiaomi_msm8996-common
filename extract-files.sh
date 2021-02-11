@@ -40,13 +40,19 @@ function blob_fixup() {
         sed -i "s/name=\"android.hidl.manager-V1.0-java/name=\"android.hidl.manager@1.0-java/g" "${2}"
         ;;
     system_ext/lib64/lib-imscamera.so)
-        "${PATCHELF}" --add-needed "libgui_shim.so" "${2}"
+        for LIBGUI_SHIM in $(grep -L "libgui_shim.so" "${2}"); do
+            "${PATCHELF}" --add-needed "libgui_shim.so" "${LIBGUI_SHIM}"
+        done
         ;;
     system_ext/lib64/lib-imsvideocodec.so)
-        "${PATCHELF}" --add-needed "libui_shim.so" "${2}"
+        for LIBUI_SHIM in $(grep -L "libui_shim.so" "${2}"); do
+            "${PATCHELF}" --add-needed "libui_shim.so" "${LIBUI_SHIM}"
+        done
         ;;
     system_ext/lib64/lib-imsvt.so)
-        "${PATCHELF}" --add-needed "libgui_shim.so" "${2}"
+        for LIBGUI_SHIM in $(grep -L "libgui_shim.so" "${2}"); do
+            "${PATCHELF}" --add-needed "libgui_shim.so" "${LIBGUI_SHIM}"
+        done
         ;;
     system_ext/lib64/libdpmframework.so)
         sed -i "s/libhidltransport.so/libcutils-v29.so\x00\x00\x00/" "${2}"
