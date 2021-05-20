@@ -17,7 +17,7 @@ allow qfp-daemon qfp-daemon_core_data_file:file create_file_perms;
 allow qfp-daemon qfp_proxy_service:service_manager find;
 
 # Add IQfpService service
-allow qfp-daemon iqfp_service:service_manager add;
+#allow qfp-daemon iqfp_service:service_manager add;
 
 r_dir_file(qfp-daemon, persist_qc_senseid_file)
 r_dir_file(qfp-daemon, sensors_persist_file)
