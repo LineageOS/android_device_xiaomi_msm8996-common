@@ -1,3 +1,5 @@
+permissive mm-qcamerad;
+
 allow mm-qcamerad camera_data_file:sock_file { create unlink };
 allow mm-qcamerad camera_data_file:dir search;
 
