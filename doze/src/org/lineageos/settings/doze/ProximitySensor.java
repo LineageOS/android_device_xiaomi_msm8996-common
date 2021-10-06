@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- *               2017-2018 The LineageOS Project
+ *               2017-2018,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ public class ProximitySensor implements SensorEventListener {
         boolean isNear = event.values[0] < mSensor.getMaximumRange();
         if (mSawNear && !isNear) {
             if (shouldPulse(event.timestamp)) {
-                Utils.launchDozePulse(mContext);
+                DozeUtils.launchDozePulse(mContext);
             }
         } else {
             mInPocketTime = event.timestamp;
@@ -74,11 +74,11 @@ public class ProximitySensor implements SensorEventListener {
     private boolean shouldPulse(long timestamp) {
         long delta = timestamp - mInPocketTime;
 
-        if (Utils.isHandwaveGestureEnabled(mContext) && Utils.isPocketGestureEnabled(mContext)) {
+        if (DozeUtils.isHandwaveGestureEnabled(mContext) && DozeUtils.isPocketGestureEnabled(mContext)) {
             return true;
-        } else if (Utils.isHandwaveGestureEnabled(mContext)) {
+        } else if (DozeUtils.isHandwaveGestureEnabled(mContext)) {
             return delta < HANDWAVE_MAX_DELTA_NS;
-        } else if (Utils.isPocketGestureEnabled(mContext)) {
+        } else if (DozeUtils.isPocketGestureEnabled(mContext)) {
             return delta >= POCKET_MIN_DELTA_NS;
         }
         return false;

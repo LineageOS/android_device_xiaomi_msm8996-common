@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2015 The CyanogenMod Project
- *               2017-2018 The LineageOS Project
+ * Copyright (C) 2015 The CyanogenMod Project
+ *               2017-2018,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ public class TiltSensor implements SensorEventListener {
         }
 
         if (event.values[0] == 1) {
-            Utils.launchDozePulse(mContext);
+            DozeUtils.launchDozePulse(mContext);
         }
     }
 
