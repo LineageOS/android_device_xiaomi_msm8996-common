@@ -316,6 +316,7 @@ vendor/etc/init/vendor.qti.gnss@1.0-service.rc
 vendor/etc/cacert_location.pem
 vendor/etc/xtra_root_cert.pem
 vendor/lib64/hw/vendor.qti.gnss@1.0-impl.so
+vendor/lib64/android.hardware.gnss@1.0-v27.so
 vendor/lib64/libdataitems.so
 vendor/lib64/libdrplugin_client.so
 vendor/lib64/libDRPlugin.so
@@ -335,6 +336,7 @@ vendor/lib64/libulp2.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
 vendor/lib64/vendor.qti.gnss@1.0_vendor.so
+system/lib64/android.hardware.gnss@1.0-v27.so
 
 # Graphics (Adreno) - from daisy - QKQ1.191002.002
 vendor/lib64/egl/eglSubDriverAndroid.so|8edb19893decd259ba43d752b48e0a69c5788db4
@@ -631,6 +633,9 @@ vendor/lib/sensors.ssc.so
 vendor/lib64/libsensor1.so|f8524d62d2ad52849f4a13b018baf08d0eac8180
 vendor/lib64/libsensor_reg.so|8ca48358abf3f8f84f86036b02dbb210a5870742
 vendor/lib64/sensors.ssc.so
+
+# Sensors - from prebuilt vndk v27
+vendor/lib64/android.frameworks.sensorservice@1.0-v27.so
 
 # Thermal - from op3 - PKQ1.181203.001
 vendor/bin/thermal-engine|b15c9e8fa54ebb15dfeb36c7fbc834a28b4c836e
