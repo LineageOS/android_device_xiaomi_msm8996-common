@@ -99,6 +99,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
     debug.gralloc.gfx_ubwc_disable=0 \
+    debug.renderengine.backend=threaded \
     debug.sf.enable_hwc_vds=1 \
     debug.sf.hw=1 \
     debug.sf.latch_unsignaled=1 \
