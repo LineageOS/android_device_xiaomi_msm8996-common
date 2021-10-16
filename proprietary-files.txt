@@ -506,6 +506,8 @@ vendor/lib/libqti-util.so|d65f3ef240cebea73bd1ba8b1132a7e639aa05bb
 # Peripheral manager
 vendor/bin/pm-proxy
 vendor/bin/pm-service
+
+# Peripheral manager - from Nokia/Plate2_00WW - QKQ1.190828.002
 vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
