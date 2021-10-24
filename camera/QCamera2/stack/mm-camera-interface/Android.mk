@@ -41,7 +41,7 @@ ifneq (1,$(filter 1,$(shell echo "$$(( $(PLATFORM_SDK_VERSION) >= 17 ))" )))
   LOCAL_CFLAGS += -include bionic/libc/kernel/common/linux/un.h
 endif
 
-LOCAL_CFLAGS += -Wall -Wextra -Werror
+LOCAL_CFLAGS += -Wall -Wextra -Werror -Wno-compound-token-split-by-macro
 
 LOCAL_SRC_FILES := $(MM_CAM_FILES)
 
