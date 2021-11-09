@@ -7,6 +7,7 @@ type persist_usf_cal_file, file_type;
 type proc_buttons, proc_type, fs_type;
 type proc_touchpanel, proc_type, sysfs_type, fs_type;
 type qfp-daemon_core_data_file, file_type, core_data_file_type, data_file_type;
+type rild_file, file_type, vendor_file_type;
 type sysfs_cnss_common, sysfs_type, fs_type;
 type sysfs_fpc, sysfs_type, fs_type;
 type sysfs_fpc_keyevents, sysfs_type, fs_type;
