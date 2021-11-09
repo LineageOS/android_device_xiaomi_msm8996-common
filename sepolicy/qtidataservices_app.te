@@ -1,0 +1,3 @@
+get_prop(qtidataservices_app, vendor_default_prop)
+allow qtidataservices_app self:socket create_socket_perms;
+allowxperm qtidataservices_app self:socket ioctl msm_sock_ipc_ioctls;
