@@ -1,4 +1,8 @@
 set_prop(rild, vendor_radio_prop)
 
+allow rild rild_file:file r_file_perms;
+allow rild diag_device:chr_file { ioctl open read write };
+binder_call(rild, qtidataservices_app)
+
 dontaudit rild tombstone_data_file:dir search;
 dontaudit rild vendor_file:file ioctl;
