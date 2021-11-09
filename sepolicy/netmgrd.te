@@ -1,1 +1,6 @@
 set_prop(netmgrd, vendor_xlat_prop)
+set_prop(netmgrd, vendor_default_prop)
+allow netmgrd netutils_wrapper:process noatsecure;
+allow netmgrd kernel:system module_request;
+allow netmgrd diag_device:chr_file { ioctl open read write };
+allow netmgrd system_file:file rw_file_perms;
