@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017,2019-2020 The LineageOS Project
+ *           (C) 2017,2019-2020,2022 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 package org.lineageos.settings.device;
 
-import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -39,8 +38,6 @@ public class ButtonSettingsFragment extends PreferenceFragment
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.button_panel);
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -121,15 +118,6 @@ public class ButtonSettingsFragment extends PreferenceFragment
                 !FileUtils.fileExists(Constants.FP_WAKEUP_NODE)) {
             getPreferenceScreen().removePreference(fingerprintCategory);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            getActivity().onBackPressed();
-            return true;
-        }
-        return false;
     }
 
     private void updatePreferencesBasedOnDependencies() {
