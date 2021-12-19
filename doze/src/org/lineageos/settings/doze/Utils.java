@@ -40,6 +40,7 @@ public final class Utils {
 
     protected static final String CATEG_TILT_SENSOR = "tilt_sensor";
     protected static final String CATEG_PROX_SENSOR = "proximity_sensor";
+    protected static final String DOZE_ENABLE = "doze_enable";
 
     protected static final String GESTURE_PICK_UP_KEY = "gesture_pick_up";
     protected static final String GESTURE_HAND_WAVE_KEY = "gesture_hand_wave";
