@@ -1,2 +1,4 @@
+allow hal_lineage_touch_default proc_buttons:dir search;
+
 allow hal_lineage_touch_default proc_touchpanel:dir search;
 allow hal_lineage_touch_default proc_touchpanel:file rw_file_perms;
