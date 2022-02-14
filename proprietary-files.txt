@@ -503,11 +503,10 @@ vendor/lib/libqti-perfd.so|2a2077cf455d5a6b03c0bb2b6eeca554ee28a363
 vendor/lib/libqti-perfd-client.so|a4a6da47ee26fcd5116c514f7fed15b91306aea3
 vendor/lib/libqti-util.so|d65f3ef240cebea73bd1ba8b1132a7e639aa05bb
 
-# Peripheral manager
-vendor/bin/pm-proxy
-vendor/bin/pm-service
-vendor/lib64/libperipheral_client.so
-vendor/lib/libperipheral_client.so
+# Peripheral manager - from jasmine V11.0.28.0.QDIMIXM
+vendor/bin/pm-proxy|bc4e972e3fe595b973197efe5114da8ff4339a59
+vendor/bin/pm-service|b0f77edfe04a3cc6284738196c0044e676d5eeb3
+vendor/lib64/libperipheral_client.so|a0dd574c8af3135adae10ef49065fa765906db7a
 
 # Postprocessing - from op3 - PKQ1.181203.001
 vendor/bin/hw/vendor.display.color@1.0-service|2ca340c7fd7689ac8ddf36f948fd95a7cd3bfc2e
