@@ -329,7 +329,6 @@ vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
 -vendor/lib/libC2D2.so;DISABLE_DEPS|c04a5ac1e576f63ebe91aba14bf917ee9e382be0
 -vendor/lib/libCB.so;DISABLE_DEPS|15986a50f98c979833e5d651eedcffaf19e54e3b
 -vendor/lib/libOpenCL.so;DISABLE_DEPS|9ee3900265f9b855f526c0ce4fcfdaed51d62003
--vendor/lib/libRSDriver_adreno.so;DISABLE_DEPS|51e8ebcd4584726cbee21a4486b6f37ce5e716f1
 -vendor/lib/libadreno_utils.so;DISABLE_DEPS|3a09e6720121f5b459a1fc7f9639b632da5832ec
 -vendor/lib/libbccQTI.so;DISABLE_DEPS|124156259b7900ac44c48dd9cf83b210d02d8c9d
 -vendor/lib/libc2d30_bltlib.so;DISABLE_DEPS|4a486823ef2a9ea14f4f02c9eb9053ac5fb028af
@@ -337,8 +336,6 @@ vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
 -vendor/lib/libgsl.so;DISABLE_DEPS|2ddafd66848dfd146bbaf184b69f92df9f79c99f
 -vendor/lib/libllvm-glnext.so;DISABLE_DEPS|a28adae3ae758cdffc889d681b3cdefe24351c32
 -vendor/lib/libllvm-qcom.so;DISABLE_DEPS|3079ae9049c8758664e6ade78837e0fc6c2272d5
--vendor/lib/librs_adreno.so;DISABLE_DEPS|9f0022a5c38a676a580511749bab3c538ed8b803
--vendor/lib/librs_adreno_sha1.so;DISABLE_DEPS|28201ce01c442df4389273245be313ff4a741d6e
 -vendor/lib64/egl/eglSubDriverAndroid.so;DISABLE_DEPS|8edb19893decd259ba43d752b48e0a69c5788db4
 -vendor/lib64/egl/libEGL_adreno.so;DISABLE_DEPS|c97c8e14d26f53398c50122daf80a599f077398a
 -vendor/lib64/egl/libGLESv1_CM_adreno.so;DISABLE_DEPS|0adf2e094afdc3476198ef8ad52101cf9004eb5d
@@ -349,7 +346,6 @@ vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
 -vendor/lib64/libC2D2.so;DISABLE_DEPS|ff2d4947c7924376ff66517461246d238e221e05
 -vendor/lib64/libCB.so;DISABLE_DEPS|df167809abe16674a61742ba6efb208edd069a3b
 -vendor/lib64/libOpenCL.so;DISABLE_DEPS|84c7d8be13885c9346f73c09aaaedc3bce7667d9
--vendor/lib64/libRSDriver_adreno.so;DISABLE_DEPS|e7628b78d034500c64d09fcaf5305971242e1acd
 -vendor/lib64/libadreno_utils.so;DISABLE_DEPS|04b3878ea84a99f133934580adfd6905f6cc102b
 -vendor/lib64/libbccQTI.so;DISABLE_DEPS|e79ba0450ce215bfb81e518cce310f378314b4e5
 -vendor/lib64/libc2d30_bltlib.so;DISABLE_DEPS|644a88f490cc883492d94b9f581127fb33f51415
@@ -357,8 +353,6 @@ vendor/etc/xtra_root_cert.pem|f55a31ec4d9cf8ce2724acadecf00c779f8767db
 -vendor/lib64/libgsl.so;DISABLE_DEPS|5453da1723c3b014850165b42236ba26af11a7ad
 -vendor/lib64/libllvm-glnext.so;DISABLE_DEPS|dad8139672a9dcff4270a58599aa1b72d13e62fc
 -vendor/lib64/libllvm-qcom.so;DISABLE_DEPS|88f4199538ce887c91936bf70eef31615c938aa2
--vendor/lib64/librs_adreno.so;DISABLE_DEPS|e41149794e719c7f743c4d800def68a5c8e5f9ca
--vendor/lib64/librs_adreno_sha1.so;DISABLE_DEPS|f9d28682f9c219dfe086da9f3a15aaddbcd38a05
 
 # Graphics (HDR) - from daisy - QKQ1.191002.002
 -vendor/lib/libhdr_tm.so;DISABLE_DEPS|4c371d0931245a65d0b4df768de8837bbdf4832e
