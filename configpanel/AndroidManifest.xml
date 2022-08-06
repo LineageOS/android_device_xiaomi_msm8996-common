@@ -26,9 +26,6 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
-    <uses-sdk
-        android:minSdkVersion="27" />
-
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/device_settings_app_name"
@@ -50,7 +47,8 @@
 
         <activity
             android:name=".ButtonSettingsActivity"
-            android:label="@string/button_panel_title">
+            android:label="@string/button_panel_title"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -59,7 +57,8 @@
 
         <activity android:name=".KeyHandler" />
 
-        <receiver android:name=".BootCompletedReceiver" >
+        <receiver android:name=".BootCompletedReceiver"
+                  android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
