@@ -87,3 +87,10 @@ persist.vendor.radio.sib16_support=1
 # SoC
 ro.soc.manufacturer=Qualcomm
 ro.soc.model=MSM8996
+
+# USB
+vendor.usb.dpl.inst.name=dpl
+vendor.usb.qdss.inst.name=qdss
+vendor.usb.rmnet.func.name=rmnet_bam
+vendor.usb.rmnet.inst.name=rmnet
+vendor.usb.rndis.func.name=rnsis_bam
