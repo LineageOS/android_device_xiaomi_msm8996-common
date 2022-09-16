@@ -7,11 +7,6 @@ ifndef BOARD_VNDK_VERSION
 # The libs with "vndk: {enabled: true, support_system_process: true}" will be
 # added VNDK_SP_LIBRARIES automatically. And the core variants of the VNDK-SP
 # libs will be copied to vndk-sp directory.
-# However, some of those libs need FWK-ONLY libs, which must be listed here
-# manually.
-
-VNDK_SP_LIBRARIES := \
-    libdexfile_support \
 
 install_in_hw_dir := \
    android.hidl.memory@1.0-impl
