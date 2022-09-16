@@ -2,7 +2,7 @@ allow rild rild_file:file r_file_perms;
 allow rild diag_device:chr_file { ioctl open read write };
 binder_call(rild, qtidataservices_app)
 
-set_prop(rild, system_radio_prop)
+set_prop(rild, vendor_radio_prop)
 
 dontaudit rild tombstone_data_file:dir search;
 dontaudit rild vendor_file:file ioctl;
