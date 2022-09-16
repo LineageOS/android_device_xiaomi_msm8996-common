@@ -16,6 +16,23 @@
       "message": "-1 till i find better device to use blob, but i think they are already legal blob.",
       "revId": "1d68d2110d18556cac6ae0397f968ebdeba6123a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64e38c0_fb45049b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25485
+      },
+      "writtenOn": "2022-09-16T08:10:35Z",
+      "side": 1,
+      "message": "i don\u0027t need it anymore\ngood bye",
+      "revId": "1d68d2110d18556cac6ae0397f968ebdeba6123a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
