@@ -5,9 +5,9 @@ dual.camera.cs.br          u:object_r:camera_prop:s0
 persist.camera.            u:object_r:camera_prop:s0
 
 persist.net.doxlat         u:object_r:vendor_xlat_prop:s0
-ro.sys.oem.sno             u:object_r:system_radio_prop:s0
-sys.fake_bs_flag0          u:object_r:system_radio_prop:s0
-sys.fake_bs_flag1          u:object_r:system_radio_prop:s0
+ro.sys.oem.sno             u:object_r:vendor_radio_prop:s0
+sys.fake_bs_flag0          u:object_r:vendor_radio_prop:s0
+sys.fake_bs_flag1          u:object_r:vendor_radio_prop:s0
 
 sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
 
