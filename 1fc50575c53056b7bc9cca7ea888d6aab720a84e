@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc92a16_373f4c01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25485
+      },
+      "writtenOn": "2022-09-18T21:15:48Z",
+      "side": 1,
+      "message": "We don\u0027t need it anymore, enabled configs in kernel\n",
+      "revId": "1fc50575c53056b7bc9cca7ea888d6aab720a84e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
