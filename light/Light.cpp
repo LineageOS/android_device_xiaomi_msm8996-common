@@ -221,7 +221,7 @@ void Light::setSpeakerBatteryLightLocked() {
 }
 
 void Light::setSpeakerLightLocked(const LightState& state) {
-    int red, green, blue, blink;
+    int red, green, blue;
     uint32_t alpha;
 
     // Extract brightness from AARRGGBB
