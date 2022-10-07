@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d872b009_a421f337",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-07T23:15:49Z",
+      "side": 1,
+      "message": "Still missing these:\n\n\u003e  10-07 12:07:06.634   742   742 F linker  : CANNOT LINK EXECUTABLE \"/vendor/bin/ims_rtp_daemon\": library \"libmedia.so\" not found: needed by /vendor/lib64/lib-dplmedia.so in namespace (default)\n\u003e  10-07 12:07:07.290   907   907 F linker  : CANNOT LINK EXECUTABLE \"/vendor/bin/wifidisplayhalservice\": library \"com.qualcomm.qti.wifidisplayhal@1.0.so\" not found: needed by main executable\n\u003e  10-07 12:07:07.841   968   968 F linker  : CANNOT LINK EXECUTABLE \"/vendor/bin/mm-qcamera-daemon\": library \"libgui.so\" not found: needed by /vendor/lib/libmmcamera2_stats_modules.so in namespace (default)\n",
+      "revId": "26cbeeb240cbd014e124be35975ea4db39fa93c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
