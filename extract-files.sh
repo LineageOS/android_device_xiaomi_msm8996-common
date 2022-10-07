@@ -66,6 +66,13 @@ function blob_fixup() {
     vendor/lib/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
+    vendor/lib/libmmcamera2_sensor_modules.so)
+        sed -i "s/\/system\/etc\/camera\//\/vendor\/etc\/camera\//g" "${2}"
+        ;;
+    vendor/lib/libmmcamera2_stats_modules.so)
+        "${PATCHELF}" --remove-needed "libandroid.so" "${2}"
+        "${PATCHELF}" --replace-needed "libgui.so" "libgui_vendor.so" "${2}"
+        ;;
     vendor/lib/libwvhidl.so)
         "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v28.so" "${2}"
         ;;
