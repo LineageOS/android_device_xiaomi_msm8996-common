@@ -1,6 +1,10 @@
 dual.camera.cs.br          u:object_r:camera_prop:s0
 persist.camera.            u:object_r:camera_prop:s0
 
+qcom.bluetooth.soc         u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
+wc_transport.              u:object_r:vendor_bluetooth_prop:s0
+
 persist.hvdcp.             u:object_r:vendor_hvdcp_opti_prop:s0
 
 persist.data_netmgrd_mtu   u:object_r:vendor_default_prop:s0
