@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73478717_ec1a0393",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-08T15:01:43Z",
+      "side": 1,
+      "message": "Luk: we need https://review.lineageos.org/c/LineageOS/android_external_tinyalsa/+/295203",
+      "revId": "c27d9df4b04ebefbb54b61e977aefd3b28670838",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
