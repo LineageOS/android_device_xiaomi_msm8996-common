@@ -1,92 +1,15 @@
 LOCAL_PATH := $(call my-dir)
-
+ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
 include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.gnss@1.0-impl-qti
-LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib
-LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64
-LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SRC_FILES := \
-    AGnss.cpp \
-    Gnss.cpp \
-    GnssBatching.cpp \
-    GnssGeofencing.cpp \
-    GnssMeasurement.cpp \
-    GnssNi.cpp \
-    GnssConfiguration.cpp \
-    GnssDebug.cpp \
-    AGnssRil.cpp
-
-LOCAL_SRC_FILES += \
-    location_api/LocationUtil.cpp \
-    location_api/GnssAPIClient.cpp \
-    location_api/GeofenceAPIClient.cpp \
-    location_api/BatchingAPIClient.cpp \
-    location_api/MeasurementAPIClient.cpp \
-
-LOCAL_C_INCLUDES:= \
-    $(LOCAL_PATH)/location_api
-LOCAL_HEADER_LIBRARIES := \
-    libgps.utils_headers \
-    libloc_core_headers \
-    libloc_pla_headers \
-    liblocation_api_headers
-
-LOCAL_SHARED_LIBRARIES := \
-    liblog \
-    libhidlbase \
-    libutils \
-    android.hardware.gnss@1.0 \
-
-LOCAL_SHARED_LIBRARIES += \
-    libloc_core \
-    libgps.utils \
-    libdl \
-    libloc_pla \
-    liblocation_api \
-
-LOCAL_CFLAGS += $(GNSS_CFLAGS)
-include $(BUILD_SHARED_LIBRARY)
-
-BUILD_GNSS_HIDL_SERVICE := true
-ifneq ($(BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET), true)
-ifneq ($(LW_FEATURE_SET),true)
-ifneq ($(TARGET_HAS_LOW_RAM),true)
-BUILD_GNSS_HIDL_SERVICE := false
-endif # TARGET_HAS_LOW_RAM
-endif # LW_FEATURE_SET
-endif # BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET
-
-ifeq ($(BUILD_GNSS_HIDL_SERVICE), true)
-include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.gnss@1.0-service-qti
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_EXECUTABLES)
-LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_VENDOR_MODULE := true
-LOCAL_MODULE_OWNER := qti
-LOCAL_INIT_RC := android.hardware.gnss@1.0-service-qti.rc
-LOCAL_SRC_FILES := \
-    service.cpp \
-
-LOCAL_C_INCLUDES:= \
-    $(LOCAL_PATH)/location_api
-LOCAL_HEADER_LIBRARIES := \
-    libgps.utils_headers \
-    libloc_core_headers \
-    libloc_pla_headers \
-    liblocation_api_headers
-
-
-LOCAL_SHARED_LIBRARIES := \
-    liblog \
-    libcutils \
-    libdl \
-    libbase \
-    libutils \
-
-LOCAL_SHARED_LIBRARIES += \
-    libhidlbase \
-    android.hardware.gnss@1.0 \
-
-LOCAL_CFLAGS += $(GNSS_CFLAGS)
-include $(BUILD_EXECUTABLE)
-endif # BUILD_GNSS_HIDL_SERVICE
+DIR_LIST := $(LOCAL_PATH)
+include $(DIR_LIST)/utils/Android.mk
+ifeq ($(GNSS_HIDL_VERSION),2.0)
+include $(DIR_LIST)/2.0/Android.mk
+else
+ifeq ($(GNSS_HIDL_VERSION),1.1)
+include $(DIR_LIST)/1.1/Android.mk
+else
+include $(DIR_LIST)/1.0/Android.mk
+endif #GNSS HIDL 1.1
+endif #GNSS HIDL 2.0
+endif #BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE

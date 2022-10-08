@@ -30,22 +30,51 @@
 #ifndef __LOG_UTIL_H__
 #define __LOG_UTIL_H__
 
-#ifndef USE_GLIB
+#if defined (USE_ANDROID_LOGGING) || defined (ANDROID)
+// Android and LE targets with logcat support
 #include <utils/Log.h>
-#endif /* USE_GLIB */
 
-#ifdef USE_GLIB
-
+#elif defined (USE_GLIB)
+// LE targets with no logcat support
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 #ifndef LOG_TAG
 #define LOG_TAG "GPS_UTILS"
+#endif /* LOG_TAG */
 
-#endif  // LOG_TAG
+// LE targets with no logcat support
+#ifdef FEATURE_EXTERNAL_AP
+#include <syslog.h>
+#define ALOGE(...) syslog(LOG_ERR,     "LOC_LOGE: " __VA_ARGS__);
+#define ALOGW(...) syslog(LOG_WARNING, "LOC_LOGW: " __VA_ARGS__);
+#define ALOGI(...) syslog(LOG_NOTICE,  "LOC_LOGI: " __VA_ARGS__);
+#define ALOGD(...) syslog(LOG_DEBUG,   "LOC_LOGD: " __VA_ARGS__);
+#define ALOGV(...) syslog(LOG_NOTICE,  "LOC_LOGV: " __VA_ARGS__);
+#else /* FEATURE_EXTERNAL_AP */
+#define TS_PRINTF(format, x...)                                  \
+{                                                                \
+    struct timeval tv;                                           \
+    struct timezone tz;                                          \
+    int hh, mm, ss;                                              \
+    gettimeofday(&tv, &tz);                                      \
+    hh = tv.tv_sec/3600%24;                                      \
+    mm = (tv.tv_sec%3600)/60;                                    \
+    ss = tv.tv_sec%60;                                           \
+    fprintf(stdout,"%02d:%02d:%02d.%06ld]" format "\n", hh, mm, ss, tv.tv_usec, ##x);    \
+}
 
-#endif /* USE_GLIB */
+#define ALOGE(format, x...) TS_PRINTF("E/%s (%d): " format , LOG_TAG, getpid(), ##x)
+#define ALOGW(format, x...) TS_PRINTF("W/%s (%d): " format , LOG_TAG, getpid(), ##x)
+#define ALOGI(format, x...) TS_PRINTF("I/%s (%d): " format , LOG_TAG, getpid(), ##x)
+#define ALOGD(format, x...) TS_PRINTF("D/%s (%d): " format , LOG_TAG, getpid(), ##x)
+#define ALOGV(format, x...) TS_PRINTF("V/%s (%d): " format , LOG_TAG, getpid(), ##x)
+#endif /* FEATURE_EXTERNAL_AP */
+
+#endif /* #if defined (USE_ANDROID_LOGGING) || defined (ANDROID) */
 
 #ifdef __cplusplus
 extern "C"
@@ -140,6 +169,7 @@ extern char* get_timestamp(char* str, unsigned long buf_size);
 #define LOC_LOG_HEAD(fmt) "%s:%d] " fmt
 #define LOC_LOGv(fmt,...) LOC_LOGV(LOC_LOG_HEAD(fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define LOC_LOGw(fmt,...) LOC_LOGW(LOC_LOG_HEAD(fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define LOC_LOGi(fmt,...) LOC_LOGI(LOC_LOG_HEAD(fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define LOC_LOGd(fmt,...) LOC_LOGD(LOC_LOG_HEAD(fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #define LOC_LOGe(fmt,...) LOC_LOGE(LOC_LOG_HEAD(fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
