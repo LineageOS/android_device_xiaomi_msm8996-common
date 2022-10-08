@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c1b607_5ac28dda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-08T10:26:44Z",
+      "side": 1,
+      "message": "Goes with: https://review.lineageos.org/c/LineageOS/android_device_xiaomi_gemini/+/341132",
+      "revId": "43ed98d60fa19dd94179866a3559ba41eda00580",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
