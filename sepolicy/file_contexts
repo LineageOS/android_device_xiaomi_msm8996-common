@@ -27,14 +27,12 @@
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 /data/camera(/.*)?                    u:object_r:camera_socket:s0
 /data/decrypt\.txt                    u:object_r:thermal_data_file:s0
-/data/misc/stargate(/.*)?             u:object_r:qfp-daemon_core_data_file:s0
 /data/vendor/misc/audio/acdbdata/delta(/.*)?       u:object_r:acdbdelta_vendor_data_file:s0
 
 # Persist files
 /(mnt/vendor)/persist/audio/us_cal                 u:object_r:persist_usf_cal_file:s0
 /(mnt/vendor)/persist/PRSensorData\.txt            u:object_r:sensors_persist_file:s0
 /(mnt/vendor)/persist/PSensor3cm_ct\.txt           u:object_r:sensors_persist_file:s0
-/(mnt/vendor)/persist/qc_senseid(/.*)?             u:object_r:persist_qc_senseid_file:s0
 
 # Root files
 /bt_firmware(/.*)?    u:object_r:bt_firmware_file:s0
