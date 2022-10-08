@@ -66,6 +66,11 @@ function blob_fixup() {
     vendor/lib/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
+    vendor/lib/libmmcamera2_isp_modules.so)
+        "${SIGSCAN}" -p "06 9B 03 F5 30 2C 0C F2 5C 40 FE F7 5C EC 06 9A 02 F5 30 21 01 F5 8B 60 FE F7 5A EC 0C B9" \
+                     -P "7C B9 06 9B 03 F5 30 2C 0C F2 5C 40 FE F7 5A EC 06 9A 02 F5 30 21 01 F5 8B 60 FE F7 5A EC" \
+                     -f "${2}"
+        ;;
     vendor/lib/libmmcamera2_sensor_modules.so)
         sed -i "s/\/system\/etc\/camera\//\/vendor\/etc\/camera\//g" "${2}"
         ;;
