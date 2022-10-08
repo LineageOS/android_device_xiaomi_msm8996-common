@@ -13,8 +13,6 @@ sys.fake_bs_flag1          u:object_r:vendor_radio_prop:s0
 
 sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
 
-sys.panel.                 u:object_r:system_panel_prop:s0
-
 qcom.bluetooth.soc         u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
 wc_transport.              u:object_r:vendor_bluetooth_prop:s0
