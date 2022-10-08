@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a40082_b16b085b",
+        "filename": "msm8996.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2022-10-08T14:28:42Z",
+      "side": 1,
+      "message": "I think this isn\u0027t needed",
+      "range": {
+        "startLine": 408,
+        "startChar": 4,
+        "endLine": 408,
+        "endChar": 16
+      },
+      "revId": "a3c10106013dde002d9916d98b40581bcf72f79e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
