@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2015-2017, 2019, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -32,8 +32,11 @@
 
 #include <string>
 #include <cstring>
+#include <sstream>
 #include <DataItemId.h>
 #include <IDataItemCore.h>
+#include <gps_extended_c.h>
+#include <inttypes.h>
 
 #define MAC_ADDRESS_LENGTH    6
 // MAC address length in bytes
@@ -41,9 +44,67 @@
 #define SRN_MAC_ADDRESS_LENGTH    6
 #define WIFI_SUPPLICANT_DEFAULT_STATE    0
 
+static constexpr char sDelimit = ':';
+
 namespace loc_core
 {
 using namespace std;
+
+enum NetworkType {
+    TYPE_MOBILE = 0,
+    TYPE_WIFI,
+    TYPE_ETHERNET,
+    TYPE_BLUETOOTH,
+    TYPE_MMS,
+    TYPE_SUPL,
+    TYPE_DUN,
+    TYPE_HIPRI,
+    TYPE_WIMAX,
+    TYPE_PROXY,
+    TYPE_UNKNOWN,
+};
+
+typedef struct NetworkInfoType
+{
+    // Unique network handle ID
+    uint64_t networkHandle;
+    // Type of network for corresponding network handle
+    NetworkType networkType;
+    NetworkInfoType() : networkHandle(NETWORK_HANDLE_UNKNOWN), networkType(TYPE_UNKNOWN) {}
+    NetworkInfoType(string strObj) {
+        size_t posDelimit = strObj.find(sDelimit);
+
+        if ( posDelimit != string::npos) {
+            int32_t type = TYPE_UNKNOWN;
+            string handleStr = strObj.substr(0, posDelimit);
+            string typeStr = strObj.substr(posDelimit + 1, strObj.length() - posDelimit - 1);
+            stringstream(handleStr) >> networkHandle;
+            stringstream(typeStr) >> type;
+            networkType = (NetworkType) type;
+        } else {
+            networkHandle = NETWORK_HANDLE_UNKNOWN;
+            networkType = TYPE_UNKNOWN;
+        }
+    }
+    bool operator== (const NetworkInfoType& other) {
+        return ((networkHandle == other.networkHandle) && (networkType == other.networkType));
+    }
+    string toString() {
+        string valueStr;
+        valueStr.clear ();
+        char nethandle [32];
+        memset (nethandle, 0, 32);
+        snprintf(nethandle, sizeof(nethandle), "%" PRIu64, networkHandle);
+        valueStr += string(nethandle);
+        valueStr += sDelimit;
+        char type [12];
+        memset (type, 0, 12);
+        snprintf (type, 12, "%u", networkType);
+        valueStr += string (type);
+        return valueStr;
+    }
+} NetworkInfoType;
+
 
 class AirplaneModeDataItemBase : public IDataItemCore  {
 public:
@@ -222,44 +283,46 @@ protected:
 class NetworkInfoDataItemBase : public IDataItemCore {
 public:
     NetworkInfoDataItemBase(
-    int32_t type, string typeName, string subTypeName,
-    bool available, bool connected, bool roaming ):
+    NetworkType initialType, int32_t type, string typeName, string subTypeName,
+    bool available, bool connected, bool roaming, uint64_t networkHandle ):
+            mAllTypes(typeToAllTypes(initialType)),
             mType(type),
             mTypeName(typeName),
             mSubTypeName(subTypeName),
             mAvailable(available),
             mConnected(connected),
             mRoaming(roaming),
-            mId(NETWORKINFO_DATA_ITEM_ID) {}
+            mNetworkHandle(networkHandle),
+            mId(NETWORKINFO_DATA_ITEM_ID) {
+                mAllNetworkHandles[0].networkHandle = networkHandle;
+                mAllNetworkHandles[0].networkType = initialType;
+            }
     virtual ~NetworkInfoDataItemBase() {}
     inline virtual DataItemId getId() { return mId; }
     virtual void stringify(string& /*valueStr*/) {}
     virtual int32_t copy(IDataItemCore* /*src*/, bool* /*dataItemCopied = NULL*/) {return 1;}
-    enum NetworkType {
-        TYPE_UNKNOWN,
-        TYPE_MOBILE,
-        TYPE_WIFI,
-        TYPE_ETHERNET,
-        TYPE_BLUETOOTH,
-        TYPE_MMS,
-        TYPE_SUPL,
-        TYPE_DUN,
-        TYPE_HIPRI,
-        TYPE_WIMAX
-    };
     inline virtual NetworkType getType(void) const {
         return (NetworkType)mType;
     }
-// Data members
+    inline uint64_t getAllTypes() { return mAllTypes; }
+    inline NetworkInfoType* getNetworkHandle() {
+        return &mAllNetworkHandles[0];
+    }
+    // Data members
+    uint64_t mAllTypes;
     int32_t mType;
     string mTypeName;
     string mSubTypeName;
     bool mAvailable;
     bool mConnected;
     bool mRoaming;
+    NetworkInfoType mAllNetworkHandles[MAX_NETWORK_HANDLES];
+    uint64_t mNetworkHandle;
 protected:
     DataItemId mId;
-
+    inline uint64_t typeToAllTypes(NetworkType type) {
+        return (type >= TYPE_UNKNOWN || type < TYPE_MOBILE) ?  0 : (1<<type);
+    }
 };
 
 class ServiceStatusDataItemBase : public IDataItemCore {
@@ -309,24 +372,42 @@ protected:
 
 class RilServiceInfoDataItemBase : public IDataItemCore {
 public:
-    RilServiceInfoDataItemBase() :
-        mId(RILSERVICEINFO_DATA_ITEM_ID) {}
-    virtual ~RilServiceInfoDataItemBase() {}
+    inline RilServiceInfoDataItemBase() :
+            mData(nullptr), mId(RILSERVICEINFO_DATA_ITEM_ID) {}
+    inline virtual ~RilServiceInfoDataItemBase() { if (nullptr != mData) free(mData); }
     inline virtual DataItemId getId() { return mId; }
     virtual void stringify(string& /*valueStr*/) {}
     virtual int32_t copy(IDataItemCore* /*src*/, bool* /*dataItemCopied = NULL*/) {return 1;}
+    inline RilServiceInfoDataItemBase(const RilServiceInfoDataItemBase& peer) :
+            RilServiceInfoDataItemBase() {
+        peer.setPeerData(*this);
+    }
+    inline virtual bool operator==(const RilServiceInfoDataItemBase& other) const {
+        return other.mData == mData;
+    }
+    inline virtual void setPeerData(RilServiceInfoDataItemBase& /*peer*/) const {}
+    void* mData;
 protected:
     DataItemId mId;
 };
 
 class RilCellInfoDataItemBase : public IDataItemCore {
 public:
-    RilCellInfoDataItemBase() :
-        mId(RILCELLINFO_DATA_ITEM_ID) {}
-    virtual ~RilCellInfoDataItemBase() {}
+    inline RilCellInfoDataItemBase() :
+            mData(nullptr), mId(RILCELLINFO_DATA_ITEM_ID) {}
+    inline virtual ~RilCellInfoDataItemBase() { if (nullptr != mData) free(mData); }
     inline virtual DataItemId getId() { return mId; }
     virtual void stringify(string& /*valueStr*/) {}
     virtual int32_t copy(IDataItemCore* /*src*/, bool* /*dataItemCopied = NULL*/) {return 1;}
+    inline RilCellInfoDataItemBase(const RilCellInfoDataItemBase& peer) :
+            RilCellInfoDataItemBase() {
+        peer.setPeerData(*this);
+    }
+    inline virtual bool operator==(const RilCellInfoDataItemBase& other) const {
+        return other.mData == mData;
+    }
+    inline virtual void setPeerData(RilCellInfoDataItemBase& /*peer*/) const {}
+    void* mData;
 protected:
     DataItemId mId;
 };
@@ -393,7 +474,7 @@ protected:
 class MccmncDataItemBase : public IDataItemCore {
 public:
     MccmncDataItemBase(const string & name) :
-        mValue (name),
+        mValue(name),
         mId(MCCMNC_DATA_ITEM_ID) {}
     virtual ~MccmncDataItemBase() {}
     inline virtual DataItemId getId() { return mId; }
@@ -407,7 +488,7 @@ protected:
 
 class SrnDeviceScanDetailsDataItemBase : public IDataItemCore {
 public:
-    SrnDeviceScanDetailsDataItemBase (DataItemId Id) :
+    SrnDeviceScanDetailsDataItemBase(DataItemId Id) :
         mValidSrnData(false),
         mApSrnRssi(-1),
         mApSrnTimestamp(0),
@@ -415,7 +496,7 @@ public:
         mReceiveTimestamp(0),
         mErrorCause(-1),
         mId(Id) {}
-    virtual ~SrnDeviceScanDetailsDataItemBase () {}
+    virtual ~SrnDeviceScanDetailsDataItemBase() {}
     inline virtual DataItemId getId() { return mId; }
     // Data members common to all SRN tech types
     /* Represents info on whether SRN data is valid (no error)*/
@@ -454,6 +535,18 @@ public:
     virtual ~BtLeDeviceScanDetailsDataItemBase() {}
     virtual void stringify(string& /*valueStr*/) {}
     virtual int32_t copy(IDataItemCore* /*src*/, bool* /*dataItemCopied = NULL*/) {return 1;}
+};
+
+class BatteryLevelDataItemBase : public IDataItemCore {
+public:
+    inline BatteryLevelDataItemBase(uint8_t batteryPct) :
+            mBatteryPct(batteryPct), mId(BATTERY_LEVEL_DATA_ITEM_ID) {}
+    inline ~BatteryLevelDataItemBase() {}
+    inline virtual DataItemId getId() { return mId; }
+// Data members
+    uint8_t mBatteryPct;
+protected:
+    DataItemId mId;
 };
 
 } // namespace loc_core
