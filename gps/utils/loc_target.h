@@ -54,12 +54,10 @@ void loc_get_platform_name(char *platform_name, int array_length);
 /*The character array passed to this function should have length
   of atleast PROPERTY_VALUE_MAX*/
 void loc_get_auto_platform_name(char *platform_name, int array_length);
-
-/*Reads the property ro.lean to identify if this is a lean target
-  Returns:
-  0 if not a lean and mean target
-  1 if this is a lean and mean target*/
-int loc_identify_lean_target();
+int loc_identify_low_ram_target();
+/*The character array passed to this function should have length
+  of atleast PROPERTY_VALUE_MAX*/
+void loc_get_device_soc_id(char *soc_id_value, int array_length);
 
 /* Please remember to update 'target_name' in loc_log.cpp,
    if do any changes to this enum. */

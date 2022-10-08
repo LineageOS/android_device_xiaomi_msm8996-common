@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2019 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -36,6 +36,8 @@
 #include <map>
 
 #include "LocationAPI.h"
+#include <loc_pla.h>
+#include <log_util.h>
 
 enum SESSION_MODE {
     SESSION_MODE_NONE = 0,
@@ -55,7 +57,8 @@ enum REQUEST_TYPE {
 enum CTRL_REQUEST_TYPE {
     CTRL_REQUEST_DELETEAIDINGDATA = 0,
     CTRL_REQUEST_CONTROL,
-    CTRL_REQUEST_CONFIG,
+    CTRL_REQUEST_CONFIG_UPDATE,
+    CTRL_REQUEST_CONFIG_GET,
     CTRL_REQUEST_MAX,
 };
 
@@ -72,12 +75,13 @@ public:
 
 class RequestQueue {
 public:
-    RequestQueue(): mSession(0) {
+    RequestQueue(): mSession(0), mSessionArrayPtr(nullptr) {
     }
     virtual ~RequestQueue() {
-        reset(0);
+        reset((uint32_t)0);
     }
     void inline setSession(uint32_t session) { mSession = session; }
+    void inline setSessionArrayPtr(uint32_t* ptr) { mSessionArrayPtr = ptr; }
     void reset(uint32_t session) {
         LocationAPIRequest* request = nullptr;
         while (!mQueue.empty()) {
@@ -86,6 +90,10 @@ public:
             delete request;
         }
         mSession = session;
+    }
+    void reset(uint32_t* sessionArrayPtr) {
+        reset((uint32_t)0);
+        mSessionArrayPtr = sessionArrayPtr;
     }
     void push(LocationAPIRequest* request) {
         mQueue.push(request);
@@ -99,8 +107,10 @@ public:
         return request;
     }
     uint32_t getSession() { return mSession; }
+    uint32_t* getSessionArrayPtr() { return mSessionArrayPtr; }
 private:
     uint32_t mSession;
+    uint32_t* mSessionArrayPtr;
     std::queue<LocationAPIRequest*> mQueue;
 };
 
@@ -112,12 +122,15 @@ public:
     LocationAPIControlClient& operator=(const LocationAPIControlClient&) = delete;
 
     LocationAPIRequest* getRequestBySession(uint32_t session);
+    LocationAPIRequest* getRequestBySessionArrayPtr(uint32_t* sessionArrayPtr);
 
     // LocationControlAPI
     uint32_t locAPIGnssDeleteAidingData(GnssAidingData& data);
     uint32_t locAPIEnable(LocationTechnologyType techType);
     void locAPIDisable();
     uint32_t locAPIGnssUpdateConfig(GnssConfig config);
+    uint32_t locAPIGnssGetConfig(GnssConfigFlagsMask config);
+    inline LocationControlAPI* getControlAPI() { return mLocationControlAPI; }
 
     // callbacks
     void onCtrlResponseCb(LocationError error, uint32_t id);
@@ -127,6 +140,8 @@ public:
     inline virtual void onEnableCb(LocationError /*error*/) {}
     inline virtual void onDisableCb(LocationError /*error*/) {}
     inline virtual void onGnssUpdateConfigCb(
+            size_t /*count*/, LocationError* /*errors*/, uint32_t* /*ids*/) {}
+    inline virtual void onGnssGetConfigCb(
             size_t /*count*/, LocationError* /*errors*/, uint32_t* /*ids*/) {}
 
     class GnssDeleteAidingDataRequest : public LocationAPIRequest {
@@ -165,6 +180,15 @@ public:
         LocationAPIControlClient& mAPI;
     };
 
+    class GnssGetConfigRequest : public LocationAPIRequest {
+    public:
+        GnssGetConfigRequest(LocationAPIControlClient& API) : mAPI(API) {}
+        inline void onCollectiveResponse(size_t count, LocationError* errors, uint32_t* ids) {
+            mAPI.onGnssGetConfigCb(count, errors, ids);
+        }
+        LocationAPIControlClient& mAPI;
+    };
+
 private:
     pthread_mutex_t mMutex;
     LocationControlAPI* mLocationControlAPI;
@@ -185,16 +209,16 @@ public:
     LocationAPIRequest* getRequestBySession(uint32_t session);
 
     // LocationAPI
-    uint32_t locAPIStartTracking(LocationOptions& options);
+    uint32_t locAPIStartTracking(TrackingOptions& trackingOptions);
     void locAPIStopTracking();
-    void locAPIUpdateTrackingOptions(LocationOptions& options);
+    void locAPIUpdateTrackingOptions(TrackingOptions& trackingOptions);
 
     int32_t locAPIGetBatchSize();
-    uint32_t locAPIStartSession(uint32_t id, uint32_t sessionMode,
-            LocationOptions& options);
+    uint32_t locAPIStartSession(
+            uint32_t id, uint32_t sessionMode, TrackingOptions&& trackingOptions);
     uint32_t locAPIStopSession(uint32_t id);
-    uint32_t locAPIUpdateSessionOptions(uint32_t id, uint32_t sessionMode,
-            LocationOptions& options);
+    uint32_t locAPIUpdateSessionOptions(
+            uint32_t id, uint32_t sessionMode, TrackingOptions&& trackingOptions);
     uint32_t locAPIGetBatchedLocations(uint32_t id, size_t count);
 
     uint32_t locAPIAddGeofences(size_t count, uint32_t* ids,
@@ -215,6 +239,7 @@ public:
 
     inline virtual void onCapabilitiesCb(LocationCapabilitiesMask /*capabilitiesMask*/) {}
     inline virtual void onGnssNmeaCb(GnssNmeaNotification /*gnssNmeaNotification*/) {}
+    inline virtual void onGnssDataCb(GnssDataNotification /*gnssDataNotification*/) {}
     inline virtual void onGnssMeasurementsCb(
             GnssMeasurementsNotification /*gnssMeasurementsNotification*/) {}
 
@@ -255,6 +280,8 @@ public:
 
     inline virtual void onGnssNiCb(uint32_t /*id*/, GnssNiNotification /*gnssNiNotification*/) {}
     inline virtual void onGnssNiResponseCb(LocationError /*error*/) {}
+
+    inline virtual void onLocationSystemInfoCb(LocationSystemInfo /*locationSystemInfo*/) {}
 
 private:
     // private inner classes
@@ -461,6 +488,7 @@ private:
             for (size_t i = 0; i < count; i++) {
                 ids[i] = mAPI.mGeofenceBiDict.getId(sessions[i]);
             }
+            LOC_LOGD("%s:]Returned geofence-id: %d in add geofence", __FUNCTION__, *ids);
             mAPI.onAddGeofencesCb(count, errors, ids);
             free(ids);
         }
@@ -469,11 +497,25 @@ private:
 
     class RemoveGeofencesRequest : public LocationAPIRequest {
     public:
-        RemoveGeofencesRequest(LocationAPIClientBase& API) : mAPI(API) {}
+        RemoveGeofencesRequest(LocationAPIClientBase& API,
+                               BiDict<GeofenceBreachTypeMask>* removedGeofenceBiDict) :
+                               mAPI(API), mRemovedGeofenceBiDict(removedGeofenceBiDict) {}
         inline void onCollectiveResponse(size_t count, LocationError* errors, uint32_t* sessions) {
-            // No need to handle collectiveResponse, cbs already notified
+            if (nullptr != mRemovedGeofenceBiDict) {
+                uint32_t *ids = (uint32_t*)malloc(sizeof(uint32_t) * count);
+                for (size_t i = 0; i < count; i++) {
+                    ids[i] = mRemovedGeofenceBiDict->getId(sessions[i]);
+                }
+                LOC_LOGD("%s:]Returned geofence-id: %d in remove geofence", __FUNCTION__, *ids);
+                mAPI.onRemoveGeofencesCb(count, errors, ids);
+                free(ids);
+                delete(mRemovedGeofenceBiDict);
+            } else {
+                LOC_LOGE("%s:%d] Unable to access removed geofences data.", __FUNCTION__, __LINE__);
+            }
         }
         LocationAPIClientBase& mAPI;
+        BiDict<GeofenceBreachTypeMask>* mRemovedGeofenceBiDict;
     };
 
     class ModifyGeofencesRequest : public LocationAPIRequest {
