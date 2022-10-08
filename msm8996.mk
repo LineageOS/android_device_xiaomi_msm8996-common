@@ -148,10 +148,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
 
-# Common config scripts
-PRODUCT_PACKAGES += \
-    init.panel.sh
-
 # Common init scripts
 PRODUCT_PACKAGES += \
     fstab.qcom \
