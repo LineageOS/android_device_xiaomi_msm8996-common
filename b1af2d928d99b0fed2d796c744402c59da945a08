@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b791a06f_93eba176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2022-10-08T14:31:10Z",
+      "side": 1,
+      "message": "You don\u0027t even build CAS HAL?",
+      "revId": "b1af2d928d99b0fed2d796c744402c59da945a08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
