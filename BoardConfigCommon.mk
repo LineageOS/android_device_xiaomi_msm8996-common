@@ -95,8 +95,6 @@ QCOM_BT_USE_BTNV := true
 
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
-    /vendor/bin/mm-qcamera-daemon=26
 TARGET_SUPPORT_HAL1 := false
 TARGET_USES_MEDIA_EXTENSIONS := true
 
