@@ -383,11 +383,6 @@ service qcom-sh /vendor/bin/init.qcom.sh
 on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
 
-service panel-sh /vendor/bin/init.panel.sh
-    class core
-    user root
-    oneshot
-
 service ril-daemon2 /vendor/bin/hw/rild -c 2
     class main
     user radio
