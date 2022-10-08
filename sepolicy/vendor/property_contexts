@@ -8,6 +8,8 @@ qcom.bluetooth.soc         u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
 wc_transport.              u:object_r:vendor_bluetooth_prop:s0
 
+persist.hvdcp.             u:object_r:vendor_hvdcp_opti_prop:s0
+
 persist.net.doxlat         u:object_r:vendor_xlat_prop:s0
 ro.sys.oem.sno             u:object_r:vendor_radio_prop:s0
 sys.fake_bs_flag0          u:object_r:vendor_radio_prop:s0
