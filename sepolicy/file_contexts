@@ -43,6 +43,7 @@
 /system/bin/chargeonlymode            u:object_r:charger_exec:s0
 /(vendor|system/vendor)/bin/readfem   u:object_r:readfem_exec:s0
 /(vendor|system/vendor)/bin/readmac   u:object_r:readmac_exec:s0
+/(vendor|system/vendor)/bin/tfa-calib u:object_r:tfa-calib_exec:s0
 
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey         u:object_r:hal_drm_clearkey_exec:s0
@@ -50,6 +51,3 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.ir@1\.0-service\.xiaomi            u:object_r:hal_ir_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.xiaomi_8996    u:object_r:hal_light_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service\.xiaomi_8996      u:object_r:hal_lineage_touch_default_exec:s0
-
-# Shell scripts
-/(vendor|system/vendor)/bin/init\.tfa\.sh      u:object_r:init_tfa_exec:s0
