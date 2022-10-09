@@ -1,0 +1,9 @@
+type tfa-calib, domain;
+type tfa-calib_exec, exec_type, vendor_file_type, file_type;
+
+# Allow for transition from init domain to tfa-calib
+init_daemon_domain(tfa-calib)
+
+# Allow read and write to sound card device
+allow tfa-calib audio_device:chr_file rw_file_perms;
+allow tfa-calib audio_device:dir search;
