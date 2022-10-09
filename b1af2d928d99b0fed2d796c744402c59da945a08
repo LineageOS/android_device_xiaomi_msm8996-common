@@ -16,6 +16,24 @@
       "message": "You don\u0027t even build CAS HAL?",
       "revId": "b1af2d928d99b0fed2d796c744402c59da945a08",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3558009e_c66d6e98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-09T09:25:26Z",
+      "side": 1,
+      "message": "CAS HAL is built by default.",
+      "parentUuid": "b791a06f_93eba176",
+      "revId": "b1af2d928d99b0fed2d796c744402c59da945a08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
