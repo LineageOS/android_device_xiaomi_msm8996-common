@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b78a3c7_f8a1fc6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-09T09:58:21Z",
+      "side": 1,
+      "message": "Pick https://review.lineageos.org/c/LineageOS/android_device_fxtec_pro1/+/339051 as well.",
+      "revId": "7217bb03df142ef461f86cb5fd4709b85761f7da",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
