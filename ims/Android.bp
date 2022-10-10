@@ -34,4 +34,5 @@ cc_library_shared {
     shared_libs: ["libui"],
 
     compile_multilib: "64",
+    system_ext_specific: true,
 }
