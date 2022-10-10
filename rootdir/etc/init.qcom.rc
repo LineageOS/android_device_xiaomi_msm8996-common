@@ -400,12 +400,6 @@ service vendor.qseecomd /vendor/bin/qseecomd
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service time_daemon /vendor/bin/time_daemon
-    class main
-    user root
-    group root
-    writepid /dev/cpuset/system-background/tasks
-
 # Start camera server as daemon
 service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start

@@ -540,13 +540,12 @@ vendor/lib64/vendor.display.color@1.1.so|388404f39cd0c2dd3ea9fc59ee950edf24f78a8
 vendor/lib64/vendor.display.color@1.2.so|da1c83747c7bb4a64cf380bdb889cb811b67bc2e
 vendor/lib64/vendor.display.postproc@1.0.so|f6dae960f3f4eea0d5d36aea4ac0a2e0039691f5
 
-# Power-off alarm - from daisy - PKQ1.180917.001
-system/framework/vendor.qti.hardware.alarm-V1.0-java.jar|ca5bf830ebb4fbf8fc1994200ec6e03dc83c274b
-vendor/app/PowerOffAlarm/PowerOffAlarm.apk|3fbc64ee84b17eaaf5f9002b58f4615216de0389
-vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service|b7f648c81773214202aaa3620863d048c90713c7
+# Power-off alarm - from daisy - QKQ1.191002.002
+product/app/PowerOffAlarm/PowerOffAlarm.apk|46387fe02067df3c4c09ec49fff7737473ea1145
+vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service|28c768324a36e12a8c4a1a968caa25ad94a160fe
 vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc|c9877b6cae0353d5fdea5bc23dba77101b3d6980
-vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so|df138b77fb116a1a786a70c9c76b69d61b5c04d2
-vendor/lib64/vendor.qti.hardware.alarm@1.0.so|5761eae471e8dcd94ce139e831a1aa5b23f133c6
+vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so|656009a5cc2b3bc52a7706579a192a1f3328f37c
+vendor/lib64/vendor.qti.hardware.alarm@1.0.so|78f8db9acff8b3461d6d37c747b1bdb59e547bb5
 
 # Power-off charging daemon
 -sbin/charger:bin/chargeonlymode|664dfa548b81cac348f1699222160f8d2b4d247c
@@ -648,10 +647,11 @@ vendor/bin/thermal-engine|b15c9e8fa54ebb15dfeb36c7fbc834a28b4c836e
 vendor/lib64/libthermalioctl.so|aa2a0abd8fb9792024efd93f648c129b6a22619e
 -vendor/lib/libthermalclient.so|270ea373c617584af092dc4ea2aa1c7bf27be7f4
 
-# Time services - from daisy - PKQ1.180917.001
-vendor/app/TimeService/TimeService.apk|78109530538aa8fb533ad288c9d356c57481a10e
-vendor/bin/time_daemon|d67f1c50583b5efca0f5baea00a51056a798b7f8
-vendor/lib64/libtime_genoff.so|8f4c1f9ace6af463b241b130d6872b5d39cc7b2a
+# Time services - from daisy - QKQ1.191002.002
+vendor/app/TimeService/TimeService.apk|27f9b81621c446baa8c37581d9bfbca2fd67b496
+vendor/bin/time_daemon|75b8a6a14cfb4424499ccb2bf1cad011df295d0e
+vendor/etc/init/init.time_daemon.rc|b253ca2a498757e14e1d7a051bf504ae09218f51
+vendor/lib64/libtime_genoff.so|06df52867790cdbbcc674a3a28d7ad7c8cc161ac
 
 # WiFi
 vendor/bin/cnss-daemon
