@@ -90,8 +90,8 @@ function blob_fixup() {
         "${PATCHELF}" --remove-needed "libandroid.so" "${2}"
         "${PATCHELF}" --replace-needed "libgui.so" "libgui_vendor.so" "${2}"
         ;;
-    vendor/lib/libwvhidl.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v28.so" "${2}"
+    vendor/lib64/libwvhidl.so)
+        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v29.so" "${2}"
         ;;
     esac
 }
