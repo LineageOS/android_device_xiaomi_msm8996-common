@@ -75,6 +75,9 @@ function blob_fixup() {
     vendor/lib64/libsettings.so)
         "${PATCHELF}" --replace-needed "libprotobuf-cpp-full.so" "libprotobuf-cpp-full-v28.so" "${2}"
         ;;
+    vendor/lib64/libwvhidl.so)
+        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v29.so" "${2}"
+        ;;
     vendor/lib/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
@@ -89,9 +92,6 @@ function blob_fixup() {
     vendor/lib/libmmcamera2_stats_modules.so)
         "${PATCHELF}" --remove-needed "libandroid.so" "${2}"
         "${PATCHELF}" --replace-needed "libgui.so" "libgui_vendor.so" "${2}"
-        ;;
-    vendor/lib/libwvhidl.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-v28.so" "${2}"
         ;;
     esac
 }
