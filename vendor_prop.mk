@@ -23,13 +23,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.audio.fluence.speaker=true \
     persist.vendor.audio.fluence.voicecall=true \
     persist.vendor.audio.fluence.voicerec=false \
-    persist.vendor.bt.enable.splita2dp=false \
     ro.config.media_vol_steps=25 \
     ro.config.vc_call_vol_steps=7 \
     ro.vendor.audio.sdk.fluencetype=fluence \
     ro.vendor.audio.sdk.ssr=false \
-    vendor.audio.dolby.ds2.enabled=false \
-    vendor.audio.dolby.ds2.hardbypass=false \
     vendor.audio_hal.period_size=192 \
     vendor.audio.hw.aac.encoder=true \
     vendor.audio.offload.buffer.size.kb=64 \
@@ -45,15 +42,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    bt.max.hfpclient.connections=1 \
-    qcom.bluetooth.soc=rome \
-    ro.bluetooth.dun=true \
-    ro.bluetooth.hfp.ver=1.7 \
-    ro.bluetooth.sap=true \
-    ro.btconfig.if=uart \
-    ro.btconfig.vendor=qcom \
-    ro.btconfig.chip=QCA6164 \
-    ro.btconfig.dev=/dev/ttyHS0
+    qcom.bluetooth.soc=rome
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -73,13 +62,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.iwlan.enable=true \
     persist.data.mode=concurrent \
     persist.data.netmgrd.qos.enable=true \
-    ro.use_data_netmgrd=true
+    ro.vendor.use_data_netmgrd=true
 
-# Display (Qualcomm AD)
+# Display
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qcom.ad=1 \
-    ro.qcom.ad.calib.data=/system/etc/calib.cfg \
-    ro.qcom.ad.sensortype=2 \
     ro.vendor.display.cabl=0
 
 # DRM
@@ -99,7 +85,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     dev.pm.dyn_samplingrate=1 \
     persist.demo.hdmirotationlock=false \
-    persist.hwc.enable_vds=1 \
     ro.opengles.version=196610 \
     ro.sf.lcd_density=480 \
     vendor.display.disable_rotator_split=1 \
@@ -116,27 +101,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.vidc.enc.disable.pq=true \
-    vendor.video.disable.ubwc=1 \
-    vidc.enc.dcvs.extra-buff-count=2
-
-# Memory optimizations
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.qti.sys.fw.bservice_enable=true
-
-# NFC
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.nfc.port=I2C \
-    persist.nfc.smartcard.config=SIM1,SIM2,eSE1
+    vendor.vidc.enc.disable.pq=true
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so \
-    ro.vendor.qti.sys.fw.bg_apps_limit=60
-
-# Priv-app permissions whitelist
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=enforce
+    ro.vendor.extension_library=libqti-perfd-client.so
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -146,12 +115,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.default_cdma_sub=0 \
     ro.telephony.default_network=20,20 \
-    persist.data.qmi.adb_logmask=0 \
     persist.net.doxlat=true \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.force_on_dc=true \
     persist.radio.multisim.config=dsds \
-    persist.radio.redir_party_num=1 \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.mt_sms_ack=30 \
     persist.vendor.radio.rat_on=combine \
@@ -166,17 +132,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.agg.dl_pkt=10 \
     persist.data.df.agg.dl_size=4096 \
     persist.data.df.mux_count=8 \
-    persist.data.df.iwlan_mux=9 \
-    persist.data.df.dev_name=rmnet_usb0
+    persist.data.df.iwlan_mux=9
 
 # SoC
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.soc.manufacturer=Qualcomm \
     ro.soc.model=MSM8996
-
-# TimeService
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.timed.enable=true
 
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
