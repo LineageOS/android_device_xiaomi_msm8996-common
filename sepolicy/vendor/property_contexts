@@ -3,7 +3,11 @@ persist.camera.            u:object_r:camera_prop:s0
 
 persist.hvdcp.             u:object_r:vendor_hvdcp_opti_prop:s0
 
+persist.data_netmgrd_mtu   u:object_r:vendor_default_prop:s0
+persist.data.              u:object_r:vendor_default_prop:s0
 persist.net.doxlat         u:object_r:vendor_xlat_prop:s0
+persist.net.logmask        u:object_r:vendor_default_prop:s0
+persist.rmnet.data.enable  u:object_r:vendor_default_prop:s0
 ro.sys.oem.sno             u:object_r:vendor_radio_prop:s0
 sys.fake_bs_flag0          u:object_r:vendor_radio_prop:s0
 sys.fake_bs_flag1          u:object_r:vendor_radio_prop:s0
