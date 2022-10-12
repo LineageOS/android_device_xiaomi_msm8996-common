@@ -16,3 +16,5 @@ allowxperm readmac self:socket ioctl msm_sock_ipc_ioctls;
 
 allow readmac diag_device:chr_file rw_file_perms;
 allow readmac sysfs:file r_file_perms;
+
+get_prop(readmac, vendor_radio_prop)
