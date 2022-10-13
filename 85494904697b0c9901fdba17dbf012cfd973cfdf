@@ -16,6 +16,24 @@
       "message": "I suggest to do it from kernel, different devices might use different boot devices, and kernel is closer to bootloader cmdline than boot image cmdline\nhttps://github.com/LineageOS/android_kernel_xiaomi_sdm710/commit/28a4b85b4b828a54844740b60b277356add12545",
       "revId": "85494904697b0c9901fdba17dbf012cfd973cfdf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c77b0e4_962884e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-13T12:06:27Z",
+      "side": 1,
+      "message": "Well, that\u0027s not the case here and I want to keep it aligned with what I already have in mi845.",
+      "parentUuid": "f0aeb66c_44c57edc",
+      "revId": "85494904697b0c9901fdba17dbf012cfd973cfdf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
