@@ -402,7 +402,6 @@ PRODUCT_PACKAGES += \
     hostapd \
     readfem \
     readmac \
-    WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
 
