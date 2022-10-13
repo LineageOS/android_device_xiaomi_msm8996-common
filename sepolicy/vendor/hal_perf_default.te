@@ -1,1 +1,4 @@
 dontaudit hal_perf_default self:capability { dac_override dac_read_search };
+
+# Allow perf HAL to set freq props
+set_prop(hal_perf_default, vendor_freq_prop)

@@ -15,3 +15,6 @@ sys.fake_bs_flag1          u:object_r:vendor_radio_prop:s0
 sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
 
 sys.thermal.para           u:object_r:vendor_thermal_prop:s0
+
+vendor.min_freq_0          u:object_r:vendor_freq_prop:s0
+vendor.min_freq_4          u:object_r:vendor_freq_prop:s0
