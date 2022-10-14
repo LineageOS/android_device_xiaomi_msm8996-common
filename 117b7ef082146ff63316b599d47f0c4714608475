@@ -16,6 +16,24 @@
       "message": "Note: Fence destructor part missing in hardware/lineage/compat.",
       "revId": "117b7ef082146ff63316b599d47f0c4714608475",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ee8f1c_cc04385e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-14T15:31:36Z",
+      "side": 1,
+      "message": "Fence destructor shim not needed if we update to Q blobs from daisy.",
+      "parentUuid": "dfba9d23_d31b752d",
+      "revId": "117b7ef082146ff63316b599d47f0c4714608475",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
