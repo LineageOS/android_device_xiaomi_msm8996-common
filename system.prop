@@ -39,7 +39,6 @@ persist.demo.hdmirotationlock=false
 DEVICE_PROVISIONED=1
 ril.subscription.types=NV,RUIM
 persist.net.doxlat=true
-persist.radio.apm_sim_not_pwdn=1
 persist.radio.multisim.config=dsds
 
 # USB

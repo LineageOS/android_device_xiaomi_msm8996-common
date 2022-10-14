@@ -110,10 +110,6 @@ on post-fs-data
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
-    # Create netmgr log dir
-    mkdir /data/vendor/netmgr 0770 radio radio
-    chmod 0770 /data/vendor/netmgr
-
     # Create the directories used by CnE subsystem
     mkdir /data/vendor/connectivity 0771 radio radio
     chown radio radio /data/vendor/connectivity
@@ -255,9 +251,6 @@ on boot
     mkdir /persist/wlan_bt 0770 system system
     mkdir /persist/audio 0777 media audio
 
-    # Create NETMGR daemon socket area
-    mkdir /dev/socket/netmgr 0750 radio radio
-
     # LED torch permissions
     chmod 0666 /sys/class/leds/led:torch_0/brightness
     chmod 0666 /sys/class/leds/led:torch_1/brightness
@@ -297,6 +290,9 @@ on boot
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
+    start vendor.qcrild
+    start vendor.qcrild2
+
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.qcom
@@ -335,27 +331,11 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     group system radio
     writepid /dev/cpuset/system-background/tasks
 
-service vendor.netmgrd /vendor/bin/netmgrd
-    class main
-    user root
-    group root wifi wakelock radio inet
-    writepid /dev/cpuset/system-background/tasks
-
-service vendor.dataqti /vendor/bin/qti
-    class main
-    user radio
-    group radio oem_2901 diag usb
-    writepid /dev/cpuset/system-background/tasks
-
 service vendor.sensors.qti /vendor/bin/sensors.qti
     class core
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
-
-on property:ro.vendor.use_data_netmgrd=false
-    # netmgr not supported on specific target
-    stop vendor.netmgrd
 
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
@@ -380,12 +360,6 @@ service qcom-sh /vendor/bin/init.qcom.sh
 
 on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
-
-service ril-daemon2 /vendor/bin/hw/rild -c 2
-    class main
-    user radio
-    group radio cache inet misc audio log readproc wakelock
-    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 service vendor.qseecomd /vendor/bin/qseecomd
     class core
@@ -447,40 +421,6 @@ service adsprpcd /vendor/bin/adsprpcd
     class main
     user media
     group media
-
-# imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
-service vendor.imsqmidaemon /vendor/bin/imsqmidaemon
-    class main
-    user system
-    socket ims_qmid stream 0660 system radio
-    group radio log diag
-    writepid /dev/cpuset/system-background/tasks
-
-# imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
-service vendor.imsdatadaemon /vendor/bin/imsdatadaemon
-    class main
-    user system
-    socket ims_datad stream 0660 system radio
-    group system wifi radio inet log diag
-    writepid /dev/cpuset/system-background/tasks
-    disabled
-
-on property:vendor.ims.QMI_DAEMON_STATUS=1
-    start vendor.imsdatadaemon
-
-service vendor.ims_rtp_daemon /vendor/bin/ims_rtp_daemon
-    class main
-    user system
-    group radio diag inet log
-
-service vendor.imsrcsservice /vendor/bin/imsrcsd
-    class main
-    user system
-    group radio diag inet log
-    writepid /dev/cpuset/system-background/tasks
-
-on property:vendor.ims.DATA_DAEMON_STATUS=1
-    restart vendor.ims_rtp_daemon
 
 service ppd /vendor/bin/mm-pp-dpps
     class hal
