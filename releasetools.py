@@ -23,6 +23,7 @@ def FullOTA_Assertions(info):
   return
 
 def IncrementalOTA_Assertions(info):
+  info.input_zip = info.target_zip
   AddModemAssertion(info, info.target_zip)
   return
 
