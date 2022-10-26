@@ -276,8 +276,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1-service \
     com.android.nfc_extras \
-    NfcNci \
-    SecureElement \
     Tag
 
 # OMX
