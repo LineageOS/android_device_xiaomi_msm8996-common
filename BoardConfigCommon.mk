@@ -182,6 +182,9 @@ BOARD_VNDK_VERSION := current
 TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit.xiaomi_8996
 TARGET_RECOVERY_DEVICE_MODULES := libinit.xiaomi_8996
 
+# Verified Boot
+BOARD_AVB_ENABLE := false
+
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
 BOARD_HAS_QCOM_WLAN_SDK := true
