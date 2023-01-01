@@ -16,6 +16,23 @@
       "message": "oi",
       "revId": "b8736c74e5b987151ea8e2e1c704e3de7173d190",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "397127a3_6ed00238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32210
+      },
+      "writtenOn": "2023-01-01T06:07:45Z",
+      "side": 1,
+      "message": "Can this Commit Appply to devices that is running arm build?",
+      "revId": "b8736c74e5b987151ea8e2e1c704e3de7173d190",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
