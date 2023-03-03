@@ -1,0 +1,2 @@
+allow hal_lineage_health_default sysfs_batteryinfo:dir search;
+allow hal_lineage_health_default sysfs_batteryinfo:file rw_file_perms;
