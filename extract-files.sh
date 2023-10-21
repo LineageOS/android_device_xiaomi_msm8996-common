@@ -69,6 +69,9 @@ function blob_fixup() {
     vendor/lib/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
+    vendor/lib/libchromaflash.so|vendor/lib/libmmcamera_hdr_gb_lib.so|vendor/lib/libmorpho_easy_hdr.so|vendor/lib/libmorpho_hdr_checker.so|vendor/lib/libmorpho_image_stab4.so|vendor/lib/libmpbase.so|vendor/lib/liboptizoom.so|vendor/lib/libseemore.so|vendor/lib/libubifocus.so)
+        "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${2}"
+        ;;
     vendor/lib/libmmcamera2_isp_modules.so)
         "${SIGSCAN}" -p "06 9B 03 F5 30 2C 0C F2 5C 40 FE F7 5C EC 06 9A 02 F5 30 21 01 F5 8B 60 FE F7 5A EC 0C B9" \
                      -P "7C B9 06 9B 03 F5 30 2C 0C F2 5C 40 FE F7 5A EC 06 9A 02 F5 30 21 01 F5 8B 60 FE F7 5A EC" \
