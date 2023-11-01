@@ -54,6 +54,9 @@ function blob_fixup() {
     vendor/bin/imsrcsd)
         sed -i "s/libhidltransport.so/libbase_shim.so\x00\x00\x00\x00/" "${2}"
         ;;
+    vendor/bin/pm-service)
+        grep -q libutils-v33.so "${2}" || "${PATCHELF}" --add-needed "libutils-v33.so" "${2}"
+        ;;
     vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so)
         sed -i "s/libhidltransport.so/libbase_shim.so\x00\x00\x00\x00/" "${2}"
         ;;
