@@ -16,6 +16,24 @@
       "message": "maybe we should make it global default...?",
       "revId": "fda57a0745bfcf5c4da64602674dd96cf106dae8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96298b10_e8d64251",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-11-06T10:41:20Z",
+      "side": 1,
+      "message": "It\u0027d affect devices with a left notch.",
+      "parentUuid": "5f8314f3_d2d43884",
+      "revId": "fda57a0745bfcf5c4da64602674dd96cf106dae8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
