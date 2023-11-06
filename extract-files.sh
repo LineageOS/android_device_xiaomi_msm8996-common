@@ -23,7 +23,7 @@ source "${HELPER}"
 
 function blob_fixup() {
     case "${1}" in
-    system/lib*/com.qualcomm.qti.ant@1.0.so)
+    system/lib64/com.qualcomm.qti.ant@1.0.so)
         "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
         ;;
     system_ext/etc/init/dpmd.rc)
