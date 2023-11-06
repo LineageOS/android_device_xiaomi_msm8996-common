@@ -23,7 +23,7 @@ source "${HELPER}"
 
 function blob_fixup() {
     case "${1}" in
-    system/lib*/com.qualcomm.qti.ant@1.0.so)
+    system/lib64/com.qualcomm.qti.ant@1.0.so)
         "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
         ;;
     system_ext/etc/init/dpmd.rc)
@@ -82,9 +82,6 @@ function blob_fixup() {
         ;;
     vendor/lib64/libril-qc-qmi-1.so)
         "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
-        ;;
-    vendor/lib/hw/vulkan.msm8996.so)
-        sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
         ;;
     vendor/lib/libchromaflash.so|vendor/lib/libmmcamera_hdr_gb_lib.so|vendor/lib/libmorpho_easy_hdr.so|vendor/lib/libmorpho_hdr_checker.so|vendor/lib/libmorpho_image_stab4.so|vendor/lib/libmpbase.so|vendor/lib/liboptizoom.so|vendor/lib/libseemore.so|vendor/lib/libubifocus.so)
         "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${2}"
