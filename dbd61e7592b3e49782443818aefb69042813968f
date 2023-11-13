@@ -16,6 +16,24 @@
       "message": "why do we need both?",
       "revId": "dbd61e7592b3e49782443818aefb69042813968f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7fe348_81ea40c9",
+        "filename": "rootdir/etc/ueventd.qcom.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 25485
+      },
+      "writtenOn": "2023-11-13T19:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef54fd7_978f4e75",
+      "revId": "dbd61e7592b3e49782443818aefb69042813968f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
