@@ -46,7 +46,7 @@ on boot
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
 
-on charger
+on property:init.svc.vendor.charger=running
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     # Enable UFS powersaving
     write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
@@ -195,13 +195,6 @@ on property:sys.boot_completed=1
 
 on property:init.svc.recovery=running
     trigger enable-low-power
-
-service vendor.charger /system/bin/charger
-    class charger
-    user system
-    group system graphics input
-    capabilities SYS_BOOT
-    seclabel u:r:charger:s0
 
 service energy-awareness /vendor/bin/energy-awareness
     class main
