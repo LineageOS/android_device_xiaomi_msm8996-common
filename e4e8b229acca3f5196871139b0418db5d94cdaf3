@@ -16,6 +16,24 @@
       "message": "gps hal has dependency on health hidl, you could pick this to change it to aidl:\n\nhttps://review.lineageos.org/c/LineageOS/android_device_xiaomi_mithorium-common/+/367442/3",
       "revId": "e4e8b229acca3f5196871139b0418db5d94cdaf3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbbda99b_83a20171",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-11-13T16:59:29Z",
+      "side": 1,
+      "message": "Yes, I know it has that hidl dep. I might pick that too, thanks.",
+      "parentUuid": "0f352226_f5ebfeb5",
+      "revId": "e4e8b229acca3f5196871139b0418db5d94cdaf3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
