@@ -1,0 +1,26 @@
+//
+// Copyright (C) 2017-2023 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "ConfigPanel",
+
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    certificate: "platform",
+    platform_apis: true,
+    privileged: true,
+    required: ["XiaomiPocketMode"],
+    product_specific: true,
+
+    static_libs: [
+        "org.lineageos.platform.internal",
+        "org.lineageos.settings.resources",
+    ],
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}
