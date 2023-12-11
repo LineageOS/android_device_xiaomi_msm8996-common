@@ -1,0 +1,29 @@
+//
+// Copyright (C) 2017-2023 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "XiaomiPocketMode",
+
+    srcs: ["src/**/*.java"],
+
+    certificate: "platform",
+    platform_apis: true,
+    privileged: true,
+    required: ["pocketmode_whitelist.xml"],
+    product_specific: true,
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}
+
+prebuilt_etc {
+    name: "pocketmode_whitelist.xml",
+
+    src: "pocketmode_whitelist.xml",
+    relative_install_path: "sysconfig",
+    product_specific: true,
+}
