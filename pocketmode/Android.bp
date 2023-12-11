@@ -13,7 +13,7 @@ android_app {
     platform_apis: true,
     privileged: true,
     required: ["pocketmode_whitelist.xml"],
-    product_specific: true,
+    system_ext_specific: true,
 
     optimize: {
         proguard_flags_files: ["proguard.flags"],
@@ -25,5 +25,5 @@ prebuilt_etc {
 
     src: "pocketmode_whitelist.xml",
     relative_install_path: "sysconfig",
-    product_specific: true,
+    system_ext_specific: true,
 }

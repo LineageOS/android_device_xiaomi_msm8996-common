@@ -13,7 +13,7 @@ android_app {
     platform_apis: true,
     privileged: true,
     required: ["XiaomiPocketMode"],
-    product_specific: true,
+    system_ext_specific: true,
 
     static_libs: [
         "org.lineageos.platform.internal",
