@@ -23,21 +23,21 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
 import org.lineageos.internal.util.FileUtils;
 import org.lineageos.settings.R;
 
-public class ButtonSettingsFragment extends PreferenceFragment
+public class ButtonSettingsFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceChangeListener {
 
     private Handler mHandler = new Handler();
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        addPreferencesFromResource(R.xml.button_panel);
+        setPreferencesFromResource(R.xml.button_panel, rootKey);
     }
 
     @Override
