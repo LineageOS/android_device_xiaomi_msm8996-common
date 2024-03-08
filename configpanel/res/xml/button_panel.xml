@@ -21,17 +21,17 @@
         android:key="fp_key"
         android:title="@string/fingerprint_title" >
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="fp_home"
             android:title="@string/fingerprint_as_home_title"
             android:summary="@string/fingerprint_as_home_summary" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="fp_wakeup"
             android:title="@string/fingerprint_wakeup_title"
             android:summary="@string/fingerprint_wakeup_summary" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="fp_pocketmode"
             android:title="@string/fingerprint_pocketmode_title"
             android:summary="@string/fingerprint_pocketmode_summary"

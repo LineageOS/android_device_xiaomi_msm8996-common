@@ -26,7 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import org.lineageos.internal.util.FileUtils;
 import org.lineageos.internal.util.PackageManagerUtils;
@@ -78,7 +78,7 @@ public class ButtonSettingsFragment extends PreferenceFragment
         super.addPreferencesFromResource(preferencesResId);
         // Initialize node preferences
         for (String pref : Constants.sBooleanNodePreferenceMap.keySet()) {
-            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            SwitchPreferenceCompat b = (SwitchPreferenceCompat) findPreference(pref);
             if (b == null) continue;
             b.setOnPreferenceChangeListener(this);
             String node = Constants.sBooleanNodePreferenceMap.get(pref);
@@ -105,7 +105,8 @@ public class ButtonSettingsFragment extends PreferenceFragment
         final PreferenceCategory fingerprintCategory =
                 (PreferenceCategory) getPreferenceScreen().findPreference(Constants.CATEGORY_FP);
 
-        SwitchPreference b = (SwitchPreference) findPreference(Constants.FP_POCKETMODE_KEY);
+        SwitchPreferenceCompat b =
+                (SwitchPreferenceCompat) findPreference(Constants.FP_POCKETMODE_KEY);
         if (!PackageManagerUtils.isAppEnabled(getContext(), "org.lineageos.pocketmode")) {
             fingerprintCategory.removePreference(b);
         } else {
@@ -121,7 +122,7 @@ public class ButtonSettingsFragment extends PreferenceFragment
 
     private void updatePreferencesBasedOnDependencies() {
         for (String pref : Constants.sNodeDependencyMap.keySet()) {
-            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            SwitchPreferenceCompat b = (SwitchPreferenceCompat) findPreference(pref);
             if (b == null) continue;
             String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
             if (FileUtils.isFileReadable(dependencyNode)) {
