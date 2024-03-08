@@ -23,7 +23,7 @@ import android.content.SharedPreferences;
 import android.os.UserHandle;
 
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 public class Utils {
 
@@ -37,7 +37,7 @@ public class Utils {
         return preferences.getString(key, (String) Constants.sNodeDefaultMap.get(key));
     }
 
-    public static void updateDependentPreference(Context context, SwitchPreference b,
+    public static void updateDependentPreference(Context context, SwitchPreferenceCompat b,
             String key, boolean shouldSetEnabled) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean prefActualValue = preferences.getBoolean(key, false);
