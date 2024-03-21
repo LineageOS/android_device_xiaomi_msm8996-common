@@ -382,10 +382,6 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     TetheringConfigOverlay
 
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
-
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
