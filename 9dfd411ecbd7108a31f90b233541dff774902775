@@ -22,6 +22,30 @@
       },
       "revId": "9dfd411ecbd7108a31f90b233541dff774902775",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d449e1_2616b057",
+        "filename": "msm8996.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-03-21T09:16:25Z",
+      "side": 1,
+      "message": "nvim put # there automatically.",
+      "parentUuid": "6d331294_60113a08",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 1
+      },
+      "revId": "9dfd411ecbd7108a31f90b233541dff774902775",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
