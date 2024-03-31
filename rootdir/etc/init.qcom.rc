@@ -110,10 +110,6 @@ on post-fs-data
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
-    # Create netmgr log dir
-    mkdir /data/vendor/netmgr 0770 radio radio
-    chmod 0770 /data/vendor/netmgr
-
     # Create the directories used by CnE subsystem
     mkdir /data/vendor/connectivity 0771 radio radio
     chown radio radio /data/vendor/connectivity
@@ -255,9 +251,6 @@ on boot
     mkdir /persist/wlan_bt 0770 system system
     mkdir /persist/audio 0777 media audio
 
-    # Create NETMGR daemon socket area
-    mkdir /dev/socket/netmgr 0750 radio radio
-
     # LED torch permissions
     chmod 0666 /sys/class/leds/led:torch_0/brightness
     chmod 0666 /sys/class/leds/led:torch_1/brightness
@@ -275,11 +268,6 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/mode
     chmod 0664 /sys/class/graphics/fb0/msm_cmd_autorefresh_en
 
-    # Assign TCP buffer thresholds to be ceiling value of technology maximums
-    # Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  8388608
-    write /proc/sys/net/core/wmem_max  8388608
-
     # Enable default router information in RA
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
@@ -296,6 +284,9 @@ on boot
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
+
+    start vendor.qcrild
+    start vendor.qcrild2
 
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
@@ -335,27 +326,11 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     group system radio
     task_profiles ServiceCapacityLow
 
-service vendor.netmgrd /vendor/bin/netmgrd
-    class main
-    user root
-    group root wifi wakelock radio inet
-    task_profiles ServiceCapacityLow
-
-service vendor.dataqti /vendor/bin/qti
-    class main
-    user radio
-    group radio oem_2901 diag usb
-    task_profiles ServiceCapacityLow
-
 service vendor.sensors.qti /vendor/bin/sensors.qti
     class core
     user system
     group system
     task_profiles ServiceCapacityLow
-
-on property:ro.vendor.use_data_netmgrd=false
-    # netmgr not supported on specific target
-    stop vendor.netmgrd
 
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
@@ -365,6 +340,12 @@ service cnss-daemon /vendor/bin/cnss-daemon -n -l
 
 on property:sys.shutdown.requested=*
     stop cnss-daemon
+
+service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
+    class core
+    user vendor_qrtr
+    group vendor_qrtr
+    capabilities NET_BIND_SERVICE
 
 service loc_launcher /vendor/bin/loc_launcher
     class late_start
@@ -380,12 +361,6 @@ service qcom-sh /vendor/bin/init.qcom.sh
 
 on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
-
-service ril-daemon2 /vendor/bin/hw/rild -c 2
-    class main
-    user radio
-    group radio cache inet misc audio log readproc wakelock
-    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 service vendor.qseecomd /vendor/bin/qseecomd
     class core

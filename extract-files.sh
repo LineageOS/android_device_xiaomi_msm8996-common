@@ -78,9 +78,6 @@ function blob_fixup() {
     vendor/lib64/lib-uceservice.so)
         sed -i "s/libhidltransport.so/libbase_shim.so\x00\x00\x00\x00/" "${2}"
         ;;
-    vendor/lib64/libril-qc-qmi-1.so)
-        "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
-        ;;
     vendor/lib/libchromaflash.so|vendor/lib/libmmcamera_hdr_gb_lib.so|vendor/lib/libmorpho_easy_hdr.so|vendor/lib/libmorpho_hdr_checker.so|vendor/lib/libmorpho_image_stab4.so|vendor/lib/libmpbase.so|vendor/lib/liboptizoom.so|vendor/lib/libseemore.so|vendor/lib/libubifocus.so)
         "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${2}"
         ;;
