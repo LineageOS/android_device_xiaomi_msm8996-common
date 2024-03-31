@@ -40,9 +40,6 @@ function blob_fixup() {
     system_ext/etc/permissions/qti_libpermissions.xml)
         sed -i "s/name=\"android.hidl.manager-V1.0-java/name=\"android.hidl.manager@1.0-java/g" "${2}"
         ;;
-    system_ext/lib64/com.qualcomm.qti.imscmservice@1.0.so)
-        "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
-        ;;
     system_ext/lib64/lib-imscamera.so)
         grep -q "libgui_shim.so" "${2}" || "${PATCHELF}" --add-needed "libgui_shim.so" "${2}"
         ;;
@@ -50,18 +47,13 @@ function blob_fixup() {
         grep -q "libui_shim.so" "${2}" || "${PATCHELF}" --add-needed "libui_shim.so" "${2}"
         ;;
     system_ext/lib64/lib-imsvt.so)
-        "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
         grep -q "libgui_shim.so" "${2}" || "${PATCHELF}" --add-needed "libgui_shim.so" "${2}"
         ;;
     system_ext/lib64/libdpmframework.so)
         sed -i "s/libhidltransport.so/libcutils-v29.so\x00\x00\x00/" "${2}"
         ;;
-    vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|vendor/bin/hw/vendor.display.color@1.0-service|vendor/bin/ATFWD-daemon|vendor/bin/ims_rtp_daemon)
+    vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|vendor/bin/hw/vendor.display.color@1.0-service)
         "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
-        ;;
-    vendor/bin/imsrcsd)
-        "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
-        sed -i "s/libhidltransport.so/libbase_shim.so\x00\x00\x00\x00/" "${2}"
         ;;
     vendor/bin/pm-service)
         grep -q libutils-v33.so "${2}" || "${PATCHELF}" --add-needed "libutils-v33.so" "${2}"
@@ -71,15 +63,6 @@ function blob_fixup() {
         ;;
     vendor/lib64/hw/vulkan.msm8996.so)
         sed -i "s/vulkan.msm8953.so/vulkan.msm8996.so/g" "${2}"
-        ;;
-    vendor/lib64/lib-dplmedia.so)
-        "${PATCHELF}" --remove-needed "libmedia.so" "${2}"
-        ;;
-    vendor/lib64/lib-uceservice.so)
-        sed -i "s/libhidltransport.so/libbase_shim.so\x00\x00\x00\x00/" "${2}"
-        ;;
-    vendor/lib64/libril-qc-qmi-1.so)
-        "${PATCHELF}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
         ;;
     vendor/lib/libchromaflash.so|vendor/lib/libmmcamera_hdr_gb_lib.so|vendor/lib/libmorpho_easy_hdr.so|vendor/lib/libmorpho_hdr_checker.so|vendor/lib/libmorpho_image_stab4.so|vendor/lib/libmpbase.so|vendor/lib/liboptizoom.so|vendor/lib/libseemore.so|vendor/lib/libubifocus.so)
         "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${2}"
