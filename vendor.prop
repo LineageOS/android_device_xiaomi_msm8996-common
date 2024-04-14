@@ -67,6 +67,7 @@ vendor.gralloc.enable_fb_ubwc=1
 # IMS
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
+persist.dbg.wfc_avail_ovr=1
 
 # Media
 vendor.vidc.enc.disable.pq=true
