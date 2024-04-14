@@ -35,6 +35,8 @@ import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS;
 
+import org.lineageos.internal.util.FileUtils;
+import org.lineageos.settings.buttons.ButtonConstants;
 import org.lineageos.settings.buttons.ButtonSettingsActivity;
 import org.lineageos.settings.buttons.ButtonUtils;
 
@@ -80,11 +82,11 @@ public class PartsSearchIndexablesProvider extends SearchIndexablesProvider {
 
     private List<String> getNonIndexableKeys(Context context) {
         List<String> keys = new ArrayList<>();
-        if (!FileUtils.fileExists(Constants.FP_HOME_KEY_NODE) &&
-                !FileUtils.fileExists(Constants.FP_WAKEUP_NODE)) {
-            keys.add(Constants.FP_HOME_KEY);
-            keys.add(Constants.FP_WAKEUP_KEY);
-            keys.add(Constants.FP_POCKETMODE_KEY);
+        if (!FileUtils.fileExists(ButtonConstants.FP_HOME_KEY_NODE) &&
+                !FileUtils.fileExists(ButtonConstants.FP_WAKEUP_NODE)) {
+            keys.add(ButtonConstants.FP_HOME_KEY);
+            keys.add(ButtonConstants.FP_WAKEUP_KEY);
+            keys.add(ButtonConstants.FP_POCKETMODE_KEY);
         }
         return keys;
     }
