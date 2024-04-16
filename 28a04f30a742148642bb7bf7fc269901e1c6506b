@@ -63,6 +63,30 @@
       },
       "revId": "28a04f30a742148642bb7bf7fc269901e1c6506b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25fda327_bca72f1d",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 12
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2024-04-16T22:07:53Z",
+      "side": 1,
+      "message": "sounds good - just wanted to check. I miss stuff like this when I sort it sometimes so better to ask hehe.",
+      "parentUuid": "f7b847be_26736a65",
+      "range": {
+        "startLine": 677,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 27
+      },
+      "revId": "28a04f30a742148642bb7bf7fc269901e1c6506b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
