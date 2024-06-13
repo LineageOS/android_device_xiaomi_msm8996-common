@@ -145,6 +145,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.5:64 \
     camera.msm8996 \
     libgui_vendor \
+    libion.vendor \
     libstdc++_vendor \
     vendor.qti.hardware.camera.device@1.0
 
@@ -234,6 +235,7 @@ PRODUCT_PACKAGES += \
     android.hidl.base@1.0.vendor\
     android.hidl.manager@1.0 \
     android.hidl.memory@1.0.vendor \
+    libhidlmemory.vendor \
     libhidltransport \
     libhidltransport.vendor \
     libhwbinder \
@@ -351,7 +353,9 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.config@1.2.vendor \
     android.hardware.radio.deprecated@1.0.vendor \
     android.hardware.secure_element@1.0.vendor \
+    libnetutils.vendor \
     librmnetctl \
+    libsqlite.vendor \
     libxml2
 
 # Seccomp policy
