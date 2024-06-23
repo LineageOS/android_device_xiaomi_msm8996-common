@@ -398,8 +398,8 @@ product/lib64/lib-imsvt.so:system_ext/lib64/lib-imsvt.so|d650917fb938a70467f9b0f
 product/lib64/lib-imsvtextutils.so:system_ext/lib64/lib-imsvtextutils.so|c8065a0ddf21c3ba9cffdc61c2b5b6488081b8be
 product/lib64/lib-imsvtutils.so:system_ext/lib64/lib-imsvtutils.so|8e9bba6bbad8e8e5d3cfa40831262db5c745e073
 product/lib64/libdiag_system.so:system_ext/lib64/libdiag_system.so|d667eb3507836f509673c4b108d451ecfe47826b
-product/lib64/libimscamera_jni.so:system_ext/lib64/libimscamera_jni.so|7cb89110cca94d37d68c705f12a7a5a4ee106139
-product/lib64/libimsmedia_jni.so:system_ext/lib64/libimsmedia_jni.so|3540752cc3658261ea3c909f03018eea4398f84e
+product/lib64/libimscamera_jni.so:system_ext/lib64/libimscamera_jni.so;SYMLINK=system_ext/priv-app/ims/lib/arm64/libimscamera_jni.so|7cb89110cca94d37d68c705f12a7a5a4ee106139
+product/lib64/libimsmedia_jni.so:system_ext/lib64/libimsmedia_jni.so;SYMLINK=system_ext/priv-app/ims/lib/arm64/libimsmedia_jni.so|3540752cc3658261ea3c909f03018eea4398f84e
 product/lib64/vendor.qti.ims.callinfo@1.0.so:system_ext/lib64/vendor.qti.ims.callinfo@1.0.so|a752c392c4f2dc03180f41bbe286a9daad915d21
 product/lib64/vendor.qti.ims.rcsconfig@1.0.so:system_ext/lib64/vendor.qti.ims.rcsconfig@1.0.so|ba5ffc588422c1b0f3ac8135314db2c88d62671e
 product/lib64/vendor.qti.imsrtpservice@2.0.so:system_ext/lib64/vendor.qti.imsrtpservice@2.0.so|6ef5cd72d34c20e82cb0e58681a4aae9b0dac99a
