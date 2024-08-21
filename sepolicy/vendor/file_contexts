@@ -45,6 +45,6 @@
 /(vendor|system/vendor)/bin/tfa-calib u:object_r:tfa-calib_exec:s0
 
 # HALs
-/(vendor|system/vendor)/bin/hw/android\.hardware\.ir@1\.0-service\.xiaomi            u:object_r:hal_ir_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.ir-service\.xiaomi                 u:object_r:hal_ir_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light-service\.xiaomi              u:object_r:hal_light_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service\.xiaomi_8996      u:object_r:hal_lineage_touch_default_exec:s0
