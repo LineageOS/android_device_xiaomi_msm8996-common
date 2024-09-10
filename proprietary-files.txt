@@ -668,8 +668,8 @@ vendor/lib64/libtime_genoff.so|06df52867790cdbbcc674a3a28d7ad7c8cc161ac
 vendor/bin/hw/android.hardware.drm@1.2-service.widevine|e130b8f1c8d46d8a185b00cba5ff8a2a871ee94c
 vendor/etc/init/android.hardware.drm@1.2-service.widevine.rc|dee5b7838ac561a2292e89fc0c4ccd1932224215
 vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.2-service.widevine.xml|1b556a6b981dfe8c5d62311b59758d370dd6dd10
-vendor/lib64/libwvhidl.so|a701374f4c0a6b6924b3f81c304505db48b3f9e1
-vendor/lib64/mediadrm/libwvdrmengine.so|9576cf6a0350a3b6fdc4982cede62c542f257011
+vendor/lib64/libwvhidl.so|a701374f4c0a6b6924b3f81c304505db48b3f9e1|2fbdbec58d54c19c42df7eb34ac8f756a3064232
+vendor/lib64/mediadrm/libwvdrmengine.so|9576cf6a0350a3b6fdc4982cede62c542f257011|2fd66e6cc4c7d6735752a92a23e33b8dc7e306fa
 
 # WiFi
 vendor/bin/cnss-daemon
