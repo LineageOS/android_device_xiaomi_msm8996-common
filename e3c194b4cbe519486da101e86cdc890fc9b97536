@@ -24,6 +24,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f70c7c4_6526d3db",
+        "filename": "extract-files.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-11-01T13:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fec1607d_718031cd",
+      "range": {
+        "startLine": 29,
+        "startChar": 17,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "e3c194b4cbe519486da101e86cdc890fc9b97536",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b304610_239ca03b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-01T13:02:13Z",
       "side": 1,
       "message": "libhidlbase_shim",
+      "range": {
+        "startLine": 56,
+        "startChar": 17,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "e3c194b4cbe519486da101e86cdc890fc9b97536",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094ce724_fae15010",
+        "filename": "extract-files.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2024-11-01T13:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b304610_239ca03b",
       "range": {
         "startLine": 56,
         "startChar": 17,
