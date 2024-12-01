@@ -1,0 +1,101 @@
+cc_library_shared {
+    name: "android.hardware.gnss@2.0-impl-qti",
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: [
+        "AGnss.cpp",
+        "Gnss.cpp",
+        "AGnssRil.cpp",
+        "GnssMeasurement.cpp",
+        "GnssConfiguration.cpp",
+        "GnssBatching.cpp",
+        "GnssGeofencing.cpp",
+        "GnssNi.cpp",
+        "GnssDebug.cpp",
+        "GnssVisibilityControl.cpp",
+        "MeasurementCorrections.cpp",
+    ] + [
+        "location_api/GnssAPIClient.cpp",
+        "location_api/MeasurementAPIClient.cpp",
+        "location_api/GeofenceAPIClient.cpp",
+        "location_api/BatchingAPIClient.cpp",
+        "location_api/LocationUtil.cpp",
+    ],
+
+    local_include_dirs: ["location_api"],
+
+    header_libs: [
+        "libgps.utils_headers",
+        "libloc_core_headers",
+        "libloc_pla_headers",
+        "liblocbatterylistener_headers",
+        "liblocation_api_headers",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libhidlbase",
+        "libcutils",
+        "libutils",
+        "android.hardware.gnss@1.0",
+        "android.hardware.gnss@1.1",
+        "android.hardware.gnss@2.0",
+        "android.hardware.gnss.measurement_corrections@1.0",
+        "android.hardware.gnss.visibility_control@1.0",
+        "android.hardware.health@1.0",
+        "android.hardware.health@2.0",
+        "android.hardware.power@1.2"
+    ] + [
+        "libloc_core",
+        "libgps.utils",
+        "libdl",
+        "liblocation_api",
+    ],
+
+    static_libs: [
+        "libhealthhalutils",
+        "liblocbatterylistener",
+    ],
+
+    cflags: [
+        "-DGNSS_HIDL_LEGACY_MEASURMENTS",
+    ] + GNSS_CFLAGS,
+}
+
+cc_binary {
+    name: "android.hardware.gnss@2.0-service-qti",
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["android.hardware.gnss@2.0-service-qti.rc"],
+    vintf_fragments: ["android.hardware.gnss@2.0-service-qti.xml"],
+    srcs: ["service.cpp"],
+
+    local_include_dirs: ["location_api"],
+
+    header_libs: [
+        "libgps.utils_headers",
+        "libloc_core_headers",
+        "libloc_pla_headers",
+        "liblocation_api_headers",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libdl",
+        "libbase",
+        "libutils",
+        "libgps.utils",
+        "libqti_vndfwk_detect"
+    ] + [
+        "libhidlbase",
+        "android.hardware.gnss@1.0",
+        "android.hardware.gnss@1.1",
+        "android.hardware.gnss@2.0",
+    ],
+
+    cflags: [
+        "-DLOC_HIDL_VERSION=\"3.0\"",
+    ] + GNSS_CFLAGS,
+}
