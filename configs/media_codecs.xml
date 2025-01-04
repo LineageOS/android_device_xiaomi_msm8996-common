@@ -119,8 +119,6 @@ Only the three quirks included above are recognized at this point:
         <Setting name="max-video-encoder-input-buffers" value="11" />
     </Settings>
     <Encoders>
-        <!-- Audio Hardware  -->
-        <!-- Audio Software  -->
         <!-- Video Hardware  -->
         <MediaCodec name="OMX.qcom.video.encoder.avc" type="video/avc" >
             <Quirk name="requires-allocate-on-input-ports" />
