@@ -46,6 +46,30 @@
       },
       "revId": "10c6f828c9619574b34f0945a3391dfa2f7dd675",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258d4e43_86f04c22",
+        "filename": "Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-01-27T09:21:14Z",
+      "side": 0,
+      "message": "yes, but they also didn\u0027t have leftover IMS symlinks.",
+      "parentUuid": "c13dffa8_d4c6179b",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "10c6f828c9619574b34f0945a3391dfa2f7dd675",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
