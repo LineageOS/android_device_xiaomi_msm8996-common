@@ -22,6 +22,30 @@
       },
       "revId": "10c6f828c9619574b34f0945a3391dfa2f7dd675",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c13dffa8_d4c6179b",
+        "filename": "Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 25485
+      },
+      "writtenOn": "2025-01-27T09:20:11Z",
+      "side": 0,
+      "message": "i checked 416231 as ref and seems like others removed \"include $(CLEAR_VARS)\"",
+      "parentUuid": "6a884470_64b0952d",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "10c6f828c9619574b34f0945a3391dfa2f7dd675",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
