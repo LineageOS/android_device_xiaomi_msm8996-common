@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c92e71_3b3c8888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25485
+      },
+      "writtenOn": "2025-01-27T10:25:43Z",
+      "side": 1,
+      "message": "ig we can remove Android.mk now as i see other common repos removed it.\nhttps://review.lineageos.org/q/Id5986b8a740e45f864eecdd2bd82d9455f128d6b",
+      "revId": "772d9e7b889f94bb0c3aee0c0fce3ad403a7827d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
