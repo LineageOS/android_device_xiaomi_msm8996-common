@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017-2024 The LineageOS Project
+# Copyright (C) 2017-2025 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -162,7 +162,7 @@ TARGET_VENDOR_PROP += $(VENDOR_PATH)/vendor.prop
 BOARD_USES_QCOM_HARDWARE := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(VENDOR_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(VENDOR_PATH)/init/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_BLANK_UNBLANK_ON_INIT := true
 TARGET_USERIMAGES_USE_EXT4 := true
