@@ -1,0 +1,11 @@
+cc_binary {
+    name: "readmac",
+    vendor: true,
+
+    srcs: ["xiaomi_readmac.c"],
+    shared_libs: ["liblog"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}
