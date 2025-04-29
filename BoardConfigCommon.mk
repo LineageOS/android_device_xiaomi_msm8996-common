@@ -184,10 +184,6 @@ BOARD_VENDOR_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_VNDK_VERSION := current
 
-# Vendor init
-TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit.xiaomi_8996
-TARGET_RECOVERY_DEVICE_MODULES := libinit.xiaomi_8996
-
 # Verified Boot
 BOARD_AVB_ENABLE := false
 
