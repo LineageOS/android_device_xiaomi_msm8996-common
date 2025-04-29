@@ -397,6 +397,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3-service.basic
 
+# Vendor init
+$(call soong_config_set,libinit,vendor_init_lib,//$(VENDOR_PATH):libinit.xiaomi_8996)
+
 # VNDK
 PRODUCT_PACKAGES += \
     libcutils-v29 \
