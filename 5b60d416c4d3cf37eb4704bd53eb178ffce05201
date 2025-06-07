@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47eac92c_8ebbf695",
+        "filename": "touch/KeySwapper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-06-07T15:53:00Z",
+      "side": 0,
+      "message": "This path was only used on scorpio.",
+      "range": {
+        "startLine": 33,
+        "startChar": 49,
+        "endLine": 33,
+        "endChar": 83
+      },
+      "revId": "5b60d416c4d3cf37eb4704bd53eb178ffce05201",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
