@@ -1,79 +1,39 @@
 /*
- * Copyright (C) 2019,2021 The LineageOS Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * SPDX-FileCopyrightText: 2019-2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
  */
 
-#define LOG_TAG "vendor.lineage.touch@1.0-service.xiaomi_8996"
-
-#include <android-base/logging.h>
-#include <hidl/HidlTransportSupport.h>
+#define LOG_TAG "vendor.lineage.touch-service.xiaomi_8996"
 
 #include "KeyDisabler.h"
 #include "KeySwapper.h"
 
-using android::OK;
-using android::sp;
-using android::status_t;
-using android::hardware::configureRpcThreadpool;
-using android::hardware::joinRpcThreadpool;
+#include <android-base/logging.h>
+#include <android/binder_manager.h>
+#include <android/binder_process.h>
 
-using ::vendor::lineage::touch::V1_0::IKeyDisabler;
-using ::vendor::lineage::touch::V1_0::IKeySwapper;
-using ::vendor::lineage::touch::V1_0::implementation::KeyDisabler;
-using ::vendor::lineage::touch::V1_0::implementation::KeySwapper;
+using aidl::vendor::lineage::touch::KeyDisabler;
+using aidl::vendor::lineage::touch::KeySwapper;
 
 int main() {
-    sp<KeyDisabler> keyDisabler;
-    sp<KeySwapper> keySwapper;
-    status_t status;
+    binder_status_t status = STATUS_OK;
 
-    LOG(INFO) << "Touch HAL service is starting.";
+    ABinderProcess_setThreadPoolMaxThreadCount(0);
+    std::shared_ptr<KeyDisabler> keyDisabler = ndk::SharedRefBase::make<KeyDisabler>();
+    std::shared_ptr<KeySwapper> keySwapper = ndk::SharedRefBase::make<KeySwapper>();
 
-    keyDisabler = new KeyDisabler();
-    if (keyDisabler == nullptr) {
-        LOG(ERROR) << "Can not create an instance of Touch HAL KeyDisabler Iface, exiting.";
-        goto shutdown;
-    }
-    keySwapper = new KeySwapper();
-    if (keySwapper == nullptr) {
-        LOG(ERROR) << "Can not create an instance of Touch HAL KeySwapper Iface, exiting.";
-        goto shutdown;
+    const std::string instanceKeyDisabler = std::string(KeyDisabler::descriptor) + "/default";
+    status = AServiceManager_addService(keyDisabler->asBinder().get(), instanceKeyDisabler.c_str());
+    if (status != STATUS_OK) {
+        LOG(WARNING) << "Can't register IKeyDisabler/default";
     }
 
-    configureRpcThreadpool(1, true /*callerWillJoin*/);
-
-    status = keyDisabler->registerAsService();
-    if (status != OK) {
-        LOG(ERROR) << "Could not register service for Touch HAL KeyDisabler Iface ("
-                   << status << ")";
-        goto shutdown;
-    }
-    if (keySwapper->isSupported()) {
-        status = keySwapper->registerAsService();
-        if (status != OK) {
-            LOG(ERROR) << "Could not register service for Touch HAL KeySwapper Iface ("
-                       << status << ")";
-            goto shutdown;
-        }
+    const std::string instanceKeySwapper = std::string(KeySwapper::descriptor) + "/default";
+    status = AServiceManager_addService(keySwapper->asBinder().get(), instanceKeySwapper.c_str());
+    if (status != STATUS_OK) {
+        LOG(WARNING) << "Can't register IKeySwapper/default";
     }
 
-    LOG(INFO) << "Touch HAL service is ready.";
-    joinRpcThreadpool();
-    // Should not pass this line
-
-shutdown:
-    // In normal operation, we don't expect the thread pool to shutdown
-    LOG(ERROR) << "Touch HAL service is shutting down.";
-    return 1;
+    ABinderProcess_joinThreadPool();
+    return EXIT_FAILURE;  // should not reach
 }
