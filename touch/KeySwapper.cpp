@@ -1,37 +1,31 @@
 /*
- * Copyright (C) 2021 The LineageOS Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
  */
+
+#define LOG_TAG "vendor.lineage.touch-service.xiaomi_8996"
+
+#include "KeySwapper.h"
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
-#include "KeySwapper.h"
-
 using ::android::base::ReadFileToString;
 using ::android::base::Trim;
 using ::android::base::WriteStringToFile;
 
-namespace vendor {
-namespace lineage {
-namespace touch {
-namespace V1_0 {
-namespace implementation {
+namespace {
 
 constexpr const char* kProcButtonsControlPath = "/proc/buttons/reversed_keys_enable";
 constexpr const char* kProcTouchpanelControlPath = "/proc/touchpanel/reversed_keys_enable";
+
+}  // anonymous namespace
+
+namespace aidl {
+namespace vendor {
+namespace lineage {
+namespace touch {
 
 KeySwapper::KeySwapper() {
     if (!access(kProcButtonsControlPath, F_OK)) {
@@ -45,37 +39,32 @@ KeySwapper::KeySwapper() {
     has_key_swapper_ = control_path_ != nullptr;
 }
 
-bool KeySwapper::isSupported() {
-    return has_key_swapper_;
-}
+ndk::ScopedAStatus KeySwapper::getEnabled(bool* _aidl_return) {
+    std::string value;
 
-// Methods from ::vendor::lineage::touch::V1_0::IKeySwapper follow.
-Return<bool> KeySwapper::isEnabled() {
-    std::string buf;
+    if (!has_key_swapper_) return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
 
-    if (!has_key_swapper_) return false;
-
-    if (!ReadFileToString(control_path_, &buf)) {
-        LOG(ERROR) << "Failed to read from " << control_path_;
-        return false;
+    if (!ReadFileToString(control_path_, &value)) {
+        LOG(ERROR) << "Failed to read current KeySwapper state";
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
-    return Trim(buf) == "1";
+    *_aidl_return = Trim(value) == "1";
+    return ndk::ScopedAStatus::ok();
 }
 
-Return<bool> KeySwapper::setEnabled(bool enabled) {
-    if (!has_key_swapper_) return false;
+ndk::ScopedAStatus KeySwapper::setEnabled(bool enable) {
+    if (!has_key_swapper_) return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
 
-    if (!WriteStringToFile(enabled ? "1" : "0", control_path_, true)) {
-        LOG(ERROR) << "Failed to write to " << control_path_;
-        return false;
+    if (!WriteStringToFile(enable ? "1" : "0", control_path_, true)) {
+        LOG(ERROR) << "Failed to write KeySwapper state";
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
-    return true;
+    return ndk::ScopedAStatus::ok();
 }
 
-}  // namespace implementation
-}  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
+}  // namespace aidl

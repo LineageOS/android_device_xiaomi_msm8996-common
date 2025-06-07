@@ -1,68 +1,61 @@
 /*
- * Copyright (C) 2019,2021 The LineageOS Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * SPDX-FileCopyrightText: 2025 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
  */
+
+#define LOG_TAG "vendor.lineage.touch-service.xiaomi_8996"
+
+#include "KeyDisabler.h"
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
-#include "KeyDisabler.h"
-
 using ::android::base::ReadFileToString;
 using ::android::base::Trim;
 using ::android::base::WriteStringToFile;
 
+namespace {
+
+constexpr const char* kControlPath = "/proc/touchpanel/capacitive_keys_enable";
+
+}  // anonymous namespace
+
+namespace aidl {
 namespace vendor {
 namespace lineage {
 namespace touch {
-namespace V1_0 {
-namespace implementation {
-
-constexpr const char kControlPath[] = "/proc/touchpanel/capacitive_keys_enable";
 
 KeyDisabler::KeyDisabler() {
     has_key_disabler_ = !access(kControlPath, F_OK);
 }
 
-// Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
-Return<bool> KeyDisabler::isEnabled() {
-    std::string buf;
+ndk::ScopedAStatus KeyDisabler::getEnabled(bool* _aidl_return) {
+    std::string value;
 
-    if (!has_key_disabler_) return false;
+    if (!has_key_disabler_) return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
 
-    if (!ReadFileToString(kControlPath, &buf, true)) {
-        LOG(ERROR) << "Failed to read from " << kControlPath;
-        return false;
+    if (!ReadFileToString(kControlPath, &value)) {
+        LOG(ERROR) << "Failed to read current KeyDisabler state";
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
-    return Trim(buf) == "0";
+    *_aidl_return = Trim(value) == "0";
+    return ndk::ScopedAStatus::ok();
 }
 
-Return<bool> KeyDisabler::setEnabled(bool enabled) {
-    if (!has_key_disabler_) return false;
+ndk::ScopedAStatus KeyDisabler::setEnabled(bool enable) {
+    if (!has_key_disabler_) return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
 
-    if (!WriteStringToFile(enabled ? "0" : "1", kControlPath, true)) {
-        LOG(ERROR) << "Failed to write to " << kControlPath;
-        return false;
+    if (!WriteStringToFile(enable ? "0" : "1", kControlPath, true)) {
+        LOG(ERROR) << "Failed to write KeyDisabler state";
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
-    return true;
+    return ndk::ScopedAStatus::ok();
 }
 
-}  // namespace implementation
-}  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
+}  // namespace aidl
