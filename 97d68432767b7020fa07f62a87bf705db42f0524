@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408b4af2_b6c8ca0d",
+        "filename": "touch/KeyDisabler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-06-07T09:09:30Z",
+      "side": 1,
+      "message": "should we return different exception code here?",
+      "range": {
+        "startLine": 36,
+        "startChar": 73,
+        "endLine": 36,
+        "endChar": 97
+      },
+      "revId": "97d68432767b7020fa07f62a87bf705db42f0524",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd798d0_f4f9d8d6",
+        "filename": "touch/KeyDisabler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-06-07T09:09:30Z",
+      "side": 1,
+      "message": "should we return different exception code here?",
+      "range": {
+        "startLine": 48,
+        "startChar": 73,
+        "endLine": 48,
+        "endChar": 97
+      },
+      "revId": "97d68432767b7020fa07f62a87bf705db42f0524",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef866631_1936f437",
+        "filename": "touch/KeySwapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-06-07T09:09:30Z",
+      "side": 1,
+      "message": "should we return different exception code here?",
+      "range": {
+        "startLine": 45,
+        "startChar": 72,
+        "endLine": 45,
+        "endChar": 96
+      },
+      "revId": "97d68432767b7020fa07f62a87bf705db42f0524",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97271780_7b7cdcb4",
+        "filename": "touch/KeySwapper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-06-07T09:09:30Z",
+      "side": 1,
+      "message": "should we return different exception code here?",
+      "range": {
+        "startLine": 57,
+        "startChar": 72,
+        "endLine": 57,
+        "endChar": 96
+      },
+      "revId": "97d68432767b7020fa07f62a87bf705db42f0524",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
